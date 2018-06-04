@@ -1,0 +1,6 @@
+framework module Pods_Star {
+  umbrella header "Pods-Star-umbrella.h"
+
+  export *
+  module * { export * }
+}
