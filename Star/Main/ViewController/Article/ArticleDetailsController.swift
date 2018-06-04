@@ -110,6 +110,8 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
             ["title":"标题2","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1],
             ["title":"标题3","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1],
             ["title":"标题4","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1]]
+        
+        
     }
     func inputTextViewConfirm(inputTextView: JXInputTextView, object: String?) {
         print("发送delegate",object)
