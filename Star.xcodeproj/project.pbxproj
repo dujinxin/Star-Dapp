@@ -91,7 +91,6 @@
 		35CB0D3320B576060092C5FC /* paizhaoanniu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0CC320B576050092C5FC /* paizhaoanniu@2x.png */; };
 		35CB0D3420B576060092C5FC /* com.baidu.idl.face.model.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0CC420B576050092C5FC /* com.baidu.idl.face.model.bundle */; };
 		35CB0D3720B576060092C5FC /* com.baidu.idl.face.faceSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0CC720B576050092C5FC /* com.baidu.idl.face.faceSDK.bundle */; };
-		35CB0D3820B576060092C5FC /* ScanVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CCA20B576050092C5FC /* ScanVM.swift */; };
 		35CB0D3920B576060092C5FC /* MyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CCB20B576050092C5FC /* MyVM.swift */; };
 		35CB0D3A20B576060092C5FC /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CCC20B576050092C5FC /* LoginVM.swift */; };
 		35CB0D3B20B576060092C5FC /* CommenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CCE20B576050092C5FC /* CommenModel.swift */; };
@@ -131,6 +130,15 @@
 		35CB0D8420B6A8730092C5FC /* RemindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D8320B6A8730092C5FC /* RemindView.m */; };
 		35CB0D8820B6CB190092C5FC /* OcrVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D8720B6CB180092C5FC /* OcrVM.swift */; };
 		35CB0D8A20B795B70092C5FC /* AuthResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D8920B795B70092C5FC /* AuthResultViewController.swift */; };
+		35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35D7588A20C52FD700A77EEB /* Task.storyboard */; };
+		35D7588D20C5360000A77EEB /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7588C20C5360000A77EEB /* TaskViewController.swift */; };
+		35D7589120C5373B00A77EEB /* ModifyImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589020C5373A00A77EEB /* ModifyImageController.swift */; };
+		35D7589320C63DC400A77EEB /* TaskVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589220C63DC400A77EEB /* TaskVM.swift */; };
+		35D7589720C6603500A77EEB /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589620C6603500A77EEB /* HomeVM.swift */; };
+		35D7589920C6637C00A77EEB /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589820C6637C00A77EEB /* ArticleModel.swift */; };
+		35D7589B20C6C04A00A77EEB /* CommentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589A20C6C04A00A77EEB /* CommentVM.swift */; };
+		35D7589D20C7DE4000A77EEB /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589C20C7DE4000A77EEB /* TaskModel.swift */; };
+		35D7589F20C7EBCD00A77EEB /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7589E20C7EBCD00A77EEB /* CommentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -241,7 +249,6 @@
 		35CB0CC320B576050092C5FC /* paizhaoanniu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paizhaoanniu@2x.png"; sourceTree = "<group>"; };
 		35CB0CC420B576050092C5FC /* com.baidu.idl.face.model.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = com.baidu.idl.face.model.bundle; sourceTree = "<group>"; };
 		35CB0CC720B576050092C5FC /* com.baidu.idl.face.faceSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = com.baidu.idl.face.faceSDK.bundle; sourceTree = "<group>"; };
-		35CB0CCA20B576050092C5FC /* ScanVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanVM.swift; sourceTree = "<group>"; };
 		35CB0CCB20B576050092C5FC /* MyVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVM.swift; sourceTree = "<group>"; };
 		35CB0CCC20B576050092C5FC /* LoginVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		35CB0CCE20B576050092C5FC /* CommenModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommenModel.swift; sourceTree = "<group>"; };
@@ -285,6 +292,15 @@
 		35CB0D8320B6A8730092C5FC /* RemindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindView.m; sourceTree = "<group>"; };
 		35CB0D8720B6CB180092C5FC /* OcrVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcrVM.swift; sourceTree = "<group>"; };
 		35CB0D8920B795B70092C5FC /* AuthResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResultViewController.swift; sourceTree = "<group>"; };
+		35D7588A20C52FD700A77EEB /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
+		35D7588C20C5360000A77EEB /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		35D7589020C5373A00A77EEB /* ModifyImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyImageController.swift; sourceTree = "<group>"; };
+		35D7589220C63DC400A77EEB /* TaskVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskVM.swift; sourceTree = "<group>"; };
+		35D7589620C6603500A77EEB /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		35D7589820C6637C00A77EEB /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		35D7589A20C6C04A00A77EEB /* CommentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVM.swift; sourceTree = "<group>"; };
+		35D7589C20C7DE4000A77EEB /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		35D7589E20C7EBCD00A77EEB /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		764F7A13560F468FDAD2BC9C /* Pods-Star.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.release.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.release.xcconfig"; sourceTree = "<group>"; };
 		C0CEBECB4717FCC0EE3AC335 /* Pods-Star.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -683,10 +699,12 @@
 		35CB0CC920B576050092C5FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				35CB0CCA20B576050092C5FC /* ScanVM.swift */,
 				35CB0CCB20B576050092C5FC /* MyVM.swift */,
 				35CB0CCC20B576050092C5FC /* LoginVM.swift */,
 				352281BE20BE4700001A0CA8 /* ArticleVM.swift */,
+				35D7589A20C6C04A00A77EEB /* CommentVM.swift */,
+				35D7589220C63DC400A77EEB /* TaskVM.swift */,
+				35D7589620C6603500A77EEB /* HomeVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -696,6 +714,9 @@
 			children = (
 				35CB0CCE20B576050092C5FC /* CommenModel.swift */,
 				35CB0CCF20B576050092C5FC /* UserModel.swift */,
+				35D7589820C6637C00A77EEB /* ArticleModel.swift */,
+				35D7589E20C7EBCD00A77EEB /* CommentModel.swift */,
+				35D7589C20C7DE4000A77EEB /* TaskModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -728,6 +749,7 @@
 		35CB0CD920B576050092C5FC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				35D7588720C52F7A00A77EEB /* Task */,
 				352281C020BE5540001A0CA8 /* Article */,
 				35CB0CDA20B576050092C5FC /* MainViewController.swift */,
 				352281B720BE4365001A0CA8 /* ArticleListController.swift */,
@@ -825,6 +847,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		35D7588720C52F7A00A77EEB /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				35D7588A20C52FD700A77EEB /* Task.storyboard */,
+				35D7588C20C5360000A77EEB /* TaskViewController.swift */,
+				35D7589020C5373A00A77EEB /* ModifyImageController.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -896,6 +928,7 @@
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
 				35CB0D2B20B576060092C5FC /* tuku@2x.png in Resources */,
 				35CB0D4E20B576060092C5FC /* PropertyCell.xib in Resources */,
+				35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */,
 				35CB0D2E20B576060092C5FC /* paizhaoanniu_dianjihou@3x.png in Resources */,
 				35CB0D3020B576060092C5FC /* dengpao@3x.png in Resources */,
 				35CB0D3320B576060092C5FC /* paizhaoanniu@2x.png in Resources */,
@@ -958,6 +991,7 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -968,6 +1002,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1011,6 +1046,7 @@
 				35CB0D8420B6A8730092C5FC /* RemindView.m in Sources */,
 				35CB0CE820B576050092C5FC /* JXDefaultView.swift in Sources */,
 				35CB0D4B20B576060092C5FC /* PropertyCell.swift in Sources */,
+				35D7589320C63DC400A77EEB /* TaskVM.swift in Sources */,
 				35249D6B20C4D984001C1140 /* UIImageView+Extension.swift in Sources */,
 				35CB0CED20B576050092C5FC /* ZPTableViewController.swift in Sources */,
 				35CB0D3D20B576060092C5FC /* JXPlaceHolderTextView.swift in Sources */,
@@ -1030,6 +1066,8 @@
 				35CB0CE720B576050092C5FC /* BaseModel.swift in Sources */,
 				35249D7120C4D984001C1140 /* UIScreen+Extension.swift in Sources */,
 				35CB0D0320B576050092C5FC /* ApiEnum.swift in Sources */,
+				35D7589120C5373B00A77EEB /* ModifyImageController.swift in Sources */,
+				35D7589720C6603500A77EEB /* HomeVM.swift in Sources */,
 				35CB0D0C20B576050092C5FC /* LoginViewController.swift in Sources */,
 				35CB0CEA20B576050092C5FC /* BaseViewController.swift in Sources */,
 				35CB0D4D20B576060092C5FC /* AccountViewController.swift in Sources */,
@@ -1039,16 +1077,19 @@
 				35CB0D3A20B576060092C5FC /* LoginVM.swift in Sources */,
 				35CB0CE620B576050092C5FC /* BaseViewModel.swift in Sources */,
 				35CB0D4120B576060092C5FC /* JXTopBarView.swift in Sources */,
+				35D7589920C6637C00A77EEB /* ArticleModel.swift in Sources */,
 				35CB0D4820B576060092C5FC /* MyPropertyViewController.swift in Sources */,
 				35CB0D4420B576060092C5FC /* MainViewController.swift in Sources */,
 				352281CA20BFB87B001A0CA8 /* JXView.swift in Sources */,
 				35CB0D0620B576050092C5FC /* LanguageManager.swift in Sources */,
+				35D7588D20C5360000A77EEB /* TaskViewController.swift in Sources */,
 				35CB0D0920B576050092C5FC /* TabBarViewController.swift in Sources */,
 				352281C220BE559B001A0CA8 /* ArticleDetailsController.swift in Sources */,
 				352281B620BE348B001A0CA8 /* CommonManager.swift in Sources */,
-				35CB0D3820B576060092C5FC /* ScanVM.swift in Sources */,
 				35CB0D4520B576060092C5FC /* MyViewController.swift in Sources */,
 				35CB0D4620B576060092C5FC /* ScanViewController.swift in Sources */,
+				35D7589D20C7DE4000A77EEB /* TaskModel.swift in Sources */,
+				35D7589F20C7EBCD00A77EEB /* CommentModel.swift in Sources */,
 				35CB0D4320B576060092C5FC /* JXAlertView.swift in Sources */,
 				35CB0D8820B6CB190092C5FC /* OcrVM.swift in Sources */,
 				35CB0D7D20B6A80E0092C5FC /* VideoCaptureDevice.m in Sources */,
@@ -1057,6 +1098,7 @@
 				35CB0CFC20B576050092C5FC /* NotificationEnum.swift in Sources */,
 				352281C820BE8A4D001A0CA8 /* JXInputTextView.swift in Sources */,
 				35249D6E20C4D984001C1140 /* UIView+Extension.swift in Sources */,
+				35D7589B20C6C04A00A77EEB /* CommentVM.swift in Sources */,
 				35CB0D7920B6A6D40092C5FC /* FaceBaseViewController.m in Sources */,
 				35CB0D0020B576050092C5FC /* JXBaseRequest.swift in Sources */,
 				35249D6D20C4D984001C1140 /* UIColor+Extension.swift in Sources */,
@@ -1216,10 +1258,7 @@
 				);
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1244,10 +1283,7 @@
 				);
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

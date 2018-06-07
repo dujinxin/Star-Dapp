@@ -14,6 +14,8 @@ let kDiscoveryUrl = "http://101.254.166.116:8080/zstar/index#/home"
 //"https://www.baidu.com"
 class MainViewController: UIViewController {
 
+    let homeVM = HomeVM()
+    
     var webView: WKWebView!
     
     lazy var processView: UIProgressView = {
@@ -46,7 +48,7 @@ class MainViewController: UIViewController {
         // 注入JS对象名称senderModel，当JS通过senderModel来调用时，我们可以在WKScriptMessageHandler代理中接收到
         //let web = WKWebView(frame: CGRect(), configuration: config)
         webView = WKWebView(frame: CGRect(x: 0, y: kStatusBarHeight, width: view.bounds.width, height: view.bounds.height - kStatusBarHeight - kTabBarHeight), configuration: config)
-        view.addSubview(webView)
+        //view.addSubview(webView)
         
         
         self.processView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 2)
@@ -142,6 +144,14 @@ class MainViewController: UIViewController {
         }else{
             self.showAuth()
         }
+        
+        self.homeVM.powerRank(limit: 10) { (_, msg, isSuc) in
+            
+        }
+        self.homeVM.coinRank(limit: 10) { (_, msg, isSuc) in
+            
+        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

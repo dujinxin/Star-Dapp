@@ -26,6 +26,9 @@ class MyViewController: UITableViewController {
         
         //self.nickNameLabel.text = UserManager.manager.userEntity.nickname
         
+        let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=login&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
+        self.userImageView.sd_setImage(with: url, completed: nil)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,12 +45,7 @@ class MyViewController: UITableViewController {
     }
 
     @IBAction func edit(_ sender: UIButton) {
-        let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=login&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
-        
-        self.userImageView.sd_setImage(with: url, completed: nil)
-        print(url)
-        return
-        
+
         let alertVC = UIAlertController(title: "修改昵称", message: nil, preferredStyle: .alert)
         //键盘的返回键 如果只有一个非cancel action 那么就会触发 这个按钮，如果有多个那么返回键只是单纯的收回键盘
         alertVC.addTextField(configurationHandler: { (textField) in
@@ -83,7 +81,14 @@ class MyViewController: UITableViewController {
         if indexPath.section == 1 {
             if indexPath.row == 0 {
                 //performSegue(withIdentifier: "property", sender: nil)
-                performSegue(withIdentifier: "property_web", sender: nil)
+                //performSegue(withIdentifier: "property_web", sender: nil)
+                
+                let storyboard = UIStoryboard(name: "Task", bundle: nil)
+                let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
+                //let loginVC = UINavigationController.init(rootViewController: login)
+                
+                self.navigationController?.pushViewController(login, animated: true)
+                //self.navigationController?.present(loginVC, animated: false, completion: nil)
             }else if indexPath.row == 1{
                 //performSegue(withIdentifier: "myWallet", sender: nil)
                 performSegue(withIdentifier: "myWallet_web", sender: nil)

@@ -11,7 +11,7 @@ import UIKit
 class ArticleListController: UITableViewController {
 
     let vm = ArticleVM()
-    
+    var page : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +26,31 @@ class ArticleListController: UITableViewController {
 //        }
 
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-//        self.tableView.mj_header = MJRefreshHeader(refreshingBlock: {
-//            //self.vm.loadNewMainData(completion: <#T##((Any?, String, Bool) -> ())##((Any?, String, Bool) -> ())##(Any?, String, Bool) -> ()#>)
-//        })
-//        self.tableView.mj_header.beginRefreshing()
+        self.tableView.mj_header = MJRefreshHeader(refreshingBlock: {
+            self.vm.articleList(pageNo: 1, completion: { (_, msg, isSuc) in
+                self.tableView.mj_header.endRefreshing()
+                if isSuc {
+                    self.tableView.reloadData()
+                } else {
+                    ViewManager.showNotice(msg)
+                }
+            })
+        })
+        self.tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+            //FIXME:先使用，成功后再加...待完善，看后台规则再定
+            self.page += 1
+            self.vm.articleList(pageNo: self.page, completion: { (_, msg, isSuc) in
+                self.tableView.mj_footer.endRefreshing()
+                if isSuc {
+                    self.tableView.reloadData()
+                } else {
+                    ViewManager.showNotice(msg)
+                }
+            })
+        })
+        self.tableView.mj_header.beginRefreshing()
         
-        self.vm.dataArray = [1,1,1,1]
+        //self.vm.dataArray = [1,1,1,1]
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,9 +73,8 @@ class ArticleListController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! ArticleCell
 
-        cell.articleImageView.backgroundColor = UIColor.randomColor
-        cell.articleTitleLabel.text = "标题"
-        cell.articleTimeLabel.text = "2018-10-19"
+        let entity = self.vm.dataArray[indexPath.row] as! ArticleListEntity
+        cell.entity = entity
         // Configure the cell...
 
         return cell
@@ -64,6 +82,8 @@ class ArticleListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let entity = self.vm.dataArray[indexPath.row] as! ArticleListEntity
         
         if indexPath.row == 2 {
             
@@ -75,15 +95,19 @@ class ArticleListController: UITableViewController {
             inputTextView.placeHolder = "写下你的评论吧~~🌹🌹🌹"
             inputTextView.show()
         } else {
-            self.performSegue(withIdentifier: "articleDetail", sender: nil)
+            self.performSegue(withIdentifier: "articleDetail", sender: entity)
         }
     }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let identifier = segue.identifier
+        if identifier == "articleDetail" {
+            let entity = sender as! ArticleListEntity
+            let vc = segue.destination as! ArticleDetailsController
+            vc.articleEntity = entity
+        }
     }
 
 }

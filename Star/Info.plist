@@ -22,9 +22,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>NSCameraUsageDescription</key>
 	<string>该功能需要访问您的相机</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>该功能需要操作您的相册</string>
+    <key>NSPhotoLibraryUsageDescription</key>
     <string>该功能需要访问您的相册</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

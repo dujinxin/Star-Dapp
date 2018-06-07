@@ -14,7 +14,14 @@ private let bottomInputViewHeight : CGFloat = 60 + additionalBottomHeight
 
 class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableViewDataSource,JXInputTextViewDelegate,UIScrollViewDelegate {
 
-    let vm = ArticleVM()
+    let articleVM = ArticleVM()
+    var articleEntity : ArticleListEntity?
+    
+    var page : Int = 1
+    
+    let commentVM = CommentVM()
+    
+    
     
     lazy var processView: UIProgressView = {
         let process = UIProgressView()
@@ -51,15 +58,10 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
-        //        if #available(iOS 11.0, *) {
-        //            self.tableView.contentInsetAdjustmentBehavior = .automatic
-        //            self.tableView.contentInset = UIEdgeInsetsMake(kStatusBarHeight, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
-        //            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(kStatusBarHeight, 0, 0, 0)
-        //
-        //        } else {
-        //            self.automaticallyAdjustsScrollViewInsets = false
-        //        }
+ 
         
+        guard let articleId = self.articleEntity?.id else { return }
+        guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
         
         self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - bottomInputViewHeight), style: .plain)
         self.tableView.delegate = self
@@ -75,10 +77,17 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.inputTextView?.delegate = self
         self.inputTextView?.sendBlock = { (_,object) in
             print("发送block",object)
-            
-            let dict = ["title":"新增","content":object,"status":1]
-            self.vm.dataArray.append(dict)
-            self.tableView.reloadSections([0], with: .automatic)
+            self.commentVM.comment(object as! String, articleHash: (self.articleEntity?.artHashIndex)!, articleId: (self.articleEntity?.id)!, completion: { (_, msg, isSuc) in
+                ViewManager.showNotice(msg)
+                if isSuc {
+                    self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
+                        self.tableView.reloadData()
+                    }
+                }
+            })
+//            let dict = ["title":"新增","content":object,"status":1]
+//            self.vm.dataArray.append(dict)
+//            self.tableView.reloadSections([0], with: .automatic)
         }
         self.inputTextView?.limitWords = 1000
         self.inputTextView?.placeHolder = "写下你的评论吧~~🌹🌹🌹"
@@ -101,20 +110,34 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         
         self.showMBProgressHUD()
-        self.webView.load(URLRequest(url: URL(string: "https://www.jianshu.com/p/0b781b423170")!))
-        //self.webView.load(URLRequest(url: URL(string: "https://find.guangjiego.com/Discovery/home.html")!))
-    
+        if let str = self.articleEntity?.cdnUrl,let url = URL(string: str) {
+            self.webView.load(URLRequest(url: url))
+        }
+        //self.webView.load(URLRequest(url: URL(string: "https://www.jianshu.com/p/0b781b423170")!))
+   
+        self.articleVM.articleDetails(articleId, articleHash: articleHashIndex) { (_, msg, isSuc) in
+            if isSuc {
+                
+            }
+        }
+        self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
+            self.tableView.reloadData()
+        }
         
-        self.vm.dataArray = [
-            ["title":"标题1","content":"我要上春晚🌹","status":1],
-            ["title":"标题2","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1],
-            ["title":"标题3","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1],
-            ["title":"标题4","content":"我要上春晚🌹我要上春晚🌹我要上春晚🌹","status":1]]
-        
-        
+        CommonManager.countDown(timeOut: 1, timeInterval: 30, process: { (n) in
+            print("开始计时")
+        }) {
+            print("计时结束")
+//            self.articleVM.articleRead("", completion: { (_, msg, isSuc) in
+//                //
+//            })
+        }
     }
-    func inputTextViewConfirm(inputTextView: JXInputTextView, object: String?) {
-        print("发送delegate",object)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,6 +149,9 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "getParames")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
     }
+    func inputTextViewConfirm(inputTextView: JXInputTextView, object: String?) {
+        print("发送delegate",object)
+    }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if keyPath == "contentSize" {
@@ -133,10 +159,10 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
                 let change = change,
                 let sizeValue = change[NSKeyValueChangeKey.newKey],
                 let size = sizeValue as? CGSize{
-                print(size)
+                //print(size)
                 
                 if size != self.tableView.tableHeaderView?.frame.size {
-                    print("更新header")
+                    //print("更新header")
                     self.tableView.beginUpdates()
                     self.tableView.tableHeaderView?.frame = CGRect(origin: CGPoint(), size: size)
                     self.tableView.endUpdates()
@@ -183,24 +209,17 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vm.dataArray.count
+        return self.commentVM.dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CommentCell
         
-        cell.userImageView.backgroundColor = UIColor.randomColor
-        cell.userImageView.sd_setImage(with: URL.init(string: String(format: "%@%@?deviceId=%@&method=login&random=", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000))), placeholderImage: nil, options: [], completed: nil)
-//        cell.nickNameLabel.text = "标题"
-//        cell.statusLabel.text = "精"
-//        cell.contentLabel.text = "我要评论😳带表情😔😓"
-        
-        let dict = self.vm.dataArray[indexPath.row] as! Dictionary<String,Any>
-        cell.nickNameLabel.text = dict["title"] as? String
-        cell.statusLabel.text = "精"
-        cell.contentLabel.text = dict["content"] as? String
+        let entity = self.commentVM.dataArray[indexPath.row] as? CommentListEntity
+        cell.entity = entity
+
         // Configure the cell...
-        
+
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

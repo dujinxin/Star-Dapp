@@ -93,6 +93,7 @@ class LoginViewController: BaseViewController {
         fetchImageButton.sd_setImage(with: url, for: .normal, completed: nil)
     }
     @IBAction func fetchCodeWord(_ sender: UIButton) {
+        print("123456789")
         guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
         guard String.validate(codeImageTextField.text, type: .none, emptyMsg: "图片验证码不能为空", formatMsg: "") == true else { return }
       

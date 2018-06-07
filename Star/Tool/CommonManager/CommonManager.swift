@@ -17,8 +17,8 @@ class CommonManager {
     /// 倒计时
     ///
     /// - Parameters:
-    ///   - timeOut: 倒计时长
-    ///   - timeInterval: 倒计时间间隔
+    ///   - timeOut: 倒计时长(执行次数)
+    ///   - timeInterval: 倒计时间间隔(每次调用间隔)
     ///   - process:未完成时的回调
     ///   - completion: 完成回调
     static func countDown(timeOut:Int,timeInterval:Double = 1,process:@escaping ((_ currentTime:Int)->()),completion:@escaping (()->())) {

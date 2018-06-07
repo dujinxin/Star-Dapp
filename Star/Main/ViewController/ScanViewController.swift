@@ -25,7 +25,6 @@ class ScanViewController: UIViewController {
     
     var session = AVCaptureSession()
     
-    var vm = ScanVM()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

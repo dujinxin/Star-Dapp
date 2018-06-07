@@ -15,6 +15,21 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
+    var entity: CommentListEntity? {
+        didSet {
+            self.nickNameLabel.text = entity?.user?.nickname
+            self.contentLabel.text = entity?.commentRepl
+            self.userImageView.backgroundColor = UIColor.randomColor
+            if let str = entity?.user?.avatar,let url = URL(string: str) {
+                self.userImageView.sd_setImage(with: url, placeholderImage: nil, options: [], completed: nil)
+            } else {
+                self.userImageView.image = nil
+            }
+            if entity?.topStatus == 2 {
+                self.statusLabel.text = "精"
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

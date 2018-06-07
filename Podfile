@@ -12,6 +12,7 @@ target 'Star' do
     pod 'MJExtension'
     pod 'MJRefresh'
     pod 'Masonry'
+    pod 'SwiftyJSON'
 
   # Pods for Star
 

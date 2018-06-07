@@ -11,9 +11,6 @@ import AFNetworking
 
 class LoginVM: JXRequest {
 
-
-    lazy var userModel = UserModel()
-    
     var dataArray = [[String:AnyObject]]()
     //获取图片验证码 & 改为直接拼接URL展示
     func getImageCode(type:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
@@ -127,8 +124,9 @@ class LoginVM: JXRequest {
         }
         
     }
+    //修改昵称
     func modify(nickName:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
-        JXRequest.request(url: ApiString.modifiyNickName.rawValue, param: ["nickname":nickName], success: { (data, message) in
+        JXRequest.request(url: ApiString.modifyNickName.rawValue, param: ["nickname":nickName], success: { (data, message) in
             
             UserManager.manager.userDict["nickname"] = nickName
             //UserManager.manager.userEntity.nickname = nickName
@@ -167,19 +165,27 @@ class LoginVM: JXRequest {
 
 class IdentifyVM: JXRequest {
     
-    var userData = Data()
-    var frontImage = UIImage()
-    var backImage = UIImage()
-    
-    var imageArray : Array<String> = ["facePhoto","idCardFront","idCardBack"]
-    
+    var imageArray : Array<String> = ["facePhoto"]
+    //var imageArray : Array<String> = ["facePhoto","idCardFront","idCardBack"]
     
     //识别
-    func zpsyIdentifyInfo(param:Dictionary<String,Any> ,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
+    func identifyInfo(param:Dictionary<String,Any> ,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         
-        IdentifyVM.request(url: ApiString.identifyInfo.rawValue, param: param, success: { (data, message) in
-            completion(data,message,true)
-            
+        IdentifyVM.request(url: ApiString.liveAuth.rawValue, param: param, success: { (data, message) in
+            guard
+                let dict = data as? Dictionary<String, Any>,
+                let authStatus = dict["authStatus"] as? Int,
+                let msg = dict["message"] as? String
+                else{
+                    completion(data,message,false)
+                    return
+            }
+            if authStatus == 3 {
+                var d = UserManager.manager.userDict
+                d["authStatus"] = 3
+                let _ = UserManager.manager.saveAccound(dict: dict)
+            }
+            completion(data,msg,true)
         }) { (message, code) in
             completion(nil,message,false)
         }
@@ -192,7 +198,7 @@ class IdentifyVM: JXRequest {
             
             for obj in self.imageArray {
                 let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-                let path = paths[0] + "/\(obj)"
+                let path = paths[0] + "/\(obj)" + ".jpg"
                 if obj == "facePhoto"{
                     
                     let pathUrl = URL.init(fileURLWithPath: path)
@@ -215,5 +221,48 @@ class IdentifyVM: JXRequest {
             }
             
         }
+    }
+}
+
+class ModifyImageVM: JXRequest {
+
+    //识别
+    func modifyImage(param:Dictionary<String,Any> ,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
+        
+        ModifyImageVM.request(url: ApiString.modifyAvatar.rawValue, param: param, success: { (data, message) in
+//            guard
+//                let dict = data as? Dictionary<String, Any>,
+//                let authStatus = dict["authStatus"] as? Int,
+//                let msg = dict["message"] as? String
+//                else{
+//                    completion(data,message,false)
+//                    return
+//            }
+//            if authStatus == 3 {
+//                var d = UserManager.manager.userDict
+//                d["authStatus"] = 3
+//                let _ = UserManager.manager.saveAccound(dict: dict)
+//            }
+            completion(data,message,true)
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
+    }
+    override func customConstruct() -> JXBaseRequest.constructingBlock? {
+        return {(_ formData : AFMultipartFormData) -> () in
+            let format = DateFormatter()
+            format.dateFormat = "yyyyMMddHHmmss"
+            let timeStr = format.string(from: Date.init())
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let path = paths[0] + "/userImage.jpg"
+            let pathUrl = URL.init(fileURLWithPath: path)
+            guard let data = try? Data(contentsOf: pathUrl) else{
+                return
+            }
+            let stream = InputStream.init(data: data)
+            formData.appendPart(with: stream, name: "avatar", fileName: "userImage\(timeStr)", length: Int64(data.count), mimeType: "image/jpeg")
+            print(data)
+        }
+            
     }
 }
