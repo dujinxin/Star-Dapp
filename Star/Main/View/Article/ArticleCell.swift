@@ -15,15 +15,15 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var articleTimeLabel: UILabel!
     
     
-    var entity: ArticleListEntity? {
+    var entity: ArticleEntity? {
         didSet {
             self.articleImageView.backgroundColor = UIColor.randomColor
             self.articleTitleLabel.text = entity?.title
             //self.articleTimeLabel.text = "2018-10-19"
             
-            if let timeStr = entity?.releaseTime {
-                self.articleTimeLabel.text = Date.calculateTimeStringFrom(timeStr)
-            }
+//            if let timeStr = entity?.releaseDate {
+//                self.articleTimeLabel.text = Date.calculateTimeStringFrom(timeStr)
+//            }
             
             if entity?.coverImg?.hasPrefix("http") == true {
                 self.articleImageView.sd_setImage(with: URL(string: (entity?.coverImg!)!), placeholderImage: nil, options: [], completed: nil)

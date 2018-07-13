@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ModifyImageController: UIViewController {
+class ModifyImageController: BaseViewController {
 
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var confirmButton: UIButton!
     
@@ -21,14 +22,32 @@ class ModifyImageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.title = "设置头像"
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: confirmButton.jxWidth, height: confirmButton.jxHeight)
+        gradientLayer.cornerRadius = 22
+        self.confirmButton.layer.addSublayer(gradientLayer)
+        self.confirmButton.backgroundColor = UIColor.clear
+        
+        self.customNavigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "提交", style: UIBarButtonItemStyle.plain, target: self, action: #selector(confirm))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.topConstraint.constant = kNavStatusHeight
+    }
+    override func isCustomNavigationBarUsed() -> Bool {
+        return true
+    }
 
     @IBAction func selectImage(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -44,13 +63,14 @@ class ModifyImageController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-    @IBAction func confirm(_ sender: Any) {
+    @objc func confirm() {
         if isSelected {
             let _ = UIImage.insert(image: self.userImageView.image!, name: "userImage.jpg")
             
             self.imageVM.modifyImage(param: [:]) { (_, msg, isSuc) in
                 if isSuc {
                     let _ = UIImage.delete(name: "userImage.jpg")
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         } else {

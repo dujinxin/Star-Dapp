@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TaskCell" customModule="Star" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="136" height="122"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="136" height="122"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUS-jE-4fs">
+                        <rect key="frame" x="0.0" y="10" width="136" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="zFh-d0-8Qd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.23137254901960785" green="0.2627450980392157" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owg-bN-1hG">
+                        <rect key="frame" x="0.0" y="97" width="136" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="US7-5Y-fu9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.11764705882352941" green="0.38431372549019605" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWechat" translatesAutoresizingMaskIntoConstraints="NO" id="bCD-SG-6JI">
+                        <rect key="frame" x="49.666666666666657" y="42.666666666666664" width="37" height="36.999999999999993"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="bCD-SG-6JI" secondAttribute="height" id="9df-AC-Eqq"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.99607843139999996" green="0.99607843139999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Owg-bN-1hG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bCD-SG-6JI" secondAttribute="bottom" constant="5" id="0xe-MI-5zh"/>
+                <constraint firstItem="bCD-SG-6JI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HUS-jE-4fs" secondAttribute="bottom" constant="5" id="JsL-bs-aCi"/>
+                <constraint firstItem="Owg-bN-1hG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YJg-E1-DZ4"/>
+                <constraint firstItem="bCD-SG-6JI" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Zdc-3a-iHK"/>
+                <constraint firstAttribute="bottom" secondItem="Owg-bN-1hG" secondAttribute="bottom" constant="10" id="a6C-ts-2kU"/>
+                <constraint firstItem="HUS-jE-4fs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="cFe-li-NaL"/>
+                <constraint firstAttribute="trailing" secondItem="HUS-jE-4fs" secondAttribute="trailing" id="qAC-rr-dAX"/>
+                <constraint firstItem="bCD-SG-6JI" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="uWq-YS-Dzp"/>
+                <constraint firstAttribute="trailing" secondItem="Owg-bN-1hG" secondAttribute="trailing" id="ujT-9e-vOf"/>
+                <constraint firstItem="HUS-jE-4fs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vHF-6Y-vAM"/>
+            </constraints>
+            <size key="customSize" width="136" height="122"/>
+            <connections>
+                <outlet property="iconImageVIew" destination="bCD-SG-6JI" id="SnT-hS-hEK"/>
+                <outlet property="numberLabel" destination="Owg-bN-1hG" id="ada-Sc-fvY"/>
+                <outlet property="titleLabel" destination="HUS-jE-4fs" id="pQM-Cq-tYp"/>
+            </connections>
+            <point key="canvasLocation" x="-191" y="-111"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="iconWechat" width="37" height="31"/>
+    </resources>
+</document>

@@ -15,18 +15,42 @@ class JXNavigationBar: UINavigationBar {
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-    }
+    }￼
     */
 
+    /// 颜色渐变
+    lazy var gradientLayer: CAGradientLayer = {
+        
+        let gradient = CAGradientLayer.init()
+        gradient.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradient.locations = [0.5]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+        gradient.frame = CGRect(x: 0, y: 0, width: self.jxWidth, height: self.jxHeight)
+        return gradient
+    }()
+    var isUseGradualColor : Bool = false
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         var rect = CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavStatusHeight)
-        
+
         self.subviews.forEach { (v) in
             if NSStringFromClass(type(of: v)).contains("UIBarBackground") {
                 v.frame = rect
-            }else if NSStringFromClass(type(of: v)).contains("UINavigationBarContentView") {
+                
+                if isUseGradualColor {
+                    self.gradientLayer.frame = CGRect(x: 0, y: 0, width: v.jxWidth, height: v.jxHeight)
+                    v.layer.addSublayer(self.gradientLayer)
+                }
+            } else if NSStringFromClass(type(of: v)).contains("UINavigationBarContentView") {
                 rect.origin.y += kStatusBarHeight
                 rect.size.height -= kStatusBarHeight
                 v.frame = rect

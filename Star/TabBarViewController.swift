@@ -18,17 +18,40 @@ class TabBarViewController: UITabBarController {
         
         let button = UIButton(type: .custom)
         //button.backgroundColor = UIColor.red
+        //let image = UIImage.image(originalImage: UIImage(named: "diamond_selected"), to: 80)
+        let image = UIImage(named: "diamond_selected")
+        button.setImage(image, for: .normal)
         
         //button.frame = tabBar.frame.insetBy(dx: 2 * (tabBar.bounds.width / (CGFloat(childViewControllers.count) - 1)), dy: 0)
-        button.frame = CGRect(x: 2 * tabBar.bounds.width / CGFloat(childViewControllers.count), y: 0, width: tabBar.bounds.width / CGFloat(childViewControllers.count), height: tabBar.bounds.height)
-            button.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
+        
+        button.frame = CGRect(x: tabBar.bounds.width / CGFloat(childViewControllers.count), y: -37, width: tabBar.bounds.width / CGFloat(childViewControllers.count), height: 86)
+        //button.frame = CGRect(x: 2 * tabBar.bounds.width / CGFloat(childViewControllers.count), y: 0, width: tabBar.bounds.width / CGFloat(childViewControllers.count), height: tabBar.bounds.height)
+        //button.setBackgroundImage(self.imageWithColor(UIColor.clear), for: .normal)
+        button.addTarget(self, action: #selector(buttonClick), for: .touchUpInside)
         tabBar.addSubview(button)
+        
+        tabBar.items?.forEach({ (item) in
+            if item.tag == 1 {
+                let attributed = [NSAttributedStringKey.foregroundColor:UIColor.clear]
+                item.setTitleTextAttributes(attributed, for: .normal)
+                item.setTitleTextAttributes(attributed, for: .selected)
+            }
+        })
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tabBarStatus(notify:)), name: NSNotification.Name(rawValue: NotificationTabBarHiddenStatus), object: nil)
     }
-
+    func imageWithColor(_ color:UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,13 +63,14 @@ class TabBarViewController: UITabBarController {
 
     @objc func buttonClick() {
 
-        //GDLocationManager.manager.startUpdateLocation()
+        //self.tabBarController?.selectedIndex = 1
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let scan = storyboard.instantiateViewController(withIdentifier: "ScanVC") as! ScanViewController
-        let scanVC = UINavigationController.init(rootViewController: scan)
-        
-        self.present(scanVC, animated: false, completion: nil)
+        self.selectedIndex = 1
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let scan = storyboard.instantiateViewController(withIdentifier: "ScanVC") as! ScanViewController
+//        let scanVC = UINavigationController.init(rootViewController: scan)
+//
+//        self.present(scanVC, animated: false, completion: nil)
     }
     @objc func loginStatus(notify:Notification) {
         print(notify)
@@ -86,4 +110,9 @@ class TabBarViewController: UITabBarController {
         }
     }
 
+}
+extension TabBarViewController {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+    }
 }

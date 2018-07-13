@@ -10,7 +10,7 @@ import UIKit
 
 class MyVM: NSObject {
     
-    var zcoinBalance : Double = 0
+    var ipe : Double = 0
     
     
 //    //注册
@@ -25,13 +25,13 @@ class MyVM: NSObject {
     func property(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         JXRequest.request(url: ApiString.property.rawValue, param: Dictionary(), success: { (data, message) in
             guard let dict = data as? Dictionary<String, Any>,
-                let zcoinBalance = dict["zcoinBalance"] as? Double
+                let zcoinBalance = dict["ipe"] as? Double
                 else{
                     completion(nil,message,false)
                     return
             }
             print(zcoinBalance)
-            self.zcoinBalance = zcoinBalance
+            self.ipe = zcoinBalance
             
             completion(data,message,true)
             

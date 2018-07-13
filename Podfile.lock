@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - JXFoundation (0.1.1)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
@@ -26,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - JXFoundation
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -37,6 +39,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - JXFoundation
     - Masonry
     - MBProgressHUD
     - MJExtension
@@ -47,6 +50,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  JXFoundation: 7f8ff25f5020c06501b3a73deeff154bf2ecf94b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
@@ -55,6 +59,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 3797f40a1039e6fe86cbc86ad084d1e911e3caa4
+PODFILE CHECKSUM: 43620b57f309c8fae0d15d4c10271257c4c8c8bb
 
 COCOAPODS: 1.5.0

@@ -74,11 +74,7 @@ class JXNetworkManager: NSObject {
         }else{
             afmanager.requestSerializer.setValue("", forHTTPHeaderField: "smart_sid")
         }
-        print(afmanager.requestSerializer.httpRequestHeaders)
-        
-//        afmanager.requestSerializer.setValue(UserManager.manager.userEntity.token, forHTTPHeaderField: "token")
-//        afmanager.requestSerializer.setValue(CTUtility.getTimeStamp(), forHTTPHeaderField: "timestamp")
-        
+        //print(afmanager.requestSerializer.httpRequestHeaders)
         
         if let customUrlRequest = request.buildCustomUrlRequest() {
             request.sessionTask = afmanager.dataTask(with: customUrlRequest, uploadProgress: nil, downloadProgress: nil, completionHandler: { (response, responseData, error) in

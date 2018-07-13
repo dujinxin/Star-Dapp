@@ -12,6 +12,7 @@ class RegisterViewController: BaseViewController {
 
 
     @IBOutlet weak var mainScrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var codeTextField: UITextField!
@@ -30,6 +31,13 @@ class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 11.0, *) {
+            self.mainScrollView.contentInsetAdjustmentBehavior = .never
+            self.mainScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        
         // Do any additional setup after loading the view.
         //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
         
@@ -54,24 +62,43 @@ class RegisterViewController: BaseViewController {
 //        lookButton.setImage(UIImage(named:"look_highlight"), for: .highlighted)
 //        lookButton.isSelected = false
         
-        loginButton.backgroundColor = UIColor.rgbColor(from: 153, 153, 153)
-        loginButton.layer.cornerRadius = 22
-        //loginButton.alpha = 0.4
+        loginButton.backgroundColor = UIColor.clear
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: loginButton.jxWidth, height: loginButton.jxHeight)
+        gradientLayer.cornerRadius = 22
+        self.loginButton.layer.addSublayer(gradientLayer)
+        
+        fetchButton.layer.borderColor = UIColor.rgbColor(from: 21, 106, 206).cgColor
+        fetchButton.layer.borderWidth = 1
+        fetchButton.layer.cornerRadius = 13.3
+        fetchButton.setTitleColor(JXTextColor, for: .normal)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
-        //userTextField.text = "13477831123"
-        //passwordTextField.text = "12345678a"
-        //codeTextField.text = "996687"
-        
         let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=register&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
         lookButton.sd_setImage(with: url, for: .normal, completed: nil)
+        
+        
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
+        if let controllers = self.navigationController?.viewControllers {
+            if controllers.count > 1 {
+                self.navigationController?.viewControllers.remove(at: 0)
+            }
+        }
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -87,13 +114,11 @@ class RegisterViewController: BaseViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    override func awakeFromNib() {
-        //
+
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
     }
-    
-    @IBAction func backLoginVC(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
+
     @IBAction func changePasswordText(_ sender: UIButton) {
         
         let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=register&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))

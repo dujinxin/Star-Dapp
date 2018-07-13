@@ -12,6 +12,11 @@ import AFNetworking
 class LoginVM: JXRequest {
 
     var dataArray = [[String:AnyObject]]()
+    
+    var indentifyInfoEntity : IndentifyInfoEntity?
+    var profileInfoEntity : ProfileInfoEntity?
+    
+    
     //获取图片验证码 & 改为直接拼接URL展示
     func getImageCode(type:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         JXRequest.request(url: ApiString.getImageCode.rawValue, param: ["method":type], success: { (data, message) in
@@ -85,8 +90,7 @@ class LoginVM: JXRequest {
             completion(nil,message,false)
         }
     }
-    
-    
+    //登录
     func login(userName:String, code:String, completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         
         JXRequest.request(url: ApiString.login.rawValue, param: ["username":userName,"mobileValidateCode":code], success: { (data, message) in
@@ -103,36 +107,56 @@ class LoginVM: JXRequest {
             completion(nil,message,false)
         }
     }
-
-    func personInfo(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
-        JXRequest.request(url: ApiString.personInfo.rawValue, param: Dictionary(), success: { (data, message) in
-            
-            guard let dict = data as? Dictionary<String, Any>
-                else{
-                completion(data,message,false)
-                return
-            }
-            
-//            UserManager.manager.userEntity.name = dict["name"] as? String
-//            UserManager.manager.userEntity.idCard = dict["idCard"] as? String
-//            UserManager.manager.userEntity.validStatus = dict["validStatus"] as! Int
+    //退出
+    func logout(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
+        JXRequest.request(url: ApiString.logout.rawValue, param: Dictionary(), success: { (data, message) in
             
             completion(data,message,true)
             
         }) { (message, code) in
             completion(nil,message,false)
         }
-        
+    }
+    //实名信息
+    func identityInfo(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
+        JXRequest.request(url: ApiString.myIdentity.rawValue, param: Dictionary(), success: { (data, message) in
+            
+            guard let dict = data as? Dictionary<String, Any>
+                else{
+                    completion(data,message,false)
+                    return
+            }
+            self.indentifyInfoEntity = IndentifyInfoEntity()
+            self.indentifyInfoEntity?.setValuesForKeys(dict)
+            completion(data,message,true)
+            
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
+    }
+    //个人信息
+    func personInfo(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
+        JXRequest.request(url: ApiString.profileInfo.rawValue, param: Dictionary(), success: { (data, message) in
+            
+            guard let dict = data as? Dictionary<String, Any>
+                else{
+                    completion(data,message,false)
+                    return
+            }
+            self.profileInfoEntity = ProfileInfoEntity()
+            self.profileInfoEntity?.setValuesForKeys(dict)
+            completion(data,message,true)
+            
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
     }
     //修改昵称
     func modify(nickName:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         JXRequest.request(url: ApiString.modifyNickName.rawValue, param: ["nickname":nickName], success: { (data, message) in
             
-            UserManager.manager.userDict["nickname"] = nickName
-            //UserManager.manager.userEntity.nickname = nickName
-            
-            let _ = UserManager.manager.saveAccound(dict: UserManager.manager.userDict)
-            
+            //UserManager.manager.userDict["nickname"] = nickName
+            //let _ = UserManager.manager.saveAccound(dict: UserManager.manager.userDict)
             completion(data,message,true)
             
         }) { (message, code) in
@@ -152,15 +176,7 @@ class LoginVM: JXRequest {
         }
         
     }
-    func logout(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
-        JXRequest.request(url: ApiString.logout.rawValue, param: Dictionary(), success: { (data, message) in
-            
-            completion(data,message,true)
-            
-        }) { (message, code) in
-            completion(nil,message,false)
-        }
-    }
+    
 }
 
 class IdentifyVM: JXRequest {

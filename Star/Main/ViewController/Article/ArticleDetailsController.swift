@@ -15,13 +15,26 @@ private let bottomInputViewHeight : CGFloat = 60 + additionalBottomHeight
 class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableViewDataSource,JXInputTextViewDelegate,UIScrollViewDelegate {
 
     let articleVM = ArticleVM()
-    var articleEntity : ArticleListEntity?
+    var articleEntity : ArticleEntity?
     
     var page : Int = 1
-    
+
     let commentVM = CommentVM()
     
+    var articleLiked : Bool = false
+    var articleLikes : Int = 0
     
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomInputView: BottomInputView!
+    @IBOutlet weak var bottomConstraintsHeight: NSLayoutConstraint!
+    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var priseLabel: UILabel!
+    @IBOutlet weak var priseButton: UIButton!
+    @IBOutlet weak var checkChain: UIButton!
+    
+    @IBOutlet weak var actionButton: UIButton!
     
     lazy var processView: UIProgressView = {
         let process = UIProgressView()
@@ -51,58 +64,71 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         return web
     }()
-    var tableView : UITableView!
     
-    var inputTextView : JXInputTextView?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.groupTableViewBackground
- 
-        
-        guard let articleId = self.articleEntity?.id else { return }
-        guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
-        
-        self.tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - bottomInputViewHeight), style: .plain)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        //        self.tableView.mj_header = MJRefreshHeader(refreshingBlock: {
-        //            //self.vm.loadNewMainData(completion: <#T##((Any?, String, Bool) -> ())##((Any?, String, Bool) -> ())##(Any?, String, Bool) -> ()#>)
-        //        })
-        //        self.tableView.mj_header.beginRefreshing()
-        self.view.addSubview(self.tableView)
-        
-        self.inputTextView = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: bottomInputViewHeight), style: .bottom, completion:nil)
-        self.inputTextView?.delegate = self
-        self.inputTextView?.sendBlock = { (_,object) in
-            print("发送block",object)
+    lazy var inputTextView: JXInputTextView = {
+        let input = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: bottomInputViewHeight), style: .bottom, completion:nil)
+        input.delegate = self
+        input.sendBlock = { (_,object) in
             self.commentVM.comment(object as! String, articleHash: (self.articleEntity?.artHashIndex)!, articleId: (self.articleEntity?.id)!, completion: { (_, msg, isSuc) in
                 ViewManager.showNotice(msg)
                 if isSuc {
+                    guard let articleId = self.articleEntity?.id else { return }
+                    guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
                     self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
                         self.tableView.reloadData()
                     }
                 }
             })
-//            let dict = ["title":"新增","content":object,"status":1]
-//            self.vm.dataArray.append(dict)
-//            self.tableView.reloadSections([0], with: .automatic)
         }
-        self.inputTextView?.limitWords = 1000
-        self.inputTextView?.placeHolder = "写下你的评论吧~~🌹🌹🌹"
-        self.view.addSubview(self.inputTextView!)
+        input.limitWords = 1000
+        input.placeHolder = "写下你的评论吧~~🌹🌹🌹"
+        return input
+    }()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.title = "详情"
         
+        if #available(iOS 11.0, *) {
+            self.tableView?.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+ 
+        self.priseButton.setImage(UIImage(named: "iconHeartNormal"), for: .normal)
+        self.priseButton.setImage(UIImage(named: "iconHeartSelected"), for: .selected)
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.checkChain.jxWidth, height: self.checkChain.jxHeight)
+        gradientLayer.cornerRadius = 15
+        self.checkChain.layer.addSublayer(gradientLayer)
+        
+        guard let articleId = self.articleEntity?.id else { return }
+        guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
+        
+        
+        self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
+        //        self.tableView.mj_header = MJRefreshHeader(refreshingBlock: {
+        //            //self.vm.loadNewMainData(completion: <#T##((Any?, String, Bool) -> ())##((Any?, String, Bool) -> ())##(Any?, String, Bool) -> ()#>)
+        //        })
+        //        self.tableView.mj_header.beginRefreshing()
+
+        
+        self.bottomConstraintsHeight.constant = bottomInputViewHeight
         
         self.webView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: self.tableView.bounds.height - bottomInputViewHeight)
         //self.webView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 3 * bottomInputViewHeight)
         self.webView.scrollView.isScrollEnabled = false
         self.webView.scrollView.bounces = false
-        self.tableView.tableHeaderView = self.webView
         self.webView.scrollView.delegate = self
         
         
-        self.processView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 2)
+        self.processView.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: 2)
         view.addSubview(self.processView)
         
         self.webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -110,38 +136,54 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         
         self.showMBProgressHUD()
+        //self.webView.load(URLRequest(url: URL(string: "https://www.jianshu.com/p/0b781b423170")!))
         if let str = self.articleEntity?.cdnUrl,let url = URL(string: str) {
             self.webView.load(URLRequest(url: url))
         }
-        //self.webView.load(URLRequest(url: URL(string: "https://www.jianshu.com/p/0b781b423170")!))
+        self.tableView.tableHeaderView = self.webView
    
         self.articleVM.articleDetails(articleId, articleHash: articleHashIndex) { (_, msg, isSuc) in
+            self.hideMBProgressHUD()
             if isSuc {
-                
+                self.articleLiked = self.articleVM.articleDetailsEntity.like
+                self.priseButton.isSelected = self.articleVM.articleDetailsEntity.like
+                self.articleLikes = self.articleVM.articleDetailsEntity.article.likes
+                self.priseLabel.text = "\(self.articleVM.articleDetailsEntity.article.likes)"
             }
         }
         self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
             self.tableView.reloadData()
         }
         
-        CommonManager.countDown(timeOut: 1, timeInterval: 30, process: { (n) in
-            print("开始计时")
-        }) {
-            print("计时结束")
-//            self.articleVM.articleRead("", completion: { (_, msg, isSuc) in
-//                //
-//            })
-        }
+//        CommonManager.countDown(timeOut: 1, timeInterval: 30, process: { (n) in
+//            print("开始计时")
+//        }) {
+//            print("计时结束")
+////            self.articleVM.articleRead("", completion: { (_, msg, isSuc) in
+////                //
+////            })
+//        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        if self.articleVM.articleDetailsEntity.like != self.articleLiked {
+            guard let id = self.articleEntity?.id ,let artHashIndex = self.articleEntity?.artHashIndex else {
+                return
+            }
+            self.articleVM.articleLike(id, artHashIndex: artHashIndex, status: self.articleLiked == true ? 2 : 1, completion: nil)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.topConstraint.constant = kNavStatusHeight
     }
     deinit {
         self.webView.scrollView.removeObserver(self, forKeyPath: "contentSize")
@@ -149,8 +191,28 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "getParames")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
     }
-    func inputTextViewConfirm(inputTextView: JXInputTextView, object: String?) {
-        print("发送delegate",object)
+    
+    @IBAction func showInputView() {
+        let inputTextView = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: 60), style: .hidden, completion:nil)
+        inputTextView.sendBlock = { (_,object) in
+            self.commentVM.comment(object as! String, articleHash: (self.articleEntity?.artHashIndex)!, articleId: (self.articleEntity?.id)!, completion: { (_, msg, isSuc) in
+                ViewManager.showNotice(msg)
+                if isSuc {
+                    guard let articleId = self.articleEntity?.id else { return }
+                    guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
+                    self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
+                        self.tableView.reloadData()
+                    }
+                }
+            })
+        }
+        inputTextView.cancelBlock = { (_,_) in
+            
+        }
+        inputTextView.limitWords = 5
+        inputTextView.placeHolder = "请输入您的回复内容"
+        inputTextView.useTopBar = true
+        inputTextView.show()
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
@@ -188,12 +250,49 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == self.webView.scrollView {
-            print("scrollViewDidScroll = ",scrollView.contentSize)
-        }
         if scrollView.isDragging {
             self.view.endEditing(true)
         }
+    }
+    @IBAction func priseClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.articleLiked == true {
+            self.articleLiked = false
+            self.articleLikes -= 1
+        } else {
+            self.articleLiked = true
+            self.articleLikes += 1
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.priseButton.alpha = 0.0
+                self.priseButton.transform = CGAffineTransform(scaleX: 2, y: 2)
+//                var frame = self.priseButton.frame
+//                frame.origin.y += 25
+//                self.priseButton.frame = frame
+                
+            }) { (finished) in
+                self.priseButton.alpha = 1.0
+                self.priseButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+                
+//                var frame = self.priseButton.frame
+//                frame.origin.y -= 25
+//                self.priseButton.frame = frame
+            }
+        }
+        self.priseLabel.text = "\(self.articleLikes)"
+        
+    }
+    @IBAction func checkChainArticle(_ sender: Any) {
+        if self.articleVM.articleDetailsEntity.like != self.articleLiked {
+            guard let id = self.articleEntity?.id ,let artHashIndex = self.articleEntity?.artHashIndex else {
+                return
+            }
+            self.articleVM.articleChain(id, artHashIndex: artHashIndex) { (_, msg, isSuc) in
+                //
+            }
+        }
+    }
+    override func isCustomNavigationBarUsed() -> Bool {
+        return true
     }
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -224,8 +323,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        //self.inputTextView?.show()
+
     }
     // MARK: - Navigation
     
@@ -235,7 +333,17 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         // Pass the selected object to the new view controller.
     }
 }
-
+extension ArticleDetailsController:UITextFieldDelegate {
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        print("我可以做别的吗？")
+//        textField.resignFirstResponder()
+//        self.showInputView()
+//        return true
+//    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        return true
+//    }
+}
 extension ArticleDetailsController:WKNavigationDelegate{
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -285,3 +393,7 @@ extension ArticleDetailsController :WKScriptMessageHandler{
         print("message:",message)
     }
 }
+
+
+
+

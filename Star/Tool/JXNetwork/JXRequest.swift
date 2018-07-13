@@ -94,6 +94,7 @@ class JXRequest: JXBaseRequest {
                 msg = message ?? "请求成功"
                 isSuccess = true
             }else if code == .kResponseTokenDisabled{
+                JXNetworkManager.manager.cancelRequests()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
             }else if code == .kResponseLoginFromOtherDevice{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginFromOtherDevice), object: false)

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+//import JXFoundation
 
 class LoginViewController: BaseViewController {
 
-
     @IBOutlet weak var mainScrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var codeImageTextField: UITextField!
     @IBOutlet weak var codeWordTextField: UITextField!
@@ -46,32 +47,54 @@ class LoginViewController: BaseViewController {
 //        let attributeString2 = NSMutableAttributedString.init(string: "如果忘记密码，请联系管理员")
 //        attributeString2.addAttributes([NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
 //        passwordTextField.attributedPlaceholder = attributeString2
-//
-//
-//        lookButton.setImage(UIImage(named:"look_normal"), for: .normal)
-//        lookButton.setImage(UIImage(named:"look_highlight"), for: .highlighted)
-//        lookButton.isSelected = false
         
-        loginButton.backgroundColor = UIColor.rgbColor(from: 153, 153, 153)
-        loginButton.layer.cornerRadius = 22
+        
+        if #available(iOS 11.0, *) {
+            self.mainScrollView.contentInsetAdjustmentBehavior = .never
+            self.mainScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+
+        
+        loginButton.backgroundColor = UIColor.clear
         //loginButton.alpha = 0.4
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: loginButton.jxWidth, height: loginButton.jxHeight)
+        gradientLayer.cornerRadius = 22
+        self.loginButton.layer.addSublayer(gradientLayer)
+        
+        
+        fetchWordButton.layer.borderColor = UIColor.rgbColor(from: 21, 106, 206).cgColor
+        fetchWordButton.layer.borderWidth = 1
+        fetchWordButton.layer.cornerRadius = 13.3
+        fetchWordButton.setTitleColor(JXTextColor, for: .normal)
         
         let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=login&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
         fetchImageButton.sd_setImage(with: url, for: .normal, completed: nil)
         
         
-        //userTextField.text = "13477831123"
-        //passwordTextField.text = "12345678a"
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         
-//        self.vm.getImageCode(type: "login") { (data, msg, isSuccess) in
-//            //
-//        }
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        if let controllers = self.navigationController?.viewControllers {
+            if controllers.count > 1 {
+                self.navigationController?.viewControllers.remove(at: 0)
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -84,8 +107,8 @@ class LoginViewController: BaseViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    override func awakeFromNib() {
-        //
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
     }
     @IBAction func fetchCodeImage(_ sender: UIButton) {
         
@@ -160,4 +183,49 @@ extension LoginViewController: UITextFieldDelegate {
     func textChange(notify:NSNotification) {
         
     }
+//    @objc func keyboardWillShow(notify:Notification) {
+//
+//        guard
+//            let userInfo = notify.userInfo,
+//            let rect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+//            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+//            else {
+//                return
+//        }
+//
+//        UIView.animate(withDuration: animationDuration, animations: {
+//            self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
+//            self.tapControl.alpha = 0.2
+//        }) { (finish) in
+//            //
+//        }
+//    }
+//    @objc func keyboardWillHide(notify:Notification) {
+//        print("notify = ","notify")
+//        guard
+//            let userInfo = notify.userInfo,
+//            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+//            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+//            else {
+//                return
+//        }
+//        UIView.animate(withDuration: animationDuration, animations: {
+//            //如果为iPhoneX，则把底部的34空间让出来
+//            let h : CGFloat = self.topBarHeight + additionalBottomHeight
+//            if self.style == .bottom {
+//                self.frame = CGRect.init(x: 0, y: keyWindowHeight - h, width: keyWindowWidth, height: h)
+//            } else {
+//                self.frame = CGRect.init(x: 0, y: keyWindowHeight, width: keyWindowWidth, height: h)
+//            }
+//            self.tapControl.alpha = 0
+//        }) { (finish) in
+//            if self.style == .hidden {
+//                self.clearInfo()
+//            } else if self.style == .bottom{
+//
+//            } else {
+//                self.clearInfo()
+//            }
+//        }
+//    }
 }

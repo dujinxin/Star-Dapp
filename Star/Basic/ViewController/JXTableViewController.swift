@@ -21,9 +21,14 @@ class JXTableViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.groupTableViewBackground
         
-        //isLogin ? setUpTableView() : setUpDefaultView()
-        
+        if #available(iOS 11.0, *) {
+            self.tableView?.contentInsetAdjustmentBehavior = .never
+            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +41,21 @@ class JXTableViewController: BaseViewController{
     }
     
     func setUpTableView(){
+        let y = self.isCustomNavigationBarUsed() ? kNavStatusHeight : 0
+        let height = self.isCustomNavigationBarUsed() ? (view.bounds.height - kNavStatusHeight) : view.bounds.height
         
-        self.tableView = UITableView(frame: self.view.bounds, style: .plain)
+        self.tableView = UITableView(frame: CGRect(x: 0, y: y, width: view.bounds.width, height: height), style: .plain)
         self.tableView?.backgroundColor = UIColor.groupTableViewBackground
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
-        
+        self.tableView?.estimatedRowHeight = 44
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
         self.view.addSubview(self.tableView!)
         
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(requestData), for: UIControlEvents.valueChanged)
-        
-        self.tableView?.addSubview(refreshControl!)
+//        refreshControl = UIRefreshControl()
+//        refreshControl?.addTarget(self, action: #selector(requestData), for: UIControlEvents.valueChanged)
+//        
+//        self.tableView?.addSubview(refreshControl!)
     }
 }
 
@@ -64,3 +72,4 @@ extension JXTableViewController : UITableViewDelegate,UITableViewDataSource{
         return UITableViewCell()
     }
 }
+

@@ -7,10 +7,8 @@
 //
 
 import UIKit
+import JXFoundation
 
-//enum JXInputTextViewPosition : Int {
-//
-//}
 enum JXInputTextViewStyle {
     case none          //控件不带输入框
     case hidden        //hidden
@@ -28,10 +26,10 @@ enum JXInputTextViewApplication {
     case chat
 }
 @objc protocol JXInputTextViewDelegate {
-    
     @objc optional func inputTextViewConfirm(inputTextView :JXInputTextView, object:String?)
-    @objc optional func jxSelectView(jxSelectView :JXSelectView, clickButtonAtIndex index:Int)
 }
+private let inputViewTopBarHeight : CGFloat = 44
+
 private let inputViewMinHeight : CGFloat = 40
 //private let inputViewMaxHeight : CGFloat = 90
 private let inputViewTopMargin : CGFloat = 10
@@ -50,9 +48,17 @@ class JXInputTextView: JXView {
     
     var delegate : JXInputTextViewDelegate?
     var sendBlock : ClickBlock?
+    var cancelBlock : ClickBlock?
     
     //private let topBarHeight : CGFloat = 60
-    
+    var useTopBar : Bool = false {
+        didSet{
+            if useTopBar == true {
+                self.addSubview(self.topBarView)
+                
+            }
+        }
+    }
     var limitWords : Int  =  0                     //限制字数，0默认不限制
     var limitLines : Int  =  4                     //限制行数，默认限制4行
     var placeHolder: String? {
@@ -82,6 +88,9 @@ class JXInputTextView: JXView {
     }
     //MARK:public methods
     func show() {
+        self.setPosition(hidden: style != .bottom)
+        self.topBarView.titleLabel.text = "\(0)/\(self.limitWords)"
+        
         let superView : UIView
         if self.style == .bottom {
             guard let v = self.superview else {
@@ -99,7 +108,7 @@ class JXInputTextView: JXView {
         
         switch self.style {
         case .hidden:
-            self.contentView?.becomeFirstResponder()
+            self.textView.becomeFirstResponder()
         default:
             print("由输入框来触发")
         }
@@ -112,15 +121,8 @@ class JXInputTextView: JXView {
     private var keyboardRect = CGRect()
     private var animateDuration = 0.25
     private var isKeyboardShow = false
-    private lazy var cancelButton: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = UIColor.white
-        btn.setTitle("取消", for: UIControlState.normal)
-        btn.setTitleColor(JX333333Color, for: UIControlState.normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        btn.addTarget(self, action: #selector(tapClick), for: UIControlEvents.touchUpInside)
-        return btn
-    }()
+    
+    
     private lazy var bgWindow : UIWindow? = {
         let window = UIApplication.shared.keyWindow
         window?.frame = UIScreen.main.bounds
@@ -143,14 +145,34 @@ class JXInputTextView: JXView {
         text.layer.cornerRadius = 3
         text.delegate = self
         text.layer.masksToBounds = true
-        text.layer.borderColor = UIColor.gray.cgColor
-        text.layer.borderWidth = 1.0
+//        text.layer.borderColor = UIColor.gray.cgColor
+//        text.layer.borderWidth = 1.0
         text.returnKeyType = .send
         text.enablesReturnKeyAutomatically = true
         
-        text.font = UIFont.systemFont(ofSize: 14)
-        text.textColor = UIColor.darkText
+        text.font = UIFont.systemFont(ofSize: 17)
+        text.textColor = UIColor.rgbColor(from: 57, 57, 57)
         return text
+    }()
+    lazy var topBarView: InputTopView = {
+        let top = InputTopView()
+        top.cancelBlock = {
+            if let block = self.cancelBlock {
+                block(self, self.textView.text)
+            }
+            self.dismiss()
+        }
+        top.confirmBlock = {
+            if let block = self.sendBlock {
+                block(self,self.textView.text)
+            }
+            self.textView.text = ""                        //发送后清除内容
+            if self.apply == .comment {
+                self.automaticallySet(self.textView , self.textView.text)
+                self.textView.resignFirstResponder()       //评论需要收起键盘，聊天则不用收
+            }
+        }
+        return top
     }()
     //MARK:private methods
     private func setTopBar(style:JXInputTextViewStyle) {
@@ -171,13 +193,16 @@ class JXInputTextView: JXView {
 //            self.contentView = UIView()
 //            self.addSubview(self.contentView!)
         }
-        self.setPosition(hidden: style != .bottom)
     }
     private func setPosition(hidden:Bool) {
         //如果为iPhoneX，则把底部的34空间让出来
         let h : CGFloat = topBarHeight + additionalBottomHeight
         if hidden == true {
-            self.frame = CGRect.init(x: 0, y: keyWindowHeight, width: keyWindowWidth, height: topBarHeight)
+            if self.useTopBar {
+                self.frame = CGRect.init(x: 0, y: keyWindowHeight, width: keyWindowWidth, height: topBarHeight + inputViewTopBarHeight - inputViewTopMargin)
+            } else {
+                self.frame = CGRect.init(x: 0, y: keyWindowHeight, width: keyWindowWidth, height: topBarHeight)
+            }
         } else {
             self.frame = CGRect.init(x: 0, y: keyWindowHeight - h, width: keyWindowWidth, height: h)
         }
@@ -214,7 +239,13 @@ class JXInputTextView: JXView {
     override func layoutSubviews() {
         super.layoutSubviews()
         //self.frame = CGRect(x: 0, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
-        self.contentView?.frame = CGRect(x: inputViewMargin, y: inputViewTopMargin, width: inputViewWidth, height: topBarHeight - inputViewTopMargin - inputViewBottomMargin)
+        if self.useTopBar == true {
+            self.topBarView.frame = CGRect(x: 0, y: 0, width: frame.width, height: inputViewTopBarHeight)
+            self.contentView?.frame = CGRect(x: inputViewMargin, y: inputViewTopBarHeight, width: inputViewWidth, height: topBarHeight - inputViewTopMargin - inputViewBottomMargin)
+        } else {
+            self.contentView?.frame = CGRect(x: inputViewMargin, y: inputViewTopMargin, width: inputViewWidth, height: topBarHeight - inputViewTopMargin - inputViewBottomMargin)
+        }
+        
     }
 }
 extension JXInputTextView {
@@ -233,7 +264,11 @@ extension JXInputTextView {
 //            self.show()
 //        }
         UIView.animate(withDuration: animationDuration, animations: {
-            self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
+            if self.useTopBar {
+                self.frame = CGRect(x: 0, y: keyWindowHeight - (self.topBarHeight + inputViewTopBarHeight - inputViewTopMargin) - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight + inputViewTopBarHeight - inputViewTopMargin)
+            } else {
+                self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
+            }
             self.tapControl.alpha = 0.2
         }) { (finish) in
             //
@@ -288,6 +323,15 @@ extension JXInputTextView {
             let view = nofiy.object as? JXPlaceHolderTextView,let string = view.text else{
             return
         }
+        if self.useTopBar {
+            self.topBarView.titleLabel.text = "\(string.count)/\(self.limitWords)"
+            if string.count > 0 {
+                self.topBarView.confirmButton.setTitleColor(UIColor.rgbColor(from: 22, 105, 172), for: .normal)
+            } else {
+                self.topBarView.confirmButton.setTitleColor(UIColor.rgbColor(from: 160, 160, 160), for: .normal)
+            }
+            
+        }
         self.automaticallySet(view, string)
         //self.layoutIfNeeded()
     }
@@ -304,7 +348,11 @@ extension JXInputTextView {
             self.topBarHeight = inputViewTopMargin + inputViewBottomMargin + height
         }
         UIView.animate(withDuration: animateDuration, animations: {
-            self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
+            if self.useTopBar {
+                self.frame = CGRect(x: 0, y: keyWindowHeight - (self.topBarHeight + inputViewTopBarHeight - inputViewTopMargin) - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight + inputViewTopBarHeight - inputViewTopMargin)
+            } else {
+                self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
+            }
         }) { (finish) in
             //
         }
@@ -318,6 +366,9 @@ extension JXInputTextView : UITextViewDelegate {
         //限制字数不可以限制回车，删除键，所以要优先响应，然后再限制
         //删除键
         if text == "" {
+            if self.useTopBar {
+                self.topBarView.titleLabel.textColor = UIColor.rgbColor(from: 160, 160, 160)
+            }
             return true
         }
         //return键 收键盘
@@ -337,13 +388,79 @@ extension JXInputTextView : UITextViewDelegate {
         }
         //限制输入字符数
         if limitWords > 0 {
-            if let string = textView.text, string.count > limitWords - 1{
+            if let string = textView.text, string.count >= limitWords {
                 textView.text = String(string.prefix(upTo: string.index(string.startIndex, offsetBy: limitWords)))
                 //textView.text = string.substring(to: string.index(string.startIndex, offsetBy: 500))
                 ViewManager.showNotice("字符个数不能大于\(limitWords)")
                 return false
+            } else {
+                if self.useTopBar {
+                    if textView.text.count == limitWords - 1{
+                        self.topBarView.titleLabel.textColor = UIColor.rgbColor(from: 251, 74, 88)
+                    } else {
+                        self.topBarView.titleLabel.textColor = UIColor.rgbColor(from: 160, 160, 160)
+                    }
+                }
             }
         }
         return true
+    }
+}
+class InputTopView: UIView {
+    lazy var cancelButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("取消", for: UIControlState.normal)
+        btn.setTitleColor(UIColor.rgbColor(from: 160, 160, 160), for: UIControlState.normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        btn.addTarget(self, action: #selector(cnacelClick), for: UIControlEvents.touchUpInside)
+        return btn
+    }()
+    lazy var confirmButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("发布", for: UIControlState.normal)
+        btn.setTitleColor(UIColor.rgbColor(from: 160, 160, 160), for: UIControlState.normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        btn.addTarget(self, action: #selector(confirmClick), for: UIControlEvents.touchUpInside)
+        return btn
+    }()
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        //btn.setTitle("取消", for: UIControlState.normal)
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.rgbColor(from: 160, 160, 160)
+        label.textAlignment = .center
+        
+        return label
+    }()
+    var cancelBlock : (()->())?
+    var confirmBlock : (()->())?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(self.cancelButton)
+        addSubview(self.confirmButton)
+        addSubview(self.titleLabel)
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.cancelButton.frame = CGRect(x: 15, y: 10, width: 44, height: 30)
+        self.titleLabel.frame = CGRect(x: 15, y: 10, width: 100, height: 30)
+        self.titleLabel.center = self.center
+        self.confirmButton.frame = CGRect(x: self.jxWidth - 44 - 15, y: 10, width: 44, height: 30)
+    }
+    @objc func cnacelClick() {
+        if let block = cancelBlock {
+            block()
+        }
+    }
+    @objc func confirmClick() {
+        if let block = confirmBlock {
+            block()
+        }
     }
 }

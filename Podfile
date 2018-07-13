@@ -13,6 +13,7 @@ target 'Star' do
     pod 'MJRefresh'
     pod 'Masonry'
     pod 'SwiftyJSON'
+    pod 'JXFoundation'
 
   # Pods for Star
 

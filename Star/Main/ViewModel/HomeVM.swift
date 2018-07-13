@@ -9,6 +9,58 @@
 import Foundation
 
 class HomeVM: BaseViewModel {
+    
+    var homeEntity = HomeEntity()
+    
+    var propertyRecordEntity = PropertyRecordEntity()
+    
+    var inviteEntity = InviteEntity()
+    
+    
+    func home(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        
+        JXRequest.request(url: ApiString.home.rawValue, param: [:], success: { (data, msg) in
+            
+            guard let result = data as? Dictionary<String, Any>
+                else{
+                    completion(nil, self.message, false)
+                    return
+            }
+            self.homeEntity.setValuesForKeys(result)
+            if let coinRank = result["coinRank"] as? Array<Dictionary<String, Any>> {
+                for i in 0..<coinRank.count {
+                    let entity = CoinRankEntity()
+                    let dict = coinRank[i]
+                    if let ipe = dict["ipe"] as? Double {
+                        entity.ipe = ipe
+                    }
+                    if let user = dict["user"] as? Dictionary<String,Any> {
+                        let userEntity = HomeUserEntity()
+                        userEntity.setValuesForKeys(user)
+                        entity.user = userEntity
+                    }
+                    self.homeEntity.coinRankArray.append(entity)
+                }
+            }
+            if let mineralInfo = result["mineralInfo"] as? Dictionary<String, Any> {
+                if let award = mineralInfo["award"] as? Array<String> {
+                    award.forEach({ (str) in
+                        self.homeEntity.mineralInfoArray.append(str)
+                    })
+                }
+                if let mineral = mineralInfo["mineral"] as? Array<String> {
+                    mineral.forEach({ (str) in
+                        self.homeEntity.mineralInfoArray.append(str)
+                    })
+                }
+            }
+            
+            completion(data, msg, true)
+            
+        }) { (msg, code) in
+            completion(nil, msg, false)
+        }
+    }
     func powerRank(limit:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         JXRequest.request(url: ApiString.powerRank.rawValue, param: ["limit":limit], success: { (data, msg) in
@@ -18,10 +70,19 @@ class HomeVM: BaseViewModel {
                     completion(nil, self.message, false)
                     return
             }
-            self.dataArray.removeAll()
-            for i in 0..<array.count{
-                let model = BaseModel()
+            self.homeEntity.powerRankArray.removeAll()
+            for i in 0..<array.count {
+                let entity = PowerRankEntity()
                 let dict = array[i]
+                if let ipe = dict["power"] as? Double {
+                    entity.power = ipe
+                }
+                if let user = dict["user"] as? Dictionary<String,Any> {
+                    let userEntity = HomeUserEntity()
+                    userEntity.setValuesForKeys(user)
+                    entity.user = userEntity
+                }
+                self.homeEntity.powerRankArray.append(entity)
             }
             
             completion(data, msg, true)
@@ -39,12 +100,81 @@ class HomeVM: BaseViewModel {
                     completion(nil, self.message, false)
                     return
             }
-            self.dataArray.removeAll()
-            for i in 0..<array.count{
-                let model = BaseModel()
+            self.homeEntity.coinRankArray.removeAll()
+            for i in 0..<array.count {
+                let entity = CoinRankEntity()
                 let dict = array[i]
+                if let ipe = dict["power"] as? Double {
+                    entity.ipe = ipe
+                }
+                if let user = dict["user"] as? Dictionary<String,Any> {
+                    let userEntity = HomeUserEntity()
+                    userEntity.setValuesForKeys(user)
+                    entity.user = userEntity
+                }
+                self.homeEntity.coinRankArray.append(entity)
+            }
+            completion(data, msg, true)
+            
+        }) { (msg, code) in
+            completion(nil, msg, false)
+        }
+    }
+    func harvestDiamond(id:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        JXRequest.request(url: ApiString.harvestDiamond.rawValue, param: ["id":id], success: { (data, msg) in
+            
+            completion(data, msg, true)
+            
+        }) { (msg, code) in
+            completion(nil, msg, false)
+        }
+    }
+    
+    func propertyRecord(pageSize:Int = 20,pageNo:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        
+        JXRequest.request(url: ApiString.propertyRecord.rawValue, param: ["pageSize":pageSize,"pageNo":pageNo], success: { (data, msg) in
+            
+            guard
+                let dict = data as? Dictionary<String, Any>,
+                let total = dict["total"] as? Int
+                else{
+                    completion(nil, self.message, false)
+                    return
+            }
+            if total > 0 {
+                guard
+                    let list = dict["coinRecord"] as? Array<Dictionary<String, Any>>
+                    else{
+                        completion(nil, self.message, false)
+                        return
+                }
+                if pageNo == 1 {
+                    self.propertyRecordEntity.coinRecord.removeAll()
+                }
+                self.propertyRecordEntity.total = total
+                for i in 0..<list.count{
+                    let dict = list[i]
+                    let entity = PropertyEntity()
+                    entity.setValuesForKeys(dict)
+                    self.propertyRecordEntity.coinRecord.append(entity)
+                }
             }
             
+            completion(data, msg, true)
+            
+        }) { (msg, code) in
+            completion(nil, msg, false)
+        }
+    }
+
+    func inviteInfo(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        JXRequest.request(url: ApiString.inviteInfo.rawValue, param: [:], success: { (data, msg) in
+            guard let dict = data as? Dictionary<String, Any>
+                else{
+                    completion(nil, self.message, false)
+                    return
+            }
+            self.inviteEntity.setValuesForKeys(dict)
             completion(data, msg, true)
             
         }) { (msg, code) in

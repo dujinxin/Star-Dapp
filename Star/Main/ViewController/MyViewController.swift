@@ -8,36 +8,66 @@
 
 import UIKit
 
-class MyViewController: UITableViewController {
+class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var dataArray = [["image":"property","title":"我的资产"],["image":"wallet","title":"我的钱包"],["image":"property","title":"实名信息"],["image":"account","title":"账户信息"]]
-    
+    var dataArray = [["image":"iconMoney","title":"我的资产"],["image":"iconPocket","title":"我的钱包"],["image":"iconPerson","title":"实名信息"],["image":"iconGear","title":"账户信息"]]
     
     var vm = LoginVM()
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var nickNameLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
-  
+    var nickName = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = JXF1f1f1Color
+        
+        if #available(iOS 11.0, *) {
+            self.tableView?.contentInsetAdjustmentBehavior = .never
+            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        self.tableView.register(UINib(nibName: "MyCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier1")
+        self.tableView.register(UINib(nibName: "ImageTitleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier2")
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.isScrollEnabled = false
+        
+//        self.nickNameLabel.textColor = JXFfffffColor
+//        self.userImageView.layer.cornerRadius = 40
+//        self.userImageView.layer.masksToBounds = true
+//        self.userImageView.clipsToBounds = true
         
         //self.nickNameLabel.text = UserManager.manager.userEntity.nickname
         
-        let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=login&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
-        self.userImageView.sd_setImage(with: url, completed: nil)
-        
+        self.vm.personInfo { (data, msg, isSuccess) in
+            if isSuccess == true {
+//                if let str = self.vm.profileInfoEntity?.avatar {
+//                    let url = URL.init(string:str)
+//                    self.userImageView.sd_setImage(with: url, completed: nil)
+//                }
+//                self.nickNameLabel.text = self.vm.profileInfoEntity?.nickname
+                self.tableView.reloadData()
+            } else {
+                ViewManager.showNotice(msg)
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.barStyle = .blackTranslucent
         if !UserManager.manager.isLogin {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
             let loginVC = UINavigationController.init(rootViewController: login)
             self.navigationController?.present(loginVC, animated: false, completion: nil)
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,7 +90,8 @@ class MyViewController: UITableViewController {
                 
                 self.vm.modify(nickName: text, completion: { (_, msg, isSuccess) in
                     ViewManager.showNotice(msg)
-                    self.nickNameLabel.text = text
+                    self.vm.profileInfoEntity?.nickname = text
+                    self.tableView.reloadData()
                 })
             }
         }))
@@ -69,61 +100,62 @@ class MyViewController: UITableViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
 
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-   
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                //performSegue(withIdentifier: "property", sender: nil)
-                //performSegue(withIdentifier: "property_web", sender: nil)
-                
-                let storyboard = UIStoryboard(name: "Task", bundle: nil)
-                let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
-                //let loginVC = UINavigationController.init(rootViewController: login)
-                
-                self.navigationController?.pushViewController(login, animated: true)
-                //self.navigationController?.present(loginVC, animated: false, completion: nil)
-            }else if indexPath.row == 1{
-                //performSegue(withIdentifier: "myWallet", sender: nil)
-                performSegue(withIdentifier: "myWallet_web", sender: nil)
-            }else if indexPath.row == 2{
-                performSegue(withIdentifier: "personInfo", sender: nil)
-            }else{
-                performSegue(withIdentifier: "accound", sender: nil)
-            }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataArray.count + 1
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //return UITableViewAutomaticDimension
+        if indexPath.row == 0 {
+            return 200 + kNavStatusHeight
+        } else {
+            return 64
         }
     }
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 260
-//    }
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let contentView = UIView()
-//        contentView.frame = CGRect.init(x: 0, y: 0, width: view.frame.width, height: 250)
-//        contentView.backgroundColor = JXFfffffColor
-//
-//        let imageView = UIImageView()
-//        imageView.frame = CGRect(x: (kScreenWidth - 64.0) / 2, y: 25, width: 64, height: 64)
-//        imageView.isUserInteractionEnabled = true
-//        imageView.backgroundColor = UIColor.randomColor
-//        contentView.addSubview(imageView)
-//
-//
-//        let titleLabel = UILabel()
-//        titleLabel.frame = CGRect.init(x: 15, y: imageView.jxBottom + 15, width: view.frame.width - 30, height: 44)
-//        titleLabel.text = "昵称"
-//        titleLabel.font = UIFont.systemFont(ofSize: 14)
-//        titleLabel.textAlignment = .center
-//        titleLabel.textColor = JX666666Color
-//
-//        contentView.addSubview(titleLabel)
-//
-//        return contentView
-//
-//    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier1", for: indexPath) as! MyCell
+            if let str = self.vm.profileInfoEntity?.avatar {
+                let url = URL.init(string:str)
+                cell.userImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "portrait_default"), options: [], completed: nil)
+                //cell.userImageView.sd_setImage(with: url, completed: nil)
+            }
+            cell.nickNameLabel.text = self.vm.profileInfoEntity?.nickname
+            cell.editButton.addTarget(self, action: #selector(edit(_:)), for: .touchUpInside)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier2", for: indexPath) as! ImageTitleCell
+            let dict = dataArray[indexPath.row - 1]
+            
+            cell.iconView.image = UIImage(named: dict["image"]!)
+            cell.titleView.text = dict["title"]
+            return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 1 {
+            performSegue(withIdentifier: "property", sender: nil)
+
+//                let storyboard = UIStoryboard(name: "Task", bundle: nil)
+//                let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
+//            self.navigationController?.pushViewController(login, animated: true)
+            
+        }else if indexPath.row == 2{
+            ViewManager.showNotice("敬请期待")
+            //performSegue(withIdentifier: "myWallet", sender: nil)
+            //performSegue(withIdentifier: "myWallet_web", sender: nil)
+        }else if indexPath.row == 3{
+            performSegue(withIdentifier: "personInfo", sender: nil)
+        }else if indexPath.row == 4{
+            performSegue(withIdentifier: "accound", sender: nil)
+        }
+    }
 }

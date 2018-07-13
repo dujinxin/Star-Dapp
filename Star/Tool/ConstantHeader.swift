@@ -37,6 +37,7 @@ let JXF1f1f1Color = UIColor.rgbColor(rgbValue: 0xf1f1f1)
 let JXMainColor = UIColor.rgbColor(rgbValue: 0x0469c8)
 let JXGrayColor = UIColor.rgbColor(from: 177, 178, 177)
 let JXOrangeColor = UIColor.rgbColor(from: 219, 80, 8)
+let JXTextColor = UIColor.rgbColor(from: 59, 67, 104)
 
 //tableView SeparatorView backgroundColor R:0.78 G:0.78 B:0.8 A:1
 let JXSeparatorColor = UIColor.init(red: 0.78, green: 0.78, blue: 0.8, alpha: 1)

@@ -11,13 +11,18 @@ import MBProgressHUD
 
 class BaseViewController: UIViewController {
     
+    var isUseGradientColor : Bool = true
+    
     //MARK: - custom NavigationBar
     //自定义导航栏
-    lazy var customNavigationBar : UINavigationBar = {
-        let navigationBar = UINavigationBar(frame:CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
-        navigationBar.barTintColor = UIColor.cyan//导航条颜色
-        navigationBar.tintColor = UIColor.brown //item图片文字颜色
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.red,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 22)]//标题设置
+    lazy var customNavigationBar : JXNavigationBar = {
+        let navigationBar = JXNavigationBar(frame:CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: kNavStatusHeight))
+        navigationBar.isUseGradualColor = self.isUseGradientColor
+        navigationBar.barTintColor = UIColor.blue//导航条颜色
+        navigationBar.isTranslucent = true
+        navigationBar.barStyle = .blackTranslucent
+        navigationBar.tintColor = UIColor.white //item图片文字颜色
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 17)]//标题设置
         return navigationBar
     }()
     lazy var customNavigationItem: UINavigationItem = {
@@ -45,23 +50,17 @@ class BaseViewController: UIViewController {
     
     //log state
     var isLogin = false
-    var isCustomNavigationBarUsed = false
+    //var isCustomNavigationBarUsed = false
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        automaticallyAdjustsScrollViewInsets = false
-//        
-//        view.backgroundColor = UIColor.white
-//        view.backgroundColor = UIColor.rgbColor(rgbValue: 0xf1f1f1)
-//        view.backgroundColor = UIColor.rgbColor(from: 200, 200, 200)
-//        view.backgroundColor = UIColor.randomColor()
+        self.view.backgroundColor = UIColor.groupTableViewBackground
         
-        
+        setUpMainView()
         //isLogin ? setUpMainView() : setUpDefaultView()
         
-        self.isCustomNavigationBarUsed ? setCustomNavigationBar() : navigationBarConfig()
+        self.isCustomNavigationBarUsed() ? setCustomNavigationBar() : navigationBarConfig()
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,12 +68,13 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
     /// request data
     @objc func requestData() {
         
     }
-    
+    func isCustomNavigationBarUsed() -> Bool{
+        return false
+    }
     /// request data
     ///
     /// - Parameter withPage: load data for page,
@@ -100,9 +100,10 @@ class BaseViewController: UIViewController {
 extension BaseViewController {
     func setCustomNavigationBar() {
         //隐藏navigationBar
+        self.navigationController?.navigationBar.isHidden = true
         //1.自定义view代替NavigationBar,需要自己实现手势返回;
         //2.自定义navigatioBar代替系统的，手势返回不用自己实现
-        view.addSubview(customNavigationBar)
+        view.addSubview(self.customNavigationBar)
         customNavigationBar.items = [customNavigationItem]
     }
     func navigationBarConfig() {
@@ -114,8 +115,8 @@ extension BaseViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
         self.navigationController?.navigationBar.tintColor = JX333333Color //item图片文字颜色
-        //        self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
-        //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]//标题设置
+//        self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]//标题设置
     }
 }
 

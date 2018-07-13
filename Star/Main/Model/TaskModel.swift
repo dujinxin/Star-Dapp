@@ -9,10 +9,24 @@
 import Foundation
 
 class TaskListEntity: BaseModel {
-    @objc var id : String?
+    @objc var power : Int = 0
+    @objc var tasks = Array<TaskEntity>()
+}
+class TaskEntity: BaseModel {
+    @objc var id : Int = 0
     @objc var name : String?
     @objc var title : String?
     @objc var power : Int = 0
-    @objc var finishStatus : Bool = false
+    @objc var finishStatus : Int = 0
     @objc var statusStr : String?
+}
+class PowerRecordEntity: BaseModel {
+    @objc var powerRecordArray = Array<PowerEntity>()
+    @objc var total : Int = 0
+}
+class PowerEntity: BaseModel {
+    @objc var categoryInfo : String?
+    @objc var id : Int = 0
+    @objc var power : Double = 0
+    @objc var time : String?
 }

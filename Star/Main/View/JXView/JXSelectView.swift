@@ -35,7 +35,7 @@ class JXSelectView: UIView {
     var selectRow : Int = -1
     
     var style : JXSelectViewStyle = .list
-    let position : JXSelectViewShowPosition = .bottom
+    var position : JXSelectViewShowPosition = .bottom
     private var contentView : UIView?
     var isUseCustomTopBar : Bool = false {
         didSet{
@@ -153,23 +153,19 @@ class JXSelectView: UIView {
     
     init(frame: CGRect, style:JXSelectViewStyle) {
         super.init(frame: frame)
-        //self.rect = frame
-        self.backgroundColor = UIColor.white
+        
         self.style = style
         
         if style == .list {
             self.contentView = self.tableView
-        }else{
+        } else if style == .pick {
             self.contentView = self.pickView
         }
         selectViewHeight = frame.height
         self.resetFrame()
-        
     }
     init(frame:CGRect, customView:UIView) {
         super.init(frame: frame)
-        //self.rect = frame
-        self.backgroundColor = UIColor.white
         self.style = .custom
         self.contentView = customView
         selectViewHeight = customView.bounds.height
@@ -202,8 +198,10 @@ class JXSelectView: UIView {
         if isUseCustomTopBar || isUseSystemItemBar {
             h += selectViewTop
         }
-        if deviceModel == .iPhoneX {
-            h += 34
+        if position == .bottom {
+            if deviceModel == .iPhoneX {
+                h += 34
+            }
         }
         self.frame = CGRect(x: 0, y: 0, width: selectViewWidth, height:h)
         self.layoutSubviews()
@@ -228,6 +226,8 @@ class JXSelectView: UIView {
                     view.backgroundColor = UIColor.red
                 }
             }
+        } else if style == .list {
+            self.contentView?.frame = CGRect(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight)
         } else {
             self.contentView?.frame = CGRect(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight)
         }

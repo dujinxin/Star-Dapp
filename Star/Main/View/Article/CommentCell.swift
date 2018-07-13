@@ -19,11 +19,11 @@ class CommentCell: UITableViewCell {
         didSet {
             self.nickNameLabel.text = entity?.user?.nickname
             self.contentLabel.text = entity?.commentRepl
-            self.userImageView.backgroundColor = UIColor.randomColor
+            
             if let str = entity?.user?.avatar,let url = URL(string: str) {
-                self.userImageView.sd_setImage(with: url, placeholderImage: nil, options: [], completed: nil)
+                self.userImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "portrait_default"), options: [], completed: nil)
             } else {
-                self.userImageView.image = nil
+                self.userImageView.image = UIImage(named: "portrait_default")
             }
             if entity?.topStatus == 2 {
                 self.statusLabel.text = "精"
@@ -34,6 +34,10 @@ class CommentCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.userImageView.layer.cornerRadius = 20
+        self.userImageView.layer.masksToBounds = true
+        self.userImageView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

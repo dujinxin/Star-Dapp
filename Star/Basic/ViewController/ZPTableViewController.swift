@@ -15,12 +15,13 @@ class ZPTableViewController: UITableViewController {
     //MARK: - custom NavigationBar
     //自定义导航栏
     lazy var customNavigationBar : JXNavigationBar = {
-        let navigationBar = JXNavigationBar(frame:CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavStatusHeight))
+        let navigationBar = JXNavigationBar(frame:CGRect(x: 0, y: -kNavStatusHeight, width: kScreenWidth, height: kNavStatusHeight))
         navigationBar.isTranslucent = true
         navigationBar.barStyle = .blackTranslucent
         navigationBar.barTintColor = UIColor.orange//导航条颜色
         navigationBar.tintColor = UIColor.white //item图片文字颜色
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.red,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 20)]//标题设置
+
         return navigationBar
     }()
     lazy var customNavigationItem: UINavigationItem = {
@@ -40,28 +41,17 @@ class ZPTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let image = UIImage(named: "nav_back")
-//        self.navigationController?.navigationBar.backIndicatorImage = image
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image?.withRenderingMode(.alwaysOriginal)
-//        self.navigationItem.leftItemsSupplementBackButton = false;
-//        let backBarButtonItem = UIBarButtonItem.init(title:"", style: .plain, target: nil, action: nil)
-//        self.navigationItem.backBarButtonItem = backBarButtonItem
-////        self.navigationController?.navigationBar.barTintColor = JXMainColor//导航条颜色
-//        self.navigationController?.navigationBar.tintColor = JX333333Color //item图片文字颜色
-////        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white/*,NSFontAttributeName:UIFont.systemFont(ofSize: 19)*/]//标题设置
-        
-        
-        setCustomNavigationBar()
-        self.tableView.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: view.bounds.height - kNavStatusHeight)
-        
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never
-            self.tableView?.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
+            self.tableView?.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
             self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
-            
         } else {
-            self.automaticallyAdjustsScrollViewInsets = true
+            self.automaticallyAdjustsScrollViewInsets = false
         }
+        self.isCustomNavigationBarUsed() ? setCustomNavigationBar() : navigationBarConfig()
+        
+        self.tableView.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: view.bounds.height - kNavStatusHeight)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,11 +66,26 @@ class ZPTableViewController: UITableViewController {
 extension ZPTableViewController {
     func setCustomNavigationBar() {
         //隐藏navigationBar
+        self.navigationController?.navigationBar.isHidden = true
         //1.自定义view代替NavigationBar,需要自己实现手势返回;
         //2.自定义navigatioBar代替系统的，手势返回不用自己实现
-        view.addSubview(customNavigationBar)
+        view.addSubview(self.customNavigationBar)
         customNavigationBar.items = [customNavigationItem]
+    }
+    func navigationBarConfig() {
+        let image = UIImage(named: "nav_back")
+        self.navigationController?.navigationBar.backIndicatorImage = image
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.leftItemsSupplementBackButton = false;
+        let backBarButtonItem = UIBarButtonItem.init(title:"", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
+        self.navigationController?.navigationBar.tintColor = JX333333Color //item图片文字颜色
+        //        self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
+        //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]//标题设置
+    }
+    @objc func isCustomNavigationBarUsed() -> Bool{
+        return false
     }
 }
 extension ZPTableViewController {
@@ -99,7 +104,6 @@ extension ZPTableViewController {
     func requestData() {
         
     }
-    
     /// request data
     ///
     /// - Parameter withPage: load data for page,
