@@ -11,35 +11,22 @@ import UIKit
 class ArticleListController: JXTableViewController {
 
     let vm = ArticleVM()
-    var page : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.title = "智慧"
 
+        self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight - kTabBarHeight)
         self.tableView?.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        self.tableView?.mj_header = MJRefreshHeader(refreshingBlock: {
-            self.vm.articleList(pageNo: 1, completion: { (_, msg, isSuc) in
-                self.tableView?.mj_header.endRefreshing()
-                if isSuc {
-                    self.tableView?.reloadData()
-                } else {
-                    ViewManager.showNotice(msg)
-                }
-            })
+        self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.page = 1
+            self.request(page: self.page)
         })
-        self.tableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+        self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             //FIXME:先使用，成功后再加...待完善，看后台规则再定
             self.page += 1
-            self.vm.articleList(pageNo: self.page, completion: { (_, msg, isSuc) in
-                self.tableView?.mj_footer.endRefreshing()
-                if isSuc {
-                    self.tableView?.reloadData()
-                } else {
-                    ViewManager.showNotice(msg)
-                }
-            })
+            self.request(page: self.page)
         })
         self.tableView?.mj_header.beginRefreshing()
     }
@@ -51,7 +38,21 @@ class ArticleListController: JXTableViewController {
     override func isCustomNavigationBarUsed() -> Bool {
         return true
     }
-
+    override func request(page: Int) {
+        self.vm.articleList(pageNo: page, completion: { (_, msg, isSuc) in
+            if page == 1 {
+                self.tableView?.mj_header.endRefreshing()
+            } else {
+                self.tableView?.mj_footer.endRefreshing()
+            }
+            
+            if isSuc {
+                self.tableView?.reloadData()
+            } else {
+                ViewManager.showNotice(msg)
+            }
+        })
+    }
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,13 +62,13 @@ class ArticleListController: JXTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vm.dataArray.count
+        return self.vm.articleListEntity.list.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! ArticleCell
 
-        let entity = self.vm.dataArray[indexPath.row] as! ArticleEntity
+        let entity = self.vm.articleListEntity.list[indexPath.row]
         cell.entity = entity
         // Configure the cell...
 
@@ -77,7 +78,7 @@ class ArticleListController: JXTableViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let entity = self.vm.dataArray[indexPath.row] as! ArticleEntity
+        let entity = self.vm.articleListEntity.list[indexPath.row]
         self.performSegue(withIdentifier: "articleDetail", sender: entity)
     }
     // MARK: - Navigation

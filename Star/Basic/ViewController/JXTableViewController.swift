@@ -16,7 +16,7 @@ class JXTableViewController: BaseViewController{
     var refreshControl : UIRefreshControl?
     //data array
     var dataArray = NSMutableArray()
-    
+    var page : Int = 1
     var backBlock : (()->())?
     
     override func viewDidLoad() {
@@ -56,6 +56,12 @@ class JXTableViewController: BaseViewController{
 //        refreshControl?.addTarget(self, action: #selector(requestData), for: UIControlEvents.valueChanged)
 //        
 //        self.tableView?.addSubview(refreshControl!)
+    }
+    /// request data
+    ///
+    /// - Parameter page: load data for page,
+    func request(page:Int) {
+        
     }
 }
 

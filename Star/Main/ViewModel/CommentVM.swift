@@ -23,6 +23,9 @@ class CommentVM: BaseViewModel {
                     completion(nil, self.message, false)
                     return
             }
+            if pageNo == 1 {
+                self.dataArray.removeAll()
+            }
             if total > 0 {
                 guard
                     let list = dict["commentList"] as? Array<Dictionary<String, Any>>
@@ -30,7 +33,7 @@ class CommentVM: BaseViewModel {
                         completion(nil, self.message, false)
                         return
                 }
-                self.dataArray.removeAll()
+                
                 for i in 0..<list.count{
                     let dict = list[i]
                     let entity = CommentListEntity()
@@ -42,7 +45,6 @@ class CommentVM: BaseViewModel {
                     self.dataArray.append(entity)
                 }
             }
-            
             completion(data, msg, true)
             
         }) { (msg, code) in
@@ -52,12 +54,6 @@ class CommentVM: BaseViewModel {
     /// 发表评论
     func comment(_ content:String,articleHash:Int, articleId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         JXRequest.request(url: ApiString.articleComment.rawValue, param: ["comment":content,"artId":articleId,"artHashIndex":articleHash], success: { (data, msg) in
-            
-            //            guard let array = data as? Array<Dictionary<String, Any>>
-            //                else{
-            //                    completion(nil, self.message, false)
-            //                    return
-            //            }
             completion(data, msg, true)
             
         }) { (msg, code) in
@@ -69,12 +65,6 @@ class CommentVM: BaseViewModel {
     /// 1取消点赞，2点赞
     func like(_ status:Int,articleHash:Int, articleId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         JXRequest.request(url: ApiString.articleRead.rawValue, param: ["status":status,"id":articleId,"artIndexHash":articleHash], success: { (data, msg) in
-            
-            //            guard let array = data as? Array<Dictionary<String, Any>>
-            //                else{
-            //                    completion(nil, self.message, false)
-            //                    return
-            //            }
             completion(data, msg, true)
             
         }) { (msg, code) in
@@ -82,14 +72,8 @@ class CommentVM: BaseViewModel {
         }
     }
     /// 删除评论
-    func delete(_ commentId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
-        JXRequest.request(url: ApiString.articleRead.rawValue, param: ["id":commentId], success: { (data, msg) in
-            
-            //            guard let array = data as? Array<Dictionary<String, Any>>
-            //                else{
-            //                    completion(nil, self.message, false)
-            //                    return
-            //            }
+    func delete(_ commentId:String,artHashIndex:Int,artId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        JXRequest.request(url: ApiString.articleCommentDelete.rawValue, param: ["id":commentId,"artHashIndex":artHashIndex,"artId":artId], success: { (data, msg) in
             completion(data, msg, true)
             
         }) { (msg, code) in

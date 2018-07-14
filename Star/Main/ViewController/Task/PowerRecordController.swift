@@ -11,7 +11,6 @@ import UIKit
 class PowerRecordController: JXTableViewController{
     
     var vm = TaskVM()
-    var page : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class PowerRecordController: JXTableViewController{
         self.tableView?.estimatedRowHeight = 44
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
-        self.tableView?.mj_header = MJRefreshHeader(refreshingBlock: {
+        self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.page = 1
             self.vm.powerRecord(pageNo: self.page) { (_, msg, isSuc) in
                 self.tableView?.mj_header.endRefreshing()
@@ -40,7 +39,7 @@ class PowerRecordController: JXTableViewController{
                 }
             }
         })
-        self.tableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+        self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.page += 1
             self.vm.powerRecord(pageNo: self.page) { (_, msg, isSuc) in
                 self.tableView?.mj_footer.endRefreshing()

@@ -150,6 +150,7 @@ class TaskViewController: UICollectionViewController {
         
         let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIndentifierHeader, for: indexPath) as! TaskReusableView
         if kind == UICollectionElementKindSectionHeader {
+            reusableView.klLable.text = "\(self.taskVM.taskListEntity.power)"
             reusableView.powerRecordBlock = {
                 let vc = PowerRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)

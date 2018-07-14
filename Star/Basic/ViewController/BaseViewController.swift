@@ -75,12 +75,6 @@ class BaseViewController: UIViewController {
     func isCustomNavigationBarUsed() -> Bool{
         return false
     }
-    /// request data
-    ///
-    /// - Parameter withPage: load data for page,
-    func request(withPage:Int) {
-        
-    }
     //MARK: - base view set
     func setUpMainView() {
         //

@@ -49,9 +49,8 @@ class MainViewController: JXCollectionViewController {
         super.viewDidLoad()
         //self.customNavigationBar.removeFromSuperview()
         self.customNavigationBar.alpha = 0
-        
-        let additionalBottomHeight : CGFloat = (deviceModel == .iPhoneX) ? 34 : 0
-        self.collectionView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kTabBarHeight - additionalBottomHeight)
+ 
+        self.collectionView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kTabBarHeight)
         // Register cell classes
         self.collectionView?.register(UINib.init(nibName: "HomeCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib.init(nibName: "HomeReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIndentifierHeader)
@@ -62,7 +61,7 @@ class MainViewController: JXCollectionViewController {
         layout.sectionInset = UIEdgeInsetsMake(0.5, 0, 0, 0)
         layout.minimumLineSpacing = 0.5
         layout.minimumInteritemSpacing = 0.5
-        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: kScreenHeight - kTabBarHeight - additionalBottomHeight + 74 + 44)
+        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: kScreenHeight - kTabBarHeight + 74 + 44)
         
         self.collectionView?.collectionViewLayout = layout
         self.collectionView?.bounces = false

@@ -16,7 +16,7 @@ class ArticleVM : BaseViewModel{
     
     
     /// 文章列表
-    func articleList(append:Bool = false,pageSize:Int = 20,pageNo:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func articleList(append:Bool = false,pageSize:Int = 10,pageNo:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         JXRequest.request(url: ApiString.articleList.rawValue, param: ["pageSize":pageSize,"pageNo":pageNo], success: { (data, msg) in
             
@@ -27,6 +27,10 @@ class ArticleVM : BaseViewModel{
                     completion(nil, self.message, false)
                     return
             }
+            self.articleListEntity.total = total
+            if pageNo == 1 {
+                self.articleListEntity.list.removeAll()
+            }
             if total > 0 {
                 guard
                     let list = dict["list"] as? Array<Dictionary<String, Any>>
@@ -34,15 +38,11 @@ class ArticleVM : BaseViewModel{
                         completion(nil, self.message, false)
                         return
                 }
-                if pageNo == 1 {
-                    self.dataArray.removeAll()
-                }
-                
                 for i in 0..<list.count{
                     let dict = list[i]
                     let entity = ArticleEntity()
                     entity.setValuesForKeys(dict)
-                    self.dataArray.append(entity)
+                    self.articleListEntity.list.append(entity)
                 }
             }
 

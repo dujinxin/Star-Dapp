@@ -226,22 +226,26 @@ class HomeReusableView: UICollectionReusableView {
             }
             let animation = CAKeyframeAnimation.init(keyPath: "position")
             let path = CGMutablePath.init()
-            //path.move(to: CGPoint(x: button.jxOrigin.x, y: button.jxOrigin.y))
             
-            let transform = CGAffineTransform.init(translationX: -v.bounds.origin.x, y: -v.bounds.origin.y)
-            transform.scaledBy(x: 1, y: 0.2)
-            transform.translatedBy(x: v.bounds.origin.x, y: v.bounds.origin.y)
+            path.move(to: CGPoint(x: v.center.x, y: v.center.y))//设置起始点
+            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y + 5))//终点
+            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
+            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y - 5))//终点
+            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
             
-            let center = CGPoint(x: v.jxOrigin.x + 44 / 2, y: v.jxOrigin.y + 64 / 2)
-            
-            path.addArc(center: center, radius: 5, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true,transform:transform)
+//            let transform = CGAffineTransform.init(translationX: -v.bounds.origin.x, y: -v.bounds.origin.y)
+//            transform.scaledBy(x: 1, y: 0.2)
+//            transform.translatedBy(x: v.bounds.origin.x, y: v.bounds.origin.y)
+//
+//            let center = CGPoint(x: v.jxOrigin.x + 44 / 2, y: v.jxOrigin.y + 64 / 2)
+//            path.addArc(center: center, radius: 5, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true,transform:transform)
             
             animation.path = path
             
             animation.isRemovedOnCompletion = false
             animation.repeatCount =  Float.greatestFiniteMagnitude
             //animation.repeatDuration = 3
-            animation.duration = 3
+            animation.duration = 5
             animation.autoreverses = false
             animation.fillMode = kCAFillModeForwards
             animation.calculationMode = kCAAnimationPaced
@@ -303,13 +307,15 @@ class HomeReusableView: UICollectionReusableView {
         {
             
             let fileUrl = URL(fileURLWithPath: file)
-            print("fileUrl = ",fileUrl)
+            //print("fileUrl = ",fileUrl)
             var systemSoundID : SystemSoundID = 0
-            let s = AudioServicesCreateSystemSoundID(fileUrl as CFURL, &systemSoundID)
-            print("Audio = ",s)
-            //AudioServicesPlaySystemSound(systemSoundID)
-            AudioServicesPlaySystemSoundWithCompletion(systemSoundID) {
-                print("播放完成")
+            AudioServicesCreateSystemSoundID(fileUrl as CFURL, &systemSoundID)
+            if #available(iOS 9.0, *) {
+                AudioServicesPlaySystemSoundWithCompletion(systemSoundID) {
+                    print("播放完成")
+                }
+            } else {
+                AudioServicesPlaySystemSound(systemSoundID)
             }
         }
         if let block = self.fetchDiamondBlock {

@@ -70,7 +70,7 @@ class RegisterViewController: BaseViewController {
         gradientLayer.locations = [0.5]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: loginButton.jxWidth, height: loginButton.jxHeight)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenWidth - 60, height: loginButton.jxHeight)
         gradientLayer.cornerRadius = 22
         self.loginButton.layer.addSublayer(gradientLayer)
         
@@ -140,18 +140,20 @@ class RegisterViewController: BaseViewController {
 //            ViewManager.showNotice("图片验证码不能为空")
 //            return
 //        }
-        CommonManager.countDown(timeOut: 10, process: { (currentTime) in
-            UIView.beginAnimations(nil, context: nil)
-            self.fetchButton.setTitle(String(format: "%d", currentTime), for: .normal)
-            UIView.commitAnimations()
-            self.fetchButton.isUserInteractionEnabled = false
-        }) {
-            self.fetchButton.setTitle("获取验证码", for: .normal)
-            self.fetchButton.isUserInteractionEnabled = true
-        }
   
-        self.vm.sendMobileCode(mobile: userTextField.text!, method: "register", validateCode: passwordTextField.text!) { (_, msg, _) in
+        self.vm.sendMobileCode(mobile: userTextField.text!, method: "register", validateCode: passwordTextField.text!) { (_, msg, isSuc) in
             ViewManager.showNotice(msg)
+            if isSuc {
+                CommonManager.countDown(timeOut: 60, process: { (currentTime) in
+                    UIView.beginAnimations(nil, context: nil)
+                    self.fetchButton.setTitle(String(format: "%d", currentTime), for: .normal)
+                    UIView.commitAnimations()
+                    self.fetchButton.isEnabled = false
+                }) {
+                    self.fetchButton.setTitle("获取验证码", for: .normal)
+                    self.fetchButton.isEnabled = true
+                }
+            }
         }
     }
     

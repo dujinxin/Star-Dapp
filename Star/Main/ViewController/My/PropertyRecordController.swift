@@ -64,7 +64,7 @@ class PropertyRecordController: UIViewController,JXTopBarViewDelegate,JXHorizont
         let leftButton = UIButton()
         leftButton.frame = CGRect(x: 10, y: 7, width: 30, height: 30)
         leftButton.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 24)
         leftButton.tintColor = UIColor.black
         leftButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
         self.customNavigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftButton)

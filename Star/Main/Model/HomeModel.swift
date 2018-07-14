@@ -32,4 +32,5 @@ class InviteEntity: BaseModel {
     @objc var inviteCount : String?
     @objc var invitePower : Double = 0
     @objc var inviteCode : String?
+    @objc var nickname : String?
 }

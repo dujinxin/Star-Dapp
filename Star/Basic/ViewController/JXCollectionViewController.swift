@@ -19,6 +19,7 @@ class JXCollectionViewController: BaseViewController {
     var refreshControl : UIRefreshControl?
     //data array
     var dataArray = NSMutableArray()
+    var page : Int = 1
     
     var backBlock : (()->())?
     
@@ -71,7 +72,12 @@ class JXCollectionViewController: BaseViewController {
 //        
 //        self.collectionView?.addSubview(refreshControl!)
     }
-
+    /// request data
+    ///
+    /// - Parameter page: load data for page,
+    func request(page:Int) {
+        
+    }
 }
 extension JXCollectionViewController : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

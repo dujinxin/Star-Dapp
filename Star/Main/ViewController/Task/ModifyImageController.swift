@@ -17,7 +17,7 @@ class ModifyImageController: BaseViewController {
     
     var isSelected = false
     var imageVM = ModifyImageVM()
-    
+    var avatar : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,10 @@ class ModifyImageController: BaseViewController {
         self.confirmButton.backgroundColor = UIColor.clear
         
         self.customNavigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "提交", style: UIBarButtonItemStyle.plain, target: self, action: #selector(confirm))
+        
+        if let str = self.avatar,let url = URL(string: str){
+            self.userImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "portrait_default_big"), options: [], progress: nil, completed: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,7 +85,8 @@ class ModifyImageController: BaseViewController {
     func showImagePickerViewController(_ sourceType:UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.title = "选择照片"
-        imagePicker.navigationBar.barTintColor = UIColor.yellow
+        imagePicker.navigationBar.barTintColor = UIColor.blue
+        imagePicker.navigationBar.tintColor = UIColor.white
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true

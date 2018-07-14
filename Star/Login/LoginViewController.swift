@@ -66,7 +66,7 @@ class LoginViewController: BaseViewController {
         gradientLayer.locations = [0.5]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: loginButton.jxWidth, height: loginButton.jxHeight)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenWidth - 60, height: loginButton.jxHeight)
         gradientLayer.cornerRadius = 22
         self.loginButton.layer.addSublayer(gradientLayer)
         
@@ -116,22 +116,24 @@ class LoginViewController: BaseViewController {
         fetchImageButton.sd_setImage(with: url, for: .normal, completed: nil)
     }
     @IBAction func fetchCodeWord(_ sender: UIButton) {
-        print("123456789")
+
         guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
         guard String.validate(codeImageTextField.text, type: .none, emptyMsg: "图片验证码不能为空", formatMsg: "") == true else { return }
       
-        CommonManager.countDown(timeOut: 10, process: { (currentTime) in
-            UIView.beginAnimations(nil, context: nil)
-            self.fetchWordButton.setTitle(String(format: "%d", currentTime), for: .normal)
-            UIView.commitAnimations()
-            self.fetchWordButton.isUserInteractionEnabled = false
-        }) {
-            self.fetchWordButton.setTitle("获取验证码", for: .normal)
-            self.fetchWordButton.isUserInteractionEnabled = true
-        }
         
-        self.vm.sendMobileCode(mobile: userTextField.text!, method: "login", validateCode: codeImageTextField.text!) { (_, msg, _) in
+        self.vm.sendMobileCode(mobile: userTextField.text!, method: "login", validateCode: codeImageTextField.text!) { (_, msg, isSuc) in
             ViewManager.showNotice(msg)
+            if isSuc {
+                CommonManager.countDown(timeOut: 60, process: { (currentTime) in
+                    UIView.beginAnimations(nil, context: nil)
+                    self.fetchWordButton.setTitle(String(format: "%d", currentTime), for: .normal)
+                    UIView.commitAnimations()
+                    self.fetchWordButton.isEnabled = false
+                }) {
+                    self.fetchWordButton.setTitle("获取验证码", for: .normal)
+                    self.fetchWordButton.isEnabled = true
+                }
+            }
         }
     }
 

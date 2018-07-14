@@ -62,7 +62,7 @@ class InviteViewController: UIViewController {
         let leftButton = UIButton()
         leftButton.frame = CGRect(x: 10, y: 7, width: 30, height: 30)
         leftButton.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 24)
         leftButton.tintColor = UIColor.black
         leftButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
         self.customNavigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftButton)
@@ -186,7 +186,7 @@ class InviteViewController: UIViewController {
         
         let infoLabel = UILabel()
         infoLabel.frame = CGRect(x: 50, y: line.jxBottom + 14, width: contentView.jxWidth - 100, height: 40)
-        infoLabel.text = "我是\(12345678)，我已在这里获得区块链 知识产权收益，我在智慧星球等你"
+        infoLabel.text = "我是\(self.homeVM.inviteEntity.nickname ?? "昵称")，我已在这里获得区块链 知识产权收益，我在智慧星球等你"
         infoLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4368)
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont.systemFont(ofSize: 15)

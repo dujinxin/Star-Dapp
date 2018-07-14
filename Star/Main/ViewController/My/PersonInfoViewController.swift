@@ -11,7 +11,6 @@ import UIKit
 class PersonInfoViewController: JXTableViewController{
     
     var vm = LoginVM()
-    var page : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()

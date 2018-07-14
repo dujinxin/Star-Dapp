@@ -13,7 +13,10 @@ class MyCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    var modifyBlock : (()->())?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +35,8 @@ class MyCell: UITableViewCell {
         self.userImageView.layer.cornerRadius = 40
         self.userImageView.layer.masksToBounds = true
         self.userImageView.clipsToBounds = true
+        
+        self.userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(modifyImage)))
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,5 +44,9 @@ class MyCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+    @objc func modifyImage() {
+        if let block = modifyBlock {
+            block()
+        }
+    }
 }

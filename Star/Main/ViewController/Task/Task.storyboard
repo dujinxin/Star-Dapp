@@ -55,7 +55,7 @@
         <!--上传头像-->
         <scene sceneID="Hwi-Lm-ILH">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="aMd-c8-VF7" customClass="ModifyImageController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModifyImageVC" hidesBottomBarWhenPushed="YES" id="aMd-c8-VF7" customClass="ModifyImageController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u4f-hW-tyX"/>
                         <viewControllerLayoutGuide type="bottom" id="jFL-H1-5oi"/>

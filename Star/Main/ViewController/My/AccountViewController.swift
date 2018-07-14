@@ -11,7 +11,7 @@ import UIKit
 class AccountViewController: JXTableViewController{
     
     var vm = LoginVM()
-    var page : Int = 1
+    var mobile : String = ""
     
     lazy var logoutButton: UIButton = {
         let button = UIButton()
@@ -48,14 +48,6 @@ class AccountViewController: JXTableViewController{
         gradientLayer.cornerRadius = 22
         self.logoutButton.layer.addSublayer(gradientLayer)
         
-        
-        self.vm.identityInfo { (data, msg, isSuccess) in
-            if isSuccess == false {
-                ViewManager.showNotice(msg)
-            }else {
-                self.tableView?.reloadData()
-            }
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,7 +85,7 @@ class AccountViewController: JXTableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! PersonCell
         if indexPath.row == 0 {
             cell.leftLabel.text = "手机账号"
-            cell.rightLabel.text = self.vm.indentifyInfoEntity?.mobile
+            cell.rightLabel.text = self.mobile
         } else if indexPath.row == 1 {
             cell.leftLabel.text = "关于我们"
             cell.accessoryType = .disclosureIndicator

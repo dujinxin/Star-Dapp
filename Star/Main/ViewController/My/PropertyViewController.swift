@@ -52,12 +52,19 @@ class PropertyViewController: UIViewController {
         setCustomNavigationBar()
         self.title = "我的资产"
         let leftButton = UIButton()
-        leftButton.frame = CGRect(x: 10, y: 7, width: 30, height: 30)
+        leftButton.frame = CGRect(x: 0, y: 7, width: 30, height: 30)
         leftButton.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 24)
         leftButton.tintColor = UIColor.black
         leftButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
         self.customNavigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftButton)
+        
+        
+        self.FetchButton.backgroundColor = UIColor.rgbColor(from: 221, 221, 221)
+        self.FetchButton.setTitleColor(UIColor.rgbColor(from: 174, 174, 174), for: .normal)
+        self.FetchButton.isEnabled = false
+        self.FetchButton.layer.cornerRadius = 22
+        self.FetchButton.layer.masksToBounds = true
         
         self.vm.property { (data, msg, isSuccess) in
             

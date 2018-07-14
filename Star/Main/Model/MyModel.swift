@@ -19,6 +19,7 @@ class ProfileInfoEntity: BaseModel {
     @objc var nickname : String?
     @objc var rank : Int = 0
     @objc var avatar : String?
+    @objc var mobile : String?
 }
 
 class PropertyRecordEntity: BaseModel {

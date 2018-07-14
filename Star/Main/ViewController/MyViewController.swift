@@ -20,7 +20,6 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = JXF1f1f1Color
         
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never
@@ -34,25 +33,6 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.isScrollEnabled = false
         
-//        self.nickNameLabel.textColor = JXFfffffColor
-//        self.userImageView.layer.cornerRadius = 40
-//        self.userImageView.layer.masksToBounds = true
-//        self.userImageView.clipsToBounds = true
-        
-        //self.nickNameLabel.text = UserManager.manager.userEntity.nickname
-        
-        self.vm.personInfo { (data, msg, isSuccess) in
-            if isSuccess == true {
-//                if let str = self.vm.profileInfoEntity?.avatar {
-//                    let url = URL.init(string:str)
-//                    self.userImageView.sd_setImage(with: url, completed: nil)
-//                }
-//                self.nickNameLabel.text = self.vm.profileInfoEntity?.nickname
-                self.tableView.reloadData()
-            } else {
-                ViewManager.showNotice(msg)
-            }
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,6 +43,14 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
             let loginVC = UINavigationController.init(rootViewController: login)
             self.navigationController?.present(loginVC, animated: false, completion: nil)
+        } else {
+            self.vm.personInfo { (data, msg, isSuccess) in
+                if isSuccess == true {
+                    self.tableView.reloadData()
+                } else {
+                    ViewManager.showNotice(msg)
+                }
+            }
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +62,13 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "accound" {
+            if let vc = segue.destination as? AccountViewController,let mobile = sender as? String {
+                vc.mobile = mobile
+            }
+        }
+    }
     @IBAction func edit(_ sender: UIButton) {
 
         let alertVC = UIAlertController(title: "修改昵称", message: nil, preferredStyle: .alert)
@@ -127,6 +122,15 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             }
             cell.nickNameLabel.text = self.vm.profileInfoEntity?.nickname
             cell.editButton.addTarget(self, action: #selector(edit(_:)), for: .touchUpInside)
+            cell.rankLabel.text = "智慧星球第\(self.vm.profileInfoEntity?.rank ?? 0)位居民"
+            cell.modifyBlock = {
+                let storyboard = UIStoryboard(name: "Task", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ModifyImageVC") as! ModifyImageController
+                vc.hidesBottomBarWhenPushed = true
+                
+                vc.avatar = self.vm.profileInfoEntity?.avatar
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier2", for: indexPath) as! ImageTitleCell
@@ -155,7 +159,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         }else if indexPath.row == 3{
             performSegue(withIdentifier: "personInfo", sender: nil)
         }else if indexPath.row == 4{
-            performSegue(withIdentifier: "accound", sender: nil)
+            performSegue(withIdentifier: "accound", sender: self.vm.profileInfoEntity?.mobile)
         }
     }
 }

@@ -39,9 +39,8 @@ extension JXNavigationController {
     ///   - viewController: 将要push的viewController
     ///   - animated: 是否使用动画
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-      
         
-        if  let vc = viewController as? BaseViewController{
+        if let vc = viewController as? BaseViewController{
             if viewControllers.count > 0 {
                 vc.hidesBottomBarWhenPushed = true
                 
@@ -55,7 +54,7 @@ extension JXNavigationController {
                 let leftButton = UIButton()
                 leftButton.frame = CGRect(x: 10, y: 7, width: 30, height: 30)
                 leftButton.setImage(UIImage(named: "imgBack"), for: .normal)
-                leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12)
+                leftButton.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 24)
                 //leftButton.setTitle("up", for: .normal)
                 leftButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
                 vc.customNavigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftButton)

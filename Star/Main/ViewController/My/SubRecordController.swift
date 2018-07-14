@@ -16,9 +16,7 @@ enum SubType {
 class SubRecordController: JXTableViewController{
     
     var vm = HomeVM()
-    var page : Int = 1
     var type : SubType = .whole
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +34,7 @@ class SubRecordController: JXTableViewController{
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         if type != .payOut {
-            self.tableView?.mj_header = MJRefreshHeader(refreshingBlock: {
+            self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
                 self.page = 1
                 self.vm.propertyRecord(pageNo: self.page) { (_, msg, isSuc) in
                     self.tableView?.mj_header.endRefreshing()
@@ -47,7 +45,7 @@ class SubRecordController: JXTableViewController{
                     }
                 }
             })
-            self.tableView?.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+            self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
                 self.page += 1
                 self.vm.propertyRecord(pageNo: self.page) { (_, msg, isSuc) in
                     self.tableView?.mj_footer.endRefreshing()

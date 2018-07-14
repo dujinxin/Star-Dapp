@@ -64,6 +64,92 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         return web
     }()
+    lazy var headerView: UIView = {
+        let v = UIView()
+        v.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight + 40)
+        v.addSubview(self.webView)
+        v.addSubview(self.infoLabel)
+        v.addSubview(self.readLabel)
+        for v in v.subviews {
+            v.translatesAutoresizingMaskIntoConstraints = false
+        }
+        v.addConstraints([NSLayoutConstraint.init(item: self.infoLabel,
+                                                attribute: .left,
+                                                relatedBy: .equal,
+                                                toItem: v,
+                                                attribute: .left,
+                                                multiplier: 1.0,
+                                                constant: 20),
+                        NSLayoutConstraint.init(item: self.infoLabel,
+                                                attribute: .bottom,
+                                                relatedBy: .equal,
+                                                toItem: v,
+                                                attribute: .bottom,
+                                                multiplier: 1.0,
+                                                constant: -10),
+                        NSLayoutConstraint.init(item: self.infoLabel,
+                                                attribute: .height,
+                                                relatedBy: .equal,
+                                                toItem: nil,//没有参照物
+                            attribute: .notAnAttribute,//没有参照物
+                            multiplier: 1.0,
+                            constant: 20),
+                        NSLayoutConstraint.init(item: self.infoLabel,
+                                                attribute: .width,
+                                                relatedBy: .equal,
+                                                toItem: nil,//没有参照物
+                            attribute: .notAnAttribute,//没有参照物
+                            multiplier: 1.0,
+                            constant: 240)])
+        v.addConstraints([NSLayoutConstraint.init(item: self.readLabel,
+                                                  attribute: .left,
+                                                  relatedBy: .equal,
+                                                  toItem: self.infoLabel,
+                                                  attribute: .right,
+                                                  multiplier: 1.0,
+                                                  constant: 10),
+                          NSLayoutConstraint.init(item: self.readLabel,
+                                                  attribute: .right,
+                                                  relatedBy: .equal,
+                                                  toItem: v,
+                                                  attribute: .right,
+                                                  multiplier: 1.0,
+                                                  constant: -20),
+                          NSLayoutConstraint.init(item: self.readLabel,
+                                                  attribute: .height,
+                                                  relatedBy: .equal,
+                                                  toItem: nil,//没有参照物
+                            attribute: .notAnAttribute,//没有参照物
+                            multiplier: 1.0,
+                            constant: 20),
+                          NSLayoutConstraint.init(item: self.readLabel,
+                                                  attribute: .bottom,
+                                                  relatedBy: .equal,
+                                                  toItem: v,
+                                                  attribute: .bottom,
+                                                  multiplier: 1.0,
+                                                  constant: -10),])
+        return v
+    }()
+    lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 20, y: self.webView.jxBottom + 10, width: 220, height: 20)
+        label.textColor = UIColor.rgbColor(from: 160, 160, 160)
+        label.text = "声明：本文数据已被IPXE区块链记录！"
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .left
+        return label
+    }()
+    lazy var readLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: self.webView.jxBottom + 10, width: kScreenWidth - self.infoLabel.jxRight - 20, height: 20)
+        label.textColor = UIColor.rgbColor(from: 160, 160, 160)
+        label.text = ""
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .right
+        return label
+    }()
+    
     
     lazy var inputTextView: JXInputTextView = {
         let input = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: bottomInputViewHeight), style: .bottom, completion:nil)
@@ -98,6 +184,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.priseButton.setImage(UIImage(named: "iconHeartNormal"), for: .normal)
         self.priseButton.setImage(UIImage(named: "iconHeartSelected"), for: .selected)
         
+        
         //颜色渐变
         let gradientLayer = CAGradientLayer.init()
         gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
@@ -113,11 +200,10 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         
         self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        //        self.tableView.mj_header = MJRefreshHeader(refreshingBlock: {
-        //            //self.vm.loadNewMainData(completion: <#T##((Any?, String, Bool) -> ())##((Any?, String, Bool) -> ())##(Any?, String, Bool) -> ()#>)
-        //        })
-        //        self.tableView.mj_header.beginRefreshing()
-
+        self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.page += 1
+            self.request(page: self.page)
+        })
         
         self.bottomConstraintsHeight.constant = bottomInputViewHeight
         
@@ -140,7 +226,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         if let str = self.articleEntity?.cdnUrl,let url = URL(string: str) {
             self.webView.load(URLRequest(url: url))
         }
-        self.tableView.tableHeaderView = self.webView
+        self.tableView.tableHeaderView = self.headerView
    
         self.articleVM.articleDetails(articleId, articleHash: articleHashIndex) { (_, msg, isSuc) in
             self.hideMBProgressHUD()
@@ -149,11 +235,15 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
                 self.priseButton.isSelected = self.articleVM.articleDetailsEntity.like
                 self.articleLikes = self.articleVM.articleDetailsEntity.article.likes
                 self.priseLabel.text = "\(self.articleVM.articleDetailsEntity.article.likes)"
+                self.readLabel.text = "阅读\(self.articleVM.articleDetailsEntity.article.views)"
+                if self.articleVM.articleDetailsEntity.like == true {
+                    self.priseLabel.textColor = UIColor.rgbColor(from: 251, 74, 88)
+                } else {
+                    self.priseLabel.textColor = UIColor.rgbColor(from: 160, 160, 160)
+                }
             }
         }
-        self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
-            self.tableView.reloadData()
-        }
+        self.request(page: self.page)
         
 //        CommonManager.countDown(timeOut: 1, timeInterval: 30, process: { (n) in
 //            print("开始计时")
@@ -198,18 +288,15 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
             self.commentVM.comment(object as! String, articleHash: (self.articleEntity?.artHashIndex)!, articleId: (self.articleEntity?.id)!, completion: { (_, msg, isSuc) in
                 ViewManager.showNotice(msg)
                 if isSuc {
-                    guard let articleId = self.articleEntity?.id else { return }
-                    guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
-                    self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
-                        self.tableView.reloadData()
-                    }
+                    self.page = 1
+                    self.request(page: self.page)
                 }
             })
         }
         inputTextView.cancelBlock = { (_,_) in
             
         }
-        inputTextView.limitWords = 5
+        inputTextView.limitWords = 255
         inputTextView.placeHolder = "请输入您的回复内容"
         inputTextView.useTopBar = true
         inputTextView.show()
@@ -223,10 +310,11 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
                 let size = sizeValue as? CGSize{
                 //print(size)
                 
-                if size != self.tableView.tableHeaderView?.frame.size {
+                if size.height != (self.tableView.tableHeaderView?.frame.size.height)! - 40 {
                     //print("更新header")
                     self.tableView.beginUpdates()
-                    self.tableView.tableHeaderView?.frame = CGRect(origin: CGPoint(), size: size)
+                    self.webView.frame = CGRect(origin: CGPoint(), size: CGSize(width: size.width, height: size.height))
+                    self.tableView.tableHeaderView?.frame = CGRect(origin: CGPoint(), size: CGSize(width: size.width, height: size.height + 40))
                     self.tableView.endUpdates()
                 }
             }
@@ -259,9 +347,11 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         if self.articleLiked == true {
             self.articleLiked = false
             self.articleLikes -= 1
+            self.priseLabel.textColor = UIColor.rgbColor(from: 160, 160, 160)
         } else {
             self.articleLiked = true
             self.articleLikes += 1
+            self.priseLabel.textColor = UIColor.rgbColor(from: 251, 74, 88)
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.priseButton.alpha = 0.0
                 self.priseButton.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -282,17 +372,18 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
     }
     @IBAction func checkChainArticle(_ sender: Any) {
-        if self.articleVM.articleDetailsEntity.like != self.articleLiked {
-            guard let id = self.articleEntity?.id ,let artHashIndex = self.articleEntity?.artHashIndex else {
-                return
-            }
-            self.articleVM.articleChain(id, artHashIndex: artHashIndex) { (_, msg, isSuc) in
-                //
-            }
-        }
+        self.performSegue(withIdentifier: "chain", sender: self.articleEntity)
     }
     override func isCustomNavigationBarUsed() -> Bool {
         return true
+    }
+    func request(page: Int) {
+        guard let articleId = self.articleEntity?.id else { return }
+        guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
+        self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: page) { (_, msg, isSuc) in
+            self.tableView.mj_footer.endRefreshing()
+            self.tableView.reloadData()
+        }
     }
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -316,7 +407,20 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         let entity = self.commentVM.dataArray[indexPath.row] as? CommentListEntity
         cell.entity = entity
-
+        cell.deleteBlock = {
+            
+            guard let commentId = entity?.id else { return }
+            guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
+            guard let articleId = self.articleEntity?.id else { return }
+            self.commentVM.delete(commentId, artHashIndex: articleHashIndex, artId: articleId, completion: { (_, msg, isSuc) in
+                if isSuc {
+                    self.commentVM.dataArray.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+                } else {
+                    ViewManager.showNotice(msg)
+                }
+            })
+        }
         // Configure the cell...
 
         return cell
@@ -329,8 +433,11 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "chain" {
+            if let vc = segue.destination as? ChainInfoController,let articleEntity = sender as? ArticleEntity {
+                vc.articleEntity = articleEntity
+            }
+        }
     }
 }
 extension ArticleDetailsController:UITextFieldDelegate {

@@ -43,13 +43,14 @@ enum ApiString : String {
     case myIdentity  =              "/smart/user/identityInfo"            //我的实名信息
     case modifyNickName  =          "/smart/user/updateNickname"          //修改昵称
     
-    case articleList =              "/smart/article/list"    //文章列表
-    case articleDetails  =          "/smart/article/detail"    //文章详情
-    case articleLike =              "/smart/article/like"    //文章点赞，不允许取消
-    case articleComment =           "/smart/article/comment"    //评论文章
-    case articleRead =    "/smart/article/read"    //阅读任务
-    case articleCommentList =       "/smart/article/commentList"    //评论列表
-    case articelQueryByBlockChain = "/smart/article/chainInfo"    //查看文章上链信息
+    case articleList =              "/smart/article/list"                 //文章列表
+    case articleDetails  =          "/smart/article/detail"               //文章详情
+    case articleLike =              "/smart/article/like"                 //文章点赞，不允许取消
+    case articleRead =              "/smart/article/read"                 //阅读任务
+    case articleCommentList =       "/smart/article/commentList"          //评论列表
+    case articleComment =           "/smart/article/comment"              //发表评论
+    case articleCommentDelete =     "/smart/article/deleteComment"        //删除评论
+    case articelQueryByBlockChain = "/smart/article/chainInfo"            //查看文章上链信息
     
     
     case modifiyPwd       = "/user/updatePassword"

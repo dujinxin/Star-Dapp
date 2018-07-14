@@ -9,6 +9,7 @@
 import Foundation
 
 class ArticleListEntity: BaseModel {
+    var total : Int = 0
     @objc var list : Array<ArticleEntity> = Array()
 }
 class ArticleDetailsEntity: BaseModel {
@@ -24,6 +25,7 @@ class ArticleEntity: BaseModel {
     @objc var title : String?
     @objc var releaseDate : String?
     
+    @objc var views : Int = 0
     @objc var likes : Int = 0
 }
 

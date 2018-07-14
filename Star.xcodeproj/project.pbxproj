@@ -47,6 +47,7 @@
 		3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92A20F754FF0009BFDF /* PowerRecordController.swift */; };
 		3594D92D20F78C7D0009BFDF /* AttentionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */; };
 		3594D92F20F86A300009BFDF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D92E20F86A300009BFDF /* ding.mp3 */; };
+		3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93020F8FA270009BFDF /* ChainInfoController.swift */; };
 		35CB0C3720B575A20092C5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3620B575A20092C5FC /* AppDelegate.swift */; };
 		35CB0C3920B575A20092C5FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3820B575A20092C5FC /* ViewController.swift */; };
 		35CB0C3C20B575A20092C5FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0C3A20B575A20092C5FC /* Main.storyboard */; };
@@ -206,6 +207,7 @@
 		3594D92A20F754FF0009BFDF /* PowerRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerRecordController.swift; sourceTree = "<group>"; };
 		3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionViewController.swift; sourceTree = "<group>"; };
 		3594D92E20F86A300009BFDF /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
+		3594D93020F8FA270009BFDF /* ChainInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInfoController.swift; sourceTree = "<group>"; };
 		35CB0C3320B575A20092C5FC /* Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Star.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB0C3620B575A20092C5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35CB0C3820B575A20092C5FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				352281C120BE559B001A0CA8 /* ArticleDetailsController.swift */,
+				3594D93020F8FA270009BFDF /* ChainInfoController.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -1114,6 +1117,7 @@
 				35CB0CED20B576050092C5FC /* ZPTableViewController.swift in Sources */,
 				35CB0CFF20B576050092C5FC /* JXNetworkError.swift in Sources */,
 				35D758A120CA6F2500A77EEB /* MyModel.swift in Sources */,
+				3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */,
 				35249D7820C4EE1A001C1140 /* Date+Extension.swift in Sources */,
 				35CB0D4A20B576060092C5FC /* MyWalletViewController.swift in Sources */,
 				35CB0D8A20B795B70092C5FC /* AuthResultViewController.swift in Sources */,
@@ -1316,14 +1320,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PZN2XEQRUA;
+				DEVELOPMENT_TEAM = JD78BK6EHC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Star/Third",
 					"$(PROJECT_DIR)/Star/Third/lib",
 				);
 				INFOPLIST_FILE = Star/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1333,7 +1338,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dujinxin/Desktop/Star/Star/Star-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1344,14 +1349,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PZN2XEQRUA;
+				DEVELOPMENT_TEAM = JD78BK6EHC;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Star/Third",
 					"$(PROJECT_DIR)/Star/Third/lib",
 				);
 				INFOPLIST_FILE = Star/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1361,7 +1367,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dujinxin/Desktop/Star/Star/Star-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
