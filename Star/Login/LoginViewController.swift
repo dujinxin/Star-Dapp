@@ -120,8 +120,9 @@ class LoginViewController: BaseViewController {
         guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
         guard String.validate(codeImageTextField.text, type: .none, emptyMsg: "图片验证码不能为空", formatMsg: "") == true else { return }
       
-        
+        self.showMBProgressHUD()
         self.vm.sendMobileCode(mobile: userTextField.text!, method: "login", validateCode: codeImageTextField.text!) { (_, msg, isSuc) in
+            self.hideMBProgressHUD()
             ViewManager.showNotice(msg)
             if isSuc {
                 CommonManager.countDown(timeOut: 60, process: { (currentTime) in

@@ -13,7 +13,8 @@ private let userPath = NSHomeDirectory() + "/Documents/userAccound.json"
 class UserEntity: BaseModel {
     
     @objc var authStatus : Int = 1 //用户认证状态，1未认证，2已认证，3已活体认证（人脸识别）
-    @objc var smart_sid : String = ""          //
+    @objc var smart_sid : String = ""//
+    @objc var rank : Int = 0 
 }
 
 class UserManager : NSObject{

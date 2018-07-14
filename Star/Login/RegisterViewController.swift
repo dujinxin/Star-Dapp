@@ -140,8 +140,9 @@ class RegisterViewController: BaseViewController {
 //            ViewManager.showNotice("图片验证码不能为空")
 //            return
 //        }
-  
+        self.showMBProgressHUD()
         self.vm.sendMobileCode(mobile: userTextField.text!, method: "register", validateCode: passwordTextField.text!) { (_, msg, isSuc) in
+            self.hideMBProgressHUD()
             ViewManager.showNotice(msg)
             if isSuc {
                 CommonManager.countDown(timeOut: 60, process: { (currentTime) in
@@ -159,22 +160,26 @@ class RegisterViewController: BaseViewController {
     
     @IBAction func logAction(_ sender: Any) {
         
-//        performSegue(withIdentifier: "auth", sender: nil)
-//
-//        return
-        
         guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
         guard String.validate(codeTextField.text, type: .code4, emptyMsg: "验证码不能为空", formatMsg: "请检查验证码位数") == true else { return }
-        
+
         self.showMBProgressHUD()
-        
+
         self.vm.register(mobile: userTextField.text!, inviteCode: inviteTextField.text ?? "", mobileCode: codeTextField.text!) { (_, msg, isSuccess) in
             self.hideMBProgressHUD()
             ViewManager.showNotice(msg)
             if isSuccess {
-                self.performSegue(withIdentifier: "auth", sender: nil)
+                if UserManager.manager.userEntity.authStatus == 1 {
+                    //未实名
+                    self.performSegue(withIdentifier: "auth", sender: nil)
+                } else {
+                    //已实名
+                    self.dismiss(animated: true, completion: {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
+                    })
+                }
             } else {
-                
+                self.performSegue(withIdentifier: "auth", sender: nil)
             }
         }
         
