@@ -46,8 +46,8 @@
 		3594D92920F724200009BFDF /* JXSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92820F724200009BFDF /* JXSelectView.swift */; };
 		3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92A20F754FF0009BFDF /* PowerRecordController.swift */; };
 		3594D92D20F78C7D0009BFDF /* AttentionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */; };
-		3594D92F20F86A300009BFDF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D92E20F86A300009BFDF /* ding.mp3 */; };
 		3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93020F8FA270009BFDF /* ChainInfoController.swift */; };
+		3594D93320FA04730009BFDF /* diamond.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D93220FA04730009BFDF /* diamond.mp3 */; };
 		35CB0C3720B575A20092C5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3620B575A20092C5FC /* AppDelegate.swift */; };
 		35CB0C3920B575A20092C5FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3820B575A20092C5FC /* ViewController.swift */; };
 		35CB0C3C20B575A20092C5FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0C3A20B575A20092C5FC /* Main.storyboard */; };
@@ -206,8 +206,8 @@
 		3594D92820F724200009BFDF /* JXSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXSelectView.swift; sourceTree = "<group>"; };
 		3594D92A20F754FF0009BFDF /* PowerRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerRecordController.swift; sourceTree = "<group>"; };
 		3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionViewController.swift; sourceTree = "<group>"; };
-		3594D92E20F86A300009BFDF /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
 		3594D93020F8FA270009BFDF /* ChainInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInfoController.swift; sourceTree = "<group>"; };
+		3594D93220FA04730009BFDF /* diamond.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diamond.mp3; sourceTree = "<group>"; };
 		35CB0C3320B575A20092C5FC /* Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Star.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB0C3620B575A20092C5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35CB0C3820B575A20092C5FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				35CB0C3D20B575A30092C5FC /* Assets.xcassets */,
 				35CB0C3F20B575A30092C5FC /* LaunchScreen.storyboard */,
 				35CB0C4220B575A30092C5FC /* Info.plist */,
-				3594D92E20F86A300009BFDF /* ding.mp3 */,
+				3594D93220FA04730009BFDF /* diamond.mp3 */,
 			);
 			path = Star;
 			sourceTree = "<group>";
@@ -986,6 +986,7 @@
 				35CB0D3220B576060092C5FC /* dengpao@2x.png in Resources */,
 				35CB0D2620B576060092C5FC /* guanbi@2x.png in Resources */,
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
+				3594D93320FA04730009BFDF /* diamond.mp3 in Resources */,
 				35CB0D2B20B576060092C5FC /* tuku@2x.png in Resources */,
 				35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */,
 				35CB0D2E20B576060092C5FC /* paizhaoanniu_dianjihou@3x.png in Resources */,
@@ -1005,7 +1006,6 @@
 				35CB0C4120B575A30092C5FC /* LaunchScreen.storyboard in Resources */,
 				3523687820F5A5600021F05C /* PropertyCell.xib in Resources */,
 				35CB0D6020B658680092C5FC /* aip.license in Resources */,
-				3594D92F20F86A300009BFDF /* ding.mp3 in Resources */,
 				35D758A520CA8A8400A77EEB /* BottomInputView.xib in Resources */,
 				35CB0D2520B576060092C5FC /* Page 1@2x.png in Resources */,
 				35CB0C3E20B575A30092C5FC /* Assets.xcassets in Resources */,

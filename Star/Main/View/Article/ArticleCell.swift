@@ -17,7 +17,6 @@ class ArticleCell: UITableViewCell {
     
     var entity: ArticleEntity? {
         didSet {
-            self.articleImageView.backgroundColor = UIColor.randomColor
             self.articleTitleLabel.text = entity?.title
             //self.articleTimeLabel.text = "2018-10-19"
             
@@ -26,7 +25,9 @@ class ArticleCell: UITableViewCell {
 //            }
             
             if entity?.coverImg?.hasPrefix("http") == true {
-                self.articleImageView.sd_setImage(with: URL(string: (entity?.coverImg!)!), placeholderImage: nil, options: [], completed: nil)
+                self.articleImageView.sd_setImage(with: URL(string: (entity?.coverImg!)!), placeholderImage: UIImage(named: "articleDefault"), options: [], completed: nil)
+            } else {
+                self.articleImageView.image = UIImage(named: "articleDefault")
             }
         }
     }

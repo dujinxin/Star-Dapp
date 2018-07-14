@@ -50,7 +50,7 @@ class PropertyViewController: UIViewController {
         view.backgroundColor = UIColor.groupTableViewBackground
         self.navigationController?.navigationBar.barStyle = .default
         setCustomNavigationBar()
-        self.title = "我的资产"
+        self.title = "我的水晶IPE"
         let leftButton = UIButton()
         leftButton.frame = CGRect(x: 0, y: 7, width: 30, height: 30)
         leftButton.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)

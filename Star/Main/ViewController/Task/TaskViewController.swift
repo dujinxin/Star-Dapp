@@ -53,8 +53,8 @@ class TaskViewController: UICollectionViewController {
         
         
         let width = (kScreenWidth - 0.5 * 2) / 3
-        let height = width * kPercent
-        
+        //let height = width * kPercent
+        let height : CGFloat = 122
         
         //self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), collectionViewLayout: layout)
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
@@ -155,6 +155,13 @@ class TaskViewController: UICollectionViewController {
                 let vc = PowerRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            reusableView.dayTaskBlock = {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let login = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as! ArticleListController
+                login.hidesBottomBarWhenPushed = true
+                login.type = .task
+                self.navigationController?.pushViewController(login, animated: true)
+            }
         }
         
         return reusableView
@@ -215,7 +222,13 @@ class TaskViewController: UICollectionViewController {
                 if isSuc {
                     let _ = UIImage.delete(name: "facePhoto.jpg")
                 }
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.taskVM.taskList { (_, msg, isSuc) in
+                        if isSuc {
+                            self.collectionView?.reloadData()
+                        }
+                    }
+                })
             })
             
             //
@@ -263,7 +276,5 @@ class TaskViewController: UICollectionViewController {
         let nvc = UINavigationController(rootViewController: vc)
         nvc.isNavigationBarHidden = true
         self.present(nvc, animated: true, completion: nil)
-        
     }
-
 }

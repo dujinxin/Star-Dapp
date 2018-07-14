@@ -79,7 +79,6 @@ class BaseViewController: UIViewController {
     func setUpMainView() {
         //
     }
-    
     /// add default view eg:no data,no network,no login
     func setUpDefaultView() {
         defaultView.frame = view.bounds
@@ -121,7 +120,7 @@ extension BaseViewController {
 
 extension BaseViewController {
     func showMBProgressHUD() {
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
 //        hud.backgroundView.color = UIColor.black
 //        hud.contentColor = UIColor.black
 //        hud.bezelView.backgroundColor = UIColor.black

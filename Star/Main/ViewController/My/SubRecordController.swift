@@ -21,14 +21,12 @@ class SubRecordController: JXTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = JXF1f1f1Color
-        
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never
-            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
         } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }
+        self.tableView?.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: kScreenHeight - kNavStatusHeight - 44)//view.bounds
         self.tableView?.register(UINib(nibName: "PropertyCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView?.estimatedRowHeight = 44
         self.tableView?.rowHeight = UITableViewAutomaticDimension

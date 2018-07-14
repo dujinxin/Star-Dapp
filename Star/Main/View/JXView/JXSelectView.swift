@@ -301,7 +301,9 @@ class JXSelectView: UIView {
         }
     }
     func dismiss(animate:Bool = true) {
-        
+        guard let superView = self.superview else {
+            return
+        }
         if animate {
             UIView.animate(withDuration: animateDuration, delay: 0.0, options: .curveEaseOut, animations: {
                 self.bgView.alpha = 0.0
@@ -311,10 +313,10 @@ class JXSelectView: UIView {
                     self.frame = frame
                 }else if self.position == .bottom {
                     var frame = self.frame
-                    frame.origin.y = self.superview!.frame.height
+                    frame.origin.y = superView.frame.height
                     self.frame = frame
                 }else{
-                    self.center = self.superview!.center
+                    self.center = superView.center
                 }
             }, completion: { (finished) in
                 self.clearInfo()

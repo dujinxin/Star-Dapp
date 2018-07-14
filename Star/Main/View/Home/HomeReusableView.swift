@@ -153,13 +153,19 @@ class HomeReusableView: UICollectionReusableView {
     
     
     //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
-    func random(_ array:Array<String>) {
-        //self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
+    func randomDiamonds(_ array:Array<String>) {
+        self.buttonArray.removeAll()
+        self.diamondContentView.removeAllSubView()
         
-        //origin可随机区域 width = superView.width - button.width - animateWidth
-        let width = self.diamondContentView.bounds.width - 44 - 5 * 2
-        //origin可随机区域 width = superView.height - button.height - animateHeight
-        let height = self.diamondContentView.bounds.width - 64 - 5 * 2
+        let imageHeight : CGFloat = 52 * 167 / 156
+        let labelHeight : CGFloat = 20
+        let superWidth : CGFloat = 52
+        let superHeight = imageHeight + 20
+        
+        //origin可随机区域 width = contentView.width - superView.width - animateWidth
+        let width = self.diamondContentView.bounds.width - superWidth - 5 * 2
+        //origin可随机区域 width = contentView.height - superView.height - animateHeight
+        let height = self.diamondContentView.bounds.height - superHeight - 5 * 2
         
         for title in array {
             
@@ -187,17 +193,17 @@ class HomeReusableView: UICollectionReusableView {
             label.sizeToFit()
             superView1.addSubview(label)
             
-            
-            
+  
             var isIntersects = true
             repeat{
-                //起始位置预留动画的位置
-                let x = 5 + arc4random_uniform(UInt32(width))
-                let y = UInt32(kNavStatusHeight) + 5 + arc4random_uniform(UInt32(height))
-                superView.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: 52, height: 72)
-                superView1.frame = CGRect(x: 0, y: 0, width: 52, height: 72)
-                imageView.frame = CGRect(x: 0, y: 0, width: 52, height: 52)
-                label.frame = CGRect(x: 0, y: 52, width: 52, height: 20)
+                
+                let x = arc4random_uniform(UInt32(width))
+                //let y = UInt32(kNavStatusHeight) + 5 + arc4random_uniform(UInt32(height))
+                let y = arc4random_uniform(UInt32(height))
+                superView.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: superWidth, height: superHeight)
+                superView1.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
+                imageView.frame = CGRect(x: 0, y: 0, width: superWidth, height: imageHeight)
+                label.frame = CGRect(x: 0, y: imageHeight, width: superWidth, height: labelHeight)
                 if self.buttonArray.count == 0 {
                     //print("第一个视图一定没有交集")
                     isIntersects = false
@@ -218,6 +224,43 @@ class HomeReusableView: UICollectionReusableView {
             self.buttonArray.append(superView)
             self.diamondContentView.addSubview(superView)
         }
+    }
+    func defaultDiamond() {
+        self.diamondContentView.removeAllSubView()
+        
+        let imageHeight : CGFloat = 52 * 167 / 156
+        let labelHeight : CGFloat = 20
+        let superWidth : CGFloat = 52
+        let superHeight = imageHeight + 20
+        
+        let superView = UIView()
+        //superView.backgroundColor = UIColor.randomColor
+        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
+        
+        let superView1 = UIView()
+        superView1.backgroundColor = UIColor.clear
+        superView.addSubview(superView1)
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "imgDiamond")
+        imageView.isUserInteractionEnabled = true
+        superView1.addSubview(imageView)
+        
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textAlignment = .center
+        label.text = "挖矿中..."
+        label.sizeToFit()
+        superView1.addSubview(label)
+        
+        superView.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
+        superView1.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
+        imageView.frame = CGRect(x: 0, y: 0, width: superWidth, height: imageHeight)
+        label.frame = CGRect(x: 0, y: imageHeight, width: superWidth, height: labelHeight)
+        
+        self.diamondContentView.addSubview(superView)
+        superView.center = CGPoint(x: self.diamondContentView.center.x, y: self.diamondContentView.bounds.height / 2)
     }
     func animate() {
         for v1 in self.buttonArray {
@@ -289,7 +332,7 @@ class HomeReusableView: UICollectionReusableView {
             var frame = subView.frame
             let x : CGFloat = 25 + 30 + 54
             let y = self.diamondContentView.jxHeight + 20
-            
+            //我的资产图标中心点
             let point = CGPoint(x: x, y: y)
             
             frame.origin = point
@@ -302,7 +345,7 @@ class HomeReusableView: UICollectionReusableView {
             }
         }
         //声音
-        if let file = Bundle.main.path(forResource: "ding", ofType: "mp3")
+        if let file = Bundle.main.path(forResource: "diamond", ofType: "mp3")
         //Bundle.main.url(forResource: "ding.mp3", withExtension: nil)
         {
             
@@ -310,6 +353,13 @@ class HomeReusableView: UICollectionReusableView {
             //print("fileUrl = ",fileUrl)
             var systemSoundID : SystemSoundID = 0
             AudioServicesCreateSystemSoundID(fileUrl as CFURL, &systemSoundID)
+            let session = AVAudioSession.sharedInstance()
+            try? session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
+//            if session.category != AVAudioSessionCategoryPlayback {
+//                try? session.setCategory(AVAudioSessionCategoryPlayback)
+//                try? session.setActive(true)
+//                try? session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
+//            }
             if #available(iOS 9.0, *) {
                 AudioServicesPlaySystemSoundWithCompletion(systemSoundID) {
                     print("播放完成")
@@ -346,8 +396,10 @@ class HomeReusableView: UICollectionReusableView {
                 titleArray.append(s)
             }
             entity?.mineralInfoArray.removeSubrange(0..<array.count)
-            self.random(titleArray)
+            self.randomDiamonds(titleArray)
             self.animate()
+        } else {
+            self.defaultDiamond()
         }
     }
 }

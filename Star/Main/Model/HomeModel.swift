@@ -13,7 +13,7 @@ class HomeEntity: BaseModel {
     @objc var powerRankArray = Array<PowerRankEntity>()
     @objc var mineralInfoArray = Array<String>()
     @objc var dailyLogin : String?
-    @objc var power : Double = 0
+    @objc var power : Int = 0
     @objc var ipe : Double = 0
 }
 class CoinRankEntity: BaseModel {
@@ -22,7 +22,7 @@ class CoinRankEntity: BaseModel {
 }
 class PowerRankEntity: BaseModel {
     @objc var user : HomeUserEntity?
-    @objc var power : Double = 0
+    @objc var power : Int = 0
 }
 class HomeUserEntity: BaseModel {
     @objc var nickname : String?

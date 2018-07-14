@@ -8,16 +8,28 @@
 
 import UIKit
 
+enum FromType {
+    case tab
+    case task
+}
+
 class ArticleListController: JXTableViewController {
 
     let vm = ArticleVM()
+    var type : FromType = .tab
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.title = "智慧"
+        
+        if type == .tab {
+            self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight - kTabBarHeight)
+        } else {
+            self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
+        }
 
-        self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight - kTabBarHeight)
+        
         self.tableView?.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.page = 1

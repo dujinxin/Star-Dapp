@@ -134,6 +134,7 @@
                 <constraint firstAttribute="trailing" secondItem="tCd-gj-c8a" secondAttribute="trailing" id="WeD-4R-RTt"/>
             </constraints>
             <connections>
+                <outlet property="bottomBackgroundView" destination="YWv-8L-h6M" id="l1Y-Jn-KQV"/>
                 <outlet property="klLable" destination="0j4-Nh-QCT" id="1vP-5c-sEJ"/>
                 <outlet property="recordBackView" destination="tel-Ag-ube" id="qIR-Xm-Dwf"/>
                 <outlet property="recordButton" destination="cfZ-5T-qm3" id="XCx-yc-tpM"/>

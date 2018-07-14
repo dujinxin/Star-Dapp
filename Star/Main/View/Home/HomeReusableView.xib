@@ -26,19 +26,22 @@
                             <rect key="frame" x="0.0" y="44" width="349" height="84"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efQ-V4-Xey">
-                                    <rect key="frame" x="10" y="7" width="30" height="30"/>
+                                    <rect key="frame" x="10" y="7" width="30" height="32"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="Cfr-UV-fZ6"/>
-                                        <constraint firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="height" id="SNc-u5-fuz"/>
+                                        <constraint firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="height" multiplier="156:167" id="SNc-u5-fuz"/>
+                                        <constraint firstAttribute="width" constant="30" id="mXj-Sp-Bve"/>
                                     </constraints>
-                                    <state key="normal" image="iconDiamond"/>
+                                    <state key="normal" image="imgDiamond"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcf-4G-zD0">
-                                    <rect key="frame" x="10" y="47" width="30" height="30"/>
+                                    <rect key="frame" x="10" y="49" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Gcf-4G-zD0" secondAttribute="height" id="5xZ-12-UBy"/>
+                                    </constraints>
                                     <state key="normal" image="iconBulb"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgj-VO-HwP">
-                                    <rect key="frame" x="50" y="11.5" width="38.5" height="21"/>
+                                    <rect key="frame" x="50" y="12.5" width="38.5" height="21"/>
                                     <attributedString key="attributedText">
                                         <fragment content="1234">
                                             <attributes>
@@ -50,13 +53,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e21-T0-Sw2">
-                                    <rect key="frame" x="50" y="51" width="38.5" height="21"/>
+                                    <rect key="frame" x="50" y="53" width="38.5" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaC-XX-1vB">
-                                    <rect key="frame" x="314" y="12" width="20" height="20"/>
+                                    <rect key="frame" x="314" y="13" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="XaC-XX-1vB" secondAttribute="height" multiplier="1:1" id="BO5-kF-ZfD"/>
                                         <constraint firstAttribute="height" constant="20" id="FPP-Em-V1k"/>
@@ -68,17 +71,16 @@
                                 </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="Gcf-4G-zD0" firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="width" id="1VA-r1-hBh"/>
                                 <constraint firstItem="e21-T0-Sw2" firstAttribute="centerY" secondItem="Gcf-4G-zD0" secondAttribute="centerY" id="Ea6-jg-U5P"/>
                                 <constraint firstItem="efQ-V4-Xey" firstAttribute="top" secondItem="ag9-lT-aQm" secondAttribute="top" constant="7" id="HQT-ba-f2S"/>
                                 <constraint firstItem="XaC-XX-1vB" firstAttribute="centerY" secondItem="efQ-V4-Xey" secondAttribute="centerY" id="LQa-AE-Fkf"/>
                                 <constraint firstItem="lgj-VO-HwP" firstAttribute="centerY" secondItem="efQ-V4-Xey" secondAttribute="centerY" id="ON0-KA-LBQ"/>
-                                <constraint firstItem="Gcf-4G-zD0" firstAttribute="height" secondItem="efQ-V4-Xey" secondAttribute="height" id="SFb-1i-QHD"/>
                                 <constraint firstItem="Gcf-4G-zD0" firstAttribute="leading" secondItem="efQ-V4-Xey" secondAttribute="leading" id="bRA-P2-9UC"/>
                                 <constraint firstAttribute="trailing" secondItem="XaC-XX-1vB" secondAttribute="trailing" constant="15" id="fUm-EB-Crt"/>
-                                <constraint firstItem="Gcf-4G-zD0" firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="width" id="io1-cJ-5D5"/>
-                                <constraint firstItem="lgj-VO-HwP" firstAttribute="leading" secondItem="efQ-V4-Xey" secondAttribute="trailing" constant="10" id="oah-if-s2V"/>
                                 <constraint firstItem="efQ-V4-Xey" firstAttribute="leading" secondItem="ag9-lT-aQm" secondAttribute="leading" constant="10" id="oof-Af-57P"/>
                                 <constraint firstItem="e21-T0-Sw2" firstAttribute="leading" secondItem="Gcf-4G-zD0" secondAttribute="trailing" constant="10" id="r2s-Se-ogZ"/>
+                                <constraint firstItem="lgj-VO-HwP" firstAttribute="leading" secondItem="e21-T0-Sw2" secondAttribute="leading" id="vSM-bl-BMW"/>
                                 <constraint firstItem="Gcf-4G-zD0" firstAttribute="top" secondItem="efQ-V4-Xey" secondAttribute="bottom" constant="10" id="x4j-BH-afy"/>
                                 <constraint firstAttribute="height" constant="84" id="ymQ-np-D8m"/>
                             </constraints>
@@ -109,7 +111,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的资产" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q62-oa-0qz">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的水晶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q62-oa-0qz">
                                     <rect key="frame" x="108.5" y="74" width="53.5" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -320,9 +322,9 @@
         <image name="homeBackground" width="376" height="812"/>
         <image name="iconAssets" width="124" height="139"/>
         <image name="iconBulb" width="71" height="71"/>
-        <image name="iconDiamond" width="71" height="71"/>
         <image name="iconInfo" width="58" height="58"/>
         <image name="iconInvite" width="124" height="139"/>
         <image name="iconLligence" width="124" height="139"/>
+        <image name="imgDiamond" width="156" height="167"/>
     </resources>
 </document>

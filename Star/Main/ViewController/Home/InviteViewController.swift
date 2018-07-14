@@ -183,14 +183,22 @@ class InviteViewController: UIViewController {
         line.backgroundColor = UIColor.groupTableViewBackground
         contentView.addSubview(line)
         
+        let attributeStr = NSMutableAttributedString.init(string: "我是\(self.homeVM.inviteEntity.nickname ?? "昵称")，我已在这里获得区块链知识产权收益，我在智慧星球等你")
+        let rankStr = "\(self.homeVM.inviteEntity.nickname ?? "昵称")"
+
+        
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 15),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x3b4368)], range: NSRange.init(location: 0, length: 2))
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 15),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x1E62CD)], range: NSRange.init(location: 2, length: rankStr.count))
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 15),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x3b4368)], range: NSRange.init(location: "我是\(self.homeVM.inviteEntity.nickname ?? "昵称")".count, length: 26))
         
         let infoLabel = UILabel()
         infoLabel.frame = CGRect(x: 50, y: line.jxBottom + 14, width: contentView.jxWidth - 100, height: 40)
-        infoLabel.text = "我是\(self.homeVM.inviteEntity.nickname ?? "昵称")，我已在这里获得区块链 知识产权收益，我在智慧星球等你"
+//        infoLabel.text = "我是\(self.homeVM.inviteEntity.nickname ?? "昵称")，我已在这里获得区块链 知识产权收益，我在智慧星球等你"
         infoLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4368)
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont.systemFont(ofSize: 15)
         infoLabel.numberOfLines = 2
+        infoLabel.attributedText = attributeStr
         contentView.addSubview(infoLabel)
         
         

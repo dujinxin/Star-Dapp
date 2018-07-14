@@ -15,10 +15,12 @@ class TaskReusableView: UICollectionReusableView {
     @IBOutlet weak var recordBackView: UIView!
     @IBOutlet weak var recordButton: UIButton!
     
+    @IBOutlet weak var bottomBackgroundView: UIView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     
     var powerRecordBlock : (()->())?
+    var dayTaskBlock : (()->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,9 +42,15 @@ class TaskReusableView: UICollectionReusableView {
 
         
         self.topConstraint.constant = kNavStatusHeight + 20
+        self.bottomBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dayTask)))
     }
     @IBAction func record(_ sender: Any) {
         if let block = self.powerRecordBlock {
+            block()
+        }
+    }
+    @objc func dayTask() {
+        if let block = dayTaskBlock {
             block()
         }
     }

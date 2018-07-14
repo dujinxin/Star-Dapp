@@ -8,21 +8,30 @@
 
 import UIKit
 
-class AuthViewController: UIViewController ,UITextFieldDelegate{
+class AuthViewController: BaseViewController ,UITextFieldDelegate{
     
+    @IBOutlet weak var mainScrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var identifyCardTextField: UITextField!
     @IBOutlet weak var ocrButton: UIButton!
     @IBOutlet weak var commitButton: UIButton!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     var aipCardVC : UIViewController?
     
     var vm = OcrVM()
     var loginVM = LoginVM()
+    var alert : JXSelectView?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
         self.aipCardVC = nil
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +55,24 @@ class AuthViewController: UIViewController ,UITextFieldDelegate{
             print("token = ",self.vm.accessToken)
         }
         */
+        if #available(iOS 11.0, *) {
+            self.mainScrollView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenWidth - 60, height: commitButton.jxHeight)
+        gradientLayer.cornerRadius = 22
+        self.commitButton.layer.addSublayer(gradientLayer)
+        commitButton.backgroundColor = UIColor.clear
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,7 +105,10 @@ class AuthViewController: UIViewController ,UITextFieldDelegate{
             vc?.score = score
         }
     }
-    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.topConstraint.constant = kNavStatusHeight
+    }
     @IBAction func useOcr(_ sender: UIButton) {
         
         
@@ -145,20 +174,104 @@ class AuthViewController: UIViewController ,UITextFieldDelegate{
     }
     
     @IBAction func commit(_ sender: UIButton) {
-        
+
         guard let name = self.nameTextField.text else { return }
         guard let idNumber = self.identifyCardTextField.text else { return }
         
+        self.showMBProgressHUD()
         self.loginVM.identifyAuth(name: name, idNumber: idNumber) { (authStatus, msg, isSuccess) in
-            ViewManager.showNotice(msg)
+            self.hideMBProgressHUD()
             if isSuccess {
-                self.dismiss(animated: true, completion: {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
-                })
+                self.showResult()
+            } else {
+                ViewManager.showNotice(msg)
             }
         }
         
         //self.identifyUserLiveness()
+    }
+    func showResult() {
+        let width : CGFloat = kScreenWidth - 70
+        
+        
+        let contentView = UIView()
+        contentView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 280)
+        contentView.backgroundColor = UIColor.clear
+        
+        let backView = UIView()
+        backView.frame = CGRect(x: 35, y: 0, width: width, height: 280)
+        backView.backgroundColor = UIColor.white
+        contentView.addSubview(backView)
+        
+        
+        let titleLabel = UILabel()
+        titleLabel.frame = CGRect(x: 35, y: 20, width: width, height: 20)
+        titleLabel.text = "领取成功"
+        titleLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4358)
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.textAlignment = .center
+        
+        contentView.addSubview(titleLabel)
+        
+        
+        let line = UIView()
+        line.frame = CGRect(x: 35, y: titleLabel.jxBottom + 20, width: width, height: 1)
+        line.backgroundColor = UIColor.groupTableViewBackground
+        contentView.addSubview(line)
+        
+        
+        let attributeStr = NSMutableAttributedString.init(string: "你是智慧星球第\(UserManager.manager.userEntity.rank)位世界知识产权贡献者！")
+        let rankStr = "\(UserManager.manager.userEntity.rank)"
+        let paragraph = NSMutableParagraphStyle.init()
+        paragraph.lineSpacing =  10
+        paragraph.paragraphSpacing = 10
+        paragraph.alignment = .center
+        
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 12),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x979ebf),NSAttributedStringKey.paragraphStyle:paragraph], range: NSRange.init(location: 0, length: 7))
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 22),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x3B4368),NSAttributedStringKey.paragraphStyle:paragraph], range: NSRange.init(location: 7, length: rankStr.count))
+        attributeStr.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 12),NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0x979ebf),NSAttributedStringKey.paragraphStyle:paragraph], range: NSRange.init(location: "你是智慧星球第\(UserManager.manager.userEntity.rank)".count, length: 11))
+        
+        let detailLabel = UILabel()
+        detailLabel.frame = CGRect(x: 80, y: line.jxBottom + 44, width: width - 90, height: 67)
+//        detailLabel.text = "你是智慧星球第\(UserManager.manager.userEntity.rank)位世界知识产权贡献者！"
+//        detailLabel.textColor = UIColor.rgbColor(rgbValue: 0x979ebf)
+        detailLabel.textAlignment = .center
+//        detailLabel.font = UIFont.systemFont(ofSize: 12)
+        detailLabel.attributedText = attributeStr
+        detailLabel.numberOfLines = 2
+        contentView.addSubview(detailLabel)
+        
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: detailLabel.jxBottom + 30, width: 114, height: 36)
+        button.setTitle("我已收到", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(backTo), for: .touchUpInside)
+        contentView.addSubview(button)
+        button.center = CGPoint(x: detailLabel.center.x, y: button.center.y)
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0.5]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 114, height: 36)
+        gradientLayer.cornerRadius = 18
+        
+        button.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.alert = JXSelectView.init(frame: CGRect(), customView: contentView)
+        self.alert?.position = .middle
+        self.alert?.delegate = self
+        self.alert?.show()
+        
+    }
+    @objc func backTo() {
+        self.alert?.dismiss(animate: false)
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
+        })
     }
     func identifyUserLiveness() {
         
@@ -250,7 +363,24 @@ class AuthViewController: UIViewController ,UITextFieldDelegate{
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
+        if textField == nameTextField {
+            self.identifyCardTextField.becomeFirstResponder()
+            return false
+        } else {
+            return textField.resignFirstResponder()
+        }
     }
 
+}
+extension AuthViewController : JXSelectViewDelegate {
+    func jxSelectView(jxSelectView: JXSelectView, didSelectRowAt row: Int, inSection section: Int) {
+        
+    }
+    
+    func jxSelectView(jxSelectView: JXSelectView, clickButtonAtIndex index: Int) {
+        jxSelectView.dismiss(animate: false)
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
+        })
+    }
 }

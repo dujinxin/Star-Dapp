@@ -33,16 +33,28 @@ class ArticleVM : BaseViewModel{
             }
             if total > 0 {
                 guard
-                    let list = dict["list"] as? Array<Dictionary<String, Any>>
+                    var list = dict["list"] as? Array<Dictionary<String, Any>>
                     else{
                         completion(nil, self.message, false)
                         return
                 }
-                for i in 0..<list.count{
-                    let dict = list[i]
-                    let entity = ArticleEntity()
-                    entity.setValuesForKeys(dict)
-                    self.articleListEntity.list.append(entity)
+                if pageNo == 1 {
+                    
+                    for i in 0..<list.count{
+                        let j = arc4random_uniform(UInt32(list.count))
+                        print(j)
+                        let dict = list.remove(at: Int(j)) //list[Int(j)]
+                        let entity = ArticleEntity()
+                        entity.setValuesForKeys(dict)
+                        self.articleListEntity.list.append(entity)
+                    }
+                } else {
+                    for i in 0..<list.count{
+                        let dict = list[i]
+                        let entity = ArticleEntity()
+                        entity.setValuesForKeys(dict)
+                        self.articleListEntity.list.append(entity)
+                    }
                 }
             }
 

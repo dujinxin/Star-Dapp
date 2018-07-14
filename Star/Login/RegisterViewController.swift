@@ -38,30 +38,6 @@ class RegisterViewController: BaseViewController {
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
-        // Do any additional setup after loading the view.
-        //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
-        
-//        var font = UIFont.systemFont(ofSize: 13)
-//
-//        if kScreenWidth < 375 {
-//            self.leadingConstraints.constant = 15
-//            self.trailingConstraints.constant = 15
-//            font = UIFont.systemFont(ofSize: 12)
-//        }
-//
-//        let attributeString1 = NSMutableAttributedString.init(string: "中国大陆")
-//        attributeString1.addAttributes([NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
-//        userTextField.attributedPlaceholder = attributeString1
-//
-//        let attributeString2 = NSMutableAttributedString.init(string: "如果忘记密码，请联系管理员")
-//        attributeString2.addAttributes([NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
-//        passwordTextField.attributedPlaceholder = attributeString2
-//
-//
-//        lookButton.setImage(UIImage(named:"look_normal"), for: .normal)
-//        lookButton.setImage(UIImage(named:"look_highlight"), for: .highlighted)
-//        lookButton.isSelected = false
-        
         loginButton.backgroundColor = UIColor.clear
         
         //颜色渐变
@@ -85,6 +61,8 @@ class RegisterViewController: BaseViewController {
         let url = URL.init(string: String(format: "%@%@?deviceId=%@&method=register&random=%d", kBaseUrl,ApiString.getImageCode.rawValue,UIDevice.current.uuid,arc4random_uniform(100000)))
         lookButton.sd_setImage(with: url, for: .normal, completed: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
@@ -109,7 +87,7 @@ class RegisterViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -178,9 +156,7 @@ class RegisterViewController: BaseViewController {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
                     })
                 }
-            } else {
-                self.performSegue(withIdentifier: "auth", sender: nil)
-            }
+            } 
         }
         
     }
@@ -207,6 +183,39 @@ extension RegisterViewController: UITextFieldDelegate {
     @objc func textChange(notify:NSNotification) {
         guard let textField = notify.object as? UITextField else {
             return
+        }
+    }
+    @objc func keyboardWillShow(notify:Notification) {
+        
+        guard
+            let userInfo = notify.userInfo,
+            let rect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+        
+        //print(rect)//226
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 160)
+            
+        }) { (finish) in
+            //
+        }
+    }
+    @objc func keyboardWillHide(notify:Notification) {
+        print("notify = ","notify")
+        guard
+            let userInfo = notify.userInfo,
+            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        }) { (finish) in
+            
         }
     }
 }

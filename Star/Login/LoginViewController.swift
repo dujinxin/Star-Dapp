@@ -12,6 +12,7 @@ import UIKit
 class LoginViewController: BaseViewController {
 
     @IBOutlet weak var mainScrollView: UIScrollView!
+    @IBOutlet weak var contentSize_heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var codeImageTextField: UITextField!
@@ -28,26 +29,6 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
-        
-//        var font = UIFont.systemFont(ofSize: 13)
-//
-//        if kScreenWidth < 375 {
-//            self.leadingConstraints.constant = 15
-//            self.trailingConstraints.constant = 15
-//            font = UIFont.systemFont(ofSize: 12)
-//        }
-//
-//        let attributeString1 = NSMutableAttributedString.init(string: "中国大陆")
-//        attributeString1.addAttributes([NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
-//        userTextField.attributedPlaceholder = attributeString1
-//
-//        let attributeString2 = NSMutableAttributedString.init(string: "如果忘记密码，请联系管理员")
-//        attributeString2.addAttributes([NSAttributedStringKey.font:font,NSAttributedStringKey.foregroundColor:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
-//        passwordTextField.attributedPlaceholder = attributeString2
-        
         
         if #available(iOS 11.0, *) {
             self.mainScrollView.contentInsetAdjustmentBehavior = .never
@@ -80,8 +61,8 @@ class LoginViewController: BaseViewController {
         fetchImageButton.sd_setImage(with: url, for: .normal, completed: nil)
         
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         
         self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
@@ -103,6 +84,13 @@ class LoginViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.contentSize_heightConstraint.constant = kScreenHeight
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -166,8 +154,19 @@ class LoginViewController: BaseViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        if textField == userTextField {
+//            self.mainScrollView.contentOffset = CGPoint(x: 0, y: -60)
+//        } else if textField == codeImageTextField{
+//            self.mainScrollView.contentOffset = CGPoint(x: 0, y: -60 * 2)
+//        } else if textField == codeWordTextField{
+//            self.mainScrollView.contentOffset = CGPoint(x: 0, y: -60 * 2)
+//        }
+        return true
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        //self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         return true
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -186,49 +185,37 @@ extension LoginViewController: UITextFieldDelegate {
     func textChange(notify:NSNotification) {
         
     }
-//    @objc func keyboardWillShow(notify:Notification) {
-//
-//        guard
-//            let userInfo = notify.userInfo,
-//            let rect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
-//            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
-//            else {
-//                return
-//        }
-//
-//        UIView.animate(withDuration: animationDuration, animations: {
-//            self.frame = CGRect(x: 0, y: keyWindowHeight - self.topBarHeight - self.keyboardRect.height, width: keyWindowWidth, height: self.topBarHeight)
-//            self.tapControl.alpha = 0.2
-//        }) { (finish) in
-//            //
-//        }
-//    }
-//    @objc func keyboardWillHide(notify:Notification) {
-//        print("notify = ","notify")
-//        guard
-//            let userInfo = notify.userInfo,
-//            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
-//            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
-//            else {
-//                return
-//        }
-//        UIView.animate(withDuration: animationDuration, animations: {
-//            //如果为iPhoneX，则把底部的34空间让出来
-//            let h : CGFloat = self.topBarHeight + additionalBottomHeight
-//            if self.style == .bottom {
-//                self.frame = CGRect.init(x: 0, y: keyWindowHeight - h, width: keyWindowWidth, height: h)
-//            } else {
-//                self.frame = CGRect.init(x: 0, y: keyWindowHeight, width: keyWindowWidth, height: h)
-//            }
-//            self.tapControl.alpha = 0
-//        }) { (finish) in
-//            if self.style == .hidden {
-//                self.clearInfo()
-//            } else if self.style == .bottom{
-//
-//            } else {
-//                self.clearInfo()
-//            }
-//        }
-//    }
+    @objc func keyboardWillShow(notify:Notification) {
+
+        guard
+            let userInfo = notify.userInfo,
+            let rect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+
+        //print(rect)//226
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 160)
+            
+        }) { (finish) in
+            //
+        }
+    }
+    @objc func keyboardWillHide(notify:Notification) {
+        print("notify = ","notify")
+        guard
+            let userInfo = notify.userInfo,
+            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        }) { (finish) in
+            
+        }
+    }
 }

@@ -11,9 +11,7 @@ import Foundation
 class HomeVM: BaseViewModel {
     
     var homeEntity = HomeEntity()
-    
     var propertyRecordEntity = PropertyRecordEntity()
-    
     var inviteEntity = InviteEntity()
     
     
@@ -74,8 +72,8 @@ class HomeVM: BaseViewModel {
             for i in 0..<array.count {
                 let entity = PowerRankEntity()
                 let dict = array[i]
-                if let ipe = dict["power"] as? Double {
-                    entity.power = ipe
+                if let power = dict["power"] as? Int {
+                    entity.power = power
                 }
                 if let user = dict["user"] as? Dictionary<String,Any> {
                     let userEntity = HomeUserEntity()

@@ -10,7 +10,7 @@ import UIKit
 
 class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var dataArray = [["image":"iconMoney","title":"我的资产"],["image":"iconPocket","title":"我的钱包"],["image":"iconPerson","title":"实名信息"],["image":"iconGear","title":"账户信息"]]
+    var dataArray = [["image":"iconMoney","title":"水晶IPE"],["image":"iconPocket","title":"钱包"],["image":"iconPerson","title":"实名"],["image":"iconGear","title":"系统"]]
     
     var vm = LoginVM()
     @IBOutlet weak var tableView: UITableView!

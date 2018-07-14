@@ -27,6 +27,6 @@ class PowerRecordEntity: BaseModel {
 class PowerEntity: BaseModel {
     @objc var categoryInfo : String?
     @objc var id : Int = 0
-    @objc var power : Double = 0
+    @objc var power : Int = 0
     @objc var time : String?
 }

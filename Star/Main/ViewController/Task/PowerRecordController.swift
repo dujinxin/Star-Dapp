@@ -39,17 +39,17 @@ class PowerRecordController: JXTableViewController{
                 }
             }
         })
-        self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
-            self.page += 1
-            self.vm.powerRecord(pageNo: self.page) { (_, msg, isSuc) in
-                self.tableView?.mj_footer.endRefreshing()
-                if isSuc {
-                    self.tableView?.reloadData()
-                } else {
-                    ViewManager.showNotice(msg)
-                }
-            }
-        })
+//        self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+//            self.page += 1
+//            self.vm.powerRecord(pageNo: self.page) { (_, msg, isSuc) in
+//                self.tableView?.mj_footer.endRefreshing()
+//                if isSuc {
+//                    self.tableView?.reloadData()
+//                } else {
+//                    ViewManager.showNotice(msg)
+//                }
+//            }
+//        })
         self.tableView?.mj_header.beginRefreshing()
         
     }

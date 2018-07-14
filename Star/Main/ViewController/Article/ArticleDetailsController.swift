@@ -149,27 +149,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         label.textAlignment = .right
         return label
     }()
-    
-    
-    lazy var inputTextView: JXInputTextView = {
-        let input = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: bottomInputViewHeight), style: .bottom, completion:nil)
-        input.delegate = self
-        input.sendBlock = { (_,object) in
-            self.commentVM.comment(object as! String, articleHash: (self.articleEntity?.artHashIndex)!, articleId: (self.articleEntity?.id)!, completion: { (_, msg, isSuc) in
-                ViewManager.showNotice(msg)
-                if isSuc {
-                    guard let articleId = self.articleEntity?.id else { return }
-                    guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
-                    self.commentVM.commentList(artId: articleId, artHashIndex: articleHashIndex, pageNo: self.page) { (_, msg, isSuc) in
-                        self.tableView.reloadData()
-                    }
-                }
-            })
-        }
-        input.limitWords = 1000
-        input.placeHolder = "写下你的评论吧~~🌹🌹🌹"
-        return input
-    }()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
@@ -200,14 +180,14 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         
         
         self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        self.tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+        self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.page += 1
             self.request(page: self.page)
         })
         
         self.bottomConstraintsHeight.constant = bottomInputViewHeight
         
-        self.webView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: self.tableView.bounds.height - bottomInputViewHeight)
+        self.webView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: self.tableView.bounds.height )
         //self.webView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 3 * bottomInputViewHeight)
         self.webView.scrollView.isScrollEnabled = false
         self.webView.scrollView.bounces = false
@@ -313,8 +293,8 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
                 if size.height != (self.tableView.tableHeaderView?.frame.size.height)! - 40 {
                     //print("更新header")
                     self.tableView.beginUpdates()
-                    self.webView.frame = CGRect(origin: CGPoint(), size: CGSize(width: size.width, height: size.height))
-                    self.tableView.tableHeaderView?.frame = CGRect(origin: CGPoint(), size: CGSize(width: size.width, height: size.height + 40))
+                    self.webView.frame = CGRect(origin: CGPoint(), size: CGSize(width: kScreenWidth, height: size.height))
+                    self.tableView.tableHeaderView?.frame = CGRect(origin: CGPoint(), size: CGSize(width: kScreenWidth, height: size.height + 40))
                     self.tableView.endUpdates()
                 }
             }

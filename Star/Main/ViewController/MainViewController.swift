@@ -13,7 +13,7 @@ private let reuseIndentifierHeader = "reuseIndentifierHeader"
 
 class MainViewController: JXCollectionViewController {
 
-    let homeVM = HomeVM()
+    var homeVM = HomeVM()
     var isIpe : Bool = true
     
     
@@ -68,6 +68,12 @@ class MainViewController: JXCollectionViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         if !UserManager.manager.isLogin {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
@@ -77,11 +83,6 @@ class MainViewController: JXCollectionViewController {
         }else{
             self.showAuth()
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.navigationBar.barStyle = .blackTranslucent
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -121,9 +122,12 @@ class MainViewController: JXCollectionViewController {
         }
     }
     override func requestData() {
+        self.homeVM = HomeVM()
         self.homeVM.home { (_, msg, isSuc) in
-            //
             self.collectionView?.reloadData()
+            if let message = self.homeVM.homeEntity.dailyLogin ,message.isEmpty == false {
+                ViewManager.showNotice(message)
+            }
         }
         self.homeVM.powerRank(limit: 15) { (_, msg, isSuc) in
             

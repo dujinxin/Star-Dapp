@@ -231,50 +231,50 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFX-dS-kgx">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="什么是水晶" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9v-7x-17L">
-                                                <rect key="frame" x="134" y="30" width="107" height="26.333333333333329"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="什么是水晶IPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9v-7x-17L">
+                                                <rect key="frame" x="119" y="30" width="137" height="26.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <color key="textColor" red="0.23137254901960785" green="0.2627450980392157" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aq3-Dr-Rvw">
                                                 <rect key="frame" x="30" y="71.333333333333343" width="315" height="107.66666666666666"/>
-                                                <string key="text">水晶是基于个人或机构在星球活动产生的奖励，用户可通过产生有价值的内容，或通过互动挖矿的方式获得水晶。水晶将逐步开放消费和兑换功能。
-水晶的总量有限，随着时间推移，获得水晶的难度将越来越大，因此，前期参与更有优势。</string>
+                                                <string key="text">水晶IPE是基于个人或机构在星球活动产生的奖励，用户可通过产生有价值的内容获得水晶IPE。水晶IPE将逐步开放消费和兑换功能。
+水晶IPE的总量有限，随着时间推移，获得水晶IPE的难度将越来越大，因此，前期参与更有优势。</string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智慧越高，水晶越多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtW-En-bO4">
-                                                <rect key="frame" x="92.000000000000014" y="219" width="192.33333333333337" height="25.333333333333343"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智慧越高，水晶IPE越多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtW-En-bO4">
+                                                <rect key="frame" x="77.000000000000014" y="219" width="222.33333333333337" height="25.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NxV-Kw-zZq">
-                                                <rect key="frame" x="30" y="259.33333333333331" width="315" height="143.33333333333331"/>
-                                                <string key="text">智慧是用户获得水晶的决定因素，智慧越高，获得的水晶越多。
-智慧分永久智慧和魔法智慧。永久智慧长期有效，能持续参与水晶分配。魔法智慧一般数值较大，但有一定的时间分配期，超过分配期则对水晶的分配权自动失效。
-除了智慧外，还有一些其他因素影响获得水晶的效率，用户可自行探索。</string>
+                                                <rect key="frame" x="30" y="259.33333333333331" width="315" height="125.33333333333331"/>
+                                                <string key="text">智慧是用户获得水晶的重要因素，智慧越高，获得的水晶IPE越多。
+智慧值分永久智慧和创力智慧。永久智慧长期有效，能持续参与水晶IPE分配。创力智慧需要用户积极参与智慧星球的建设。
+除了智慧外，还有一些其他因素影响获得水晶IPE的效率，用户可自行探索。</string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何提升智慧，加速获取水晶" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ji-Ut-awV">
-                                                <rect key="frame" x="48.666666666666657" y="442.66666666666663" width="277.66666666666674" height="26.333333333333314"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何提升智慧，加速获取水晶IPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ji-Ut-awV">
+                                                <rect key="frame" x="33.666666666666657" y="424.66666666666663" width="307.66666666666674" height="26.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                 <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kh1-or-Ww7">
-                                                <rect key="frame" x="30" y="484.00000000000006" width="315" height="250.66666666666669"/>
+                                                <rect key="frame" x="30" y="466" width="315" height="268.66666666666674"/>
                                                 <string key="text">在智慧星球上进行阅读、学习、社交、交易等所有活动，都可增加智慧值，未来我们将会有更多场景，以支持用户获取更多智慧值。
-1、完成永久智慧任务
-通过创建钱包和备份、人脸识别、关注公众号、设置头像等，完善你的智慧星球区块链身份，可立即快速提升智慧。
-2、每日登录、及时收取水晶
-每日登录、及时收取水晶等一些用户行为会持续增加算力。
-3、参与智慧星球的建设
-积极阅读和学习，主动参与评论等社交活动等，未来参与更多新的应用服务也能提升智慧。</string>
+        
+1、完成永久智慧任务 通过人脸识别、关注公众号、设置头像等，完善你的智慧星球区块链身份，可立即快速提升智慧。
+        
+2、每日登录、及时收取水晶IPE 每日登录、及时收取水晶IPE等一些用户行为会持续增加算力。
+        
+3、参与智慧星球的建设 积极阅读和学习，主动参与点赞、评论等社交活动，未来参与更多新的应用服务，也能提升智慧。</string>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -456,7 +456,7 @@
         <!--Article List Controller-->
         <scene sceneID="3iU-0S-dwi">
             <objects>
-                <viewController id="v18-s0-tcy" customClass="ArticleListController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleVC" id="v18-s0-tcy" customClass="ArticleListController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ng3-wN-KbE"/>
                         <viewControllerLayoutGuide type="bottom" id="DVZ-C5-G10"/>
