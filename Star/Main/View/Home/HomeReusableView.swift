@@ -62,8 +62,13 @@ class HomeReusableView: UICollectionReusableView {
             
             self.diamondLabel.text = "\(entity?.ipe ?? 0)"
             
-            print(entity?.mineralInfoArray)
-            self.setTitleArray()
+//            if oldValue?.mineralInfoArray.count == entity?.mineralInfoArray.count {
+//                print("不做处理")
+//            } else {
+                print("重新布局",entity?.mineralInfoArray)
+                self.setTitleArray()
+//            }
+            
         }
     }
     
@@ -234,17 +239,11 @@ class HomeReusableView: UICollectionReusableView {
         let superHeight = imageHeight + 20
         
         let superView = UIView()
-        //superView.backgroundColor = UIColor.randomColor
-        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
-        
-        let superView1 = UIView()
-        superView1.backgroundColor = UIColor.clear
-        superView.addSubview(superView1)
         
         let imageView = UIImageView()
         imageView.image = UIImage(named: "imgDiamond")
         imageView.isUserInteractionEnabled = true
-        superView1.addSubview(imageView)
+        superView.addSubview(imageView)
         
         let label = UILabel()
         label.textColor = UIColor.white
@@ -252,10 +251,9 @@ class HomeReusableView: UICollectionReusableView {
         label.textAlignment = .center
         label.text = "挖矿中..."
         label.sizeToFit()
-        superView1.addSubview(label)
+        superView.addSubview(label)
         
         superView.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
-        superView1.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
         imageView.frame = CGRect(x: 0, y: 0, width: superWidth, height: imageHeight)
         label.frame = CGRect(x: 0, y: imageHeight, width: superWidth, height: labelHeight)
         

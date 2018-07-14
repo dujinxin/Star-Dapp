@@ -112,10 +112,10 @@ class MainViewController: JXCollectionViewController {
         //未实名认证
         if UserManager.manager.userEntity.authStatus == 1 {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let auth = storyboard.instantiateViewController(withIdentifier: "AuthVC") as! AuthViewController
-            let authVC = UINavigationController.init(rootViewController: auth)
+            let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+            let loginVC = UINavigationController.init(rootViewController: login)
             
-            self.navigationController?.present(authVC, animated: false, completion: nil)
+            self.navigationController?.present(loginVC, animated: false, completion: nil)
         }else{
             print("已认证")
             self.requestData()

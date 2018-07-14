@@ -36,6 +36,11 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     
     @IBOutlet weak var actionButton: UIButton!
     
+    var navigationBar : UIView?
+    var backgroundView : UIView?
+    var titleView : UILabel?
+    var leftItem : UIButton?
+    
     lazy var processView: UIProgressView = {
         let process = UIProgressView()
         process.progressTintColor = UIColor.blue
@@ -152,8 +157,23 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.view.backgroundColor = UIColor.white
         self.title = "详情"
+        
+        self.customNavigationBar.removeFromSuperview()
+        
+        let leftButton = UIButton()
+        leftButton.setImage(UIImage(named: "imgBack"), for: .normal)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(5, 9, 5, 9)
+        //leftButton.setTitle("up", for: .normal)
+        leftButton.addTarget(self, action: #selector(backTo), for: .touchUpInside)
+        
+        self.navigationBar = self.setClearNavigationBar(title: "文章详情", leftItem: leftButton)
+        self.view.addSubview(navigationBar!)
+        
+        self.tableView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - bottomInputViewHeight)
+        self.tableView.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        //self.tableView.addSubview(self.navigationBar!)
         
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never
@@ -194,7 +214,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.webView.scrollView.delegate = self
         
         
-        self.processView.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: 2)
+        self.processView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 2)
         view.addSubview(self.processView)
         
         self.webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -236,6 +256,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .default
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -253,7 +274,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     }
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        self.topConstraint.constant = kNavStatusHeight
+        self.topConstraint.constant = 0
     }
     deinit {
         self.webView.scrollView.removeObserver(self, forKeyPath: "contentSize")
@@ -261,7 +282,40 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "getParames")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
     }
-    
+    func setClearNavigationBar(title:String,leftItem:UIView,rightItem:UIView? = nil) -> UIView {
+        
+        let navigiationBar = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavStatusHeight))
+        navigationBar?.backgroundColor = UIColor.clear
+        
+        self.backgroundView = UIView(frame: navigiationBar.bounds)
+        self.backgroundView?.backgroundColor = UIColor.white
+        
+        self.titleView = UILabel(frame: CGRect(x: 80, y: kStatusBarHeight, width: kScreenWidth - 160, height: 44))
+        titleView?.text = title
+        titleView?.textColor = UIColor.black
+        titleView?.textAlignment = .center
+        titleView?.font = UIFont.systemFont(ofSize: 17)
+        
+        self.leftItem = leftItem as? UIButton
+        self.leftItem?.frame = CGRect(x: 10, y: kStatusBarHeight + 7, width: 30, height: 30)
+        self.leftItem?.setTitleColor(UIColor.black, for: .normal)
+        self.leftItem?.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.leftItem?.tintColor = UIColor.black
+        
+        navigiationBar.addSubview(self.backgroundView!)
+        navigiationBar.addSubview(self.titleView!)
+        
+        navigiationBar.addSubview(self.leftItem!)
+        if let right = rightItem {
+            right.frame = CGRect(x: kScreenWidth - 10 - 30, y: kStatusBarHeight + 7, width: 30, height: 30)
+            navigiationBar.addSubview(right)
+        }
+        return navigiationBar
+        
+    }
+    @objc func backTo() {
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func showInputView() {
         let inputTextView = JXInputTextView(frame: CGRect(x: 0, y: self.tableView.frame.height, width: view.bounds.width, height: 60), style: .hidden, completion:nil)
         inputTextView.sendBlock = { (_,object) in
@@ -320,6 +374,26 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.isDragging {
             self.view.endEditing(true)
+        }
+        let yOffset = scrollView.contentOffset.y
+        print(yOffset)
+        if yOffset <= 0 {
+            //self.customNavigationBar.barTintColor = UIColor.orange
+            //self.customNavigationBar.alpha = 0
+            self.backgroundView?.alpha = 1
+            self.titleView?.text = "文章详情"
+            self.leftItem?.setImage(UIImage(named: "imgBack")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            self.leftItem?.tintColor = UIColor.black
+            self.leftItem?.imageEdgeInsets = UIEdgeInsetsMake(5, 9, 5, 9)
+        }else if yOffset >= kNavStatusHeight{
+            //self.customNavigationBar.alpha = 1
+            self.backgroundView?.alpha = 0
+            self.titleView?.text = ""
+            self.leftItem?.setImage(UIImage(named: "iconBackBlackbg"), for: .normal)
+            self.leftItem?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        }else{
+            //self.customNavigationBar.alpha = fabs(fabs(yOffset) - kNavStatusHeight) / kNavStatusHeight
+            self.backgroundView?.alpha = fabs(fabs(yOffset) - kNavStatusHeight) / kNavStatusHeight
         }
     }
     @IBAction func priseClick(_ sender: UIButton) {

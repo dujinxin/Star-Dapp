@@ -85,8 +85,8 @@ class ModifyImageController: BaseViewController {
     func showImagePickerViewController(_ sourceType:UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.title = "选择照片"
-        imagePicker.navigationBar.barTintColor = UIColor.blue
-        imagePicker.navigationBar.tintColor = UIColor.white
+//        imagePicker.navigationBar.barTintColor = UIColor.blue
+//        imagePicker.navigationBar.tintColor = UIColor.white
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
