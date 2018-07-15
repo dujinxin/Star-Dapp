@@ -198,7 +198,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         guard let articleId = self.articleEntity?.id else { return }
         guard let articleHashIndex = self.articleEntity?.artHashIndex else { return }
         
-        
+        self.tableView?.estimatedRowHeight = 126
         self.tableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.page += 1

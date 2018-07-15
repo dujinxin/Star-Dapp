@@ -158,34 +158,48 @@ class HomeReusableView: UICollectionReusableView {
     
     
     //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
+    /// 水晶随机分布在一个固定矩形区域,水晶带有上下移动的动画
+    ///
+    /// - Parameter array: 水晶数组
     func randomDiamonds(_ array:Array<String>) {
         self.buttonArray.removeAll()
         self.diamondContentView.removeAllSubView()
         
         let imageHeight : CGFloat = 52 * 167 / 156
         let labelHeight : CGFloat = 20
-        let superWidth : CGFloat = 52
-        let superHeight = imageHeight + 20
+        //水晶+数字 宽高
+        let crystalViewWidth : CGFloat = 52
+        let crystalViewHeight = imageHeight + 20
         
-        //origin可随机区域 width = contentView.width - superView.width - animateWidth
-        let width = self.diamondContentView.bounds.width - superWidth - 5 * 2
-        //origin可随机区域 width = contentView.height - superView.height - animateHeight
-        let height = self.diamondContentView.bounds.height - superHeight - 5 * 2
+        //动画区域
+        let animateWidth :CGFloat = 0
+        let animateHeight :CGFloat = 5 + 5 //上下各5
+        
+        //margin
+        let marginLeft : CGFloat  = 30
+        let marginRight : CGFloat = 30
+        let marginTop : CGFloat = 0
+        let marginBottom : CGFloat = 0
+
+        //origin可随机区域 width = contentView.width - crystalView.width - animateWidth - marginLeft - marginRight
+        let origin_x = self.diamondContentView.bounds.width - crystalViewWidth - animateWidth - marginLeft - marginRight
+        //origin可随机区域 width = contentView.height - crystalView.height - animateHeight - marginTop - marginBottom
+        let origin_y = self.diamondContentView.bounds.height - crystalViewHeight - animateHeight - marginTop - marginBottom
         
         for title in array {
             
-            let superView = UIView()
+            let crystalView = UIView()
             //superView.backgroundColor = UIColor.randomColor
-            superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
+            crystalView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
             
-            let superView1 = UIView()
-            superView1.backgroundColor = UIColor.clear
-            superView.addSubview(superView1)
+            let superView = UIView()
+            superView.backgroundColor = UIColor.clear
+            crystalView.addSubview(superView)
             
             let imageView = UIImageView()
             imageView.image = UIImage(named: "imgDiamond")
             imageView.isUserInteractionEnabled = true
-            superView1.addSubview(imageView)
+            superView.addSubview(imageView)
             
             let label = UILabel()
             let components = title.components(separatedBy: "_")
@@ -196,19 +210,18 @@ class HomeReusableView: UICollectionReusableView {
             label.font = UIFont.systemFont(ofSize: 12)
             label.textAlignment = .center
             label.sizeToFit()
-            superView1.addSubview(label)
+            superView.addSubview(label)
             
   
             var isIntersects = true
             repeat{
                 
-                let x = arc4random_uniform(UInt32(width))
-                //let y = UInt32(kNavStatusHeight) + 5 + arc4random_uniform(UInt32(height))
-                let y = arc4random_uniform(UInt32(height))
-                superView.frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: superWidth, height: superHeight)
-                superView1.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
-                imageView.frame = CGRect(x: 0, y: 0, width: superWidth, height: imageHeight)
-                label.frame = CGRect(x: 0, y: imageHeight, width: superWidth, height: labelHeight)
+                let x = arc4random_uniform(UInt32(origin_x))
+                let y = arc4random_uniform(UInt32(origin_y))
+                crystalView.frame = CGRect(x: CGFloat(x) + marginLeft , y: CGFloat(y) + marginTop, width: crystalViewWidth, height: crystalViewHeight)
+                superView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: crystalViewHeight)
+                imageView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: imageHeight)
+                label.frame = CGRect(x: 0, y: imageHeight, width: crystalViewWidth, height: labelHeight)
                 if self.buttonArray.count == 0 {
                     //print("第一个视图一定没有交集")
                     isIntersects = false
@@ -216,7 +229,7 @@ class HomeReusableView: UICollectionReusableView {
                     isIntersects = false
                     for subView in self.buttonArray {
                         //与已存在的子视图没有交集，方可添加
-                        if subView.frame.intersects(superView.frame) == true {
+                        if subView.frame.intersects(crystalView.frame) == true {
                             //print("有交集")
                             isIntersects = true
                             break
@@ -226,8 +239,8 @@ class HomeReusableView: UICollectionReusableView {
                 
             }while(isIntersects)
             //print("没有交集")
-            self.buttonArray.append(superView)
-            self.diamondContentView.addSubview(superView)
+            self.buttonArray.append(crystalView)
+            self.diamondContentView.addSubview(crystalView)
         }
     }
     func defaultDiamond() {
@@ -277,7 +290,6 @@ class HomeReusableView: UICollectionReusableView {
 //            let transform = CGAffineTransform.init(translationX: -v.bounds.origin.x, y: -v.bounds.origin.y)
 //            transform.scaledBy(x: 1, y: 0.2)
 //            transform.translatedBy(x: v.bounds.origin.x, y: v.bounds.origin.y)
-//
 //            let center = CGPoint(x: v.jxOrigin.x + 44 / 2, y: v.jxOrigin.y + 64 / 2)
 //            path.addArc(center: center, radius: 5, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true,transform:transform)
             
@@ -295,29 +307,7 @@ class HomeReusableView: UICollectionReusableView {
             animation.calculationMode = kCAAnimationPaced
             
             v.layer.add(animation, forKey: nil)
-            
-            //            UIView.animate(withDuration: 3, delay: 3.1, options: [.repeat,.curveEaseInOut], animations: {
-            //                var frame = button.frame
-            //                frame.origin.y += 10
-            //                button.frame = frame
-            //            }) { (finish) in
-            //                if finish == true {
-            //                    UIView.animate(withDuration: 3, delay: 0, options: .curveEaseInOut, animations: {
-            //                        var frame = button.frame
-            //                        frame.origin.y -= 10
-            //                        button.frame = frame
-            //                    }) { (finish1) in
-            //                        if finish1 == true {
-            //                            print("done1")
-            //                        } else {
-            //                            print("animating1")
-            //                        }
-            //                    }
-            //                    print("done")
-            //                } else {
-            //                    print("animating")
-            //                }
-            //            }
+        
         }
     }
     @objc func tap(tap:UITapGestureRecognizer) {

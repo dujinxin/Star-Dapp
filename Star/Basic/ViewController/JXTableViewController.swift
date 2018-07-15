@@ -25,7 +25,6 @@ class JXTableViewController: BaseViewController{
         
         if #available(iOS 11.0, *) {
             self.tableView?.contentInsetAdjustmentBehavior = .never
-            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
         } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }

@@ -29,7 +29,8 @@ class ArticleListController: JXTableViewController {
             self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
         }
 
-        
+        self.tableView?.separatorStyle = .none
+        self.tableView?.estimatedRowHeight = 256
         self.tableView?.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.page = 1

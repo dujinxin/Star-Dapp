@@ -18,7 +18,7 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
-  - MJRefresh (3.1.14.1)
+  - MJRefresh (3.1.15.3)
   - SDWebImage (4.1.2):
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
@@ -54,11 +54,11 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
-  MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 43620b57f309c8fae0d15d4c10271257c4c8c8bb
+PODFILE CHECKSUM: 8b22d21b136dee6df097f8ae6762e532d05475c2
 
 COCOAPODS: 1.5.0
