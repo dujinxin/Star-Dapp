@@ -286,6 +286,9 @@ class HomeReusableView: UICollectionReusableView {
             animation.isRemovedOnCompletion = false
             animation.repeatCount =  Float.greatestFiniteMagnitude
             //animation.repeatDuration = 3
+            let index = self.buttonArray.index(of: v1)
+            
+            animation.beginTime = 0.5 * Double(index!)
             animation.duration = 5
             animation.autoreverses = false
             animation.fillMode = kCAFillModeForwards

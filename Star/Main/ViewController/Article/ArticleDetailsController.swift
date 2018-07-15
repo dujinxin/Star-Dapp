@@ -171,7 +171,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
         self.navigationBar = self.setClearNavigationBar(title: "文章详情", leftItem: leftButton)
         self.view.addSubview(navigationBar!)
         
-        self.tableView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - bottomInputViewHeight)
+        //self.tableView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - bottomInputViewHeight)
         self.tableView.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
         //self.tableView.addSubview(self.navigationBar!)
         
@@ -274,7 +274,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
     }
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        self.topConstraint.constant = 0
+        self.topConstraint.constant = kStatusBarHeight
     }
     deinit {
         self.webView.scrollView.removeObserver(self, forKeyPath: "contentSize")
@@ -376,7 +376,7 @@ class ArticleDetailsController: BaseViewController,UITableViewDelegate,UITableVi
             self.view.endEditing(true)
         }
         let yOffset = scrollView.contentOffset.y
-        print(yOffset)
+        //print(yOffset)
         if yOffset <= 0 {
             //self.customNavigationBar.barTintColor = UIColor.orange
             //self.customNavigationBar.alpha = 0

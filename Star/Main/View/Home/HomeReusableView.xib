@@ -26,22 +26,22 @@
                             <rect key="frame" x="0.0" y="44" width="349" height="84"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efQ-V4-Xey">
-                                    <rect key="frame" x="10" y="7" width="30" height="32"/>
+                                    <rect key="frame" x="10" y="7" width="30" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="height" multiplier="156:167" id="SNc-u5-fuz"/>
+                                        <constraint firstAttribute="width" secondItem="efQ-V4-Xey" secondAttribute="height" id="SNc-u5-fuz"/>
                                         <constraint firstAttribute="width" constant="30" id="mXj-Sp-Bve"/>
                                     </constraints>
-                                    <state key="normal" image="imgDiamond"/>
+                                    <state key="normal" image="iconDiamond"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gcf-4G-zD0">
-                                    <rect key="frame" x="10" y="49" width="30" height="30"/>
+                                    <rect key="frame" x="10" y="47" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Gcf-4G-zD0" secondAttribute="height" id="5xZ-12-UBy"/>
                                     </constraints>
                                     <state key="normal" image="iconBulb"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgj-VO-HwP">
-                                    <rect key="frame" x="50" y="12.5" width="38.5" height="21"/>
+                                    <rect key="frame" x="50" y="11.5" width="38.5" height="21"/>
                                     <attributedString key="attributedText">
                                         <fragment content="1234">
                                             <attributes>
@@ -53,13 +53,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e21-T0-Sw2">
-                                    <rect key="frame" x="50" y="53" width="38.5" height="21"/>
+                                    <rect key="frame" x="50" y="51" width="38.5" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaC-XX-1vB">
-                                    <rect key="frame" x="314" y="13" width="20" height="20"/>
+                                    <rect key="frame" x="314" y="12" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="XaC-XX-1vB" secondAttribute="height" multiplier="1:1" id="BO5-kF-ZfD"/>
                                         <constraint firstAttribute="height" constant="20" id="FPP-Em-V1k"/>
@@ -319,12 +319,12 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="homeBackground" width="376" height="812"/>
+        <image name="homeBackground" width="375" height="757"/>
         <image name="iconAssets" width="124" height="139"/>
         <image name="iconBulb" width="71" height="71"/>
+        <image name="iconDiamond" width="24" height="24"/>
         <image name="iconInfo" width="58" height="58"/>
         <image name="iconInvite" width="124" height="139"/>
         <image name="iconLligence" width="124" height="139"/>
-        <image name="imgDiamond" width="156" height="167"/>
     </resources>
 </document>
