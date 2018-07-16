@@ -79,12 +79,6 @@ class LoginVM: JXRequest {
             url = ApiString.sendMobileCodeLogin.rawValue + "?deviceId=\(UIDevice.current.uuid)"
         }
         JXRequest.request(url: url, param: ["mobile":mobile,"method":method,"validateCode":validateCode], success: { (data, message) in
-            
-            guard let _ = data as? Dictionary<String, Any>
-                else{
-                    completion(nil,message,false)
-                    return
-            }
             completion(data,message,true)
         }) { (message, code) in
             completion(nil,message,false)

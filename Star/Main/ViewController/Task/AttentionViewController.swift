@@ -40,6 +40,11 @@ class AttentionViewController: BaseViewController {
         
         self.infoButton.isEnabled = false
         
+        let attributedString = NSMutableAttributedString.init(string: "验证码")
+        attributedString.addAttributes([NSAttributedStringKey.font:UIFont.systemFont(ofSize: 17)], range: NSRange.init(location: 0, length: 3))
+        
+        self.textField.attributedPlaceholder = attributedString
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
     }

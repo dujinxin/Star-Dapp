@@ -164,8 +164,14 @@ class RegisterViewController: BaseViewController {
 
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        if textField == passwordTextField {
+            self.codeTextField.becomeFirstResponder()
+            return false
+        } else {
+            textField.resignFirstResponder()
+            return true
+        }
+        
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 

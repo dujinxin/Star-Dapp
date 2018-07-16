@@ -69,7 +69,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="255" height="44"/>
                                                         <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="2rN-t7-A6s" id="URZ-vF-igk"/>
                                                         </connections>
@@ -112,7 +112,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="215" height="44"/>
                                                         <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="2rN-t7-A6s" id="dFD-9W-1wj"/>
                                                         </connections>
@@ -623,9 +623,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="255" height="44"/>
                                                         <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                         <connections>
-                                                            <outlet property="delegate" destination="2rN-t7-A6s" id="7dn-X8-AcZ"/>
+                                                            <outlet property="delegate" destination="6Wm-6n-uSw" id="fLM-cG-VSJ"/>
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNw-Po-zTp">
@@ -1224,7 +1224,7 @@
         <image name="imgLogo" width="108" height="130"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="P4v-m0-CeM"/>
-        <segue reference="OzC-hK-Uzh"/>
+        <segue reference="VNB-SE-KwI"/>
+        <segue reference="TpD-qi-rMa"/>
     </inferredMetricsTieBreakers>
 </document>

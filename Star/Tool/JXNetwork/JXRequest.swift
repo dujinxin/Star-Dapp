@@ -60,7 +60,7 @@ class JXRequest: JXBaseRequest {
         handleResponseResult(result: error)
     }
     func handleResponseResult(result:Any?) {
-        var msg = "请求失败"
+        var msg : String?
         var netCode : JXNetworkError = .kResponseUnknow
         var data : Any? = nil
         var isSuccess : Bool = false
@@ -73,7 +73,8 @@ class JXRequest: JXBaseRequest {
             let jsonDict = result as! Dictionary<String, Any>
             print("responseData = \(jsonDict)")
             
-            let message = jsonDict["message"] as? String
+            let message = jsonDict["message"] as? String ?? ""
+            msg = message
             
             guard
                 let codeStr = jsonDict["code"] as? Int,
@@ -81,7 +82,7 @@ class JXRequest: JXBaseRequest {
                 let code = JXNetworkError(rawValue: codeStr)
                 else {
                     msg = "状态码未知"
-                    handleResponseResult(result: nil, message: message ?? msg, code: .kResponseDataError, isSuccess: isSuccess)
+                    handleResponseResult(result: nil, message: message, code: .kResponseDataError, isSuccess: isSuccess)
                     return
             }
             
@@ -89,9 +90,7 @@ class JXRequest: JXBaseRequest {
             netCode = code
             
             if (code == .kResponseSuccess){
-                print("请求成功")
                 data = jsonDict["result"]
-                msg = message ?? "请求成功"
                 isSuccess = true
             }else if code == .kResponseTokenDisabled{
                 JXNetworkManager.manager.cancelRequests()
@@ -99,8 +98,7 @@ class JXRequest: JXBaseRequest {
             }else if code == .kResponseLoginFromOtherDevice{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginFromOtherDevice), object: false)
             }else{
-                print("请求失败")
-                msg = message ?? "请求失败"
+            
             }
         }else if result is Array<Any>{
             print("Array")
@@ -141,7 +139,7 @@ class JXRequest: JXBaseRequest {
         }else{
             print("未知数据类型")
         }
-        handleResponseResult(result: data, message: msg, code: netCode, isSuccess: isSuccess)
+        handleResponseResult(result: data, message: msg ?? "", code: netCode, isSuccess: isSuccess)
     }
     func handleResponseResult(result:Any?,message:String,code:JXNetworkError,isSuccess:Bool) {
         

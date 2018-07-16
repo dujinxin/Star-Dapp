@@ -12,6 +12,7 @@ class ImageTitleCell: UITableViewCell {
 
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleView: UILabel!
+    @IBOutlet weak var detailView: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

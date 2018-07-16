@@ -32,7 +32,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.isScrollEnabled = false
-        
+        self.tableView.separatorStyle = .none
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,7 +74,8 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         let alertVC = UIAlertController(title: "修改昵称", message: nil, preferredStyle: .alert)
         //键盘的返回键 如果只有一个非cancel action 那么就会触发 这个按钮，如果有多个那么返回键只是单纯的收回键盘
         alertVC.addTextField(configurationHandler: { (textField) in
-            //textField.text = UserManager.manager.userEntity.nickname
+            textField.text = self.vm.profileInfoEntity?.nickname
+            textField.delegate = self
         })
         alertVC.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
             
@@ -115,6 +116,8 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier1", for: indexPath) as! MyCell
+            cell.accessoryType = .none
+            
             if let str = self.vm.profileInfoEntity?.avatar {
                 let url = URL.init(string:str)
                 cell.userImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "portrait_default"), options: [], completed: nil)
@@ -138,6 +141,12 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             cell.iconView.image = UIImage(named: dict["image"]!)
             cell.titleView.text = dict["title"]
+            if indexPath.row == 2 {
+                cell.accessoryType = .none
+                cell.detailView.text = "开发中..."
+            } else {
+                cell.accessoryType = .disclosureIndicator
+            }
             return cell
         }
     }
@@ -161,5 +170,18 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         }else if indexPath.row == 4{
             performSegue(withIdentifier: "accound", sender: self.vm.profileInfoEntity?.mobile)
         }
+    }
+}
+extension MyViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if range.location > 11 {
+            //let s = textField.text! as NSString
+            //let str = s.substring(to: 10)
+            //textField.text = str
+            //ViewManager.showNotice(notice: "字符个数为11位")
+            return false
+        }
+        return true
     }
 }

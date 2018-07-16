@@ -315,6 +315,7 @@ class HomeReusableView: UICollectionReusableView {
             return
         }
         let index = self.buttonArray.index(of: subView)
+        
         self.buttonArray.remove(at: index!)
         
         print(subView.frame)
@@ -360,8 +361,13 @@ class HomeReusableView: UICollectionReusableView {
             }
         }
         if let block = self.fetchDiamondBlock {
+            //删除临时水晶数据
             let id = self.titleArray[index!]
             self.titleArray.remove(at: index!)
+            //删除原始水晶数据
+            let diamondIndex = self.entity?.mineralInfoArray.index(of: id)
+            self.entity?.mineralInfoArray.remove(at: diamondIndex!)
+            //重新布局
             if self.titleArray.count == 0 {
                 self.setTitleArray()
             }
@@ -386,7 +392,6 @@ class HomeReusableView: UICollectionReusableView {
             for s in array {
                 titleArray.append(s)
             }
-            entity?.mineralInfoArray.removeSubrange(0..<array.count)
             self.randomDiamonds(titleArray)
             self.animate()
         } else {

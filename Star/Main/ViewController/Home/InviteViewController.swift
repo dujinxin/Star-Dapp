@@ -8,6 +8,7 @@
 
 import UIKit
 //import JXFoundation
+import MBProgressHUD
 
 class InviteViewController: UIViewController {
 
@@ -73,8 +74,9 @@ class InviteViewController: UIViewController {
         self.copyButton.layer.addSublayer(self.setGradientColor(size: self.copyButton.jxSize))
         self.setCardButton.layer.addSublayer(self.setGradientColor(size: CGSize(width: kScreenWidth - 90, height: 44)))
         
-        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         self.homeVM.inviteInfo { (_, msg, isSuc) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if isSuc == false {
                 ViewManager.showNotice(msg)
             } else {
@@ -83,6 +85,7 @@ class InviteViewController: UIViewController {
                 self.inviteCodeLabel.text = self.homeVM.inviteEntity.inviteCode
             }
         }
+        
     }
     func setGradientColor(size:CGSize) -> CAGradientLayer{
         //颜色渐变
@@ -117,11 +120,12 @@ class InviteViewController: UIViewController {
     }
 
     @IBAction func copyCode(_ sender: Any) {
-        let string = self.inviteCodeLabel.text
         
+        let string = self.inviteCodeLabel.text
+
         let pals = UIPasteboard.general
         pals.string = string
-        
+
         ViewManager.showNotice("复制成功")
     }
     @IBAction func exportCard(_ sender: Any) {

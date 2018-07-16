@@ -18,6 +18,9 @@ class ViewManager : NSObject{
     }
     
     class func showNotice(_ notice:String) {
+        if notice.isEmpty{
+            return
+        }
         let noticeView = JXNoticeView.init(text: notice)
         noticeView.show()
     }

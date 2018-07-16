@@ -221,14 +221,14 @@ class TaskViewController: UICollectionViewController {
                 ViewManager.showNotice(msg)
                 if isSuc {
                     let _ = UIImage.delete(name: "facePhoto.jpg")
-                }
-                self.dismiss(animated: true, completion: {
                     self.taskVM.taskList { (_, msg, isSuc) in
                         if isSuc {
                             self.collectionView?.reloadData()
                         }
                     }
-                })
+                }
+                self.dismiss(animated: true, completion: {})
+                
             })
             
             //

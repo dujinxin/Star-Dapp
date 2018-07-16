@@ -165,9 +165,14 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        //self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
-        return true
+        if textField == codeImageTextField {
+            self.codeWordTextField.becomeFirstResponder()
+            return false
+        } else {
+            textField.resignFirstResponder()
+            //self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+            return true
+        }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 

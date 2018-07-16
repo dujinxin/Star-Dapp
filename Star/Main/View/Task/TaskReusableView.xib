@@ -30,7 +30,10 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智慧值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXc-Kq-BKg">
-                                    <rect key="frame" x="200.66666666666666" y="177.66666666666666" width="37" height="14.333333333333343"/>
+                                    <rect key="frame" x="200.66666666666666" y="172" width="37" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="sUw-Sy-Fox"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.5568627451" green="0.78039215689999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>

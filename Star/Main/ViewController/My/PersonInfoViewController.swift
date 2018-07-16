@@ -78,11 +78,11 @@ class PersonInfoViewController: JXTableViewController{
         } else {
             cell.leftLabel.text = "人脸识别"
             if self.vm.indentifyInfoEntity?.faceAuth == 1 {
-                cell.accessoryType = .checkmark
-                cell.rightLabel.text = ""
+                //cell.accessoryType = .checkmark
+                cell.rightLabel.text = "✔已验证通过"
             } else {
-                cell.accessoryType = .disclosureIndicator
-                cell.rightLabel.text = "去实名"
+                //cell.accessoryType = .disclosureIndicator
+                cell.rightLabel.text = "未识别"
             }
         }
 
@@ -99,11 +99,6 @@ class PersonInfoViewController: JXTableViewController{
                 self.identifyUserLiveness()
             }
         }
-//        else if indexPath.row == 3{
-//            performSegue(withIdentifier: "AboutUs", sender: nil)
-//        }else{
-//            //performSegue(withIdentifier: "modifyPassword", sender: nil)
-//        }
     }
     func identifyUserLiveness() {
         
@@ -131,16 +126,9 @@ class PersonInfoViewController: JXTableViewController{
                 ViewManager.showNotice(msg)
                 if isSuc {
                     let _ = UIImage.delete(name: "facePhoto.jpg")
+                    self.vm.indentifyInfoEntity?.faceAuth = 1
+                    self.tableView?.reloadData()
                 }
-                self.dismiss(animated: true, completion: {
-                    self.vm.identityInfo { (data, msg, isSuccess) in
-                        if isSuccess == false {
-                            ViewManager.showNotice(msg)
-                        }else {
-                            self.tableView?.reloadData()
-                        }
-                    }
-                })
             })
             
             //
