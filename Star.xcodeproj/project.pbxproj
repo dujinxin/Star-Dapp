@@ -49,6 +49,7 @@
 		3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93020F8FA270009BFDF /* ChainInfoController.swift */; };
 		3594D93320FA04730009BFDF /* diamond.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D93220FA04730009BFDF /* diamond.mp3 */; };
 		3594D93520FB47A20009BFDF /* HomeReusableVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93420FB47A20009BFDF /* HomeReusableVM.swift */; };
+		35B8411F20FCC73B00616E8A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35B8411A20FCC6B200616E8A /* Info.plist */; };
 		35CB0C3720B575A20092C5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3620B575A20092C5FC /* AppDelegate.swift */; };
 		35CB0C3920B575A20092C5FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3820B575A20092C5FC /* ViewController.swift */; };
 		35CB0C3C20B575A20092C5FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0C3A20B575A20092C5FC /* Main.storyboard */; };
@@ -210,13 +211,19 @@
 		3594D93020F8FA270009BFDF /* ChainInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInfoController.swift; sourceTree = "<group>"; };
 		3594D93220FA04730009BFDF /* diamond.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diamond.mp3; sourceTree = "<group>"; };
 		3594D93420FB47A20009BFDF /* HomeReusableVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReusableVM.swift; sourceTree = "<group>"; };
+		35B8411920FCC6B200616E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
+		35B8412420FCC9E300616E8A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		35B8412520FCC9E300616E8A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		35B8412620FCC9E300616E8A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
+		35B8412720FCCA0100616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
+		35B8412820FCCA0800616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		35B8412920FCCA2100616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		35CB0C3320B575A20092C5FC /* Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Star.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB0C3620B575A20092C5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35CB0C3820B575A20092C5FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		35CB0C3B20B575A20092C5FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35CB0C3D20B575A30092C5FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35CB0C4020B575A30092C5FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		35CB0C4220B575A30092C5FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35CB0C4820B576040092C5FC /* Star-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Star-Bridging-Header.h"; sourceTree = "<group>"; };
 		35CB0C4B20B576040092C5FC /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		35CB0C4D20B576040092C5FC /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -477,7 +484,7 @@
 				35CB0C3A20B575A20092C5FC /* Main.storyboard */,
 				35CB0C3D20B575A30092C5FC /* Assets.xcassets */,
 				35CB0C3F20B575A30092C5FC /* LaunchScreen.storyboard */,
-				35CB0C4220B575A30092C5FC /* Info.plist */,
+				35B8411A20FCC6B200616E8A /* Info.plist */,
 				3594D93220FA04730009BFDF /* diamond.mp3 */,
 			);
 			path = Star;
@@ -964,6 +971,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 35CB0C2A20B575A20092C5FC;
 			productRefGroup = 35CB0C3420B575A20092C5FC /* Products */;
@@ -1018,6 +1026,7 @@
 				35CB0D2420B576050092C5FC /* Page 1@3x.png in Resources */,
 				35CB0D2120B576050092C5FC /* queding@2x.png in Resources */,
 				3523687020F4CCDD0021F05C /* ImageTitleCell.xib in Resources */,
+				35B8411F20FCC73B00616E8A /* Info.plist in Resources */,
 				35CB0D2D20B576060092C5FC /* dengpao_dianjihou@3x.png in Resources */,
 				35CB0C3C20B575A20092C5FC /* Main.storyboard in Resources */,
 				35CB0D3420B576060092C5FC /* com.baidu.idl.face.model.bundle in Resources */,
@@ -1184,10 +1193,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		35B8411A20FCC6B200616E8A /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				35B8411920FCC6B200616E8A /* Base */,
+				35B8412620FCC9E300616E8A /* zh-Hans */,
+				35B8412720FCCA0100616E8A /* en */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
 		35CB0C3A20B575A20092C5FC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				35CB0C3B20B575A20092C5FC /* Base */,
+				35B8412420FCC9E300616E8A /* zh-Hans */,
+				35B8412920FCCA2100616E8A /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1196,6 +1217,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				35CB0C4020B575A30092C5FC /* Base */,
+				35B8412520FCC9E300616E8A /* zh-Hans */,
+				35B8412820FCCA0800616E8A /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1207,6 +1230,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1267,6 +1291,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1333,7 +1358,10 @@
 				);
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1359,7 +1387,10 @@
 				);
 				INFOPLIST_FILE = Star/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

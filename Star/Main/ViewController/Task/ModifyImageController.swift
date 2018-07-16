@@ -88,9 +88,9 @@ class ModifyImageController: BaseViewController {
         self.imagePicker = UIImagePickerController()
         imagePicker?.title = "选择照片"
 //        imagePicker.navigationBar.barTintColor = UIColor.blue
-//        imagePicker.navigationBar.tintColor = UIColor.white
+        imagePicker?.navigationBar.tintColor = UIColor.black
         //print(self.imagePicker?.navigationItem.rightBarButtonItem!)
-        imagePicker?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(hideImagePickerViewContorller))
+        
         imagePicker?.delegate = self
         imagePicker?.allowsEditing = true
         imagePicker?.sourceType = sourceType
@@ -102,36 +102,18 @@ class ModifyImageController: BaseViewController {
 }
 extension ModifyImageController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
-//    - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        let button = UIButton()
+//        button.frame = CGRect(x: 0, y: 0, width: 44, height: 30)
+//        button.setTitle("取消", for: .normal)
+//        button.setTitleColor(UIColor.darkGray, for: .normal)
+//        let item = UIBarButtonItem.init(customView: button)
 //
-//    {
-//
-//    UIButton *cancelBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,50,30)];
-//
-//    [cancelBtn setTitle:@"取消" forState:(UIControlStateNormal)];
-//
-//    cancelBtn.backgroundColor = [UIColor redColor];
-//
-//    [cancelBtn addTarget:self action:@selector(click) forControlEvents:(UIControlEventTouchUpInside)];
-//
-//    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
-//
-//    [viewController.navigationItem setRightBarButtonItem:btn animated:NO];
-//
+//        viewController.navigationItem.rightBarButtonItem = item//UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(hideImagePickerViewContorller))
 //    }
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let button = UIButton()
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 30)
-        button.setTitle("取消", for: .normal)
-        button.setTitleColor(UIColor.darkGray, for: .normal)
-        let item = UIBarButtonItem.init(customView: button)
-        
-        
-        viewController.navigationItem.rightBarButtonItem = item//UIBarButtonItem.init(title: "取消", style: .plain, target: self, action: #selector(hideImagePickerViewContorller))
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        picker.dismiss(animated: true, completion: nil)
-//    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         if mediaType == "public.image"{

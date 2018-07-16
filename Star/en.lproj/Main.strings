@@ -1,0 +1,126 @@
+
+/* Class = "UILabel"; text = "如何提升智慧，加速获取水晶IPE"; ObjectID = "3Ji-Ut-awV"; */
+"3Ji-Ut-awV.text" = "如何提升智慧，加速获取水晶IPE";
+
+/* Class = "UILabel"; text = "+30"; ObjectID = "4FS-WD-ltc"; */
+"4FS-WD-ltc.text" = "+30";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "58l-K9-d5O"; */
+"58l-K9-d5O.text" = "Label";
+
+/* Class = "UIViewController"; title = "扫码"; ObjectID = "5Vk-DL-lpO"; */
+"5Vk-DL-lpO.title" = "扫码";
+
+/* Class = "UILabel"; text = "1/20"; ObjectID = "6mR-iW-hpa"; */
+"6mR-iW-hpa.text" = "1/20";
+
+/* Class = "UINavigationItem"; title = "我的资产"; ObjectID = "7tg-tj-0dH"; */
+"7tg-tj-0dH.title" = "我的资产";
+
+/* Class = "UITabBarItem"; title = "扫码"; ObjectID = "9Kl-O7-RN8"; */
+"9Kl-O7-RN8.title" = "扫码";
+
+/* Class = "UILabel"; text = "       IPE是IPXE基金会在IPXE上发行的Token是作为链上应用运行唯一使用到的Token，它是运行于IPXE中的智能资产，不仅有流通价值，也是价值内容通证化的表现，通过原创内容在IPXE的DApp中生产传播、社交、互动，用户可赚取IPE，在一些实际应用场景中，为获取更多优质内容，会消耗IPE，IPXE的经济激励模型将保证IPE的流通性和平衡性。\n"; ObjectID = "9fk-bH-QZp"; */
+"9fk-bH-QZp.text" = "       IPE是IPXE基金会在IPXE上发行的Token是作为链上应用运行唯一使用到的Token，它是运行于IPXE中的智能资产，不仅有流通价值，也是价值内容通证化的表现，通过原创内容在IPXE的DApp中生产传播、社交、互动，用户可赚取IPE，在一些实际应用场景中，为获取更多优质内容，会消耗IPE，IPXE的经济激励模型将保证IPE的流通性和平衡性。\n";
+
+/* Class = "UIButton"; normalTitle = "生成邀请卡"; ObjectID = "FKT-8D-32z"; */
+"FKT-8D-32z.normalTitle" = "生成邀请卡";
+
+/* Class = "UILabel"; text = "1. 可将邀请码发送给多个好友，每邀请一个好友完成注册，且该好友完成身份验证，你就可以获得+10智慧值奖励。\n2. IPXE拥有法律允许的范围内对本次活动的最终解释权，对虚假邀请行为，一经发现将取消所有奖励资格。"; ObjectID = "Hbo-Ns-klY"; */
+"Hbo-Ns-klY.text" = "1. 可将邀请码发送给多个好友，每邀请一个好友完成注册，且该好友完成身份验证，你就可以获得+10智慧值奖励。\n2. IPXE拥有法律允许的范围内对本次活动的最终解释权，对虚假邀请行为，一经发现将取消所有奖励资格。";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "JKV-Mc-Fkv"; */
+"JKV-Mc-Fkv.text" = "Label";
+
+/* Class = "UILabel"; text = "已累积智慧值"; ObjectID = "JgG-Qf-JgD"; */
+"JgG-Qf-JgD.text" = "已累积智慧值";
+
+/* Class = "UITextField"; placeholder = "优质评论可获更多水晶"; ObjectID = "JzW-HE-snj"; */
+"JzW-HE-snj.placeholder" = "优质评论可获更多水晶";
+
+/* Class = "UITabBarItem"; title = "我的"; ObjectID = "MWU-Ue-flB"; */
+"MWU-Ue-flB.title" = "我的";
+
+/* Class = "UILabel"; text = "       IPXE：全球IP、共享全球。构建数字知识产权底层网络，建立全球智慧共享新经济。利用区块链技术，帮助用户实现“创作即确权，交易即授权，发现即维权，知产证券化”。 智慧星球DApp是IPXE全球基金会愿景的重要载体，是全球智慧共享平台生态体系的重要体现。 \n官网：www.ipxe.io \n邮箱：contact@ipxe.io"; ObjectID = "N66-mo-Tpx"; */
+"N66-mo-Tpx.text" = "       IPXE：全球IP、共享全球。构建数字知识产权底层网络，建立全球智慧共享新经济。利用区块链技术，帮助用户实现“创作即确权，交易即授权，发现即维权，知产证券化”。 智慧星球DApp是IPXE全球基金会愿景的重要载体，是全球智慧共享平台生态体系的重要体现。 \n官网：www.ipxe.io \n邮箱：contact@ipxe.io";
+
+/* Class = "UILabel"; text = "智慧是用户获得水晶的重要因素，智慧越高，获得的水晶IPE越多。\n智慧值分永久智慧和创力智慧。永久智慧长期有效，能持续参与水晶IPE分配。创力智慧需要用户积极参与智慧星球的建设。\n除了智慧外，还有一些其他因素影响获得水晶IPE的效率，用户可自行探索。"; ObjectID = "NxV-Kw-zZq"; */
+"NxV-Kw-zZq.text" = "智慧是用户获得水晶的重要因素，智慧越高，获得的水晶IPE越多。\n智慧值分永久智慧和创力智慧。永久智慧长期有效，能持续参与水晶IPE分配。创力智慧需要用户积极参与智慧星球的建设。\n除了智慧外，还有一些其他因素影响获得水晶IPE的效率，用户可自行探索。";
+
+/* Class = "UIButton"; normalTitle = "链上查询"; ObjectID = "Qz6-YC-61c"; */
+"Qz6-YC-61c.normalTitle" = "链上查询";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "R4g-j7-gl3"; */
+"R4g-j7-gl3.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "首页"; ObjectID = "Rly-Bg-Ysb"; */
+"Rly-Bg-Ysb.title" = "首页";
+
+/* Class = "UILabel"; text = "智慧越高，水晶IPE越多"; ObjectID = "TtW-En-bO4"; */
+"TtW-En-bO4.text" = "智慧越高，水晶IPE越多";
+
+/* Class = "UIButton"; normalTitle = "暂不支持提取"; ObjectID = "ULS-K0-QSN"; */
+"ULS-K0-QSN.normalTitle" = "暂不支持提取";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UqW-Ze-l6g"; */
+"UqW-Ze-l6g.text" = "Label";
+
+/* Class = "UILabel"; text = "奖励规则"; ObjectID = "WFh-VC-Abp"; */
+"WFh-VC-Abp.text" = "奖励规则";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "WYz-GS-J9m"; */
+"WYz-GS-J9m.text" = "Label";
+
+/* Class = "UILabel"; text = "WFD6fD"; ObjectID = "WvY-5C-2b2"; */
+"WvY-5C-2b2.text" = "WFD6fD";
+
+/* Class = "UILabel"; text = "IPE简介"; ObjectID = "Y80-CK-r60"; */
+"Y80-CK-r60.text" = "IPE简介";
+
+/* Class = "UILabel"; text = "水晶IPE是基于个人或机构在星球活动产生的奖励，用户可通过产生有价值的内容获得水晶IPE。水晶IPE将逐步开放消费和兑换功能。\n水晶IPE的总量有限，随着时间推移，获得水晶IPE的难度将越来越大，因此，前期参与更有优势。"; ObjectID = "aq3-Dr-Rvw"; */
+"aq3-Dr-Rvw.text" = "水晶IPE是基于个人或机构在星球活动产生的奖励，用户可通过产生有价值的内容获得水晶IPE。水晶IPE将逐步开放消费和兑换功能。\n水晶IPE的总量有限，随着时间推移，获得水晶IPE的难度将越来越大，因此，前期参与更有优势。";
+
+/* Class = "UILabel"; text = "我的邀请码"; ObjectID = "bNM-Iv-1th"; */
+"bNM-Iv-1th.text" = "我的邀请码";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bpI-RB-t0h"; */
+"bpI-RB-t0h.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dDj-h2-xgb"; */
+"dDj-h2-xgb.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "复制邀请码"; ObjectID = "daj-ll-Ujn"; */
+"daj-ll-Ujn.normalTitle" = "复制邀请码";
+
+/* Class = "UINavigationItem"; title = "首页"; ObjectID = "gNV-1x-0DU"; */
+"gNV-1x-0DU.title" = "首页";
+
+/* Class = "UINavigationItem"; title = "文章详情"; ObjectID = "gxA-qg-Nnh"; */
+"gxA-qg-Nnh.title" = "文章详情";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "iiD-1d-0Vw"; */
+"iiD-1d-0Vw.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "jnE-HV-I24"; */
+"jnE-HV-I24.title" = " ";
+
+/* Class = "UITabBarItem"; title = "扫码"; ObjectID = "jnb-OC-Udu"; */
+"jnb-OC-Udu.title" = "扫码";
+
+/* Class = "UILabel"; text = "在智慧星球上进行阅读、学习、社交、交易等所有活动，都可增加智慧值，未来我们将会有更多场景，以支持用户获取更多智慧值。\n        \n1、完成永久智慧任务 通过人脸识别、关注公众号、设置头像等，完善你的智慧星球区块链身份，可立即快速提升智慧。\n        \n2、每日登录、及时收取水晶IPE 每日登录、及时收取水晶IPE等一些用户行为会持续增加算力。\n        \n3、参与智慧星球的建设 积极阅读和学习，主动参与点赞、评论等社交活动，未来参与更多新的应用服务，也能提升智慧。"; ObjectID = "kh1-or-Ww7"; */
+"kh1-or-Ww7.text" = "在智慧星球上进行阅读、学习、社交、交易等所有活动，都可增加智慧值，未来我们将会有更多场景，以支持用户获取更多智慧值。\n        \n1、完成永久智慧任务 通过人脸识别、关注公众号、设置头像等，完善你的智慧星球区块链身份，可立即快速提升智慧。\n        \n2、每日登录、及时收取水晶IPE 每日登录、及时收取水晶IPE等一些用户行为会持续增加算力。\n        \n3、参与智慧星球的建设 积极阅读和学习，主动参与点赞、评论等社交活动，未来参与更多新的应用服务，也能提升智慧。";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rko-2I-cjv"; */
+"rko-2I-cjv.text" = "Label";
+
+/* Class = "UILabel"; text = "什么是水晶IPE"; ObjectID = "t9v-7x-17L"; */
+"t9v-7x-17L.text" = "什么是水晶IPE";
+
+/* Class = "UINavigationItem"; title = "我的钱包"; ObjectID = "vyv-nF-1Rg"; */
+"vyv-nF-1Rg.title" = "我的钱包";
+
+/* Class = "UILabel"; text = "已邀请好友数"; ObjectID = "wMz-5Y-GW3"; */
+"wMz-5Y-GW3.text" = "已邀请好友数";
+
+/* Class = "UINavigationItem"; title = "关于我们"; ObjectID = "zy7-dw-ehB"; */
+"zy7-dw-ehB.title" = "关于我们";
