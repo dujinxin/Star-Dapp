@@ -76,6 +76,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         alertVC.addTextField(configurationHandler: { (textField) in
             textField.text = self.vm.profileInfoEntity?.nickname
             textField.delegate = self
+            textField.addTarget(self, action: #selector(self.valueChanged(textField:)), for: .editingChanged)
         })
         alertVC.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
             
@@ -96,6 +97,45 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.present(alertVC, animated: true, completion: nil)
     }
 
+    @objc func valueChanged(textField:UITextField) {
+        let maxLength = 12
+        
+        guard let string = textField.text as NSString? else {
+            return
+        }
+        //当前输入框语言
+        let lang = textField.textInputMode?.primaryLanguage
+        //系统语言
+        //let lang = UIApplication.shared.textInputMode?.primaryLanguage
+        if lang == "zh-Hans" {
+            guard
+                let selectedRange = textField.markedTextRange,
+                let position = textField.position(from: selectedRange.start, offset: 0) else{
+                return
+            }
+            print(position)
+            if string.length > maxLength {
+                let rangeIndex = string.rangeOfComposedCharacterSequence(at: maxLength)
+                if rangeIndex.length == 1 {
+                    textField.text = string.substring(to: maxLength)
+                } else {
+                    let range = string.rangeOfComposedCharacterSequences(for: NSRange.init(location: 0, length: maxLength))
+                    textField.text = string.substring(with: range)
+                }
+            }
+        } else {
+            if string.length > maxLength {
+                print(string.length)
+                let rangeIndex = string.rangeOfComposedCharacterSequence(at: maxLength)
+                if rangeIndex.length == 1 {
+                    textField.text = string.substring(to: maxLength)
+                } else {
+                    let range = string.rangeOfComposedCharacterSequences(for: NSRange.init(location: 0, length: maxLength))
+                    textField.text = string.substring(with: range)
+                }
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
@@ -110,7 +150,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         if indexPath.row == 0 {
             return 200 + kNavStatusHeight
         } else {
-            return 64
+            return 50
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,13 +215,13 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
 extension MyViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if range.location > 11 {
-            //let s = textField.text! as NSString
-            //let str = s.substring(to: 10)
-            //textField.text = str
-            //ViewManager.showNotice(notice: "字符个数为11位")
-            return false
-        }
+//        if range.location > 11 {
+//            //let s = textField.text! as NSString
+//            //let str = s.substring(to: 10)
+//            //textField.text = str
+//            //ViewManager.showNotice(notice: "字符个数为11位")
+//            return false
+//        }
         return true
     }
 }

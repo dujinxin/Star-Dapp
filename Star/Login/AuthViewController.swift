@@ -73,6 +73,9 @@ class AuthViewController: BaseViewController ,UITextFieldDelegate{
         self.commitButton.layer.addSublayer(gradientLayer)
         commitButton.backgroundColor = UIColor.clear
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +84,9 @@ class AuthViewController: BaseViewController ,UITextFieldDelegate{
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.nameTextField.resignFirstResponder()
@@ -371,6 +377,39 @@ class AuthViewController: BaseViewController ,UITextFieldDelegate{
         }
     }
 
+    @objc func keyboardWillShow(notify:Notification) {
+        
+        guard
+            let userInfo = notify.userInfo,
+            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+        
+        //print(rect)//226
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 160)
+            
+        }) { (finish) in
+            //
+        }
+    }
+    @objc func keyboardWillHide(notify:Notification) {
+        print("notify = ","notify")
+        guard
+            let userInfo = notify.userInfo,
+            let _ = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double
+            else {
+                return
+        }
+        UIView.animate(withDuration: animationDuration, animations: {
+            self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        }) { (finish) in
+            
+        }
+    }
 }
 extension AuthViewController : JXSelectViewDelegate {
     func jxSelectView(jxSelectView: JXSelectView, didSelectRowAt row: Int, inSection section: Int) {

@@ -50,6 +50,7 @@
 		3594D93320FA04730009BFDF /* diamond.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D93220FA04730009BFDF /* diamond.mp3 */; };
 		3594D93520FB47A20009BFDF /* HomeReusableVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93420FB47A20009BFDF /* HomeReusableVM.swift */; };
 		35B8411F20FCC73B00616E8A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35B8411A20FCC6B200616E8A /* Info.plist */; };
+		35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8412A20FDDEB400616E8A /* InviteCardController.swift */; };
 		35CB0C3720B575A20092C5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3620B575A20092C5FC /* AppDelegate.swift */; };
 		35CB0C3920B575A20092C5FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0C3820B575A20092C5FC /* ViewController.swift */; };
 		35CB0C3C20B575A20092C5FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0C3A20B575A20092C5FC /* Main.storyboard */; };
@@ -218,6 +219,7 @@
 		35B8412720FCCA0100616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		35B8412820FCCA0800616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		35B8412920FCCA2100616E8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		35B8412A20FDDEB400616E8A /* InviteCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCardController.swift; sourceTree = "<group>"; };
 		35CB0C3320B575A20092C5FC /* Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Star.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CB0C3620B575A20092C5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35CB0C3820B575A20092C5FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				3594D92420F6FC690009BFDF /* InviteViewController.swift */,
+				35B8412A20FDDEB400616E8A /* InviteCardController.swift */,
 				3594D92620F6FC780009BFDF /* HelpViewController.swift */,
 			);
 			path = Home;
@@ -1144,6 +1147,7 @@
 				35CB0CE720B576050092C5FC /* BaseModel.swift in Sources */,
 				35CB0D0320B576050092C5FC /* ApiEnum.swift in Sources */,
 				35D7589120C5373B00A77EEB /* ModifyImageController.swift in Sources */,
+				35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */,
 				35D7589720C6603500A77EEB /* HomeVM.swift in Sources */,
 				35CB0D0C20B576050092C5FC /* LoginViewController.swift in Sources */,
 				35CB0CEA20B576050092C5FC /* BaseViewController.swift in Sources */,

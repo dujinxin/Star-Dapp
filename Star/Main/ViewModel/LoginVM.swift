@@ -40,7 +40,6 @@ class LoginVM: JXRequest {
                     completion(nil,message,false)
                     return
             }
-            print(dict)
             let _ = UserManager.manager.saveAccound(dict: dict)
             completion(nil,message,true)
         }) { (message, code) in

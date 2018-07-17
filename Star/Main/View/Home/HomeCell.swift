@@ -36,6 +36,19 @@ class HomeCell: UICollectionViewCell {
             } else {
                 self.subContentView.backgroundColor = UIColor.rgbColor(from: 241, 242, 247)
             }
+            if indexPath?.item == 0 {
+                self.indexButton.setBackgroundImage(UIImage(named: "indexImg1"), for: .normal)
+                self.indexButton.setTitleColor(UIColor.rgbColor(rgbValue: 0xffffff), for: .normal)
+            } else if indexPath?.item == 1 {
+                self.indexButton.setBackgroundImage(UIImage(named: "indexImg2"), for: .normal)
+                self.indexButton.setTitleColor(UIColor.rgbColor(rgbValue: 0xffffff), for: .normal)
+            } else if indexPath?.item == 2 {
+                self.indexButton.setBackgroundImage(UIImage(named: "indexImg3"), for: .normal)
+                self.indexButton.setTitleColor(UIColor.rgbColor(rgbValue: 0xffffff), for: .normal)
+            } else {
+                self.indexButton.setBackgroundImage(UIImage(), for: .normal)
+                self.indexButton.setTitleColor(UIColor.rgbColor(rgbValue: 0x3b4368), for: .normal)
+            }
         }
     }
     
@@ -44,15 +57,15 @@ class HomeCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         self.indexButton.layer.cornerRadius = 10
-        //颜色渐变
-        let gradientLayer = CAGradientLayer.init()
-        gradientLayer.colors = [UIColor.rgbColor(from: 149, 104, 252).cgColor,UIColor.rgbColor(from:143,201,255).cgColor]
-        gradientLayer.locations = [0.5]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: indexButton.jxWidth, height: indexButton.jxHeight)
-        gradientLayer.cornerRadius = 10
-        self.indexButton.layer.addSublayer(gradientLayer)
+//        //颜色渐变
+//        let gradientLayer = CAGradientLayer.init()
+//        gradientLayer.colors = [UIColor.rgbColor(from: 149, 104, 252).cgColor,UIColor.rgbColor(from:143,201,255).cgColor]
+//        gradientLayer.locations = [0.5]
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: indexButton.jxWidth, height: indexButton.jxHeight)
+//        gradientLayer.cornerRadius = 10
+//        self.indexButton.layer.addSublayer(gradientLayer)
         
     }
 

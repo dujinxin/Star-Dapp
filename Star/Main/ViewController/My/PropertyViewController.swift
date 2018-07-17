@@ -101,7 +101,7 @@ class PropertyNavigationBar: UINavigationBar {
         self.subviews.forEach { (v) in
             if NSStringFromClass(type(of: v)).contains("UIBarBackground") {
                 v.frame = rect
-            
+
                 v.subviews.forEach({ (subV) in
                     if subV is UIImageView {
                         subV.backgroundColor = UIColor.groupTableViewBackground
@@ -111,7 +111,7 @@ class PropertyNavigationBar: UINavigationBar {
                 rect.origin.y += kStatusBarHeight
                 rect.size.height -= kStatusBarHeight
                 v.frame = rect
-            } 
+            }
         }
     }
 }

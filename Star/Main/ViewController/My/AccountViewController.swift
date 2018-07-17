@@ -16,10 +16,13 @@ class AccountViewController: JXTableViewController{
     lazy var logoutButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 30, y: 0, width: 200, height: 44)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 22
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitle("退出登录", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.rgbColor(rgbValue: 0x156ACE), for: .normal)
         button.addTarget(self, action: #selector(logout(_:)), for: .touchUpInside)
+        button.layer.borderColor = UIColor.rgbColor(rgbValue: 0x156ACE).cgColor
+        button.layer.borderWidth = 1
         return button
     }()
     
@@ -37,16 +40,6 @@ class AccountViewController: JXTableViewController{
         self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: 60 * 3)
         self.view.addSubview(self.logoutButton)
         self.logoutButton.frame = CGRect(x: 30, y: (self.tableView?.jxBottom)! + 80, width: kScreenWidth - 30 * 2, height: 44)
-        
-        //颜色渐变
-        let gradientLayer = CAGradientLayer.init()
-        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
-        gradientLayer.locations = [0.5]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: logoutButton.jxWidth, height: logoutButton.jxHeight)
-        gradientLayer.cornerRadius = 22
-        self.logoutButton.layer.addSublayer(gradientLayer)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +71,7 @@ class AccountViewController: JXTableViewController{
         return 3
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

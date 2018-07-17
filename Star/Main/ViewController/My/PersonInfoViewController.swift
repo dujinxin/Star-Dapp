@@ -61,7 +61,7 @@ class PersonInfoViewController: JXTableViewController{
         return 4
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -79,10 +79,12 @@ class PersonInfoViewController: JXTableViewController{
             cell.leftLabel.text = "人脸识别"
             if self.vm.indentifyInfoEntity?.faceAuth == 1 {
                 //cell.accessoryType = .checkmark
-                cell.rightLabel.text = "✔已验证通过"
+                cell.rightLabel.text = "已验证通过"//"✔已验证通过"
+                cell.rightLabel.textColor = UIColor.rgbColor(rgbValue: 0x1e62cd)
             } else {
                 //cell.accessoryType = .disclosureIndicator
                 cell.rightLabel.text = "未识别"
+                cell.rightLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4368)
             }
         }
 

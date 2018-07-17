@@ -32,7 +32,6 @@ class LoginViewController: BaseViewController {
         
         if #available(iOS 11.0, *) {
             self.mainScrollView.contentInsetAdjustmentBehavior = .never
-            self.mainScrollView.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
         } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }

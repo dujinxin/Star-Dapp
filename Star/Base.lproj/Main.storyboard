@@ -207,9 +207,11 @@
                         <outlet property="scrollView" destination="Ayv-Je-Cz4" id="ogT-U1-6nZ"/>
                         <outlet property="setCardButton" destination="FKT-8D-32z" id="aMh-np-l2D"/>
                         <outlet property="topConstraint" destination="bl2-Ue-NC5" id="Jbn-pd-oyd"/>
+                        <segue destination="o2f-DU-K6Z" kind="presentation" identifier="inviteCard" id="wpa-GS-Rmn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPC-e8-CjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zyZ-mP-Ayb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2671" y="-755"/>
         </scene>
@@ -331,6 +333,107 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUr-vu-gcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3471" y="-755"/>
+        </scene>
+        <!--邀请卡-->
+        <scene sceneID="RB8-yS-U7s">
+            <objects>
+                <viewController id="wV3-L7-mms" customClass="InviteCardController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CbV-k7-dYd"/>
+                        <viewControllerLayoutGuide type="bottom" id="1iu-Wr-vMe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ncv-bc-Goi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kf4-KE-E0U">
+                                <rect key="frame" x="55.666666666666657" y="54" width="264" height="264"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="8zb-H5-bPA"/>
+                                    <constraint firstAttribute="width" secondItem="kf4-KE-E0U" secondAttribute="height" id="YM1-Tx-O7h"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的邀请码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuG-ux-rlg">
+                                <rect key="frame" x="157.66666666666666" y="358" width="61.333333333333343" height="14.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.59215686270000001" green="0.61960784310000006" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DE78KM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUh-Aw-ZsX">
+                                <rect key="frame" x="142.33333333333334" y="382.33333333333331" width="90.333333333333343" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="ilu-14-e0P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我是151****6151，我已在这里获得区块链 知识产权收益，我在智慧星球等你" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3h-7e-dIJ">
+                                <rect key="frame" x="75" y="427.33333333333337" width="225" height="28.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="以区块链技术，实现全球IP共享" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c10-M0-TmX">
+                                <rect key="frame" x="102.66666666666669" y="655.66666666666663" width="170" height="14.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.23137254901960785" green="0.2627450980392157" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlU-gB-AWk">
+                                <rect key="frame" x="141.33333333333334" y="685" width="93" height="19"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="注意截屏保存" image="Shape">
+                                    <color key="titleColor" red="0.070588235294117646" green="0.58823529411764708" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智慧星球" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1F-DO-aII">
+                                <rect key="frame" x="163" y="641.33333333333337" width="49.333333333333343" height="14.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kf4-KE-E0U" firstAttribute="top" secondItem="ncv-bc-Goi" secondAttribute="top" constant="54" id="04j-Ws-LY1"/>
+                            <constraint firstItem="xlU-gB-AWk" firstAttribute="top" secondItem="c10-M0-TmX" secondAttribute="bottom" constant="15" id="0t3-1Z-5oV"/>
+                            <constraint firstAttribute="bottom" secondItem="xlU-gB-AWk" secondAttribute="bottom" constant="20" id="3vt-88-INj"/>
+                            <constraint firstItem="xlU-gB-AWk" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="5nj-MK-lqx"/>
+                            <constraint firstItem="w1F-DO-aII" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="66A-pl-QuV"/>
+                            <constraint firstItem="QuG-ux-rlg" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="7u2-jQ-Voz"/>
+                            <constraint firstItem="c10-M0-TmX" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="Cp9-1Q-OSd"/>
+                            <constraint firstItem="kf4-KE-E0U" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="HK0-tB-R6a"/>
+                            <constraint firstItem="QUh-Aw-ZsX" firstAttribute="centerX" secondItem="ncv-bc-Goi" secondAttribute="centerX" id="JHp-xh-9rC"/>
+                            <constraint firstItem="QUh-Aw-ZsX" firstAttribute="top" secondItem="QuG-ux-rlg" secondAttribute="bottom" constant="10" id="Tm6-3T-NUY"/>
+                            <constraint firstItem="c10-M0-TmX" firstAttribute="top" secondItem="w1F-DO-aII" secondAttribute="bottom" id="Uja-II-hDo"/>
+                            <constraint firstItem="w1F-DO-aII" firstAttribute="top" relation="greaterThanOrEqual" secondItem="F3h-7e-dIJ" secondAttribute="bottom" id="UsR-Ol-cwo"/>
+                            <constraint firstItem="F3h-7e-dIJ" firstAttribute="leading" secondItem="ncv-bc-Goi" secondAttribute="leading" constant="75" id="gXY-ed-Arw"/>
+                            <constraint firstItem="F3h-7e-dIJ" firstAttribute="top" secondItem="QUh-Aw-ZsX" secondAttribute="bottom" constant="12" id="hyu-BN-uCX"/>
+                            <constraint firstItem="QuG-ux-rlg" firstAttribute="top" secondItem="kf4-KE-E0U" secondAttribute="bottom" constant="40" id="qMR-6w-UIp"/>
+                            <constraint firstAttribute="trailing" secondItem="F3h-7e-dIJ" secondAttribute="trailing" constant="75" id="rM4-6R-oAc"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="邀请卡" id="0rf-I0-7Os">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="FTd-0T-KLP">
+                            <connections>
+                                <segue destination="zyZ-mP-Ayb" kind="unwind" identifier="inviteCardBack" unwindAction="unwindToInviteInfo:" id="3H2-VX-kG5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="3vt-88-INj" id="b3y-82-5Da"/>
+                        <outlet property="codeImageView" destination="kf4-KE-E0U" id="cz1-ns-PTI"/>
+                        <outlet property="codeLabel" destination="QUh-Aw-ZsX" id="GrK-Kg-MWz"/>
+                        <outlet property="detailLabel" destination="F3h-7e-dIJ" id="kAR-ma-2uN"/>
+                        <outlet property="noticeButton" destination="xlU-gB-AWk" id="dea-WT-MbV"/>
+                        <outlet property="topConstraint" destination="04j-Ws-LY1" id="SJB-3C-3jj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zF6-n6-uUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4412" y="-1451.231527093596"/>
         </scene>
         <!--扫码-->
         <scene sceneID="cGw-YF-M5H">
@@ -714,8 +817,8 @@
                                 <string key="text">       IPXE：全球IP、共享全球。构建数字知识产权底层网络，建立全球智慧共享新经济。利用区块链技术，帮助用户实现“创作即确权，交易即授权，发现即维权，知产证券化”。 智慧星球DApp是IPXE全球基金会愿景的重要载体，是全球智慧共享平台生态体系的重要体现。 
 官网：www.ipxe.io 
 邮箱：contact@ipxe.io</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.23137254900000001" green="0.26274509800000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1048,8 +1151,33 @@
             </objects>
             <point key="canvasLocation" x="2671" y="586"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="el7-1D-x7G">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o2f-DU-K6Z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="aUF-iE-VJR">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wV3-L7-mms" kind="relationship" relationship="rootViewController" id="RV7-lq-nHM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FGQ-aK-nje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3469.5999999999999" y="-1451.231527093596"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Shape" width="19" height="19"/>
         <image name="angle" width="240" height="240"/>
         <image name="home_normal" width="22" height="21"/>
         <image name="home_selected" width="22" height="21"/>
