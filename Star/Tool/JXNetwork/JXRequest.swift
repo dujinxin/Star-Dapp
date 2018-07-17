@@ -96,7 +96,9 @@ class JXRequest: JXBaseRequest {
                 JXNetworkManager.manager.cancelRequests()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
             }else if code == .kResponseLoginFromOtherDevice{
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginFromOtherDevice), object: false)
+                JXNetworkManager.manager.cancelRequests(keepCurrent: self)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginFromOtherDevice), object: false)
             }else{
             
             }

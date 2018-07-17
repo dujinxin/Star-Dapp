@@ -46,12 +46,12 @@ class JXBaseRequest: NSObject {
     ///开始请求
     func startRequest() {
         //
-        JXNetworkManager.manager.buildRequest(request: self)
+        JXNetworkManager.manager.buildRequest(self)
     }
     ///停止请求
     func stopRequest() {
         //
-        JXNetworkManager.manager.cancelRequest(request: self)
+        JXNetworkManager.manager.cancelRequest(self)
     }
     
     

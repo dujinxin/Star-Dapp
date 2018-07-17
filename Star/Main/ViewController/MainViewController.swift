@@ -42,7 +42,6 @@ class MainViewController: JXCollectionViewController {
             navigiationBar.addSubview(right)
         }
         return navigiationBar
-        
     }
     
     override func viewDidLoad() {
@@ -66,7 +65,8 @@ class MainViewController: JXCollectionViewController {
         self.collectionView?.collectionViewLayout = layout
         self.collectionView?.bounces = false
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
+        //每次进入都刷新，则不用监听登录状态
+        //NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -124,13 +124,19 @@ class MainViewController: JXCollectionViewController {
     override func requestData() {
         self.homeVM = HomeVM()
         self.homeVM.home { (_, msg, isSuc) in
-            self.collectionView?.reloadData()
-            if let message = self.homeVM.homeEntity.dailyLogin ,message.isEmpty == false {
-                ViewManager.showNotice(message)
+            if isSuc {
+                self.collectionView?.reloadData()
+                if let message = self.homeVM.homeEntity.dailyLogin ,message.isEmpty == false {
+                    ViewManager.showNotice(message)
+                }
+            } else {
+                ViewManager.showNotice(msg)
             }
         }
         self.homeVM.powerRank(limit: 15) { (_, msg, isSuc) in
-            
+            if isSuc == false{
+                ViewManager.showNotice(msg)
+            }
         }
 //        self.homeVM.coinRank(limit: 10) { (_, msg, isSuc) in
 //

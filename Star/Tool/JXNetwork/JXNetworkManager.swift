@@ -57,7 +57,7 @@ class JXNetworkManager: NSObject {
         afmanager.requestSerializer.setValue(Bundle.main.version, forHTTPHeaderField: "version")
     }
 
-    func buildRequest(request:JXBaseRequest) {
+    func buildRequest(_ request:JXBaseRequest) {
 
         ///网络判断
         if networkStatus == .unknown || networkStatus == .notReachable {
@@ -165,7 +165,7 @@ extension JXNetworkManager {
     /// 删除缓存中request
     ///
     /// - Parameter request: 已经包装好含有URL，param的request
-    func removeRequest(request:JXBaseRequest) {
+    func removeRequest(_ request:JXBaseRequest) {
         guard let task = request.sessionTask
             else {
                 return
@@ -177,36 +177,40 @@ extension JXNetworkManager {
     /// 取消request
     ///
     /// - Parameter request: 已经包装好含有URL，param的request
-    func cancelRequest(request:JXBaseRequest) {
+    func cancelRequest(_ request:JXBaseRequest) {
         guard (request.sessionTask as? URLSessionDataTask) != nil
             else {
                 return
         }
         request.sessionTask?.cancel()
-        removeRequest(request: request)
+        removeRequest(request)
     }
     /// 取消所有request
-    func cancelRequests() {
-        for (_,value) in requestCache {
-            let request = value as JXBaseRequest
-            cancelRequest(request: request)
+    func cancelRequests(keepCurrent request:JXBaseRequest? = nil) {
+        
+        for (_,r) in requestCache {
+            if let current = request, current == r{
+                
+            } else {
+                cancelRequest(r)
+            }
         }
     }
     /// 重发request
     ///
     /// - Parameter request: 已经包装好含有URL，param的request
-    func resumeRequest(request:JXBaseRequest) {
-        buildRequest(request: request)
+    func resumeRequest(_ request:JXBaseRequest) {
+        buildRequest(request)
     }
     /// 重发所有缓冲中的request
     ///
     /// - Parameter request: 已经包装好含有URL，param的request
-    func resumeRequests(request:JXBaseRequest) {
+    func resumeRequests(_ request:JXBaseRequest) {
         for (_,value) in requestCache {
             let request = value as JXBaseRequest
             
-            removeRequest(request: request)
-            resumeRequest(request: request)
+            removeRequest(request)
+            resumeRequest(request)
         }
     }
     
