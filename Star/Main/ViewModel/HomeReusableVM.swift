@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeReusableVM: BaseViewModel {
-
+    
     var frameArray = [CGRect]()
     
     //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画

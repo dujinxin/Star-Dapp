@@ -1352,8 +1352,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7FZMTCJXFZ;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TG8YFBTQ22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1366,10 +1366,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a73002c-45cf-45c9-a2ef-23069e06b1e9";
-				PROVISIONING_PROFILE_SPECIFIER = "hoc-dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dujinxin/Desktop/Star/Star/Star-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1381,9 +1381,9 @@
 			baseConfigurationReference = 764F7A13560F468FDAD2BC9C /* Pods-Star.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7FZMTCJXFZ;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TG8YFBTQ22;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1396,10 +1396,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00f69eeb-45bf-4de4-8895-740f01553df6";
-				PROVISIONING_PROFILE_SPECIFIER = "dis-hoc-appStore";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dujinxin/Desktop/Star/Star/Star-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -71,6 +71,12 @@ class HomeReusableView: UICollectionReusableView {
             
         }
     }
+    var homeReusableVM : HomeReusableVM? {
+        didSet{
+            //self.setDiamondsViewFrames()
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -102,6 +108,8 @@ class HomeReusableView: UICollectionReusableView {
 //        let subArray = ["0.00912","0.01232","0.01333","0.02245","0.02175","0.02587","0.02709","0.01933"]
 //        self.random(subArray)
 //        self.animate()
+        
+        //self.setRandomDiamonds(count: 8)
 
     }
 
@@ -156,7 +164,23 @@ class HomeReusableView: UICollectionReusableView {
         return image!
     }
     
-    
+    func setRandomDiamonds(count:Int) {
+//        self.buttonArray.removeAll()
+//        self.diamondContentView.removeAllSubView()
+        
+        for _ in 0..<count {
+            let diamondView = DiamondView()
+            diamondView.isHidden = true
+            self.buttonArray.append(diamondView)
+            self.diamondContentView.addSubview(diamondView)
+        }
+    }
+//    func setDiamondsViewFrames(array:Array<CGRect>) {
+//        for i in self.diamondContentView.subviews {
+//            <#code#>
+//        }
+//    }
+    //389d920717dcfe2e2db29f71eebc12934766bf2c
     //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
     /// 水晶随机分布在一个固定矩形区域,水晶带有上下移动的动画
     ///
@@ -396,6 +420,48 @@ class HomeReusableView: UICollectionReusableView {
             self.animate()
         } else {
             self.defaultDiamond()
+        }
+    }
+}
+class DiamondView: UIView {
+    lazy var contentView: UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.clear
+        return v
+    }()
+    lazy var imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "imgDiamond")
+        iv.isUserInteractionEnabled = true
+        return iv
+    }()
+    lazy var titleView: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
+    }()
+
+    var tapBlock : ((_ view:DiamondView)->())?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(self.contentView)
+        addSubview(self.imageView)
+        addSubview(self.titleView)
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    @objc func tap(tap:UITapGestureRecognizer) {
+        if let block = tapBlock {
+            block(self)
         }
     }
 }
