@@ -47,7 +47,7 @@ let BaiduAppKey = "I8aQQsCpBqPeYzuAVuhDiRmbXuWnG4T0"
 //let kHtmlUrl = kBaseUrl + "/index#/"
 
 
-let kBaseUrl = "http://dapp.coooding.wang"
+let kBaseUrl = "https://dapp.coooding.wang"
 let kHtmlUrl = "http://app.izheng.org/#/"
 
 

@@ -195,22 +195,25 @@ extension MainViewController {
                 self.isIpe = true
                 //self.collectionView?.reloadSections([0])
                 
-                var indexArray = [IndexPath]()
-                for i in 0..<collectionView.numberOfItems(inSection: 0) {
-                    let index = IndexPath.init(item: i, section: 0)
-                    indexArray.append(index)
-                }
-                self.collectionView?.reloadItems(at: indexArray)
+//                var indexArray = [IndexPath]()
+//                for i in 0..<collectionView.numberOfItems(inSection: 0) {
+//                    let index = IndexPath.init(item: i, section: 0)
+//                    indexArray.append(index)
+//                }
+//                self.collectionView?.reloadItems(at: indexArray)
+                self.collectionView?.reloadData()
             }
             reusableView.powerRankBlock = {
                 self.isIpe = false
                 
-                var indexArray = [IndexPath]()
-                for i in 0..<collectionView.numberOfItems(inSection: 0) {
-                    let index = IndexPath.init(item: i, section: 0)
-                    indexArray.append(index)
-                }
-                self.collectionView?.reloadItems(at: indexArray)
+//                var indexArray = [IndexPath]()
+//                for i in 0..<collectionView.numberOfItems(inSection: 0) {
+//                    let index = IndexPath.init(item: i, section: 0)
+//                    indexArray.append(index)
+//                }
+//                self.collectionView?.reloadItems(at: indexArray)
+                
+                self.collectionView?.reloadData()
             }
             reusableView.fetchDiamondBlock = { (id: String) in
                 print(id)
