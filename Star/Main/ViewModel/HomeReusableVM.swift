@@ -10,7 +10,23 @@ import UIKit
 
 class HomeReusableVM: BaseViewModel {
     
+    var diamondArray = Array<DiamondEntity>()
+    var power : Int = 0
+    var ipe : Double = 0
+    
     var frameArray = [CGRect]()
+    
+    init(entity:HomeEntity) {
+        self.diamondArray = entity.diamondArray
+        self.power = entity.power
+        self.ipe = entity.ipe
+        
+        
+        super.init()
+        
+        let array = self.diamondArray.prefix(8)
+        self.randomRect(number: array.count)
+    }
     
     //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
     /// 水晶随机分布在一个固定矩形区域,水晶带有上下移动的动画
@@ -18,9 +34,11 @@ class HomeReusableVM: BaseViewModel {
     /// - Parameter array: 水晶数组
     func randomRect(number:Int) {
         if number <= 0 {
+            self.frameArray = []
             return
         }
-        self.frameArray.removeAll()
+        //self.frameArray.removeAll()
+        var array = Array<CGRect>()
         
         let imageHeight : CGFloat = 52 * 167 / 156
         let labelHeight : CGFloat = 20
@@ -51,48 +69,18 @@ class HomeReusableVM: BaseViewModel {
             
             var frame = CGRect()
             
-//            let crystalView = UIView()
-//            crystalView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
-//
-//            let superView = UIView()
-//            superView.backgroundColor = UIColor.clear
-//            crystalView.addSubview(superView)
-//
-//            let imageView = UIImageView()
-//            imageView.image = UIImage(named: "imgDiamond")
-//            imageView.isUserInteractionEnabled = true
-//            superView.addSubview(imageView)
-//
-//            let label = UILabel()
-//            let components = title.components(separatedBy: "_")
-//            if components.count > 1 {
-//                label.text = components[1]
-//            }
-//            label.textColor = UIColor.white
-//            label.font = UIFont.systemFont(ofSize: 12)
-//            label.textAlignment = .center
-//            label.sizeToFit()
-//            superView.addSubview(label)
-            
-            
-            
             var isIntersects = true
             repeat{
                 
                 let x = arc4random_uniform(UInt32(origin_x))
                 let y = arc4random_uniform(UInt32(origin_y))
                 frame = CGRect(x: CGFloat(x) + marginLeft , y: CGFloat(y) + marginTop, width: crystalViewWidth, height: crystalViewHeight)
-                
-//                crystalView.frame = CGRect(x: CGFloat(x) + marginLeft , y: CGFloat(y) + marginTop, width: crystalViewWidth, height: crystalViewHeight)
-//                superView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: crystalViewHeight)
-//                imageView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: imageHeight)
-//                label.frame = CGRect(x: 0, y: imageHeight, width: crystalViewWidth, height: labelHeight)
                 if i == 0 {
                     //print("第一个视图一定没有交集")
                     isIntersects = false
                 } else {
                     isIntersects = false
-                    for rect in self.frameArray {
+                    for rect in array {
                         //与已存在的子视图没有交集，方可添加
                         if rect.intersects(frame) == true {
                             //print("有交集")
@@ -104,9 +92,8 @@ class HomeReusableVM: BaseViewModel {
                 
             }while(isIntersects)
             //print("没有交集")
-            self.frameArray.append(frame)
-//            self.buttonArray.append(crystalView)
-//            self.diamondContentView.addSubview(crystalView)
+            array.append(frame)
         }
+        self.frameArray = array
     }
 }

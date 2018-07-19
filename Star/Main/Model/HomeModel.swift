@@ -12,6 +12,7 @@ class HomeEntity: BaseModel {
     @objc var coinRankArray = Array<CoinRankEntity>()
     @objc var powerRankArray = Array<PowerRankEntity>()
     @objc var mineralInfoArray = Array<String>()
+    @objc var diamondArray = Array<DiamondEntity>()
     @objc var dailyLogin : String?
     @objc var power : Int = 0
     @objc var ipe : Double = 0
@@ -33,4 +34,9 @@ class InviteEntity: BaseModel {
     @objc var invitePower : Double = 0
     @objc var inviteCode : String?
     @objc var nickname : String?
+}
+class DiamondEntity: BaseModel {
+    @objc var type : String?
+    @objc var diamondId : String?
+    @objc var diamondNumber : String?
 }

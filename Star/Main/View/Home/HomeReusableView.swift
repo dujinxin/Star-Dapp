@@ -55,27 +55,18 @@ class HomeReusableView: UICollectionReusableView {
     var buttonArray = Array<UIView>()
     var titleArray = Array<String>() //["0.00912","0.01232","0.01333","0.02245","0.02175","0.02587","0.02709","0.01933"]
     
-    var entity: HomeEntity? {
-        didSet{
-            self.diamondTotalLabel.text = "\(entity?.ipe ?? 0)"
-            self.powerTotalLabel.text = "\(entity?.power ?? 0)"
-            
-            self.diamondLabel.text = "\(entity?.ipe ?? 0)"
-            
-//            if oldValue?.mineralInfoArray.count == entity?.mineralInfoArray.count {
-//                print("不做处理")
-//            } else {
-                print("重新布局",entity?.mineralInfoArray)
-                self.setTitleArray()
-//            }
-            
-        }
-    }
     var homeReusableVM : HomeReusableVM? {
         didSet{
-            //self.setDiamondsViewFrames()
+            self.diamondTotalLabel.text = "\(homeReusableVM?.ipe ?? 0)"
+            self.powerTotalLabel.text = "\(homeReusableVM?.power ?? 0)"
+            
+            self.diamondLabel.text = "\(homeReusableVM?.ipe ?? 0)"
+            
+            self.setDiamondsViewFrames(array: homeReusableVM?.frameArray ?? [], diamonds: homeReusableVM?.diamondArray ?? [])
         }
     }
+    //屏幕当前剩余水晶
+    var remainDiamonds : Int = 0
     
     
     override func awakeFromNib() {
@@ -109,7 +100,7 @@ class HomeReusableView: UICollectionReusableView {
 //        self.random(subArray)
 //        self.animate()
         
-        //self.setRandomDiamonds(count: 8)
+        self.setRandomDiamonds(count: 8)
 
     }
 
@@ -137,7 +128,7 @@ class HomeReusableView: UICollectionReusableView {
         if let block = self.diamondRankBlock {
             self.diamondRankButton.isSelected = true
             self.powerRankButton.isSelected = false
-            self.diamondLabel.text = "\(entity?.ipe ?? 0)"
+            self.diamondLabel.text = "\(homeReusableVM?.ipe ?? 0)"
             self.diamondTitleLabel.text = "水晶值"
             self.infoTitleLabel.text = "收益"
             block()
@@ -147,7 +138,7 @@ class HomeReusableView: UICollectionReusableView {
         if let block = self.powerRankBlock {
             self.diamondRankButton.isSelected = false
             self.powerRankButton.isSelected = true
-            self.diamondLabel.text = "\(entity?.power ?? 0)"
+            self.diamondLabel.text = "\(homeReusableVM?.power ?? 0)"
             self.diamondTitleLabel.text = "智慧值"
             self.infoTitleLabel.text = "智慧"
             block()
@@ -165,186 +156,66 @@ class HomeReusableView: UICollectionReusableView {
     }
     
     func setRandomDiamonds(count:Int) {
-//        self.buttonArray.removeAll()
-//        self.diamondContentView.removeAllSubView()
-        
-        for _ in 0..<count {
-            let diamondView = DiamondView()
-            diamondView.isHidden = true
-            self.buttonArray.append(diamondView)
-            self.diamondContentView.addSubview(diamondView)
-        }
-    }
-//    func setDiamondsViewFrames(array:Array<CGRect>) {
-//        for i in self.diamondContentView.subviews {
-//            <#code#>
-//        }
-//    }
-    //389d920717dcfe2e2db29f71eebc12934766bf2c
-    //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
-    /// 水晶随机分布在一个固定矩形区域,水晶带有上下移动的动画
-    ///
-    /// - Parameter array: 水晶数组
-    func randomDiamonds(_ array:Array<String>) {
-        self.buttonArray.removeAll()
-        self.diamondContentView.removeAllSubView()
-        
+
         let imageHeight : CGFloat = 52 * 167 / 156
-        let labelHeight : CGFloat = 20
+        //let labelHeight : CGFloat = 20
         //水晶+数字 宽高
         let crystalViewWidth : CGFloat = 52
         let crystalViewHeight = imageHeight + 20
         
-        //动画区域
-        let animateWidth :CGFloat = 0
-        let animateHeight :CGFloat = 5 + 5 //上下各5
-        
-        //margin
-        let marginLeft : CGFloat  = 30
-        let marginRight : CGFloat = 30
-        let marginTop : CGFloat = 0
-        let marginBottom : CGFloat = 0
-
-        //origin可随机区域 width = contentView.width - crystalView.width - animateWidth - marginLeft - marginRight
-        let origin_x = self.diamondContentView.bounds.width - crystalViewWidth - animateWidth - marginLeft - marginRight
-        //origin可随机区域 width = contentView.height - crystalView.height - animateHeight - marginTop - marginBottom
-        let origin_y = self.diamondContentView.bounds.height - crystalViewHeight - animateHeight - marginTop - marginBottom
-        
-        for title in array {
+        for i in 0..<count {
             
-            let crystalView = UIView()
-            //superView.backgroundColor = UIColor.randomColor
-            crystalView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
+            let diamondView = DiamondView(frame: CGRect(x: 0, y: 0, width: crystalViewWidth, height: crystalViewHeight))
+            diamondView.tag = i
+            diamondView.isHidden = true
+            self.buttonArray.append(diamondView)
+            self.diamondContentView.addSubview(diamondView)
             
-            let superView = UIView()
-            superView.backgroundColor = UIColor.clear
-            crystalView.addSubview(superView)
-            
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "imgDiamond")
-            imageView.isUserInteractionEnabled = true
-            superView.addSubview(imageView)
-            
-            let label = UILabel()
-            let components = title.components(separatedBy: "_")
-            if components.count > 1 {
-                label.text = components[1]
+            diamondView.tapBlock = { v in
+                self.tapClick(subView: v)
             }
-            label.textColor = UIColor.white
-            label.font = UIFont.systemFont(ofSize: 12)
-            label.textAlignment = .center
-            label.sizeToFit()
-            superView.addSubview(label)
             
-  
-            var isIntersects = true
-            repeat{
-                
-                let x = arc4random_uniform(UInt32(origin_x))
-                let y = arc4random_uniform(UInt32(origin_y))
-                crystalView.frame = CGRect(x: CGFloat(x) + marginLeft , y: CGFloat(y) + marginTop, width: crystalViewWidth, height: crystalViewHeight)
-                superView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: crystalViewHeight)
-                imageView.frame = CGRect(x: 0, y: 0, width: crystalViewWidth, height: imageHeight)
-                label.frame = CGRect(x: 0, y: imageHeight, width: crystalViewWidth, height: labelHeight)
-                if self.buttonArray.count == 0 {
-                    //print("第一个视图一定没有交集")
-                    isIntersects = false
-                } else {
-                    isIntersects = false
-                    for subView in self.buttonArray {
-                        //与已存在的子视图没有交集，方可添加
-                        if subView.frame.intersects(crystalView.frame) == true {
-                            //print("有交集")
-                            isIntersects = true
-                            break
-                        }
-                    }
-                }
-                
-            }while(isIntersects)
-            //print("没有交集")
-            self.buttonArray.append(crystalView)
-            self.diamondContentView.addSubview(crystalView)
+            //diamondView.beginAnimate(time: Double(i) * 0.5)
         }
     }
-    func defaultDiamond() {
-        self.diamondContentView.removeAllSubView()
+    func setDiamondsViewFrames(array:Array<CGRect>, diamonds:Array<DiamondEntity>) {
         
-        let imageHeight : CGFloat = 52 * 167 / 156
-        let labelHeight : CGFloat = 20
-        let superWidth : CGFloat = 52
-        let superHeight = imageHeight + 20
+        self.remainDiamonds = array.count
         
-        let superView = UIView()
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "imgDiamond")
-        imageView.isUserInteractionEnabled = true
-        superView.addSubview(imageView)
-        
-        let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textAlignment = .center
-        label.text = "挖矿中..."
-        label.sizeToFit()
-        superView.addSubview(label)
-        
-        superView.frame = CGRect(x: 0, y: 0, width: superWidth, height: superHeight)
-        imageView.frame = CGRect(x: 0, y: 0, width: superWidth, height: imageHeight)
-        label.frame = CGRect(x: 0, y: imageHeight, width: superWidth, height: labelHeight)
-        
-        self.diamondContentView.addSubview(superView)
-        superView.center = CGPoint(x: self.diamondContentView.center.x, y: self.diamondContentView.bounds.height / 2)
-    }
-    func animate() {
-        for v1 in self.buttonArray {
-            guard let v = v1.subviews.first else{
-                return
-            }
-            let animation = CAKeyframeAnimation.init(keyPath: "position")
-            let path = CGMutablePath.init()
+        if array.count == 0 {
+            let v = self.diamondContentView.subviews[0] as? DiamondView
+            v?.isHidden = false
+            v?.titleView.text = "挖矿中..."
+            v?.center = CGPoint(x: self.diamondContentView.center.x, y: self.diamondContentView.bounds.height / 2)
             
-            path.move(to: CGPoint(x: v.center.x, y: v.center.y))//设置起始点
-            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y + 5))//终点
-            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
-            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y - 5))//终点
-            path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
-            
-//            let transform = CGAffineTransform.init(translationX: -v.bounds.origin.x, y: -v.bounds.origin.y)
-//            transform.scaledBy(x: 1, y: 0.2)
-//            transform.translatedBy(x: v.bounds.origin.x, y: v.bounds.origin.y)
-//            let center = CGPoint(x: v.jxOrigin.x + 44 / 2, y: v.jxOrigin.y + 64 / 2)
-//            path.addArc(center: center, radius: 5, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: true,transform:transform)
-            
-            animation.path = path
-            
-            animation.isRemovedOnCompletion = false
-            animation.repeatCount =  Float.greatestFiniteMagnitude
-            //animation.repeatDuration = 3
-            let index = self.buttonArray.index(of: v1)
-            
-            animation.beginTime = 0.5 * Double(index!)
-            animation.duration = 5
-            animation.autoreverses = false
-            animation.fillMode = kCAFillModeForwards
-            animation.calculationMode = kCAAnimationPaced
-            
-            v.layer.add(animation, forKey: nil)
-        
-        }
-    }
-    @objc func tap(tap:UITapGestureRecognizer) {
-        guard let subView = tap.view else {
             return
         }
-        let index = self.buttonArray.index(of: subView)
         
-        self.buttonArray.remove(at: index!)
+        for i in 0..<array.count {
+            let v = self.diamondContentView.subviews[i] as? DiamondView
+            v?.frame = array[i]
+            v?.isHidden = false
+            v?.beginAnimate(time: Double(i) * 0.5)
+            if diamonds.count > i {
+                v?.entity = diamonds[i]
+            } else {
+                print("error: 数组越界")
+            }
+        }
+    }
+
+    func tapClick(subView:UIView) {
         
-        print(subView.frame)
+        let index = subView.tag
+        let durationTime = 0.5
+        guard
+            let diamondView = subView as? DiamondView,
+            let diamondEntity = diamondView.entity else{
+            return
+        }
+        
         //动画
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
+        UIView.animate(withDuration: durationTime, delay: 0, options: [.curveEaseOut], animations: {
             var frame = subView.frame
             let x : CGFloat = 25 + 30 + 54
             let y = self.diamondContentView.jxHeight + 20
@@ -353,16 +224,15 @@ class HomeReusableView: UICollectionReusableView {
             
             frame.origin = point
             subView.frame = frame
-//            print("myPropertyButton center = ",point)
-//            print("animation frame = ",subView.frame)
+    
         }) { (finish) in
             if finish {
-                subView.removeFromSuperview()
+                subView.isHidden = true
             }
         }
         //声音
         if let file = Bundle.main.path(forResource: "diamond", ofType: "mp3")
-        //Bundle.main.url(forResource: "ding.mp3", withExtension: nil)
+            //Bundle.main.url(forResource: "ding.mp3", withExtension: nil)
         {
             
             let fileUrl = URL(fileURLWithPath: file)
@@ -371,11 +241,11 @@ class HomeReusableView: UICollectionReusableView {
             AudioServicesCreateSystemSoundID(fileUrl as CFURL, &systemSoundID)
             let session = AVAudioSession.sharedInstance()
             try? session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
-//            if session.category != AVAudioSessionCategoryPlayback {
-//                try? session.setCategory(AVAudioSessionCategoryPlayback)
-//                try? session.setActive(true)
-//                try? session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
-//            }
+            //            if session.category != AVAudioSessionCategoryPlayback {
+            //                try? session.setCategory(AVAudioSessionCategoryPlayback)
+            //                try? session.setActive(true)
+            //                try? session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
+            //            }
             if #available(iOS 9.0, *) {
                 AudioServicesPlaySystemSoundWithCompletion(systemSoundID) {
                     print("播放完成")
@@ -385,41 +255,35 @@ class HomeReusableView: UICollectionReusableView {
             }
         }
         if let block = self.fetchDiamondBlock {
-            //删除临时水晶数据
-            let id = self.titleArray[index!]
-            self.titleArray.remove(at: index!)
-            //删除原始水晶数据
-            let diamondIndex = self.entity?.mineralInfoArray.index(of: id)
-            self.entity?.mineralInfoArray.remove(at: diamondIndex!)
-            //重新布局
-            if self.titleArray.count == 0 {
-                self.setTitleArray()
-            }
-            let components = id.components(separatedBy: "_")
-            if
-                components.count > 1 ,
-                let a = Double(components[1]){
+            
+            if let str = diamondEntity.diamondNumber, let a = Double(str) {
                 
-                self.entity?.ipe += a
-                self.diamondTotalLabel.text = "\(self.entity?.ipe ?? 0)"
+                self.homeReusableVM?.ipe += a
+                self.diamondTotalLabel.text = "\(self.homeReusableVM?.ipe ?? 0)"
                 self.diamondTitleLabel.text = "水晶值"
                 if self.diamondTitleLabel.text == "水晶值" {
-                    self.diamondLabel.text = "\(self.entity?.ipe ?? 0)"
+                    self.diamondLabel.text = "\(self.homeReusableVM?.ipe ?? 0)"
                 }
             }
-            block(id)
-        }
-    }
-    func setTitleArray() {
-        self.titleArray.removeAll()
-        if let array = entity?.mineralInfoArray.prefix(8),array.count > 0 {
-            for s in array {
-                titleArray.append(s)
+            //做减员处理
+            self.remainDiamonds -= 1
+            //删除原始水晶数据
+            let originIndex = self.homeReusableVM?.diamondArray.index(of: diamondEntity)
+            self.homeReusableVM?.diamondArray.remove(at: originIndex!)
+            
+            if self.remainDiamonds == 0 {
+                if
+                    let diamondArray = self.homeReusableVM?.diamondArray,
+                    let subDiamondArray = self.homeReusableVM?.diamondArray.prefix(8) {
+                    //要重置初始数组
+                    self.homeReusableVM?.randomRect(number:subDiamondArray.count)
+                    //等移动动画结束再重新布局，不然重新布局的视图会被上边的结束动画隐藏掉
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + durationTime) {
+                        self.setDiamondsViewFrames(array: self.homeReusableVM?.frameArray ?? [], diamonds: diamondArray)
+                    }
+                }
             }
-            self.randomDiamonds(titleArray)
-            self.animate()
-        } else {
-            self.defaultDiamond()
+            //block(id)
         }
     }
 }
@@ -446,22 +310,68 @@ class DiamondView: UIView {
 
     var tapBlock : ((_ view:DiamondView)->())?
     
+    var entity: DiamondEntity? {
+        didSet{
+            self.titleView.text = entity?.diamondNumber
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubview(self.contentView)
-        addSubview(self.imageView)
-        addSubview(self.titleView)
+        self.contentView.addSubview(self.imageView)
+        self.contentView.addSubview(self.titleView)
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(tap:))))
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let imageHeight : CGFloat = 52 * 167 / 156
+        let labelHeight : CGFloat = 20
+        //水晶+数字 宽高
+        //let crystalViewWidth : CGFloat = 52
+        //let crystalViewHeight = imageHeight + 20
+
+        contentView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: imageHeight)
+        titleView.frame = CGRect(x: 0, y: imageHeight, width: frame.width, height: labelHeight)
     }
     @objc func tap(tap:UITapGestureRecognizer) {
         if let block = tapBlock {
             block(self)
         }
+    }
+    
+    func beginAnimate(time:CFTimeInterval = 0) {
+        
+        let v = self.contentView
+        
+
+        let animation = CAKeyframeAnimation.init(keyPath: "position")
+        let path = CGMutablePath.init()
+        
+        path.move(to: CGPoint(x: v.center.x, y: v.center.y))//设置起始点
+        path.addLine(to: CGPoint(x: v.center.x, y: v.center.y + 5))//终点
+        path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
+        path.addLine(to: CGPoint(x: v.center.x, y: v.center.y - 5))//终点
+        path.addLine(to: CGPoint(x: v.center.x, y: v.center.y))//终点
+        
+        animation.path = path
+        
+        animation.isRemovedOnCompletion = false
+        animation.repeatCount =  Float.greatestFiniteMagnitude
+        //animation.repeatDuration = 3
+        animation.beginTime = time
+        animation.duration = 5
+        animation.autoreverses = false
+        animation.fillMode = kCAFillModeForwards
+        animation.calculationMode = kCAAnimationPaced
+        
+        v.layer.add(animation, forKey: nil)
     }
 }

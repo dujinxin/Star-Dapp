@@ -10,10 +10,22 @@ import Foundation
 
 class HomeVM: BaseViewModel {
     
-    var homeEntity = HomeEntity()
-    var propertyRecordEntity = PropertyRecordEntity()
-    var inviteEntity = InviteEntity()
-    
+    //首页
+    lazy var homeEntity: HomeEntity = {
+        let entity = HomeEntity()
+        return entity
+    }()
+    var homeReusableVM : HomeReusableVM?
+    //资产记录
+    lazy var propertyRecordEntity: PropertyRecordEntity = {
+        let entity = PropertyRecordEntity()
+        return entity
+    }()
+    //邀请
+    lazy var inviteEntity: InviteEntity = {
+        let entity = InviteEntity()
+        return entity
+    }()
     
     func home(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
@@ -44,15 +56,31 @@ class HomeVM: BaseViewModel {
                 if let award = mineralInfo["award"] as? Array<String> {
                     award.forEach({ (str) in
                         self.homeEntity.mineralInfoArray.append(str)
+                        let diamondEntity = DiamondEntity()
+                        diamondEntity.diamondId = str
+                        diamondEntity.type = "award"
+                        let components = str.components(separatedBy: "_")
+                        if components.count > 1 {
+                            diamondEntity.diamondNumber = components[1]
+                        }
+                        self.homeEntity.diamondArray.append(diamondEntity)
                     })
                 }
                 if let mineral = mineralInfo["mineral"] as? Array<String> {
                     mineral.forEach({ (str) in
                         self.homeEntity.mineralInfoArray.append(str)
+                        let diamondEntity = DiamondEntity()
+                        diamondEntity.diamondId = str
+                        diamondEntity.type = "mineral"
+                        let components = str.components(separatedBy: "_")
+                        if components.count > 1 {
+                            diamondEntity.diamondNumber = components[1]
+                        }
+                        self.homeEntity.diamondArray.append(diamondEntity)
                     })
                 }
             }
-            
+            self.homeReusableVM = HomeReusableVM.init(entity: self.homeEntity)
             completion(data, msg, true)
             
         }) { (msg, code) in

@@ -179,7 +179,8 @@ extension MainViewController {
         
         let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIndentifierHeader, for: indexPath) as! HomeReusableView
         if kind == UICollectionElementKindSectionHeader {
-            reusableView.entity = self.homeVM.homeEntity
+            //reusableView.entity = self.homeVM.homeEntity
+            reusableView.homeReusableVM = self.homeVM.homeReusableVM
             reusableView.fetchPowerBlock = {
                 let storyboard = UIStoryboard(name: "Task", bundle: nil)
                 let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
