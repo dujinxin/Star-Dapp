@@ -71,9 +71,10 @@ class ModifyImageController: BaseViewController {
     }
     @objc func confirm() {
         if isSelected {
+            self.showMBProgressHUD()
             let _ = UIImage.insert(image: self.userImageView.image!, name: "userImage.jpg")
-            
             self.imageVM.modifyImage(param: [:]) { (_, msg, isSuc) in
+                self.hideMBProgressHUD()
                 if isSuc {
                     let _ = UIImage.delete(name: "userImage.jpg")
                     self.navigationController?.popViewController(animated: true)

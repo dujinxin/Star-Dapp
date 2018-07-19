@@ -69,16 +69,19 @@ class PropertyRecordController: UIViewController,JXTopBarViewDelegate,JXHorizont
         leftButton.addTarget(self, action: #selector(pop), for: .touchUpInside)
         self.customNavigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftButton)
         
-        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["全部","收入","支出"])
-        topBar?.delegate = self
-        topBar?.isBottomLineEnabled = true
-        topBar?.backgroundColor = UIColor.rgbColor(from: 241, 242, 247)
-        topBar?.layer.borderColor = UIColor.rgbColor(from: 203, 210, 238).cgColor
-        topBar?.layer.borderWidth = 0.3
-        view.addSubview(topBar!)
+//        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["全部","收入","支出"])
+//        topBar?.delegate = self
+//        topBar?.isBottomLineEnabled = true
+//        topBar?.backgroundColor = UIColor.rgbColor(from: 241, 242, 247)
+//        topBar?.layer.borderColor = UIColor.rgbColor(from: 203, 210, 238).cgColor
+//        topBar?.layer.borderWidth = 0.3
+//        view.addSubview(topBar!)
         
         horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 44, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 44), containers: [wholeRVC,inRVC,outRVC], parentViewController: self)
-        view.addSubview(horizontalView!)
+//        view.addSubview(horizontalView!)
+        
+        self.inRVC.view.frame = CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight)
+        view.addSubview(self.inRVC.view)
     }
     
     override func didReceiveMemoryWarning() {

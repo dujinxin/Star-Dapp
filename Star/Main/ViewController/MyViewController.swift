@@ -76,19 +76,25 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         alertVC.addTextField(configurationHandler: { (textField) in
             textField.text = self.vm.profileInfoEntity?.nickname
             textField.delegate = self
-            textField.addTarget(self, action: #selector(self.valueChanged(textField:)), for: .editingChanged)
+            //textField.addTarget(self, action: #selector(self.valueChanged(textField:)), for: .editingChanged)
         })
         alertVC.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
             
             if
                 let textField = alertVC.textFields?[0],
                 let text = textField.text,
-                text.isEmpty == false{
+                text.isEmpty == false,
+                text != self.vm.profileInfoEntity?.nickname{
                 
+                self.showMBProgressHUD()
                 self.vm.modify(nickName: text, completion: { (_, msg, isSuccess) in
-                    ViewManager.showNotice(msg)
-                    self.vm.profileInfoEntity?.nickname = text
-                    self.tableView.reloadData()
+                    self.hideMBProgressHUD()
+                    if isSuccess == false {
+                        ViewManager.showNotice(msg)
+                    } else {
+                        self.vm.profileInfoEntity?.nickname = text
+                        self.tableView.reloadData()
+                    }
                 })
             }
         }))
@@ -202,7 +208,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
 //            self.navigationController?.pushViewController(login, animated: true)
             
         }else if indexPath.row == 2{
-            ViewManager.showNotice("敬请期待")
+            //ViewManager.showNotice("敬请期待")
             //performSegue(withIdentifier: "myWallet", sender: nil)
             //performSegue(withIdentifier: "myWallet_web", sender: nil)
         }else if indexPath.row == 3{
@@ -215,13 +221,13 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
 extension MyViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-//        if range.location > 11 {
-//            //let s = textField.text! as NSString
-//            //let str = s.substring(to: 10)
-//            //textField.text = str
-//            //ViewManager.showNotice(notice: "字符个数为11位")
-//            return false
-//        }
+        if range.location > 11 {
+            //let s = textField.text! as NSString
+            //let str = s.substring(to: 10)
+            //textField.text = str
+            //ViewManager.showNotice(notice: "字符个数为11位")
+            return false
+        }
         return true
     }
 }

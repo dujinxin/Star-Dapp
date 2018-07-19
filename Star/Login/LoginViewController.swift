@@ -104,8 +104,8 @@ class LoginViewController: BaseViewController {
     }
     @IBAction func fetchCodeWord(_ sender: UIButton) {
 
-        guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
-        guard String.validate(codeImageTextField.text, type: .none, emptyMsg: "图片验证码不能为空", formatMsg: "") == true else { return }
+        guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号未填写", formatMsg: "手机号填写错误") == true else { return }
+        guard String.validate(codeImageTextField.text, type: .none, emptyMsg: "图形验证码未填写", formatMsg: "") == true else { return }
       
         self.showMBProgressHUD()
         self.vm.sendMobileCode(mobile: userTextField.text!, method: "login", validateCode: codeImageTextField.text!) { (_, msg, isSuc) in
@@ -127,8 +127,8 @@ class LoginViewController: BaseViewController {
 
     @IBAction func logAction(_ sender: Any) {
         
-        guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号不能为空", formatMsg: "手机号格式错误") == true else { return }
-        guard String.validate(codeWordTextField.text, type: .code4, emptyMsg: "验证码不能为空", formatMsg: "请检查验证码位数") == true else { return }
+        guard String.validate(userTextField.text, type: .phone, emptyMsg: "手机号未填写", formatMsg: "手机号填写错误") == true else { return }
+        guard String.validate(codeWordTextField.text, type: .code4, emptyMsg: "短信验证码未填写", formatMsg: "短信验证码填写错误") == true else { return }
         
 
         self.showMBProgressHUD()

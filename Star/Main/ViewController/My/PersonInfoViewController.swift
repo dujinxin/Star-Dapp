@@ -79,7 +79,7 @@ class PersonInfoViewController: JXTableViewController{
             cell.leftLabel.text = "人脸识别"
             if self.vm.indentifyInfoEntity?.faceAuth == 1 {
                 //cell.accessoryType = .checkmark
-                cell.rightLabel.text = "已验证通过"//"✔已验证通过"
+                cell.rightLabel.text = "已识别"//"✔已验证通过"
                 cell.rightLabel.textColor = UIColor.rgbColor(rgbValue: 0x1e62cd)
             } else {
                 //cell.accessoryType = .disclosureIndicator
