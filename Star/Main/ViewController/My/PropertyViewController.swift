@@ -71,8 +71,9 @@ class PropertyViewController: UIViewController {
             if isSuccess == false {
                 ViewManager.showNotice(msg)
             }else {
-                self.propertyLabel.text = "\(self.vm.ipe)"
+                
             }
+            self.propertyLabel.text = "\(self.vm.ipe)"
         }
     }
 

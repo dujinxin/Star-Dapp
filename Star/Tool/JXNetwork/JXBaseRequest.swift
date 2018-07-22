@@ -90,18 +90,10 @@ class JXBaseRequest: NSObject {
     
    
     //子类实现
-    func customConstruct() ->constructingBlock?  {
-        return nil
-    }
-    func buildCustomUrlRequest() -> URLRequest?{
-        return nil
-    }
-    func requestSuccess(responseData:Any) {
-        
-    }
-    func requestFailure(error: Error) {
-        
-    }
+    func customConstruct() ->constructingBlock?  {return nil}
+    func buildCustomUrlRequest() -> URLRequest?  {return nil}
+    func requestSuccess(responseData:Any) {}
+    func requestFailure(error: Error) {}
     
 }
 

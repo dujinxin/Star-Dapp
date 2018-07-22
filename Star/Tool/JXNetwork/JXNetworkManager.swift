@@ -44,25 +44,30 @@ class JXNetworkManager: NSObject {
         afmanager.requestSerializer = AFHTTPRequestSerializer.init()
         afmanager.requestSerializer.timeoutInterval = 10
         
-        afmanager.reachabilityManager = AFNetworkReachabilityManager.shared()
-        afmanager.reachabilityManager.startMonitoring()
-        afmanager.reachabilityManager.setReachabilityStatusChange { (status:AFNetworkReachabilityStatus) in
-            print("网络状态变化 == \(status.rawValue)")
-            self.networkStatus = AFNetworkReachabilityStatus(rawValue: status.rawValue)!
-        }
-        
         afmanager.requestSerializer.setValue(UIDevice.current.uuid, forHTTPHeaderField: "deviceId")
         afmanager.requestSerializer.setValue(UIDevice.current.modelName, forHTTPHeaderField: "deviceName")
         afmanager.requestSerializer.setValue(UIDevice.current.systemName, forHTTPHeaderField: "os")
         afmanager.requestSerializer.setValue(Bundle.main.version, forHTTPHeaderField: "version")
+        
+        
+        afmanager.reachabilityManager = AFNetworkReachabilityManager.shared()
+        //很大概率，切换网络时，监听不到，不能实时修改状态
+        afmanager.reachabilityManager.setReachabilityStatusChange { (status:AFNetworkReachabilityStatus) in
+            print("网络状态变化 == \(status.rawValue)")
+            self.networkStatus = AFNetworkReachabilityStatus(rawValue: status.rawValue)!
+        }
+        afmanager.reachabilityManager.startMonitoring()
     }
 
     func buildRequest(_ request:JXBaseRequest) {
-
+        print("网络状态 = ",AFNetworkReachabilityManager.shared().isReachable)
+        //afmanager.reachabilityManager.startMonitoring()
         ///网络判断
         if networkStatus == .unknown || networkStatus == .notReachable {
             print("网络不可用")
-            return
+//            let error = NSError.init(domain: "网络连接断开", code: JXNetworkError.kRequestErrorNotConnectedToInternet.rawValue, userInfo: nil)
+//            request.requestFailure(error: error)
+//            return
         }
         
         ///获取URL
@@ -190,7 +195,7 @@ extension JXNetworkManager {
         
         for (_,r) in requestCache {
             if let current = request, current == r{
-                
+                //保留当前请求
             } else {
                 cancelRequest(r)
             }

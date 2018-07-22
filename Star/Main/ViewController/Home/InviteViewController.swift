@@ -7,8 +7,6 @@
 //
 
 import UIKit
-//import JXFoundation
-import MBProgressHUD
 
 class InviteViewController: UIViewController {
 
@@ -23,7 +21,8 @@ class InviteViewController: UIViewController {
     @IBOutlet weak var setCardButton: UIButton!
     
     
-    let homeVM = HomeVM()
+    var inviteEntity : InviteEntity?
+    
     
     //MARK: - custom NavigationBar
     //自定义导航栏
@@ -74,18 +73,10 @@ class InviteViewController: UIViewController {
         self.copyButton.layer.addSublayer(self.setGradientColor(size: self.copyButton.jxSize))
         self.setCardButton.layer.addSublayer(self.setGradientColor(size: CGSize(width: kScreenWidth - 90, height: 44)))
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.homeVM.inviteInfo { (_, msg, isSuc) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            if isSuc == false {
-                ViewManager.showNotice(msg)
-            } else {
-                self.inviteNumLabel.text = self.homeVM.inviteEntity.inviteCount
-                self.powerNumLabel.text = "\(self.homeVM.inviteEntity.invitePower)"
-                self.inviteCodeLabel.text = self.homeVM.inviteEntity.inviteCode
-            }
-        }
         
+        self.inviteNumLabel.text = self.inviteEntity?.inviteCount
+        self.powerNumLabel.text = "\(self.inviteEntity?.invitePower ?? 0)"
+        self.inviteCodeLabel.text = self.inviteEntity?.inviteCode
     }
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -127,16 +118,21 @@ class InviteViewController: UIViewController {
     }
     @IBAction func copyCode(_ sender: Any) {
         
-        let string = self.inviteCodeLabel.text
-
+        guard let codeStr = self.inviteEntity?.inviteCode, codeStr.isEmpty == false else{
+            return
+        }
         let pals = UIPasteboard.general
-        pals.string = string
+        pals.string = codeStr
 
         ViewManager.showNotice("复制成功")
     }
     @IBAction func exportCard(_ sender: Any) {
         
-        self.performSegue(withIdentifier: "inviteCard", sender: self.homeVM.inviteEntity)
+        guard let codeStr = self.inviteEntity?.inviteCode, codeStr.isEmpty == false else{
+            return
+        }
+        
+        self.performSegue(withIdentifier: "inviteCard", sender: self.inviteEntity)
     }
     
     @IBAction func unwindToInviteInfo(_ sender: UIStoryboardSegue) {

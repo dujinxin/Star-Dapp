@@ -95,9 +95,18 @@ class MainViewController: JXCollectionViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
-
     deinit {
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "invite":
+            if let vc = segue.destination as? InviteViewController, let inviteEntity = sender as? InviteEntity {
+                vc.inviteEntity = inviteEntity
+            }
+        default:
+            print("123456")
+        }
     }
     @objc func loginStatus(notify:Notification) {
         print(notify)
@@ -125,13 +134,13 @@ class MainViewController: JXCollectionViewController {
         self.homeVM = HomeVM()
         self.homeVM.home { (_, msg, isSuc) in
             if isSuc {
-                self.collectionView?.reloadData()
                 if let message = self.homeVM.homeEntity.dailyLogin ,message.isEmpty == false {
                     ViewManager.showNotice(message)
                 }
             } else {
                 ViewManager.showNotice(msg)
             }
+            self.collectionView?.reloadData()
         }
         self.homeVM.powerRank(limit: 15) { (_, msg, isSuc) in
             if isSuc == false{
@@ -164,13 +173,17 @@ extension MainViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCell
         if self.isIpe == true {
-            let entity = self.homeVM.homeEntity.coinRankArray[indexPath.item]
-            cell.coinEntity = entity
-            cell.indexPath = indexPath
+            if self.homeVM.homeEntity.coinRankArray.count > 0 {
+                let entity = self.homeVM.homeEntity.coinRankArray[indexPath.item]
+                cell.coinEntity = entity
+                cell.indexPath = indexPath
+            }
         } else {
-            let entity = self.homeVM.homeEntity.powerRankArray[indexPath.item]
-            cell.powerEntity = entity
-            cell.indexPath = indexPath
+            if self.homeVM.homeEntity.powerRankArray.count > 0 {
+                let entity = self.homeVM.homeEntity.powerRankArray[indexPath.item]
+                cell.powerEntity = entity
+                cell.indexPath = indexPath
+            }
         }
         
         return cell
@@ -226,7 +239,16 @@ extension MainViewController {
                 })
             }
             reusableView.inviteBlock = {
-                self.performSegue(withIdentifier: "invite", sender: nil)
+                //self.performSegue(withIdentifier: "invite", sender: nil)
+                self.showMBProgressHUD()
+                self.homeVM.inviteInfo { (_, msg, isSuc) in
+                    self.hideMBProgressHUD()
+                    if isSuc == false {
+                        ViewManager.showNotice(msg)
+                    } else {
+                        self.performSegue(withIdentifier: "invite", sender: self.homeVM.inviteEntity)
+                    }
+                }
             }
             reusableView.helpBlock = {
                 self.performSegue(withIdentifier: "help", sender: nil)

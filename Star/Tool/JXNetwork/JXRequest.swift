@@ -108,7 +108,8 @@ class JXRequest: JXBaseRequest {
             print("String")
         }else if result is Error{
             print("Error")
-            guard let error = result as? NSError,
+            guard
+                let error = result as? NSError,
                 let code = JXNetworkError(rawValue: error.code)
                 else {
                     handleResponseResult(result: data, message: "Error", code: .kResponseUnknow, isSuccess: isSuccess)

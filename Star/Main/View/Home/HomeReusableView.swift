@@ -181,6 +181,10 @@ class HomeReusableView: UICollectionReusableView {
     func setDiamondsViewFrames(array:Array<CGRect>, diamonds:Array<DiamondEntity>) {
         
         self.remainDiamonds = array.count
+        //先全部隐藏，下面根据需要显示
+        self.diamondContentView.subviews.forEach { (subView) in
+            subView.isHidden = true
+        }
         
         if array.count == 0 {
             let v = self.diamondContentView.subviews[0] as? DiamondView
@@ -283,7 +287,7 @@ class HomeReusableView: UICollectionReusableView {
                     }
                 }
             }
-            //block(id)
+            block(diamondEntity.diamondId ?? "")
         }
     }
 }
