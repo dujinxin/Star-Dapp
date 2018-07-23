@@ -23,12 +23,18 @@ class TaskCell: UICollectionViewCell {
             self.titleLabel.text = entity?.name
             self.numberLabel.text = "智慧值+\(entity?.power ?? 0)"
             
+            if entity?.finishStatus == 1 {
+                self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
+                self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
+            } else {
+                self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0x1e62cd)
+                self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0x1e62cd)
+            }
+            
             switch entity?.id {
             case 3:
                 if entity?.finishStatus == 1  {
                     self.iconImageVIew.image = UIImage(named: "iconWechat_finished")
-                    self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
-                    self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
                     self.numberLabel.text = "已关注+\(entity?.power ?? 0)"
                 } else {
                     self.iconImageVIew.image = UIImage(named: "iconWechat")
@@ -36,8 +42,6 @@ class TaskCell: UICollectionViewCell {
             case 4:
                 if entity?.finishStatus == 1  {
                     self.iconImageVIew.image = UIImage(named: "iconFaceid_finished")
-                    self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
-                    self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
                     self.numberLabel.text = "已认证+\(entity?.power ?? 0)"
                 } else {
                     self.iconImageVIew.image = UIImage(named: "iconFaceid")
@@ -45,8 +49,6 @@ class TaskCell: UICollectionViewCell {
             case 5:
                 if entity?.finishStatus == 1  {
                     self.iconImageVIew.image = UIImage(named: "iconWechat_finished")
-                    self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
-                    self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
                     self.numberLabel.text = "已创建+\(entity?.power ?? 0)"
                 } else {
                     self.iconImageVIew.image = UIImage(named: "iconWechat")
@@ -54,8 +56,6 @@ class TaskCell: UICollectionViewCell {
             case 6:
                 if entity?.finishStatus == 1  {
                     self.iconImageVIew.image = UIImage(named: "iconWechat_finished")
-                    self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
-                    self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
                     self.numberLabel.text = "已备份+\(entity?.power ?? 0)"
                 } else {
                     self.iconImageVIew.image = UIImage(named: "iconWechat")
@@ -63,8 +63,6 @@ class TaskCell: UICollectionViewCell {
             case 7:
                 if entity?.finishStatus == 1  {
                     self.iconImageVIew.image = UIImage(named: "iconHeadPortrait_finished")
-                    self.titleLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
-                    self.numberLabel.textColor = UIColor.rgbColor(rgbValue: 0xc6c6c6)
                     self.numberLabel.text = "已设置+\(entity?.power ?? 0)"
                 } else {
                     self.iconImageVIew.image = UIImage(named: "iconHeadPortrait")

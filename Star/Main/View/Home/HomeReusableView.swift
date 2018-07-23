@@ -189,6 +189,7 @@ class HomeReusableView: UICollectionReusableView {
         if array.count == 0 {
             let v = self.diamondContentView.subviews[0] as? DiamondView
             v?.isHidden = false
+            v?.isUserInteractionEnabled = false
             v?.titleView.text = "挖矿中..."
             v?.center = CGPoint(x: self.diamondContentView.center.x, y: self.diamondContentView.bounds.height / 2)
             
@@ -199,6 +200,7 @@ class HomeReusableView: UICollectionReusableView {
             let v = self.diamondContentView.subviews[i] as? DiamondView
             v?.frame = array[i]
             v?.isHidden = false
+            v?.isUserInteractionEnabled = true
             v?.beginAnimate(time: Double(i) * 0.5)
             if diamonds.count > i {
                 v?.entity = diamonds[i]
