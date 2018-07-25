@@ -57,7 +57,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
-        setUpMainView()
+        self.setUpMainView()
         //isLogin ? setUpMainView() : setUpDefaultView()
         
         self.isCustomNavigationBarUsed() ? setCustomNavigationBar() : navigationBarConfig()
@@ -67,18 +67,13 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /// request data
-    @objc func requestData() {
-        
-    }
     func isCustomNavigationBarUsed() -> Bool{
         return false
     }
+    /// request data
+    @objc func requestData() {}
     //MARK: - base view set
-    func setUpMainView() {
-        //
-    }
+    func setUpMainView() {}
     /// add default view eg:no data,no network,no login
     func setUpDefaultView() {
         defaultView.frame = view.bounds

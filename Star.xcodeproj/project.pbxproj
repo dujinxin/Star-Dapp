@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0E68E9DA4C0A8994C48AD904 /* Pods_Star.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05240EFAB33605E7FF0C3D45 /* Pods_Star.framework */; };
+		351EE5FD21070CD4004C5DE9 /* PaperListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE5FC21070CD4004C5DE9 /* PaperListController.swift */; };
+		351EE5FF21070D6C004C5DE9 /* PaperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE5FE21070D6C004C5DE9 /* PaperModel.swift */; };
+		351EE60121070FC9004C5DE9 /* PaperVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60021070FC9004C5DE9 /* PaperVM.swift */; };
+		351EE603210714BA004C5DE9 /* PaperDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE602210714BA004C5DE9 /* PaperDetailController.swift */; };
+		351EE605210818AC004C5DE9 /* TradeRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE604210818AC004C5DE9 /* TradeRecordController.swift */; };
+		351EE60721081944004C5DE9 /* TradeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60621081944004C5DE9 /* TradeVM.swift */; };
+		351EE60921081A8C004C5DE9 /* TradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60821081A8C004C5DE9 /* TradeModel.swift */; };
 		3521389820EC640900E13B14 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389720EC640900E13B14 /* TaskViewController.swift */; };
 		3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389B20EC659A00E13B14 /* TaskCell.swift */; };
 		3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3521389C20EC659A00E13B14 /* TaskCell.xib */; };
@@ -171,6 +178,13 @@
 
 /* Begin PBXFileReference section */
 		05240EFAB33605E7FF0C3D45 /* Pods_Star.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Star.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		351EE5FC21070CD4004C5DE9 /* PaperListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperListController.swift; sourceTree = "<group>"; };
+		351EE5FE21070D6C004C5DE9 /* PaperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperModel.swift; sourceTree = "<group>"; };
+		351EE60021070FC9004C5DE9 /* PaperVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperVM.swift; sourceTree = "<group>"; };
+		351EE602210714BA004C5DE9 /* PaperDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperDetailController.swift; sourceTree = "<group>"; };
+		351EE604210818AC004C5DE9 /* TradeRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecordController.swift; sourceTree = "<group>"; };
+		351EE60621081944004C5DE9 /* TradeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeVM.swift; sourceTree = "<group>"; };
+		351EE60821081A8C004C5DE9 /* TradeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModel.swift; sourceTree = "<group>"; };
 		3521389720EC640900E13B14 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3521389B20EC659A00E13B14 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		3521389C20EC659A00E13B14 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
@@ -768,13 +782,15 @@
 		35CB0CC920B576050092C5FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				35CB0CCB20B576050092C5FC /* MyVM.swift */,
 				35CB0CCC20B576050092C5FC /* LoginVM.swift */,
-				352281BE20BE4700001A0CA8 /* ArticleVM.swift */,
-				35D7589A20C6C04A00A77EEB /* CommentVM.swift */,
-				35D7589220C63DC400A77EEB /* TaskVM.swift */,
 				35D7589620C6603500A77EEB /* HomeVM.swift */,
 				3594D93420FB47A20009BFDF /* HomeReusableVM.swift */,
+				35D7589220C63DC400A77EEB /* TaskVM.swift */,
+				352281BE20BE4700001A0CA8 /* ArticleVM.swift */,
+				351EE60021070FC9004C5DE9 /* PaperVM.swift */,
+				35D7589A20C6C04A00A77EEB /* CommentVM.swift */,
+				35CB0CCB20B576050092C5FC /* MyVM.swift */,
+				351EE60621081944004C5DE9 /* TradeVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -784,11 +800,13 @@
 			children = (
 				35CB0CCE20B576050092C5FC /* CommenModel.swift */,
 				35CB0CCF20B576050092C5FC /* UserModel.swift */,
-				35D7589820C6637C00A77EEB /* ArticleModel.swift */,
-				35D7589E20C7EBCD00A77EEB /* CommentModel.swift */,
-				35D7589C20C7DE4000A77EEB /* TaskModel.swift */,
-				35D758A020CA6F2500A77EEB /* MyModel.swift */,
 				3594D92120F60EB40009BFDF /* HomeModel.swift */,
+				35D7589C20C7DE4000A77EEB /* TaskModel.swift */,
+				35D7589820C6637C00A77EEB /* ArticleModel.swift */,
+				351EE5FE21070D6C004C5DE9 /* PaperModel.swift */,
+				35D7589E20C7EBCD00A77EEB /* CommentModel.swift */,
+				35D758A020CA6F2500A77EEB /* MyModel.swift */,
+				351EE60821081A8C004C5DE9 /* TradeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -824,6 +842,8 @@
 				352281C020BE5540001A0CA8 /* Article */,
 				35CB0CDA20B576050092C5FC /* MainViewController.swift */,
 				352281B720BE4365001A0CA8 /* ArticleListController.swift */,
+				351EE5FC21070CD4004C5DE9 /* PaperListController.swift */,
+				351EE602210714BA004C5DE9 /* PaperDetailController.swift */,
 				35CB0CDB20B576050092C5FC /* MyViewController.swift */,
 				35CB0CDC20B576050092C5FC /* ScanViewController.swift */,
 			);
@@ -840,6 +860,7 @@
 				35CB0CE120B576050092C5FC /* MyWalletViewController.swift */,
 				35CB0CE320B576050092C5FC /* PersonInfoViewController.swift */,
 				35CB0CE420B576050092C5FC /* AccountViewController.swift */,
+				351EE604210818AC004C5DE9 /* TradeRecordController.swift */,
 				3594D91420F5CD4D0009BFDF /* AboutUsViewController.swift */,
 			);
 			path = My;
@@ -1117,6 +1138,7 @@
 				35CB0D0D20B576050092C5FC /* RegisterViewController.swift in Sources */,
 				35CB0D4720B576060092C5FC /* PropertyViewController.swift in Sources */,
 				35CB0D7720B6A6D40092C5FC /* CircleView.m in Sources */,
+				351EE60121070FC9004C5DE9 /* PaperVM.swift in Sources */,
 				35CB0D3C20B576060092C5FC /* UserModel.swift in Sources */,
 				3594D91720F5DA4F0009BFDF /* JXCollectionViewController.swift in Sources */,
 				3594D92220F60EB40009BFDF /* HomeModel.swift in Sources */,
@@ -1127,8 +1149,10 @@
 				35CB0CFB20B576050092C5FC /* JXPhotoBrowserController.swift in Sources */,
 				35CB0D0820B576050092C5FC /* UserManager.swift in Sources */,
 				3523686B20F4CC6F0021F05C /* MyCell.swift in Sources */,
+				351EE60721081944004C5DE9 /* TradeVM.swift in Sources */,
 				35CB0D8420B6A8730092C5FC /* RemindView.m in Sources */,
 				35CB0CE820B576050092C5FC /* JXDefaultView.swift in Sources */,
+				351EE603210714BA004C5DE9 /* PaperDetailController.swift in Sources */,
 				35D7589320C63DC400A77EEB /* TaskVM.swift in Sources */,
 				35CB0CED20B576050092C5FC /* ZPTableViewController.swift in Sources */,
 				35CB0CFF20B576050092C5FC /* JXNetworkError.swift in Sources */,
@@ -1137,6 +1161,7 @@
 				35249D7820C4EE1A001C1140 /* Date+Extension.swift in Sources */,
 				35CB0D4A20B576060092C5FC /* MyWalletViewController.swift in Sources */,
 				35CB0D8A20B795B70092C5FC /* AuthResultViewController.swift in Sources */,
+				351EE605210818AC004C5DE9 /* TradeRecordController.swift in Sources */,
 				3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */,
 				35CB0D0120B576050092C5FC /* JXNetworkManager.swift in Sources */,
 				35CB0D0420B576050092C5FC /* Encryption.swift in Sources */,
@@ -1148,6 +1173,7 @@
 				35CB0D0320B576050092C5FC /* ApiEnum.swift in Sources */,
 				35D7589120C5373B00A77EEB /* ModifyImageController.swift in Sources */,
 				35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */,
+				351EE60921081A8C004C5DE9 /* TradeModel.swift in Sources */,
 				35D7589720C6603500A77EEB /* HomeVM.swift in Sources */,
 				35CB0D0C20B576050092C5FC /* LoginViewController.swift in Sources */,
 				35CB0CEA20B576050092C5FC /* BaseViewController.swift in Sources */,
@@ -1177,7 +1203,9 @@
 				3523686F20F4CCDD0021F05C /* ImageTitleCell.swift in Sources */,
 				3523687B20F5BD190021F05C /* PersonCell.swift in Sources */,
 				352281C520BE563B001A0CA8 /* CommentCell.swift in Sources */,
+				351EE5FF21070D6C004C5DE9 /* PaperModel.swift in Sources */,
 				3523687720F5A5600021F05C /* PropertyCell.swift in Sources */,
+				351EE5FD21070CD4004C5DE9 /* PaperListController.swift in Sources */,
 				3594D91F20F60A8C0009BFDF /* HomeCell.swift in Sources */,
 				35CB0CFC20B576050092C5FC /* NotificationEnum.swift in Sources */,
 				3594D92520F6FC690009BFDF /* InviteViewController.swift in Sources */,

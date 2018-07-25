@@ -10,7 +10,7 @@ import UIKit
 
 class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var dataArray = [["image":"iconMoney","title":"水晶IPE"],["image":"iconPocket","title":"钱包"],["image":"iconPerson","title":"实名"],["image":"iconGear","title":"系统"]]
+    var dataArray = [["image":"iconMoney","title":"水晶IPE"],["image":"iconPocket","title":"钱包"],["image":"iconPerson","title":"实名"],["image":"iconGear","title":"交易"],["image":"iconGear","title":"系统"]]
     
     var vm = LoginVM()
     @IBOutlet weak var tableView: UITableView!
@@ -207,13 +207,16 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
 //                let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
 //            self.navigationController?.pushViewController(login, animated: true)
             
-        }else if indexPath.row == 2{
+        } else if indexPath.row == 2{
             //ViewManager.showNotice("敬请期待")
             //performSegue(withIdentifier: "myWallet", sender: nil)
             //performSegue(withIdentifier: "myWallet_web", sender: nil)
-        }else if indexPath.row == 3{
+        } else if indexPath.row == 3{
             performSegue(withIdentifier: "personInfo", sender: nil)
-        }else if indexPath.row == 4{
+        } else if indexPath.row == 4{
+            let vc = TradeRecordController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 5{
             performSegue(withIdentifier: "accound", sender: self.vm.profileInfoEntity?.mobile)
         }
     }

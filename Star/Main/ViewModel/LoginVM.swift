@@ -199,7 +199,7 @@ class IdentifyVM: JXRequest {
             completion(nil,message,false)
         }
     }
-    override func customConstruct() -> JXBaseRequest.constructingBlock? {
+    override func customConstruct() -> JXBaseRequest.ConstructingBlock? {
         return {(_ formData : AFMultipartFormData) -> () in
             let format = DateFormatter()
             format.dateFormat = "yyyyMMddHHmmss"
@@ -257,7 +257,7 @@ class ModifyImageVM: JXRequest {
             completion(nil,message,false)
         }
     }
-    override func customConstruct() -> JXBaseRequest.constructingBlock? {
+    override func customConstruct() -> JXBaseRequest.ConstructingBlock? {
         return {(_ formData : AFMultipartFormData) -> () in
             let format = DateFormatter()
             format.dateFormat = "yyyyMMddHHmmss"

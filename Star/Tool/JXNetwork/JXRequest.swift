@@ -12,7 +12,7 @@ import UIKit
 class JXRequest: JXBaseRequest {
     
 
-    var construct : constructingBlock? {
+    var construct : ConstructingBlock? {
         set{
             self.construct = newValue
         }
@@ -20,7 +20,7 @@ class JXRequest: JXBaseRequest {
             return nil
         }
     }
-    override func customConstruct() ->constructingBlock?  {
+    override func customConstruct() -> ConstructingBlock?  {
         return nil
     }
     

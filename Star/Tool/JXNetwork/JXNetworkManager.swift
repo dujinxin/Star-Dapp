@@ -145,9 +145,27 @@ class JXNetworkManager: NSObject {
             }
         }
         
-        
-        
         addRequest(request: request)
+    }
+    func download(_ request: JXBaseRequest) {
+        guard let urlStr = request.requestUrl, let url = URL(string: urlStr)  else {
+            fatalError("Bad UrlStr")
+        }
+        let urlRequest = URLRequest.init(url: url)
+        request.urlRequest = urlRequest
+        
+        guard let destination = request.destination else {
+            fatalError("destination block can not be nil")
+        }
+        request.sessionTask = afmanager.downloadTask(with: urlRequest, progress: request.progress, destination: destination, completionHandler: request.download)
+//        request.sessionTask = afmanager.downloadTask(with: urlRequest, progress: { (progress) in
+//            print(progress.totalUnitCount,progress.completedUnitCount)
+//        }, destination: destination) { (urlResponse, url, error) in
+//            print(urlResponse,url,error)
+//        }
+        request.sessionTask?.resume()
+        addRequest(request: request)
+        
     }
     
 }

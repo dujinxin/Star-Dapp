@@ -113,7 +113,7 @@ class ArticleVM : BaseViewModel{
             }
         }
     }
-    /// 文章点赞
+    /// 文章链上查询
     func articleChain(_ articleId:String,artHashIndex:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
         JXRequest.request(url: ApiString.articelQueryByBlockChain.rawValue, param: ["id":articleId,"artHashIndex":artHashIndex], success: { (data, msg) in
             

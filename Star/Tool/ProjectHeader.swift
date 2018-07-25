@@ -43,12 +43,12 @@ let GDAppKey = "73dcd0051605f829b29dccc6a746a676" //操作员
 let BaiduAppKey = "I8aQQsCpBqPeYzuAVuhDiRmbXuWnG4T0"
 
 
-//let kBaseUrl = "http://192.168.0.129:8081"
-//let kHtmlUrl = kBaseUrl + "/index#/"
+let kBaseUrl = "http://192.168.0.129:8081"
+let kHtmlUrl = kBaseUrl + "/index#/"
 
 
-let kBaseUrl = "https://dapp.coooding.wang"
-let kHtmlUrl = "http://app.izheng.org/#/"
+//let kBaseUrl = "https://dapp.coooding.wang"
+//let kHtmlUrl = "http://app.izheng.org/#/"
 
 
 let isShowLog : Bool = true

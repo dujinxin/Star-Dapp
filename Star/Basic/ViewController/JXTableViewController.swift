@@ -59,17 +59,12 @@ class JXTableViewController: BaseViewController{
     /// request data
     ///
     /// - Parameter page: load data for page,
-    func request(page:Int) {
-        
-    }
+    func request(page:Int) {}
 }
 
 
 extension JXTableViewController : UITableViewDelegate,UITableViewDataSource{
-    
-    
-    
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
