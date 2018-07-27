@@ -54,8 +54,6 @@ class PaperDetailController: JXTableViewController {
         button.setTitleColor(UIColor.rgbColor(rgbValue: 0x1296db), for: UIControlState.normal)
         button.setTitle("交易详情将被IPXE区块链记录，首次交易的永久智慧值！", for: UIControlState.normal)
         button.setImage(#imageLiteral(resourceName: "Shape"), for: .normal)
-        button.addTarget(self, action: #selector(clickAction(button:)), for: UIControlEvents.touchUpInside)
-
         return button
     }()
     lazy var tradeBottomView: JXSelectView = {

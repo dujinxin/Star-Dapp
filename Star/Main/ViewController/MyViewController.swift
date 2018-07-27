@@ -210,7 +210,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         } else if indexPath.row == 2{
             //ViewManager.showNotice("敬请期待")
             //performSegue(withIdentifier: "myWallet", sender: nil)
-            //performSegue(withIdentifier: "myWallet_web", sender: nil)
+            performSegue(withIdentifier: "myWallet_web", sender: nil)
         } else if indexPath.row == 3{
             performSegue(withIdentifier: "personInfo", sender: nil)
         } else if indexPath.row == 4{

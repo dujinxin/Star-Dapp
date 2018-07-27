@@ -9,10 +9,11 @@
 import UIKit
 import AVFoundation
 
-class ScanViewController: UIViewController {
+class ScanViewController: BaseViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var controlButton: UIButton!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var leftView: UIView!
@@ -25,14 +26,11 @@ class ScanViewController: UIViewController {
     
     var session = AVCaptureSession()
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +41,9 @@ class ScanViewController: UIViewController {
         self.leftView.alpha = 0.5
         self.rightView.alpha = 0.5
         self.bottomView.alpha = 0.5
+        
+        self.controlButton.setImage(#imageLiteral(resourceName: "off"), for: .normal)
+        self.controlButton.setImage(#imageLiteral(resourceName: "on"), for: .selected)
         
         
         guard
@@ -83,7 +84,10 @@ class ScanViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.topConstraint.constant = kStatusBarHeight + 7
+    }
     func getScanCrop(rect: CGRect,readerViewBounds bounds:CGRect) -> CGRect {
         
         let x,y,width,height : CGFloat
@@ -94,7 +98,8 @@ class ScanViewController: UIViewController {
         return CGRect(x: x, y: y, width: width, height: height)
     }
     @IBAction func backEvent(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func switchButton(_ sender: UIButton) {
         guard
@@ -103,8 +108,8 @@ class ScanViewController: UIViewController {
                 ViewManager.showNotice("闪光灯故障")
             return
         }
+        sender.isSelected = !sender.isSelected
         if  device.torchMode == .on{
-            
             try? device.lockForConfiguration()
             device.torchMode = .off
             try? device.unlockForConfiguration()
@@ -114,7 +119,6 @@ class ScanViewController: UIViewController {
             try? device.unlockForConfiguration()
         }
     }
-    
 }
 extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
@@ -126,58 +130,9 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
                 return
             }
             session.stopRunning()
-           
-//            guard let location = GDLocationManager.manager.location,let reGeocode = GDLocationManager.manager.reGeocode else {
-//                ViewManager.showNotice(notice: "定位失败，请检查重试")
-//                return
-//            }
-           
             
-//            self.vm.scanResult(codeId: codeStr, scanMobile: UserManager.manager.userEntity.mobile,longitude: String(format: "%f", location.coordinate.longitude), latitude: String(format: "%f", location.coordinate.latitude), model: "", country: reGeocode.country, province: reGeocode.province, city: reGeocode.city, district: reGeocode.district, address: reGeocode.poiName, street: reGeocode.street, number: reGeocode.number) { (data, msg, isSuccess) in
-//                //
-//                print("data = ", data)
-//                guard
-//                    let result = data as? Dictionary<String,Any>
-//
-//                    else{
-//                        return
-//                }
-//                print("result = ", result)
-//                guard
-////                    let result = data as? Dictionary<String,Any>,
-//                    let goodsStatus = result["goodsStatus"] as? Dictionary<String,Any>
-//
-//                    else{
-//                    return
-//                }
-//                print("goodsStatus = ", goodsStatus)
-//                if
-//                    let status = goodsStatus["status"] as? Int,
-//                    let describe = goodsStatus["describe"] as? String,
-//                    status != 1 {
-//
-//                    let alert = UIAlertView(title: nil, message: describe, delegate: self, cancelButtonTitle: "确定")
-//                    alert.show()
-//
-//                    return
-//                }
-            
-            
-//                let model = scanFinishModel()
-//                model.setmodel(scandict: result as NSDictionary)
-//
-//                if model.quality == "-1" {
-//                    //
-//                    return
-//                }
-                
-//                let vc = ScanDetailViewController()
-//
-//                //vc.view.backgroundColor = JXFfffffColor;
-//                vc.hidesBottomBarWhenPushed = true
-//                vc.scanFinishModel = model
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            }
+            ViewManager.showNotice(codeStr)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

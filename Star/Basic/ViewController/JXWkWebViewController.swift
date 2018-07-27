@@ -49,10 +49,13 @@ class JXWkWebViewController: BaseViewController {
     }
     
     override func setUpMainView() {
-        self.webView.frame = view.bounds
+        let y = self.isCustomNavigationBarUsed() ? kNavStatusHeight : 0
+        let height = self.isCustomNavigationBarUsed() ? (view.bounds.height - kNavStatusHeight) : view.bounds.height
+        
+        self.webView.frame = CGRect(x: 0, y: y, width: view.bounds.width, height: height)
         view.addSubview(self.webView)
         
-        self.processView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 5)
+        self.processView.frame = CGRect(x: 0, y: y, width: kScreenWidth, height: 2)
         view.addSubview(self.processView)
         
         self.webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -65,9 +68,9 @@ class JXWkWebViewController: BaseViewController {
             keyPath == "estimatedProgress",
             let process = processValue as? Float{
             
-            self.processView.setProgress(process, animated: true)//动画有延时，所以要等动画结束再隐藏
+            //动画有延时，所以要等动画结束再隐藏
+            self.processView.setProgress(process, animated: true)
             if process == 1.0 {
-                //perform(<#T##aSelector: Selector##Selector#>, with: <#T##Any?#>, afterDelay: <#T##TimeInterval#>)
                 DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25, execute: {
                     self.processView.alpha = 0.0
                 })
@@ -102,8 +105,7 @@ extension JXWkWebViewController:WKUIDelegate{
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         
         print("alert")
-        
-        
+
         let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { (action) in
             print("确定")

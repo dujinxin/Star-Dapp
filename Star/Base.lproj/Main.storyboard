@@ -436,25 +436,6 @@
             <point key="canvasLocation" x="4412" y="-1451.231527093596"/>
         </scene>
         <!--扫码-->
-        <scene sceneID="cGw-YF-M5H">
-            <objects>
-                <viewController id="UNc-xM-QCs" customClass="ScanViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="X65-rA-MQ2"/>
-                        <viewControllerLayoutGuide type="bottom" id="Bhy-zI-Gm9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="w48-0V-HTG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="扫码" image="tab_scan_n" selectedImage="tab_scan_n" id="9Kl-O7-RN8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bJV-ri-b3U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1884" y="-83.497536945812811"/>
-        </scene>
-        <!--扫码-->
         <scene sceneID="o0y-lS-Ur7">
             <objects>
                 <viewController storyboardIdentifier="ScanVC" title="扫码" id="5Vk-DL-lpO" customClass="ScanViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
@@ -485,7 +466,7 @@
                                 <rect key="frame" x="0.0" y="553.66666666666663" width="375" height="258.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="angle" translatesAutoresizingMaskIntoConstraints="NO" id="wQh-w4-KIX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQh-w4-KIX">
                                 <rect key="frame" x="40" y="258.66666666666669" width="295" height="295.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wQh-w4-KIX" secondAttribute="height" id="UYm-t8-4RD"/>
@@ -497,7 +478,7 @@
                                     <constraint firstAttribute="width" secondItem="sU8-1n-cGS" secondAttribute="height" multiplier="1:1" id="3L2-h0-scc"/>
                                     <constraint firstAttribute="height" constant="30" id="MRP-Rw-YZc"/>
                                 </constraints>
-                                <state key="normal" image="nav_back"/>
+                                <state key="normal" image="iconBackBlackbg"/>
                                 <connections>
                                     <action selector="backEvent:" destination="5Vk-DL-lpO" eventType="touchUpInside" id="aXD-Na-nRz"/>
                                 </connections>
@@ -516,7 +497,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aZL-Q6-Xid" firstAttribute="top" secondItem="PbA-Mj-eYW" secondAttribute="top" constant="42" id="2lH-AQ-VhI"/>
+                            <constraint firstItem="aZL-Q6-Xid" firstAttribute="top" secondItem="sU8-1n-cGS" secondAttribute="top" id="1TQ-0f-RZA"/>
                             <constraint firstItem="lMF-9U-MmC" firstAttribute="leading" secondItem="PbA-Mj-eYW" secondAttribute="leading" id="6zI-Rg-Qre"/>
                             <constraint firstItem="wQh-w4-KIX" firstAttribute="leading" secondItem="l2S-F7-F9v" secondAttribute="trailing" id="7wk-PO-saa"/>
                             <constraint firstItem="Hag-4s-U3x" firstAttribute="top" secondItem="wQh-w4-KIX" secondAttribute="top" id="96f-Bf-n9o"/>
@@ -549,12 +530,13 @@
                         <outlet property="leftViewWidthConstraint" destination="828-g0-epS" id="irx-9E-Loy"/>
                         <outlet property="rightView" destination="Hag-4s-U3x" id="MHq-jB-aA3"/>
                         <outlet property="scanImageView" destination="wQh-w4-KIX" id="lmE-QP-Gy6"/>
+                        <outlet property="topConstraint" destination="AF2-Yy-MZW" id="0C6-k8-vcd"/>
                         <outlet property="topView" destination="lMF-9U-MmC" id="E2s-vs-O13"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifd-lj-hyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3471.1999999999998" y="-83.497536945812811"/>
+            <point key="canvasLocation" x="3503" y="-83"/>
         </scene>
         <!--Smart View Controller-->
         <scene sceneID="xO3-NK-PXK">
@@ -636,7 +618,7 @@
         <!--我的钱包-->
         <scene sceneID="rBq-fo-hjO">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="sDO-A9-m1i" customClass="MyWalletViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyWalletVC" hidesBottomBarWhenPushed="YES" id="sDO-A9-m1i" customClass="MyWalletViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QVI-9O-JgG"/>
                         <viewControllerLayoutGuide type="bottom" id="K2T-0m-8Yk"/>
@@ -651,25 +633,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pvp-Lu-ZDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4412" y="1363"/>
-        </scene>
-        <!--扫码-->
-        <scene sceneID="wWV-Xd-rnw">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qPz-4y-opt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="扫码" id="jnb-OC-Udu"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GJ2-jW-lnk">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5Vk-DL-lpO" kind="relationship" relationship="rootViewController" id="Vmb-8h-ZfH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d8r-O4-mdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2671.1999999999998" y="-83.497536945812811"/>
         </scene>
         <!--关于我们-->
         <scene sceneID="HZ9-1i-Vad">
@@ -966,16 +929,14 @@
     </scenes>
     <resources>
         <image name="Shape" width="19" height="19"/>
-        <image name="angle" width="240" height="240"/>
         <image name="home_normal" width="22" height="21"/>
         <image name="home_selected" width="22" height="21"/>
+        <image name="iconBackBlackbg" width="35" height="35"/>
         <image name="imgCard" width="368" height="204"/>
         <image name="imgLogo" width="108" height="130"/>
         <image name="my_normal" width="20" height="22"/>
         <image name="my_selected" width="20" height="22"/>
-        <image name="nav_back" width="20" height="20"/>
         <image name="off" width="28" height="27"/>
-        <image name="tab_scan_n" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oip-T5-H2B"/>
