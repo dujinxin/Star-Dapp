@@ -36,6 +36,13 @@ class JXSelectView: UIView {
     
     var style : JXSelectViewStyle = .list
     var position : JXSelectViewShowPosition = .bottom
+    var customView : UIView? {
+        didSet{
+            self.style = .custom
+            self.selectViewHeight = customView?.bounds.height ?? pickViewHeight
+            self.contentView = customView
+        }
+    }
     private var contentView : UIView?
     var isUseCustomTopBar : Bool = false {
         didSet{
@@ -151,7 +158,7 @@ class JXSelectView: UIView {
     }()
     
     
-    init(frame: CGRect, style:JXSelectViewStyle) {
+    init(frame: CGRect, style: JXSelectViewStyle) {
         super.init(frame: frame)
         
         self.style = style
@@ -164,14 +171,14 @@ class JXSelectView: UIView {
         selectViewHeight = frame.height
         self.resetFrame()
     }
-    init(frame:CGRect, customView:UIView) {
+    init(frame: CGRect, customView: UIView) {
         super.init(frame: frame)
         self.style = .custom
         self.contentView = customView
         selectViewHeight = customView.bounds.height
         self.resetFrame()
     }
-    func resetFrame(height:CGFloat = 0.0) {
+    func resetFrame(height: CGFloat = 0.0) {
         var h : CGFloat
         if height > 0 {
             h = height
@@ -229,7 +236,7 @@ class JXSelectView: UIView {
         } else if style == .list {
             self.contentView?.frame = CGRect(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight)
         } else {
-            self.contentView?.frame = CGRect(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight)
+            self.contentView?.frame = CGRect(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight + kBottomMaginHeight)
         }
     }
     

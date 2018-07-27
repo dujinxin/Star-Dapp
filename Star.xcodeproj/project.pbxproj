@@ -15,6 +15,17 @@
 		351EE605210818AC004C5DE9 /* TradeRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE604210818AC004C5DE9 /* TradeRecordController.swift */; };
 		351EE60721081944004C5DE9 /* TradeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60621081944004C5DE9 /* TradeVM.swift */; };
 		351EE60921081A8C004C5DE9 /* TradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60821081A8C004C5DE9 /* TradeModel.swift */; };
+		351EE61021096E4C004C5DE9 /* SmartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE60F21096E4C004C5DE9 /* SmartViewController.swift */; };
+		351EE612210971BC004C5DE9 /* Smart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 351EE611210971BC004C5DE9 /* Smart.storyboard */; };
+		351EE61621097FFD004C5DE9 /* PaperListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE61421097FFD004C5DE9 /* PaperListCell.swift */; };
+		351EE61721097FFD004C5DE9 /* PaperListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE61521097FFD004C5DE9 /* PaperListCell.xib */; };
+		351EE61A21098B2E004C5DE9 /* PaperDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE61821098B2E004C5DE9 /* PaperDetailTopCell.swift */; };
+		351EE61B21098B2E004C5DE9 /* PaperDetailTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE61921098B2E004C5DE9 /* PaperDetailTopCell.xib */; };
+		351EE61E21098B4F004C5DE9 /* PaperDetailCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE61C21098B4F004C5DE9 /* PaperDetailCommonCell.swift */; };
+		351EE61F21098B4F004C5DE9 /* PaperDetailCommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE61D21098B4F004C5DE9 /* PaperDetailCommonCell.xib */; };
+		351EE62221099B3C004C5DE9 /* TradeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE62021099B3C004C5DE9 /* TradeListCell.swift */; };
+		351EE62321099B3C004C5DE9 /* TradeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE62121099B3C004C5DE9 /* TradeListCell.xib */; };
+		351EE6252109FCDE004C5DE9 /* TradeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */; };
 		3521389820EC640900E13B14 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389720EC640900E13B14 /* TaskViewController.swift */; };
 		3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389B20EC659A00E13B14 /* TaskCell.swift */; };
 		3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3521389C20EC659A00E13B14 /* TaskCell.xib */; };
@@ -185,6 +196,17 @@
 		351EE604210818AC004C5DE9 /* TradeRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecordController.swift; sourceTree = "<group>"; };
 		351EE60621081944004C5DE9 /* TradeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeVM.swift; sourceTree = "<group>"; };
 		351EE60821081A8C004C5DE9 /* TradeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModel.swift; sourceTree = "<group>"; };
+		351EE60F21096E4C004C5DE9 /* SmartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartViewController.swift; sourceTree = "<group>"; };
+		351EE611210971BC004C5DE9 /* Smart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Smart.storyboard; sourceTree = "<group>"; };
+		351EE61421097FFD004C5DE9 /* PaperListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperListCell.swift; sourceTree = "<group>"; };
+		351EE61521097FFD004C5DE9 /* PaperListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperListCell.xib; sourceTree = "<group>"; };
+		351EE61821098B2E004C5DE9 /* PaperDetailTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperDetailTopCell.swift; sourceTree = "<group>"; };
+		351EE61921098B2E004C5DE9 /* PaperDetailTopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperDetailTopCell.xib; sourceTree = "<group>"; };
+		351EE61C21098B4F004C5DE9 /* PaperDetailCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperDetailCommonCell.swift; sourceTree = "<group>"; };
+		351EE61D21098B4F004C5DE9 /* PaperDetailCommonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperDetailCommonCell.xib; sourceTree = "<group>"; };
+		351EE62021099B3C004C5DE9 /* TradeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeListCell.swift; sourceTree = "<group>"; };
+		351EE62121099B3C004C5DE9 /* TradeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeListCell.xib; sourceTree = "<group>"; };
+		351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeDetailController.swift; sourceTree = "<group>"; };
 		3521389720EC640900E13B14 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3521389B20EC659A00E13B14 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		3521389C20EC659A00E13B14 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
@@ -383,6 +405,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		351EE61321097FD2004C5DE9 /* Paper */ = {
+			isa = PBXGroup;
+			children = (
+				351EE61421097FFD004C5DE9 /* PaperListCell.swift */,
+				351EE61521097FFD004C5DE9 /* PaperListCell.xib */,
+				351EE61821098B2E004C5DE9 /* PaperDetailTopCell.swift */,
+				351EE61921098B2E004C5DE9 /* PaperDetailTopCell.xib */,
+				351EE61C21098B4F004C5DE9 /* PaperDetailCommonCell.swift */,
+				351EE61D21098B4F004C5DE9 /* PaperDetailCommonCell.xib */,
+			);
+			path = Paper;
+			sourceTree = "<group>";
+		};
 		3521389A20EC657000E13B14 /* Task */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,7 +445,11 @@
 		352281C020BE5540001A0CA8 /* Article */ = {
 			isa = PBXGroup;
 			children = (
+				351EE611210971BC004C5DE9 /* Smart.storyboard */,
+				352281B720BE4365001A0CA8 /* ArticleListController.swift */,
 				352281C120BE559B001A0CA8 /* ArticleDetailsController.swift */,
+				351EE5FC21070CD4004C5DE9 /* PaperListController.swift */,
+				351EE602210714BA004C5DE9 /* PaperDetailController.swift */,
 				3594D93020F8FA270009BFDF /* ChainInfoController.swift */,
 			);
 			path = Article;
@@ -427,6 +466,8 @@
 				3523687620F5A5600021F05C /* PropertyCell.xib */,
 				3523687920F5BD190021F05C /* PersonCell.swift */,
 				3523687A20F5BD190021F05C /* PersonCell.xib */,
+				351EE62021099B3C004C5DE9 /* TradeListCell.swift */,
+				351EE62121099B3C004C5DE9 /* TradeListCell.xib */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -818,6 +859,7 @@
 				3523686820F4CC3B0021F05C /* My */,
 				3521389A20EC657000E13B14 /* Task */,
 				352281B920BE4379001A0CA8 /* Article */,
+				351EE61321097FD2004C5DE9 /* Paper */,
 				35CB0CD120B576050092C5FC /* JXView */,
 			);
 			path = View;
@@ -841,11 +883,9 @@
 				35D7588720C52F7A00A77EEB /* Task */,
 				352281C020BE5540001A0CA8 /* Article */,
 				35CB0CDA20B576050092C5FC /* MainViewController.swift */,
-				352281B720BE4365001A0CA8 /* ArticleListController.swift */,
-				351EE5FC21070CD4004C5DE9 /* PaperListController.swift */,
-				351EE602210714BA004C5DE9 /* PaperDetailController.swift */,
 				35CB0CDB20B576050092C5FC /* MyViewController.swift */,
 				35CB0CDC20B576050092C5FC /* ScanViewController.swift */,
+				351EE60F21096E4C004C5DE9 /* SmartViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -861,6 +901,7 @@
 				35CB0CE320B576050092C5FC /* PersonInfoViewController.swift */,
 				35CB0CE420B576050092C5FC /* AccountViewController.swift */,
 				351EE604210818AC004C5DE9 /* TradeRecordController.swift */,
+				351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */,
 				3594D91420F5CD4D0009BFDF /* AboutUsViewController.swift */,
 			);
 			path = My;
@@ -1012,12 +1053,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351EE612210971BC004C5DE9 /* Smart.storyboard in Resources */,
 				35CB0D2C20B576060092C5FC /* tuku@3x.png in Resources */,
+				351EE61721097FFD004C5DE9 /* PaperListCell.xib in Resources */,
 				3523686C20F4CC6F0021F05C /* MyCell.xib in Resources */,
 				35CB0D1F20B576050092C5FC /* xuanzhuan@3x.png in Resources */,
 				35CB0D2A20B576060092C5FC /* dengpao_dianjihou@2x.png in Resources */,
 				35CB0D2920B576060092C5FC /* paizhaoanniu_dianjihou@2x.png in Resources */,
 				35CB0D2720B576060092C5FC /* guanbi@3x.png in Resources */,
+				351EE62321099B3C004C5DE9 /* TradeListCell.xib in Resources */,
 				35CB0D3220B576060092C5FC /* dengpao@2x.png in Resources */,
 				35CB0D2620B576060092C5FC /* guanbi@2x.png in Resources */,
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
@@ -1031,6 +1075,7 @@
 				35CB0D1E20B576050092C5FC /* xuanzhuan@2x.png in Resources */,
 				3523687C20F5BD190021F05C /* PersonCell.xib in Resources */,
 				35CB0D0B20B576050092C5FC /* Login.storyboard in Resources */,
+				351EE61B21098B2E004C5DE9 /* PaperDetailTopCell.xib in Resources */,
 				352138A220EC71C400E13B14 /* TaskReusableView.xib in Resources */,
 				35CB0D1D20B576050092C5FC /* AipOcrSdk.storyboard in Resources */,
 				35CB0D2320B576050092C5FC /* guan@3x.png in Resources */,
@@ -1038,6 +1083,7 @@
 				35CB0D1C20B576050092C5FC /* idl-license.face-ios in Resources */,
 				35CB0D2820B576060092C5FC /* xuxian@3x.png in Resources */,
 				35CB0D2220B576050092C5FC /* queding@3x.png in Resources */,
+				351EE61F21098B4F004C5DE9 /* PaperDetailCommonCell.xib in Resources */,
 				35CB0C4120B575A30092C5FC /* LaunchScreen.storyboard in Resources */,
 				3523687820F5A5600021F05C /* PropertyCell.xib in Resources */,
 				35CB0D6020B658680092C5FC /* aip.license in Resources */,
@@ -1131,6 +1177,7 @@
 				35CB0CEF20B576050092C5FC /* JXNavigationBar.swift in Sources */,
 				35CB0CE920B576050092C5FC /* JXNavigationController.swift in Sources */,
 				35CB0CFD20B576050092C5FC /* ConstantHeader.swift in Sources */,
+				351EE61A21098B2E004C5DE9 /* PaperDetailTopCell.swift in Sources */,
 				3594D91520F5CD4D0009BFDF /* AboutUsViewController.swift in Sources */,
 				35CB0D0520B576050092C5FC /* ProjectHeader.swift in Sources */,
 				3594D93520FB47A20009BFDF /* HomeReusableVM.swift in Sources */,
@@ -1157,6 +1204,7 @@
 				35CB0CED20B576050092C5FC /* ZPTableViewController.swift in Sources */,
 				35CB0CFF20B576050092C5FC /* JXNetworkError.swift in Sources */,
 				35D758A120CA6F2500A77EEB /* MyModel.swift in Sources */,
+				351EE61E21098B4F004C5DE9 /* PaperDetailCommonCell.swift in Sources */,
 				3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */,
 				35249D7820C4EE1A001C1140 /* Date+Extension.swift in Sources */,
 				35CB0D4A20B576060092C5FC /* MyWalletViewController.swift in Sources */,
@@ -1164,6 +1212,7 @@
 				351EE605210818AC004C5DE9 /* TradeRecordController.swift in Sources */,
 				3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */,
 				35CB0D0120B576050092C5FC /* JXNetworkManager.swift in Sources */,
+				351EE61021096E4C004C5DE9 /* SmartViewController.swift in Sources */,
 				35CB0D0420B576050092C5FC /* Encryption.swift in Sources */,
 				35CB0CFE20B576050092C5FC /* ViewManager.swift in Sources */,
 				352138A120EC71C400E13B14 /* TaskReusableView.swift in Sources */,
@@ -1173,6 +1222,7 @@
 				35CB0D0320B576050092C5FC /* ApiEnum.swift in Sources */,
 				35D7589120C5373B00A77EEB /* ModifyImageController.swift in Sources */,
 				35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */,
+				351EE62221099B3C004C5DE9 /* TradeListCell.swift in Sources */,
 				351EE60921081A8C004C5DE9 /* TradeModel.swift in Sources */,
 				35D7589720C6603500A77EEB /* HomeVM.swift in Sources */,
 				35CB0D0C20B576050092C5FC /* LoginViewController.swift in Sources */,
@@ -1214,7 +1264,9 @@
 				35D7589B20C6C04A00A77EEB /* CommentVM.swift in Sources */,
 				3594D92720F6FC780009BFDF /* HelpViewController.swift in Sources */,
 				35CB0D7920B6A6D40092C5FC /* FaceBaseViewController.m in Sources */,
+				351EE6252109FCDE004C5DE9 /* TradeDetailController.swift in Sources */,
 				35CB0D0020B576050092C5FC /* JXBaseRequest.swift in Sources */,
+				351EE61621097FFD004C5DE9 /* PaperListCell.swift in Sources */,
 				35CB0D7620B6A6D40092C5FC /* LivingConfigModel.m in Sources */,
 				3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */,
 				352281BC20BE43A0001A0CA8 /* ArticleCell.swift in Sources */,
@@ -1394,7 +1446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1424,7 +1476,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

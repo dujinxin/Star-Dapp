@@ -1,5 +1,5 @@
 //
-//  PaperDetailController.swift
+//  PaperListController.swift
 //  Star
 //
 //  Created by 杜进新 on 2018/7/24.
@@ -8,28 +8,20 @@
 
 import UIKit
 
-class PaperDetailController: JXTableViewController {
+class PaperListController: JXTableViewController {
     
     let vm = PaperVM()
     
-    var id : Int = 0
-    
-    var process : String = "0/0"
-    
-    
+    var clickBlock : ((_ id: String?)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.groupTableViewBackground
-        self.title = "论文"
-        
-        self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
-        
-        
+
+        self.tableView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight - kTabBarHeight - 44)
+
         self.tableView?.separatorStyle = .none
-        self.tableView?.estimatedRowHeight = 44
-        //self.tableView?.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        self.tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        self.tableView?.estimatedRowHeight = 107
+        self.tableView?.register(UINib(nibName: "PaperListCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.page = 1
             self.request(page: self.page)
@@ -46,11 +38,8 @@ class PaperDetailController: JXTableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func isCustomNavigationBarUsed() -> Bool {
-        return true
-    }
     override func request(page: Int) {
-        self.vm.paperDetails(self.id) { (_, msg, isSuc) in
+        self.vm.paperList(pageNo: page, completion: { (_, msg, isSuc) in
             if page == 1 {
                 self.tableView?.mj_header.endRefreshing()
             } else {
@@ -62,7 +51,7 @@ class PaperDetailController: JXTableViewController {
             } else {
                 ViewManager.showNotice(msg)
             }
-        }
+        })
     }
     // MARK: - Table view data source
     
@@ -73,50 +62,34 @@ class PaperDetailController: JXTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return self.vm.paperListEntity.list.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! PaperListCell
         
-        let entity = self.vm.paperDetailEntity
-        //cell.entity = entity
         // Configure the cell...
         
-        if indexPath.row == 0 {
-            cell.textLabel?.text = entity.title
-        } else if indexPath.row == 1 {
-            cell.textLabel?.text = entity.author
-        } else if indexPath.row == 2 {
-            cell.textLabel?.text = entity.downloadUrl
-        } else if indexPath.row == 3 {
-            cell.textLabel?.text = "购买"
-        } else {
-            cell.textLabel?.text = "下载"
-        }
+        cell.entity = self.vm.paperListEntity.list[indexPath.row]
+        cell.indexPath = indexPath
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+//        if let block = clickBlock {
+//            let entity = self.vm.paperListEntity.list[indexPath.row]
+//            block(entity.id)
+//        }
         
-        if indexPath.row == 3 {
-            //购买
-            self.vm.paperTrade(self.id) { (_, msg, isSuc) in
-                ViewManager.showNotice(msg)
-                if isSuc {
-                    self.request(page: 1)
-                }
-            }
-        } else if indexPath.row == 4 {
-            //下载
-            self.vm.paperDownload(self.vm.paperDetailEntity.downloadUrl!, process: { (progress) in
-                print(progress.completedUnitCount,"/",progress.totalUnitCount)
-            }) { (isSuc) in
-                print("download ",isSuc)
-            }
-        }
+        let entity = self.vm.paperListEntity.list[indexPath.row]
+        let vc = PaperDetailController()
+        vc.hidesBottomBarWhenPushed = true
+        vc.id = entity.id
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     // MARK: - Navigation
     

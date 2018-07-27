@@ -15,8 +15,11 @@ class TradeRecordController: JXTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView?.register(UINib(nibName: "PropertyCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
-        self.tableView?.estimatedRowHeight = 44
+        self.title = "交易记录"
+        
+        self.tableView?.register(UINib(nibName: "TradeListCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
+        self.tableView?.estimatedRowHeight = 72
+        self.tableView?.separatorStyle = .none
         
         self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.page = 1
@@ -45,11 +48,9 @@ class TradeRecordController: JXTableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.navigationController?.navigationBar.isHidden = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //self.navigationController?.navigationBar.isHidden = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,20 +68,13 @@ class TradeRecordController: JXTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.vm.tradeListEntity.listArray.count
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! PropertyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TradeListCell
         let entity = self.vm.tradeListEntity.listArray[indexPath.row]
-        
-        cell.propertyTitleLabel.text = entity.title
-        cell.timeLabel.text = entity.tradeTime
-        cell.numberLabel.text = "- \(entity.tradeAmount) IPE"
-        cell.numberLabel.textColor = UIColor.rgbColor(from: 4, 187, 103)
+        cell.entity = entity
+ 
         return cell
-        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -88,8 +82,8 @@ class TradeRecordController: JXTableViewController {
         
         let entity = self.vm.tradeListEntity.listArray[indexPath.row]
         
-        self.vm.tradeDetails(entity.id ?? "") { (_, msg, isSuc) in
-            
-        }
+        let vc = TradeDetailController()
+        vc.id = entity.id ?? ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

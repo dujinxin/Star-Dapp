@@ -48,17 +48,17 @@ class TaskCell: UICollectionViewCell {
                 }
             case 5:
                 if entity?.finishStatus == 1  {
-                    self.iconImageVIew.image = UIImage(named: "iconWechat_finished")
+                    self.iconImageVIew.image = UIImage(named: "createWallet_finished")
                     self.numberLabel.text = "已创建+\(entity?.power ?? 0)"
                 } else {
-                    self.iconImageVIew.image = UIImage(named: "iconWechat")
+                    self.iconImageVIew.image = UIImage(named: "createWallet")
                 }
             case 6:
                 if entity?.finishStatus == 1  {
-                    self.iconImageVIew.image = UIImage(named: "iconWechat_finished")
+                    self.iconImageVIew.image = UIImage(named: "backupWallet_finished")
                     self.numberLabel.text = "已备份+\(entity?.power ?? 0)"
                 } else {
-                    self.iconImageVIew.image = UIImage(named: "iconWechat")
+                    self.iconImageVIew.image = UIImage(named: "backupWallet")
                 }
             case 7:
                 if entity?.finishStatus == 1  {

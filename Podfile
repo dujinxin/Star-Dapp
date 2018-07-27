@@ -5,15 +5,15 @@ target 'Star' do
   use_frameworks!
 
     pod 'AFNetworking'   #3.2.1
-    pod 'MBProgressHUD'  #0.1.1
+    pod 'MBProgressHUD'  #1.0.0
    # pod 'AMapLocation'  
-    pod 'SDWebImage'     #3.0.15.1
-    pod 'SnapKit'        #3.1.15.3
-    pod 'MJExtension'    #1.1.0
-    pod 'MJRefresh'      #4.4.1
+    pod 'SDWebImage'     #4.4.1
+    pod 'SnapKit'        #4.0.0
+    pod 'MJExtension'    #3.0.15.1
+    pod 'MJRefresh'      #3.1.15.3
     pod 'Masonry'        #4.0.0
     pod 'SwiftyJSON'     #3.1.4
-    pod 'JXFoundation'   #1.0.0
+    pod 'JXFoundation'   #0.1.2
 
   # Pods for Star
 

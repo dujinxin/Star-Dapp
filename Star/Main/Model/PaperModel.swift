@@ -12,7 +12,7 @@ import Foundation
 /**
  "commentList": [
          {
-         "id": "2",
+         "id": "e71d09566f714300a95a537bf1b9504e",
          "author": "toni,mary",
          "title": "论文标题2号",
          "issue": "2017年第2期",
@@ -22,13 +22,16 @@ import Foundation
   "total": 2
  */
 class PaperListEntity: BaseModel {
-    var total : Int = 0
+    @objc var total : Int = 0
     @objc var list : Array<PaperEntity> = Array()
 }
-
+class PaperDetailEntity: BaseModel {
+    @objc var power : Int = 0
+    @objc var paperEntity = PaperEntity()
+}
 /// 论文详情
 /**
-     "id": "1",
+     "id": "e71d09566f714300a95a537bf1b9504e",
      "author": "toni,mary",
      "title": "论文标题1号",
      "issue": "2018年第3期",
@@ -45,7 +48,7 @@ class PaperListEntity: BaseModel {
      "payed": true
  */
 class PaperEntity: BaseModel {
-    @objc var id : Int = 0 //列表共用，下同
+    @objc var id : String? //列表共用，下同
     @objc var author : String?//
     @objc var title : String?//
     @objc var issue : String?//
@@ -62,4 +65,8 @@ class PaperEntity: BaseModel {
     @objc var payed : Int = 0
 }
 
+class CustomDetailEntity: BaseModel {
+    @objc var content : String?//
+    @objc var title : String?//
+}
 
