@@ -157,10 +157,12 @@ class TaskViewController: UICollectionViewController {
             }
             reusableView.dayTaskBlock = {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let login = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as! ArticleListController
-                login.hidesBottomBarWhenPushed = true
-                login.type = .task
-                self.navigationController?.pushViewController(login, animated: true)
+                guard let vc = storyboard.instantiateViewController(withIdentifier: "SmartViewController") as? SmartViewController else{
+                    return
+                }
+                vc.hidesBottomBarWhenPushed = true
+                vc.type = .task
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
         

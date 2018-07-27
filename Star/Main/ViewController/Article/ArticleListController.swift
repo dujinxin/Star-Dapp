@@ -20,13 +20,9 @@ class ArticleListController: JXTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if type == .tab {
-            self.tableView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - 44 - kTabBarHeight - kNavStatusHeight)
-        } else {
-            self.tableView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - 44 - kNavStatusHeight)
-        }
-
+        self.title = "文章"
+  
+        self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
         self.tableView?.separatorStyle = .none
         self.tableView?.estimatedRowHeight = 256
         self.tableView?.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
@@ -35,7 +31,6 @@ class ArticleListController: JXTableViewController {
             self.request(page: self.page)
         })
         self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
-            //FIXME:先使用，成功后再加...待完善，看后台规则再定
             self.page += 1
             self.request(page: self.page)
         })
@@ -45,6 +40,9 @@ class ArticleListController: JXTableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func isCustomNavigationBarUsed() -> Bool {
+        return true
     }
     override func request(page: Int) {
         self.vm.articleList(pageNo: page, completion: { (_, msg, isSuc) in

@@ -26,6 +26,8 @@
 		351EE62221099B3C004C5DE9 /* TradeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE62021099B3C004C5DE9 /* TradeListCell.swift */; };
 		351EE62321099B3C004C5DE9 /* TradeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE62121099B3C004C5DE9 /* TradeListCell.xib */; };
 		351EE6252109FCDE004C5DE9 /* TradeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */; };
+		351EE629210AC3E3004C5DE9 /* SmartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE627210AC3E3004C5DE9 /* SmartCell.swift */; };
+		351EE62A210AC3E3004C5DE9 /* SmartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE628210AC3E3004C5DE9 /* SmartCell.xib */; };
 		3521389820EC640900E13B14 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389720EC640900E13B14 /* TaskViewController.swift */; };
 		3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389B20EC659A00E13B14 /* TaskCell.swift */; };
 		3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3521389C20EC659A00E13B14 /* TaskCell.xib */; };
@@ -207,6 +209,8 @@
 		351EE62021099B3C004C5DE9 /* TradeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeListCell.swift; sourceTree = "<group>"; };
 		351EE62121099B3C004C5DE9 /* TradeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeListCell.xib; sourceTree = "<group>"; };
 		351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeDetailController.swift; sourceTree = "<group>"; };
+		351EE627210AC3E3004C5DE9 /* SmartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCell.swift; sourceTree = "<group>"; };
+		351EE628210AC3E3004C5DE9 /* SmartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmartCell.xib; sourceTree = "<group>"; };
 		3521389720EC640900E13B14 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3521389B20EC659A00E13B14 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		3521389C20EC659A00E13B14 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
@@ -416,6 +420,15 @@
 				351EE61D21098B4F004C5DE9 /* PaperDetailCommonCell.xib */,
 			);
 			path = Paper;
+			sourceTree = "<group>";
+		};
+		351EE626210AC3C7004C5DE9 /* Smart */ = {
+			isa = PBXGroup;
+			children = (
+				351EE627210AC3E3004C5DE9 /* SmartCell.swift */,
+				351EE628210AC3E3004C5DE9 /* SmartCell.xib */,
+			);
+			path = Smart;
 			sourceTree = "<group>";
 		};
 		3521389A20EC657000E13B14 /* Task */ = {
@@ -855,6 +868,7 @@
 		35CB0CD020B576050092C5FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				351EE626210AC3C7004C5DE9 /* Smart */,
 				3594D91820F5DF510009BFDF /* Home */,
 				3523686820F4CC3B0021F05C /* My */,
 				3521389A20EC657000E13B14 /* Task */,
@@ -1079,6 +1093,7 @@
 				352138A220EC71C400E13B14 /* TaskReusableView.xib in Resources */,
 				35CB0D1D20B576050092C5FC /* AipOcrSdk.storyboard in Resources */,
 				35CB0D2320B576050092C5FC /* guan@3x.png in Resources */,
+				351EE62A210AC3E3004C5DE9 /* SmartCell.xib in Resources */,
 				35CB0D3720B576060092C5FC /* com.baidu.idl.face.faceSDK.bundle in Resources */,
 				35CB0D1C20B576050092C5FC /* idl-license.face-ios in Resources */,
 				35CB0D2820B576060092C5FC /* xuxian@3x.png in Resources */,
@@ -1241,6 +1256,7 @@
 				35CB0D0920B576050092C5FC /* TabBarViewController.swift in Sources */,
 				352281C220BE559B001A0CA8 /* ArticleDetailsController.swift in Sources */,
 				352281B620BE348B001A0CA8 /* CommonManager.swift in Sources */,
+				351EE629210AC3E3004C5DE9 /* SmartCell.swift in Sources */,
 				35CB0D4520B576060092C5FC /* MyViewController.swift in Sources */,
 				3594D92920F724200009BFDF /* JXSelectView.swift in Sources */,
 				35CB0D4620B576060092C5FC /* ScanViewController.swift in Sources */,

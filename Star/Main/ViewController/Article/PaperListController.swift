@@ -16,9 +16,9 @@ class PaperListController: JXTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight - kTabBarHeight - 44)
-
+        self.title = "论文"
+        
+        self.tableView?.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight )
         self.tableView?.separatorStyle = .none
         self.tableView?.estimatedRowHeight = 107
         self.tableView?.register(UINib(nibName: "PaperListCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifier")
@@ -27,7 +27,6 @@ class PaperListController: JXTableViewController {
             self.request(page: self.page)
         })
         self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
-            //FIXME:先使用，成功后再加...待完善，看后台规则再定
             self.page += 1
             self.request(page: self.page)
         })
@@ -37,6 +36,9 @@ class PaperListController: JXTableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func isCustomNavigationBarUsed() -> Bool {
+        return true
     }
     override func request(page: Int) {
         self.vm.paperList(pageNo: page, completion: { (_, msg, isSuc) in

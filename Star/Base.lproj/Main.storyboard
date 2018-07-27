@@ -559,7 +559,7 @@
         <!--Smart View Controller-->
         <scene sceneID="xO3-NK-PXK">
             <objects>
-                <viewController id="Mpz-9a-0dd" customClass="SmartViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier=" SmartViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mpz-9a-0dd" customClass="SmartViewController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xWN-gh-iPH"/>
                         <viewControllerLayoutGuide type="bottom" id="xdh-pb-vik"/>
@@ -573,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="edT-i8-5V7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1078" y="870"/>
+            <point key="canvasLocation" x="1077.5999999999999" y="869.70443349753702"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="BIh-lu-L5E">
@@ -947,7 +947,7 @@
         <!-- -->
         <scene sceneID="VRf-D0-xoC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="904-1A-mGE" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="904-1A-mGE" customClass="JXNavigationController" customModule="Star" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title=" " id="bSS-M6-Pw7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LAp-Qi-0Kv">
@@ -978,6 +978,6 @@
         <image name="tab_scan_n" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CHf-vd-GKF"/>
+        <segue reference="oip-T5-H2B"/>
     </inferredMetricsTieBreakers>
 </document>
