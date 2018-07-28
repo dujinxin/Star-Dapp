@@ -23,7 +23,8 @@ class JXNavigationBar: UINavigationBar {
         
         let gradient = CAGradientLayer.init()
         gradient.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
-        gradient.locations = [0.5]
+        //gradient.locations = [0.5]
+        gradient.locations = [0]
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 0)
         gradient.frame = CGRect(x: 0, y: 0, width: self.jxWidth, height: self.jxHeight)
@@ -42,9 +43,15 @@ class JXNavigationBar: UINavigationBar {
         var rect = CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavStatusHeight)
 
         self.subviews.forEach { (v) in
+          
             if NSStringFromClass(type(of: v)).contains("UIBarBackground") {
                 v.frame = rect
-                
+                //隐藏分割线
+                v.subviews.forEach({ (subV) in
+                    if subV is UIImageView {
+                        subV.backgroundColor = UIColor.clear
+                    }
+                })
                 self.gradientLayer.frame = CGRect(x: 0, y: 0, width: v.jxWidth, height: v.jxHeight)
                 v.layer.addSublayer(self.gradientLayer)
             

@@ -43,7 +43,7 @@ class LoginViewController: BaseViewController {
         //颜色渐变
         let gradientLayer = CAGradientLayer.init()
         gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
-        gradientLayer.locations = [0.5]
+        gradientLayer.locations = [0]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
         gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenWidth - 60, height: loginButton.jxHeight)

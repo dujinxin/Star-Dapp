@@ -57,15 +57,6 @@ class HomeCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         self.indexButton.layer.cornerRadius = 10
-//        //颜色渐变
-//        let gradientLayer = CAGradientLayer.init()
-//        gradientLayer.colors = [UIColor.rgbColor(from: 149, 104, 252).cgColor,UIColor.rgbColor(from:143,201,255).cgColor]
-//        gradientLayer.locations = [0.5]
-//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-//        gradientLayer.frame = CGRect(x: 0, y: 0, width: indexButton.jxWidth, height: indexButton.jxHeight)
-//        gradientLayer.cornerRadius = 10
-//        self.indexButton.layer.addSublayer(gradientLayer)
         
     }
 
