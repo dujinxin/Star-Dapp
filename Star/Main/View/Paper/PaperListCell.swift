@@ -20,10 +20,31 @@ class PaperListCell: UITableViewCell {
     var entity: PaperEntity? {
         didSet{
             self.titleView.text = entity?.title
-            self.authorView.text = entity?.author
+            
+            //self.authorView.text = entity?.author
             self.periodicalView.text = entity?.source
             self.dateView.text = entity?.issue
-            self.downloadView.text = "下载：\(entity?.tradeCount ?? 0)"
+            self.downloadView.text = "交易：\(entity?.tradeCount ?? 0)"
+            
+            var source = ""
+            if let source1 = entity?.source, source1.isEmpty == false {
+                source = source1
+            }
+            
+            if let author1 = entity?.author {
+                let author = author1.replacingOccurrences(of: ",", with: ";")
+                let authors = author.components(separatedBy: ";")
+                if authors.count > 5 {
+                    var newStr = ""
+                    for i in 0..<5 {
+                        newStr += authors[i]
+                        newStr += ";"
+                    }
+                    self.authorView.text = newStr + source
+                } else {
+                    self.authorView.text = author + ";" + source
+                }
+            }
         }
     }
     var indexPath : IndexPath? {

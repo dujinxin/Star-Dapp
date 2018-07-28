@@ -144,7 +144,7 @@ class PaperVM : BaseViewModel{
             entity.content = str
         case "office":
             entity.title = "【机构】"
-            guard let text = self.paperDetailEntity.paperEntity.office else {
+            guard let text = self.paperDetailEntity.paperEntity.office, text.isEmpty == false else {
                 return nil
             }
             let str = text.replacingOccurrences(of: ",", with: "\n")
@@ -154,7 +154,7 @@ class PaperVM : BaseViewModel{
             entity.content = self.paperDetailEntity.paperEntity.thesisAbstract
         case "fund":
             entity.title = "【基金】"
-            guard let text = self.paperDetailEntity.paperEntity.fund else {
+            guard let text = self.paperDetailEntity.paperEntity.fund, text.isEmpty == false else {
                 return nil
             }
             let str = text.replacingOccurrences(of: ",", with: "\n")
@@ -168,7 +168,10 @@ class PaperVM : BaseViewModel{
             entity.content = str
         case "doi":
             entity.title = "【DOI】"
-            entity.content = self.paperDetailEntity.paperEntity.doi
+            guard let text = self.paperDetailEntity.paperEntity.doi, text.isEmpty == false else {
+                return nil
+            }
+            entity.content = text
         case "source":
             entity.title = "【来源期刊】"
             entity.content = self.paperDetailEntity.paperEntity.source

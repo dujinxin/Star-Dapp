@@ -386,7 +386,7 @@ class PaperDetailController: JXTableViewController {
                 if self.vm.paperDetailEntity.paperEntity.payed == 1 {
                     self.checkButton.setTitle("查看完整论文(\(self.vm.paperDetailEntity.paperEntity.thesisSize ?? "0.01")MB)", for: .normal)
                 } else {
-                    self.checkButton.setTitle("交易完整论文", for: .normal)
+                    self.checkButton.setTitle("(\(self.vm.paperDetailEntity.paperEntity.tradePrice) IPE)交易完整论文", for: .normal)
                 }
             } else {
                 ViewManager.showNotice(msg)
