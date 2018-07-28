@@ -26,6 +26,9 @@ class ScanViewController: BaseViewController {
     
     var session = AVCaptureSession()
     
+    var callBlock : ((_ address: String?)->())?
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -130,9 +133,24 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
                 return
             }
             session.stopRunning()
-            
             ViewManager.showNotice(codeStr)
+            if self.validate(code: codeStr) == false {
+                
+            } else {
+                if let block = callBlock {
+                    block(codeStr)
+                }
+            }
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    func validate(code: String) -> Bool {
+        if code.count != 42 {
+            return false
+        }
+        if code.hasPrefix("0x") == false{
+            return false
+        }
+        return true
     }
 }

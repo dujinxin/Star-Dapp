@@ -55,8 +55,14 @@ class UserManager : NSObject{
     /// - Parameter dict: 用户信息字典
     /// - Returns: 保存结果
     func saveAccound(dict:Dictionary<String, Any>) -> Bool {
-        self.userEntity = UserEntity()
-        self.userEntity.setValuesForKeys(dict)
+        let entity = UserEntity()
+        entity.setValuesForKeys(dict)
+        self.userEntity.authStatus = entity.authStatus
+        self.userEntity.rank = entity.rank
+        self.userEntity.smart_sid = entity.smart_sid
+
+//        self.userEntity = UserEntity()
+//        self.userEntity.setValuesForKeys(dict)
         
         guard let data = try? JSONSerialization.data(withJSONObject: dict, options: [])
             else {

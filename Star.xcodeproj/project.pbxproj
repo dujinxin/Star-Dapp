@@ -28,6 +28,7 @@
 		351EE6252109FCDE004C5DE9 /* TradeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */; };
 		351EE629210AC3E3004C5DE9 /* SmartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE627210AC3E3004C5DE9 /* SmartCell.swift */; };
 		351EE62A210AC3E3004C5DE9 /* SmartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE628210AC3E3004C5DE9 /* SmartCell.xib */; };
+		351EE62E210C6839004C5DE9 /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 351EE62D210C6839004C5DE9 /* aip.license */; };
 		3521389820EC640900E13B14 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389720EC640900E13B14 /* TaskViewController.swift */; };
 		3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389B20EC659A00E13B14 /* TaskCell.swift */; };
 		3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3521389C20EC659A00E13B14 /* TaskCell.xib */; };
@@ -150,7 +151,6 @@
 		35CB0D5B20B580E70092C5FC /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB0D5320B580440092C5FC /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		35CB0D5C20B580E70092C5FC /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB0D5420B580440092C5FC /* IdcardQuality.framework */; };
 		35CB0D5D20B580E70092C5FC /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB0D5420B580440092C5FC /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		35CB0D6020B658680092C5FC /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 35CB0D5F20B658680092C5FC /* aip.license */; };
 		35CB0D7620B6A6D40092C5FC /* LivingConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D6C20B6A6D30092C5FC /* LivingConfigModel.m */; };
 		35CB0D7720B6A6D40092C5FC /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D6F20B6A6D30092C5FC /* CircleView.m */; };
 		35CB0D7820B6A6D40092C5FC /* LivenessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0D7220B6A6D40092C5FC /* LivenessViewController.m */; };
@@ -211,6 +211,7 @@
 		351EE6242109FCDE004C5DE9 /* TradeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeDetailController.swift; sourceTree = "<group>"; };
 		351EE627210AC3E3004C5DE9 /* SmartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCell.swift; sourceTree = "<group>"; };
 		351EE628210AC3E3004C5DE9 /* SmartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmartCell.xib; sourceTree = "<group>"; };
+		351EE62D210C6839004C5DE9 /* aip.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = aip.license; sourceTree = "<group>"; };
 		3521389720EC640900E13B14 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3521389B20EC659A00E13B14 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		3521389C20EC659A00E13B14 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
@@ -342,7 +343,6 @@
 		35CB0D5220B580440092C5FC /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		35CB0D5320B580440092C5FC /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
 		35CB0D5420B580440092C5FC /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
-		35CB0D5F20B658680092C5FC /* aip.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = aip.license; sourceTree = "<group>"; };
 		35CB0D6C20B6A6D30092C5FC /* LivingConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivingConfigModel.m; sourceTree = "<group>"; };
 		35CB0D6D20B6A6D30092C5FC /* LivingConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LivingConfigModel.h; sourceTree = "<group>"; };
 		35CB0D6F20B6A6D30092C5FC /* CircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView.m; sourceTree = "<group>"; };
@@ -616,10 +616,10 @@
 				35CB0C5820B576050092C5FC /* UIView+Inherit */,
 				35CB0C5A20B576050092C5FC /* Extension */,
 				35CB0C6720B576050092C5FC /* JXViewController */,
+				35CB0C6C20B576050092C5FC /* JXNetwork */,
 				35CB0C6920B576050092C5FC /* NotificationEnum.swift */,
 				35CB0C6A20B576050092C5FC /* ConstantHeader.swift */,
 				35CB0C6B20B576050092C5FC /* ViewManager.swift */,
-				35CB0C6C20B576050092C5FC /* JXNetwork */,
 				35CB0C7120B576050092C5FC /* ApiEnum.swift */,
 				35CB0C7220B576050092C5FC /* Encryption.swift */,
 				35CB0C7320B576050092C5FC /* ProjectHeader.swift */,
@@ -730,7 +730,7 @@
 		35CB0C8320B576050092C5FC /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				35CB0D5F20B658680092C5FC /* aip.license */,
+				351EE62D210C6839004C5DE9 /* aip.license */,
 				35CB0CA820B576050092C5FC /* AipOcrBundle */,
 				35CB0C8520B576050092C5FC /* AipOcrSdk */,
 				35CB0D5120B580440092C5FC /* lib */,
@@ -1081,6 +1081,7 @@
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
 				3594D93320FA04730009BFDF /* diamond.mp3 in Resources */,
 				35CB0D2B20B576060092C5FC /* tuku@2x.png in Resources */,
+				351EE62E210C6839004C5DE9 /* aip.license in Resources */,
 				35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */,
 				35CB0D2E20B576060092C5FC /* paizhaoanniu_dianjihou@3x.png in Resources */,
 				35CB0D3020B576060092C5FC /* dengpao@3x.png in Resources */,
@@ -1101,7 +1102,6 @@
 				351EE61F21098B4F004C5DE9 /* PaperDetailCommonCell.xib in Resources */,
 				35CB0C4120B575A30092C5FC /* LaunchScreen.storyboard in Resources */,
 				3523687820F5A5600021F05C /* PropertyCell.xib in Resources */,
-				35CB0D6020B658680092C5FC /* aip.license in Resources */,
 				35D758A520CA8A8400A77EEB /* BottomInputView.xib in Resources */,
 				35CB0D2520B576060092C5FC /* Page 1@2x.png in Resources */,
 				35CB0C3E20B575A30092C5FC /* Assets.xcassets in Resources */,
@@ -1449,7 +1449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JD78BK6EHC;
+				DEVELOPMENT_TEAM = 7FZMTCJXFZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1462,7 +1462,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1479,7 +1479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JD78BK6EHC;
+				DEVELOPMENT_TEAM = 7FZMTCJXFZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1492,7 +1492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hkipx.SmarterPlanet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mingmai.star;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

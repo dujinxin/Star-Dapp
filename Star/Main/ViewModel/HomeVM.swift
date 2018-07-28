@@ -146,7 +146,7 @@ class HomeVM: BaseViewModel {
             completion(nil, msg, false)
         }
     }
-    func harvestDiamond(id:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func harvestDiamond(id: String, completion: @escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         JXRequest.request(url: ApiString.harvestDiamond.rawValue, param: ["id":id], success: { (data, msg) in
             
             completion(data, msg, true)
@@ -156,9 +156,9 @@ class HomeVM: BaseViewModel {
         }
     }
     
-    func propertyRecord(pageSize:Int = 20,pageNo:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func propertyRecord(type: Int = 0, pageSize: Int = 20, pageNo: Int, completion: @escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
-        JXRequest.request(url: ApiString.propertyRecord.rawValue, param: ["pageSize":pageSize,"pageNo":pageNo], success: { (data, msg) in
+        JXRequest.request(url: ApiString.propertyRecord.rawValue, param: ["type": type,"pageSize": pageSize,"pageNo": pageNo], success: { (data, msg) in
             
             guard
                 let dict = data as? Dictionary<String, Any>,

@@ -63,8 +63,18 @@ class PaperEntity: BaseModel {
     @objc var thesisAbstract : String?
     @objc var downloadUrl : String?
     @objc var payed : Int = 0
-}
+    
+    @objc var md5 : String?
+    @objc var tradeId : String?
+    @objc var thesisSize : String?
 
+}
+class PaperTradeEntity: BaseModel {
+    @objc var result : Bool = false
+    @objc var tradeId : String?
+    @objc var msg : String?
+    @objc var url : String?
+}
 class CustomDetailEntity: BaseModel {
     @objc var content : String?//
     @objc var title : String?//

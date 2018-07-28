@@ -21,6 +21,11 @@ class PaperVM : BaseViewModel{
         return entity
     }()
     var detailList = Array<CustomDetailEntity>()
+    //论文交易
+    lazy var paperTradeEntity: PaperTradeEntity = {
+        let entity = PaperTradeEntity()
+        return entity
+    }()
     //邀请
     lazy var inviteEntity: InviteEntity = {
         let entity = InviteEntity()
@@ -175,7 +180,13 @@ class PaperVM : BaseViewModel{
     /// 论文购买
     func paperTrade(_ id: String, completion: @escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         JXRequest.request(url: ApiString.paperTrade.rawValue, param: ["id":id], success: { (data, msg) in
-            
+            guard
+                let dict = data as? Dictionary<String, Any>
+                else{
+                    completion(nil, self.message, false)
+                    return
+            }
+            self.paperTradeEntity.setValuesForKeys(dict)
             completion(data, msg, true)
             
         }) { (msg, code) in

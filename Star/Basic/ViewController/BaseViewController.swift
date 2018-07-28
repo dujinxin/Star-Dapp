@@ -17,7 +17,6 @@ class BaseViewController: UIViewController {
     //自定义导航栏
     lazy var customNavigationBar : JXNavigationBar = {
         let navigationBar = JXNavigationBar(frame:CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: kNavStatusHeight))
-        navigationBar.isUseGradualColor = self.isUseGradientColor
         navigationBar.barTintColor = UIColor.blue//导航条颜色
         navigationBar.isTranslucent = true
         navigationBar.barStyle = .blackTranslucent

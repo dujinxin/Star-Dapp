@@ -63,7 +63,7 @@ class TaskViewController: UICollectionViewController {
         layout.sectionInset = UIEdgeInsetsMake(0.5, 0, 0, 0)
         layout.minimumLineSpacing = 0.5
         layout.minimumInteritemSpacing = 0.5
-        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: 272 + kNavStatusHeight)
+        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: 212 + kNavStatusHeight + 60 * 2)
 
         self.collectionView?.collectionViewLayout = layout
         
@@ -155,10 +155,16 @@ class TaskViewController: UICollectionViewController {
                 let vc = PowerRecordController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            reusableView.dayTaskBlock = {
-                let vc = SmartViewController()
+            reusableView.dayArticleBlock = {
+                let storyboard = UIStoryboard(name: "Smart", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as! ArticleListController
                 vc.hidesBottomBarWhenPushed = true
-                vc.type = .task
+                vc.type = .tab
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            reusableView.dayPaperBlock = {
+                let vc = PaperListController()
+                vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -180,13 +186,17 @@ class TaskViewController: UICollectionViewController {
         case 4:
             self.identifyUserLiveness()
         case 5:
-            self.taskVM.createWallet { (_, msg, _) in
-                ViewManager.showNotice(msg)
-            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WalletVC") as! MyWalletViewController
+            vc.hidesBottomBarWhenPushed = true
+            vc.urlStr = kHtmlUrl + "createWallet"
+            self.navigationController?.pushViewController(vc, animated: true)
         case 6:
-            self.taskVM.backupWallet { (_, msg, _) in
-                ViewManager.showNotice(msg)
-            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WalletVC") as! MyWalletViewController
+            vc.hidesBottomBarWhenPushed = true
+            vc.urlStr = kHtmlUrl + "exportWallet"
+            self.navigationController?.pushViewController(vc, animated: true)
         case 7:
             self.performSegue(withIdentifier: "modifyImage", sender: nil)
         default:

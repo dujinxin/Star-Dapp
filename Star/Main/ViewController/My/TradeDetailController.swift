@@ -68,7 +68,7 @@ class TradeDetailController: JXTableViewController {
         self.tableView?.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight - (64 + 60 + kBottomMaginHeight))
         self.tableView?.separatorStyle = .none
         self.tableView?.estimatedRowHeight = 44
-        self.tableView?.register(UINib(nibName: "PaperDetailTopCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifierTop")
+
         self.tableView?.register(UINib(nibName: "PaperDetailCommonCell", bundle: nil), forCellReuseIdentifier: "reuseIdentifierCommon")
         
         self.view.addSubview(self.bottomView)
@@ -90,6 +90,7 @@ class TradeDetailController: JXTableViewController {
         self.tradeVM.tradeDetails(self.id) { (_, msg, isSuc) in
             if isSuc {
                 self.tableView?.reloadData()
+                self.checkButton.setTitle("查看完整论文(\(self.tradeVM.tradeDetailEntity.size ?? "0.01")MB)", for: .normal)
             } else {
                 ViewManager.showNotice(msg)
             }
@@ -108,28 +109,13 @@ class TradeDetailController: JXTableViewController {
             self.url = url
             
             let vc  = QLPreviewController.init()
+            vc.navigationController?.navigationBar.tintColor = UIColor.black
             vc.delegate = self
             vc.dataSource = self
             self.present(vc, animated: true) {
                 
             }
         }
-      
-        
-        
-        
-//        if self.vm.tradeDetailEntity. == 1 {
-//            self.showMBProgressHUD()
-//            //下载
-//            self.vm.paperDownload(self.vm.paperDetailEntity.paperEntity.downloadUrl!, process: { (progress) in
-//                print(progress.completedUnitCount,"/",progress.totalUnitCount)
-//            }) { (isSuc) in
-//                print("download ",isSuc)
-//                self.hideMBProgressHUD()
-//            }
-//        } else {
-//            //self.tradeBottomView.show()
-//        }
     }
     // MARK: - Table view data source
     
@@ -140,36 +126,22 @@ class TradeDetailController: JXTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.tradeVM.detailList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIndetifier = (indexPath.row == 0) ? "reuseIdentifierTop" : "reuseIdentifierCommon"
+        let cellIndetifier = "reuseIdentifierCommon"
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIndetifier, for: indexPath) as! PaperDetailTopCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIndetifier, for: indexPath) as! PaperDetailCommonCell
         cell.selectionStyle = .none
+        let entity = self.tradeVM.detailList[indexPath.row]
         
-//        cell.titleView.text = self.vm.paperDetailEntity.paperEntity.title
-//        cell.sourceView.text = self.vm.paperDetailEntity.paperEntity.source
-//        cell.tradeView.text = "交易量：\(self.vm.paperDetailEntity.paperEntity.tradeCount)"
-        return cell
+        cell.titleView.text = entity.title
+        cell.contentLabel.text = entity.content
 
+        return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let identifier = segue.identifier
-        if let entity = sender as? ArticleEntity, identifier == "articleDetail" {
-            let vc = segue.destination as! ArticleDetailsController
-            vc.articleEntity = entity
-        }
-    }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
 }
 extension TradeDetailController : QLPreviewControllerDataSource, QLPreviewControllerDelegate {
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {

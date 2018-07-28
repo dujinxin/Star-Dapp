@@ -20,7 +20,7 @@ class TradeVM: BaseViewModel {
         let entity = TradeDetailEntity()
         return entity
     }()
-    
+    var detailList = Array<CustomDetailEntity>()
     
     //交易记录列表
     func tradeRecord(pageSize:Int = 10,pageNo:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
@@ -71,11 +71,59 @@ class TradeVM: BaseViewModel {
                     return
             }
             self.tradeDetailEntity.setValuesForKeys(dict)
-            
+            self.customList()
             completion(data, msg, true)
             
         }) { (msg, code) in
             completion(nil, msg, false)
         }
+    }
+    func customList() {
+        
+        if let entity = self.entity(key: "title") {
+            self.detailList.append(entity)
+        }
+        if let entity = self.entity(key: "tradeTime") {
+            self.detailList.append(entity)
+        }
+        if let entity = self.entity(key: "tradeAmount") {
+            self.detailList.append(entity)
+        }
+        if let entity = self.entity(key: "tradeHash") {
+            self.detailList.append(entity)
+        }
+        if let entity = self.entity(key: "blockHeight") {
+            self.detailList.append(entity)
+        }
+    }
+    
+    func entity(key: String?) -> CustomDetailEntity? {
+        guard let key = key, key.isEmpty == false else {
+            return nil
+        }
+        let entity = CustomDetailEntity()
+        switch key {
+//        case "author":
+//            entity.title = "交易hash"
+//            entity.content = self.tradeDetailEntity.tradeHash ?? "上链中..."
+        case "title":
+            entity.title = "论文标题"
+            entity.content = self.tradeDetailEntity.title
+        case "tradeTime":
+            entity.title = "交易时间"
+            entity.content = self.tradeDetailEntity.tradeTime
+        case "tradeAmount":
+            entity.title = "交易金额"
+            entity.content = "\(self.tradeDetailEntity.tradeAmount) IPE"
+        case "tradeHash":
+            entity.title = "交易地址"
+            entity.content = self.tradeDetailEntity.tradeHash ?? "上链中..."
+        case "blockHeight":
+            entity.title = "区块高度"
+            entity.content = "\(self.tradeDetailEntity.blockHeight)"
+        default:
+            return nil
+        }
+        return entity
     }
 }

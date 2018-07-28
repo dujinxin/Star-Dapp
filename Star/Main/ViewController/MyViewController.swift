@@ -10,7 +10,7 @@ import UIKit
 
 class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var dataArray = [["image":"iconMoney","title":"水晶IPE"],["image":"iconPocket","title":"钱包"],["image":"iconPerson","title":"实名"],["image":"iconGear","title":"交易"],["image":"iconGear","title":"系统"]]
+    var dataArray = [["image":"iconMoney","title":"水晶IPE"],["image":"iconPocket","title":"钱包"],["image":"iconPerson","title":"实名"],["image":"iconTrade","title":"交易"],["image":"iconGear","title":"系统"]]
     
     var vm = LoginVM()
     @IBOutlet weak var tableView: UITableView!
@@ -66,6 +66,10 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         if segue.identifier == "accound" {
             if let vc = segue.destination as? AccountViewController,let mobile = sender as? String {
                 vc.mobile = mobile
+            }
+        } else if segue.identifier == "myWallet_web" {
+            if let vc = segue.destination as? MyWalletViewController, let url = sender as? String {
+                vc.urlStr = url
             }
         }
     }
@@ -187,12 +191,13 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             cell.iconView.image = UIImage(named: dict["image"]!)
             cell.titleView.text = dict["title"]
-            if indexPath.row == 2 {
-                cell.accessoryType = .none
-                cell.detailView.text = "开发中..."
-            } else {
-                cell.accessoryType = .disclosureIndicator
-            }
+            cell.accessoryType = .disclosureIndicator
+//            if indexPath.row == 2 {
+//                cell.accessoryType = .none
+//                cell.detailView.text = "开发中..."
+//            } else {
+//                cell.accessoryType = .disclosureIndicator
+//            }
             return cell
         }
     }
@@ -210,7 +215,7 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         } else if indexPath.row == 2{
             //ViewManager.showNotice("敬请期待")
             //performSegue(withIdentifier: "myWallet", sender: nil)
-            performSegue(withIdentifier: "myWallet_web", sender: nil)
+            performSegue(withIdentifier: "myWallet_web", sender: kHtmlUrl)
         } else if indexPath.row == 3{
             performSegue(withIdentifier: "personInfo", sender: nil)
         } else if indexPath.row == 4{

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import QuickLook
 
 class PaperDetailController: JXTableViewController {
     
     let vm = PaperVM()
     
     var id : String?
+    
+    var url : URL?
     
     var process : String = "0/0"
     
@@ -93,7 +96,7 @@ class PaperDetailController: JXTableViewController {
         let width : CGFloat = kScreenWidth - 70
 
         let contentView = UIView()
-        contentView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 260)
+        contentView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 260 - 42)
         contentView.backgroundColor = UIColor.white
         
         let backView = UIView()
@@ -134,26 +137,26 @@ class PaperDetailController: JXTableViewController {
         contentView.addSubview(reduceNumLabel)
         
         
-        let addLabel = UILabel()
-        addLabel.frame = CGRect(x: 80, y: reduceNumLabel.jxBottom + 10, width: width - 90, height: 12)
-        addLabel.text = "智慧值将永久"
-        addLabel.textColor = UIColor.rgbColor(rgbValue: 0x979EBF)
-        addLabel.textAlignment = .center
-        addLabel.font = UIFont.systemFont(ofSize: 12)
-        contentView.addSubview(addLabel)
-        
-        let addNumLabel = UILabel()
-        addNumLabel.frame = CGRect(x: 35, y: addLabel.jxBottom + 10, width: width, height: 20)
-        addNumLabel.text = "+\(self.vm.paperDetailEntity.power)"
-        addNumLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4358)
-        addNumLabel.font = UIFont.systemFont(ofSize: 20)
-        addNumLabel.textAlignment = .center
-        
-        contentView.addSubview(addNumLabel)
+//        let addLabel = UILabel()
+//        addLabel.frame = CGRect(x: 80, y: reduceNumLabel.jxBottom + 10, width: width - 90, height: 12)
+//        addLabel.text = "智慧值将永久"
+//        addLabel.textColor = UIColor.rgbColor(rgbValue: 0x979EBF)
+//        addLabel.textAlignment = .center
+//        addLabel.font = UIFont.systemFont(ofSize: 12)
+//        contentView.addSubview(addLabel)
+//
+//        let addNumLabel = UILabel()
+//        addNumLabel.frame = CGRect(x: 35, y: addLabel.jxBottom + 10, width: width, height: 20)
+//        addNumLabel.text = "+\(self.vm.paperDetailEntity.power)"
+//        addNumLabel.textColor = UIColor.rgbColor(rgbValue: 0x3b4358)
+//        addNumLabel.font = UIFont.systemFont(ofSize: 20)
+//        addNumLabel.textAlignment = .center
+//
+//        contentView.addSubview(addNumLabel)
         
         
         let line2 = UIView()
-        line2.frame = CGRect(x: 35, y: addNumLabel.jxBottom + 15, width: width, height: 1)
+        line2.frame = CGRect(x: 35, y: reduceNumLabel.jxBottom + 15, width: width, height: 1)
         line2.backgroundColor = UIColor.groupTableViewBackground
         contentView.addSubview(line2)
         
@@ -164,7 +167,7 @@ class PaperDetailController: JXTableViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(tradePaper), for: .touchUpInside)
         contentView.addSubview(button)
-        button.center = CGPoint(x: addNumLabel.center.x, y: button.center.y)
+        button.center = CGPoint(x: reduceNumLabel.center.x, y: button.center.y)
         
         //颜色渐变
         let gradientLayer = CAGradientLayer.init()
@@ -276,6 +279,10 @@ class PaperDetailController: JXTableViewController {
         
         return selectView
     }()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = .default
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -377,7 +384,7 @@ class PaperDetailController: JXTableViewController {
             if isSuc {
                 self.tableView?.reloadData()
                 if self.vm.paperDetailEntity.paperEntity.payed == 1 {
-                    self.checkButton.setTitle("查看完整论文", for: .normal)
+                    self.checkButton.setTitle("查看完整论文(\(self.vm.paperDetailEntity.paperEntity.thesisSize ?? "0.01")MB)", for: .normal)
                 } else {
                     self.checkButton.setTitle("交易完整论文", for: .normal)
                 }
@@ -396,6 +403,16 @@ class PaperDetailController: JXTableViewController {
             }) { (isSuc, url) in
                 print("download ",isSuc)
                 self.hideMBProgressHUD()
+  
+                self.url = url
+                
+                let vc  = QLPreviewController.init()
+                vc.navigationController?.navigationBar.tintColor = UIColor.black
+                vc.delegate = self
+                vc.dataSource = self
+                self.present(vc, animated: true) {
+                    
+                }
             }
         } else {
             self.tradeBottomView.show()
@@ -421,6 +438,10 @@ class PaperDetailController: JXTableViewController {
     }
     @objc func showTradeDetail() {
         self.closeStatus()
+ 
+        let vc = TradeDetailController()
+        vc.id = self.vm.paperTradeEntity.tradeId ?? ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func closeStatus() {
         self.statusBottomView.dismiss()
@@ -473,4 +494,18 @@ class PaperDetailController: JXTableViewController {
         }
     }
     
+}
+extension PaperDetailController : QLPreviewControllerDataSource, QLPreviewControllerDelegate {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        //let item = urls[index] as QLPreviewItem
+        guard let url = self.url else {
+            return URL.init(string: "")! as QLPreviewItem
+        }
+        let item = url as QLPreviewItem
+        return item
+    }
 }

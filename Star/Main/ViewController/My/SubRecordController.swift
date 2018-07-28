@@ -32,31 +32,15 @@ class SubRecordController: JXTableViewController{
         self.tableView?.estimatedRowHeight = 44
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
-        if type != .payOut {
-            self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-                self.page = 1
-                self.vm.propertyRecord(pageNo: self.page) { (_, msg, isSuc) in
-                    self.tableView?.mj_header.endRefreshing()
-                    if isSuc {
-                        self.tableView?.reloadData()
-                    } else {
-                        ViewManager.showNotice(msg)
-                    }
-                }
-            })
-            self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
-                self.page += 1
-                self.vm.propertyRecord(pageNo: self.page) { (_, msg, isSuc) in
-                    self.tableView?.mj_footer.endRefreshing()
-                    if isSuc {
-                        self.tableView?.reloadData()
-                    } else {
-                        ViewManager.showNotice(msg)
-                    }
-                }
-            })
-            self.tableView?.mj_header.beginRefreshing()
-        }
+        self.tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.page = 1
+            self.request(page: self.page)
+        })
+        self.tableView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.page += 1
+            self.request(page: self.page)
+        })
+        self.tableView?.mj_header.beginRefreshing()
     
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +61,23 @@ class SubRecordController: JXTableViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func request(page: Int) {
+        var t = 0
+        if type == .comeIn {
+            t = 1
+        } else if type == .payOut {
+            t = -1
+        }
+        self.vm.propertyRecord(type: t,pageNo: page) { (_, msg, isSuc) in
+            self.tableView?.mj_footer.endRefreshing()
+            self.tableView?.mj_header.endRefreshing()
+            if isSuc {
+                self.tableView?.reloadData()
+            } else {
+                ViewManager.showNotice(msg)
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
@@ -96,7 +97,7 @@ class SubRecordController: JXTableViewController{
         
         cell.propertyTitleLabel.text = entity.categoryInfo
         cell.timeLabel.text = entity.time
-        cell.numberLabel.text = "+\(entity.ipe)IPE"
+        cell.numberLabel.text = "\(entity.ipe)IPE"
         cell.numberLabel.textColor = UIColor.rgbColor(from: 4, 187, 103)
         return cell
 

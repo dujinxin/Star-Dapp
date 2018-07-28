@@ -33,4 +33,6 @@ class TradeDetailEntity: BaseModel {
     @objc var tradeAmount : Double = 0
     @objc var tradeTime : String?
     @objc var tradeHash : String?
+    
+    @objc var size : String?
 }

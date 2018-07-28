@@ -15,9 +15,14 @@ let kWalletUrl = "http://192.168.0.171:8080/"  //钱包
 class MyWalletViewController: JXWkWebViewController {
     
 
-    var homeUrl: URL? {
-        return URL(string: String.init(format: "%@wallet?sid=%@", kHtmlUrl,UserManager.manager.userEntity.smart_sid))
-    }
+    var urlStr: String?
+    
+    private var webUrl : URL?
+    
+    lazy var taskVM: TaskVM = {
+        let vm = TaskVM()
+        return vm
+    }()
     lazy var rightBarButtonItem: UIBarButtonItem = {
         let leftButton = UIButton()
         leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -49,51 +54,44 @@ class MyWalletViewController: JXWkWebViewController {
         self.webView.configuration.userContentController.add(self, name: "titleFn")
         self.webView.configuration.userContentController.add(self, name: "copyFn")
         self.webView.configuration.userContentController.add(self, name: "scanFn")
-        
-        //[self.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
-//        self.webView.evaluateJavaScript("getParames()") { (data, error) in
-//            print(data,error)
-//            if let error = error {
-//                print(error.localizedDescription)
-//            }else{
-//                print(data)
-//            }
-//        }
-        
-        let web = UIWebView(frame: view.bounds)
-        if let userAgent = web.stringByEvaluatingJavaScript(from: "navigator.userAgent") {
-            if !(userAgent.contains("platformParams=")) {
-                let dict = ["platform":"ios"]
-                guard
-                    let data = try? JSONSerialization.data(withJSONObject: dict, options: []),
-                    let jsonStr = String.init(data: data, encoding: .utf8) else{
-                    return
-                }
-                let newUserAgent = userAgent.appendingFormat("platformParams=%@", jsonStr)
-                let mdict = ["UserAgent": newUserAgent]
-                print("mdict = ",mdict)
-                UserDefaults.standard.register(defaults: mdict)
-                UserDefaults.standard.synchronize()
-            }
-        }
+        self.webView.configuration.userContentController.add(self, name: "taskFn")
         
         self.webView.evaluateJavaScript("navigator.userAgent") { (data, error) in
             
             if let error = error {
                 print("Error = ",error.localizedDescription)
             } else {
-                print("navigator.userAgent = ",data ?? "")
+                //注册ua
+                //userAgent 可以简单的理解为 浏览器标识(简称UA,它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版本、CPU类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等)
+                if
+                    let userAgent = data as? String,
+                    userAgent.contains("platformParams=") == false {
+                    
+                    let dict = ["platform":"ios"]
+                    guard
+                        let result = try? JSONSerialization.data(withJSONObject: dict, options: []),
+                        let jsonStr = String.init(data: result, encoding: .utf8) else{
+                            return
+                    }
+                    let newUserAgent = userAgent.appendingFormat("platformParams=%@", jsonStr)
+                    if #available(iOS 9.0, *) {
+                        self.webView.customUserAgent = newUserAgent
+                    } else {
+                        let mdict = ["UserAgent": newUserAgent]
+                        print("mdict = ",mdict)
+                        UserDefaults.standard.register(defaults: mdict)
+                        UserDefaults.standard.synchronize()
+                    }
+                }
             }
         }
-        
-        
-//        if let url = homeUrl {
-//            self.webView.load(URLRequest(url: url))
-//        }
-        let url = URL.init(string: kWalletUrl)
-        self.webView.load(URLRequest(url: url!))
 
-        
+        if
+            let str = self.urlStr,
+            let url = URL.init(string: str) {
+            webUrl = url
+            self.webView.load(URLRequest(url: url))
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
     }
@@ -143,7 +141,7 @@ class MyWalletViewController: JXWkWebViewController {
             print("webview.url = " + (webView.url?.absoluteString)!)
             print("url = " + url.absoluteString)
             
-            if webView.url?.absoluteString == homeUrl?.absoluteString {
+            if webView.url?.absoluteString == webUrl?.absoluteString {
                 //            self.navigationItem.leftBarButtonItem = nil
                 print("首页")
                 
@@ -173,6 +171,10 @@ class MyWalletViewController: JXWkWebViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ScanVC") as! ScanViewController
         vc.hidesBottomBarWhenPushed = true
+        vc.callBlock = { (address) in
+            let url = URL.init(string: address!)
+            self.webView.load(URLRequest(url: url!))
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func getParames() -> String{
@@ -185,11 +187,14 @@ class MyWalletViewController: JXWkWebViewController {
         print(notify)
         
         if let isSuccess = notify.object as? Bool,
-            isSuccess == true,
-            let url = homeUrl{
-            
+            isSuccess == true,let url = webUrl{
             self.webView.load(URLRequest(url: url))
-            
+        }
+    }
+    override func requestData() {
+        
+        if let url = webUrl {
+            self.webView.load(URLRequest(url: url))
         }
     }
 }
@@ -210,31 +215,37 @@ extension MyWalletViewController {
 }
 extension MyWalletViewController {
     override func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("message:",message)
         print("message.name:",message.name)
         print("message.body:",message.body)
-        print("message.frameInfo:",message.frameInfo)
-
+        guard let body = message.body as? String else {
+            return
+        }
         if message.name == "titleFn" {
-            guard let body = message.body as? String else {
-                return
-            }
             self.title = body
         } else if message.name == "copyFn" {
-            guard let body = message.body as? String else {
-                return
+            if body == "true" {
+                let pals = UIPasteboard.general
+                pals.string = body
+                ViewManager.showNotice("复制成功")
             }
-            let pals = UIPasteboard.general
-            pals.string = body
+            
         } else if message.name == "scanFn" {
-            guard let body = message.body as? Bool else {
-                return
-            }
-            print(body)
-            if body == true {
+            if body == "true" {
                 self.customNavigationItem.rightBarButtonItem = self.rightBarButtonItem
             } else {
                 self.customNavigationItem.rightBarButtonItem = nil
+            }
+        } else if message.name == "taskFn" {
+            if body == "1" {
+                //创建
+                self.taskVM.createWallet { (_, msg, isSuc) in
+
+                }
+            } else {//2
+                //备份
+                self.taskVM.backupWallet { (_, msg, isSuc) in
+                    
+                }
             }
         }
     }

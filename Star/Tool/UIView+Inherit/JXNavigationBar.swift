@@ -29,7 +29,6 @@ class JXNavigationBar: UINavigationBar {
         gradient.frame = CGRect(x: 0, y: 0, width: self.jxWidth, height: self.jxHeight)
         return gradient
     }()
-    var isUseGradualColor : Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,10 +45,9 @@ class JXNavigationBar: UINavigationBar {
             if NSStringFromClass(type(of: v)).contains("UIBarBackground") {
                 v.frame = rect
                 
-                if isUseGradualColor {
-                    self.gradientLayer.frame = CGRect(x: 0, y: 0, width: v.jxWidth, height: v.jxHeight)
-                    v.layer.addSublayer(self.gradientLayer)
-                }
+                self.gradientLayer.frame = CGRect(x: 0, y: 0, width: v.jxWidth, height: v.jxHeight)
+                v.layer.addSublayer(self.gradientLayer)
+            
             } else if NSStringFromClass(type(of: v)).contains("UINavigationBarContentView") {
                 rect.origin.y += kStatusBarHeight
                 rect.size.height -= kStatusBarHeight
