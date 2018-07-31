@@ -21,12 +21,12 @@ class CommonManager {
     ///   - timeInterval: 倒计时间间隔(每次调用间隔)
     ///   - process:未完成时的回调
     ///   - completion: 完成回调
-    static func countDown(timeOut:Int,timeInterval:Double = 1,process:@escaping ((_ currentTime:Int)->()),completion:@escaping (()->())) {
+    static func countDown(timeOut:Int,timeInterval:Int = 1,process:@escaping ((_ currentTime:Int)->()),completion:@escaping (()->())) {
         
         var timeOut1 = timeOut
         let queue = DispatchQueue.global(qos: .default)
         let source_timer = DispatchSource.makeTimerSource(flags: [], queue: queue)
-        source_timer.schedule(wallDeadline: DispatchWallTime.now(), repeating: timeInterval)
+        source_timer.schedule(wallDeadline: DispatchWallTime.now(), repeating: Double(timeInterval))
         source_timer.setEventHandler {
             if timeOut1 <= 0 {
                 source_timer.cancel()
@@ -38,7 +38,7 @@ class CommonManager {
                 DispatchQueue.main.async {
                     process(seconds)
                 }
-                timeOut1 -= 1
+                timeOut1 -= timeInterval
             }
         }
         source_timer.resume()

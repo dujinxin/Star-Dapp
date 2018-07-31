@@ -11,6 +11,11 @@ import AVFoundation
 
 class HomeReusableView: UICollectionReusableView {
 
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var centerViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var centerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var centerViewLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     @IBOutlet weak var topContentView: UIView!
@@ -68,12 +73,26 @@ class HomeReusableView: UICollectionReusableView {
     //屏幕当前剩余水晶
     var remainDiamonds : Int = 0
     
+    //汇聚动画区域
+    var convergeRect: CGRect {
+        return CGRect(origin: CGPoint(), size: CGSize(width: kScreenWidth, height: kScreenHeight - kTabBarHeight))
+    }
+    //禁止出现区域
+    var forbiddenRect: CGRect {
+        let b = 200 * kPercent
+        let x = (kScreenWidth - b * 2) / 2
+        let y = ((kScreenHeight - kTabBarHeight) - b * 2) / 2
+        return CGRect(x: x, y: y, width: b, height: b)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         self.topConstraint.constant = kStatusBarHeight
+        self.centerViewTopConstraint.constant = 328 * kPercent 
+        self.centerViewHeightConstraint.constant = 133 * kPercent
+        self.centerViewHeightConstraint.constant = 132 * kPercent
         
         self.infoContentView.backgroundColor = UIColor.rgbColor(from: 250, 250, 250)
         
@@ -95,13 +114,10 @@ class HomeReusableView: UICollectionReusableView {
         self.powerRankButton.layer.borderWidth = 0.7
         self.powerRankButton.setTitleColor(JXTextColor, for: .normal)
         
-        
-//        let subArray = ["0.00912","0.01232","0.01333","0.02245","0.02175","0.02587","0.02709","0.01933"]
-//        self.random(subArray)
-//        self.animate()
-        
+        //砖石
         self.setRandomDiamonds(count: 8)
-
+        //随机光点
+        self.randomPoints(begin: 10)
     }
 
     @IBAction func help(_ sender: Any) {
@@ -292,6 +308,94 @@ class HomeReusableView: UICollectionReusableView {
             block(diamondEntity.diamondId ?? "")
         }
     }
+    
+    //MARK:汇聚动画
+    //由于同一个视图在动画过程中不响应点击事件，这里的做法是给父视图添加点击事件，而给子视图添加动画
+    func randomPoints(begin count: Int) {
+        
+        CommonManager.countDown(timeOut: count, timeInterval: 1, process: { (i) in
+            print("当前点",i)
+            self.resetRandomPoint(v: nil)
+        }) {
+            print("初始点全部生成")
+        }
+    }
+    func resetRandomPoint(v: UIView?) {
+        let iconWidth : CGFloat = 10
+        let iconHeight : CGFloat  = 10//10 * 77.0 / 34.0
+        //origin可随机区域 width = superView.width - button.width
+        let width = self.contentView.bounds.width - iconWidth
+        //origin可随机区域 width = superView.height - button.height
+        let height = self.contentView.bounds.height - iconHeight
+        
+        var frame = CGRect()
+        var isIntersects = true
+        repeat{
+            //起始位置预留动画的位置
+            let x = arc4random_uniform(UInt32(width))
+            let y = arc4random_uniform(UInt32(height))
+            frame = CGRect(x: CGFloat(x), y: CGFloat(y), width: iconWidth, height: iconHeight)
+            
+            isIntersects = false
+            //与已存在的子视图没有交集，方可添加
+            if forbiddenRect.intersects(frame) == true {
+                //print("有交集")
+                isIntersects = true
+                break
+            }
+            
+        }while(isIntersects)
+        //print("没有交集")
+        let pointView = v ?? UIView()
+        pointView.frame = frame
+        //pointView.backgroundColor = UIColor.randomColor
+        pointView.backgroundColor = UIColor.white
+        pointView.alpha = 1
+        pointView.layer.cornerRadius = iconWidth / 2
+        pointView.isHidden = false
+        self.contentView.addSubview(pointView)
+     
+        self.beginConvergeAnimate(v: pointView, startTime: 0)
+        
+    }
+    func beginConvergeAnimate(v: UIView, startTime: Double) {
+        
+        //动画
+        UIView.animate(withDuration: 3, delay: startTime, options: [.curveEaseOut], animations: {
+            var frame = v.frame
+            let point = CGPoint(x: self.convergeRect.width / 2 + v.jxWidth / 2, y: self.convergeRect.height / 2 + v.jxHeight / 2)
+            frame.origin = point
+            frame.size = CGSize(width: 0, height: 0)
+            v.frame = frame
+            v.alpha = 0
+            v.layer.cornerRadius = 0
+        }) { (finish) in
+            if finish {
+                v.isHidden = true
+                v.removeFromSuperview()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + startTime) {
+                    self.resetRandomPoint(v: v)
+                }
+            }
+        }
+    }
+    /**
+     let startPoint = CGPoint(x: self.convergeRect.width / 2, y: self.convergeRect.height / 2)
+     let endPoint = CGPoint(x: CGFloat(x) + iconWidth / 2, y: CGFloat(y) + iconHeight / 2)
+     
+     let xEndPoint = CGPoint(x: startPoint.x + 100, y: startPoint.y)
+     
+     let a = endPoint.x - startPoint.x
+     let b = endPoint.y - startPoint.y
+     let c = xEndPoint.x - startPoint.x
+     let d = xEndPoint.y - startPoint.y
+     
+     var rads = acos(((a * c) + (b * d)) / ((sqrt(a * a + b * b)) * (sqrt(c * c + d * d))))
+     if startPoint.y > endPoint.y {
+     rads = -rads
+     }
+     superView.transform = CGAffineTransform(rotationAngle: CGFloat(rads))
+     */
 }
 class DiamondView: UIView {
     lazy var contentView: UIView = {

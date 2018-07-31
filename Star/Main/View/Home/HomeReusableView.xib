@@ -266,12 +266,22 @@
                                 <constraint firstAttribute="height" constant="44" id="sfC-xZ-11J"/>
                             </constraints>
                         </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="szw-Wi-xh4">
+                            <rect key="frame" x="132" y="220" width="133" height="133"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="szw-Wi-xh4" secondAttribute="height" id="bN0-vp-WhO"/>
+                                <constraint firstAttribute="height" constant="133" id="fWQ-VS-VfN"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="pDn-wu-ROM" firstAttribute="leading" secondItem="WLV-XL-LHb" secondAttribute="leading" constant="-1" id="1ha-Xs-THR"/>
+                        <constraint firstItem="szw-Wi-xh4" firstAttribute="top" secondItem="WLV-XL-LHb" secondAttribute="top" constant="220" id="1jv-ux-qHy"/>
                         <constraint firstItem="CNB-gD-wVm" firstAttribute="top" secondItem="JpK-e3-qZg" secondAttribute="bottom" id="2H7-A8-qvk"/>
                         <constraint firstItem="ag9-lT-aQm" firstAttribute="leading" secondItem="WLV-XL-LHb" secondAttribute="leading" id="6U1-1y-h2c"/>
+                        <constraint firstItem="szw-Wi-xh4" firstAttribute="leading" secondItem="WLV-XL-LHb" secondAttribute="leading" constant="132" id="6qf-2H-czn"/>
                         <constraint firstItem="CNB-gD-wVm" firstAttribute="leading" secondItem="WLV-XL-LHb" secondAttribute="leading" id="AJg-QK-UwJ"/>
                         <constraint firstItem="pDn-wu-ROM" firstAttribute="top" secondItem="WLV-XL-LHb" secondAttribute="top" constant="-1" id="BBM-MP-OfO"/>
                         <constraint firstAttribute="trailing" secondItem="JpK-e3-qZg" secondAttribute="trailing" id="BIF-ax-hVU"/>
@@ -300,6 +310,10 @@
             </constraints>
             <connections>
                 <outlet property="backgroundImageView" destination="pDn-wu-ROM" id="XOZ-L1-8Fd"/>
+                <outlet property="centerViewHeightConstraint" destination="fWQ-VS-VfN" id="6TS-Vf-CyS"/>
+                <outlet property="centerViewLeadingConstraint" destination="6qf-2H-czn" id="189-Li-7CO"/>
+                <outlet property="centerViewTopConstraint" destination="1jv-ux-qHy" id="m79-NN-GyK"/>
+                <outlet property="contentView" destination="WLV-XL-LHb" id="qfN-8N-xOc"/>
                 <outlet property="diamondContentView" destination="hLl-IP-2gR" id="bvu-BZ-Z4C"/>
                 <outlet property="diamondLabel" destination="D5h-Gt-TSN" id="T48-q5-qeb"/>
                 <outlet property="diamondRankButton" destination="Se9-bd-Oi8" id="Grh-bN-9n3"/>
@@ -319,7 +333,7 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="homeBackground" width="375" height="757"/>
+        <image name="homeBackground" width="375" height="761"/>
         <image name="iconAssets" width="124" height="139"/>
         <image name="iconBulb" width="71" height="71"/>
         <image name="iconDiamond" width="35" height="35"/>

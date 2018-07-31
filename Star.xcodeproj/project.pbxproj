@@ -29,6 +29,7 @@
 		351EE629210AC3E3004C5DE9 /* SmartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EE627210AC3E3004C5DE9 /* SmartCell.swift */; };
 		351EE62A210AC3E3004C5DE9 /* SmartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351EE628210AC3E3004C5DE9 /* SmartCell.xib */; };
 		351EE62E210C6839004C5DE9 /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 351EE62D210C6839004C5DE9 /* aip.license */; };
+		351EE630210CEF20004C5DE9 /* diamond.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 351EE62F210CEF20004C5DE9 /* diamond.mp3 */; };
 		3521389820EC640900E13B14 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389720EC640900E13B14 /* TaskViewController.swift */; };
 		3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521389B20EC659A00E13B14 /* TaskCell.swift */; };
 		3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3521389C20EC659A00E13B14 /* TaskCell.xib */; };
@@ -68,7 +69,6 @@
 		3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92A20F754FF0009BFDF /* PowerRecordController.swift */; };
 		3594D92D20F78C7D0009BFDF /* AttentionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */; };
 		3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93020F8FA270009BFDF /* ChainInfoController.swift */; };
-		3594D93320FA04730009BFDF /* diamond.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3594D93220FA04730009BFDF /* diamond.mp3 */; };
 		3594D93520FB47A20009BFDF /* HomeReusableVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3594D93420FB47A20009BFDF /* HomeReusableVM.swift */; };
 		35B8411F20FCC73B00616E8A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35B8411A20FCC6B200616E8A /* Info.plist */; };
 		35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8412A20FDDEB400616E8A /* InviteCardController.swift */; };
@@ -212,6 +212,7 @@
 		351EE627210AC3E3004C5DE9 /* SmartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCell.swift; sourceTree = "<group>"; };
 		351EE628210AC3E3004C5DE9 /* SmartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmartCell.xib; sourceTree = "<group>"; };
 		351EE62D210C6839004C5DE9 /* aip.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = aip.license; sourceTree = "<group>"; };
+		351EE62F210CEF20004C5DE9 /* diamond.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diamond.mp3; sourceTree = "<group>"; };
 		3521389720EC640900E13B14 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3521389B20EC659A00E13B14 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		3521389C20EC659A00E13B14 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
@@ -251,7 +252,6 @@
 		3594D92A20F754FF0009BFDF /* PowerRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerRecordController.swift; sourceTree = "<group>"; };
 		3594D92C20F78C7D0009BFDF /* AttentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionViewController.swift; sourceTree = "<group>"; };
 		3594D93020F8FA270009BFDF /* ChainInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainInfoController.swift; sourceTree = "<group>"; };
-		3594D93220FA04730009BFDF /* diamond.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = diamond.mp3; sourceTree = "<group>"; };
 		3594D93420FB47A20009BFDF /* HomeReusableVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeReusableVM.swift; sourceTree = "<group>"; };
 		35B8411920FCC6B200616E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		35B8412420FCC9E300616E8A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -556,7 +556,7 @@
 				35CB0C3D20B575A30092C5FC /* Assets.xcassets */,
 				35CB0C3F20B575A30092C5FC /* LaunchScreen.storyboard */,
 				35B8411A20FCC6B200616E8A /* Info.plist */,
-				3594D93220FA04730009BFDF /* diamond.mp3 */,
+				351EE62F210CEF20004C5DE9 /* diamond.mp3 */,
 			);
 			path = Star;
 			sourceTree = "<group>";
@@ -1070,6 +1070,7 @@
 				351EE612210971BC004C5DE9 /* Smart.storyboard in Resources */,
 				35CB0D2C20B576060092C5FC /* tuku@3x.png in Resources */,
 				351EE61721097FFD004C5DE9 /* PaperListCell.xib in Resources */,
+				351EE630210CEF20004C5DE9 /* diamond.mp3 in Resources */,
 				3523686C20F4CC6F0021F05C /* MyCell.xib in Resources */,
 				35CB0D1F20B576050092C5FC /* xuanzhuan@3x.png in Resources */,
 				35CB0D2A20B576060092C5FC /* dengpao_dianjihou@2x.png in Resources */,
@@ -1079,7 +1080,6 @@
 				35CB0D3220B576060092C5FC /* dengpao@2x.png in Resources */,
 				35CB0D2620B576060092C5FC /* guanbi@2x.png in Resources */,
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
-				3594D93320FA04730009BFDF /* diamond.mp3 in Resources */,
 				35CB0D2B20B576060092C5FC /* tuku@2x.png in Resources */,
 				351EE62E210C6839004C5DE9 /* aip.license in Resources */,
 				35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */,
