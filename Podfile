@@ -1,4 +1,6 @@
- platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '9.0'
 
 target 'Star' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -14,6 +16,9 @@ target 'Star' do
     pod 'Masonry'        #4.0.0
     pod 'SwiftyJSON'     #3.1.4
     pod 'JXFoundation'   #0.1.2
+
+    pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift.git'
+    pod 'JXFMDBHelper'
 
   # Pods for Star
 

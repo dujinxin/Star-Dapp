@@ -207,17 +207,14 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         if indexPath.row == 1 {
             performSegue(withIdentifier: "property", sender: nil)
-
-//                let storyboard = UIStoryboard(name: "Task", bundle: nil)
-//                let login = storyboard.instantiateViewController(withIdentifier: "TaskVC") as! TaskViewController
-//            self.navigationController?.pushViewController(login, animated: true)
-            
         } else if indexPath.row == 2{
-            //ViewManager.showNotice("敬请期待")
-            //performSegue(withIdentifier: "myWallet", sender: nil)
             performSegue(withIdentifier: "myWallet_web", sender: kHtmlUrl)
         } else if indexPath.row == 3{
-            performSegue(withIdentifier: "personInfo", sender: nil)
+            //performSegue(withIdentifier: "personInfo", sender: nil)
+            
+            let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "EthWalletVC") as! WalletViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 4{
             let vc = TradeRecordController()
             self.navigationController?.pushViewController(vc, animated: true)

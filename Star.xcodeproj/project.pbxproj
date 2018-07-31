@@ -140,7 +140,6 @@
 		35CB0D4520B576060092C5FC /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CDB20B576050092C5FC /* MyViewController.swift */; };
 		35CB0D4620B576060092C5FC /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CDC20B576050092C5FC /* ScanViewController.swift */; };
 		35CB0D4720B576060092C5FC /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CDE20B576050092C5FC /* PropertyViewController.swift */; };
-		35CB0D4920B576060092C5FC /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CE020B576050092C5FC /* WalletViewController.swift */; };
 		35CB0D4A20B576060092C5FC /* MyWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CE120B576050092C5FC /* MyWalletViewController.swift */; };
 		35CB0D4C20B576060092C5FC /* PersonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CE320B576050092C5FC /* PersonInfoViewController.swift */; };
 		35CB0D4D20B576060092C5FC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CB0CE420B576050092C5FC /* AccountViewController.swift */; };
@@ -171,6 +170,35 @@
 		35D758A120CA6F2500A77EEB /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D758A020CA6F2500A77EEB /* MyModel.swift */; };
 		35D758A320CA8A6C00A77EEB /* BottomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D758A220CA8A6C00A77EEB /* BottomInputView.swift */; };
 		35D758A520CA8A8400A77EEB /* BottomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D758A420CA8A8400A77EEB /* BottomInputView.xib */; };
+		35E5AD982110406F001FAEED /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35E5AD972110406F001FAEED /* Wallet.storyboard */; };
+		35E5AD9B2110431B001FAEED /* Web3VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5AD9A2110431B001FAEED /* Web3VM.swift */; };
+		35E5AD9D21104324001FAEED /* PropertyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5AD9C21104324001FAEED /* PropertyModel.swift */; };
+		35E5ADB721104338001FAEED /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5AD9F21104337001FAEED /* TransferViewController.swift */; };
+		35E5ADB821104338001FAEED /* PropertyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E5ADA021104337001FAEED /* PropertyViewCell.xib */; };
+		35E5ADB921104338001FAEED /* AddPropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E5ADA121104337001FAEED /* AddPropertyCell.xib */; };
+		35E5ADBA21104338001FAEED /* AddPropertyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA221104337001FAEED /* AddPropertyCell.swift */; };
+		35E5ADBB21104338001FAEED /* AddPropertyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA321104337001FAEED /* AddPropertyController.swift */; };
+		35E5ADBC21104338001FAEED /* PropertyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA421104337001FAEED /* PropertyViewCell.swift */; };
+		35E5ADBD21104338001FAEED /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA621104337001FAEED /* SettingViewController.swift */; };
+		35E5ADBE21104338001FAEED /* WalletHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA821104337001FAEED /* WalletHeadCell.swift */; };
+		35E5ADBF21104338001FAEED /* ModifyPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADA921104337001FAEED /* ModifyPasswordController.swift */; };
+		35E5ADC021104338001FAEED /* WalletListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADAA21104337001FAEED /* WalletListController.swift */; };
+		35E5ADC121104338001FAEED /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADAB21104337001FAEED /* ImportWalletController.swift */; };
+		35E5ADC221104338001FAEED /* WalletDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADAC21104337001FAEED /* WalletDetailController.swift */; };
+		35E5ADC321104338001FAEED /* CreateWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADAD21104337001FAEED /* CreateWalletController.swift */; };
+		35E5ADC421104338001FAEED /* WalletHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E5ADAE21104337001FAEED /* WalletHeadCell.xib */; };
+		35E5ADC521104338001FAEED /* PrivateKeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB021104337001FAEED /* PrivateKeyController.swift */; };
+		35E5ADC621104338001FAEED /* KeyStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB121104337001FAEED /* KeyStoreController.swift */; };
+		35E5ADC721104338001FAEED /* ExportPKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB321104337001FAEED /* ExportPKViewController.swift */; };
+		35E5ADC821104338001FAEED /* ExportKSTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB421104337001FAEED /* ExportKSTextController.swift */; };
+		35E5ADC921104338001FAEED /* ExportKSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB521104337001FAEED /* ExportKSViewController.swift */; };
+		35E5ADCA21104338001FAEED /* ExportKSCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADB621104337001FAEED /* ExportKSCodeController.swift */; };
+		35E5ADCC21104569001FAEED /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADCB21104569001FAEED /* WalletManager.swift */; };
+		35E5ADCF2110464E001FAEED /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADCD2110464E001FAEED /* String+Extension.swift */; };
+		35E5ADD02110464E001FAEED /* EthUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADCE2110464E001FAEED /* EthUnit.swift */; };
+		35E5ADD22110475C001FAEED /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADD12110475C001FAEED /* WalletViewController.swift */; };
+		35E5ADD421105E12001FAEED /* CreateSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADD321105E12001FAEED /* CreateSuccessController.swift */; };
+		35E5ADD621106354001FAEED /* BackUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E5ADD521106354001FAEED /* BackUpController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -335,7 +363,6 @@
 		35CB0CDB20B576050092C5FC /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		35CB0CDC20B576050092C5FC /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		35CB0CDE20B576050092C5FC /* PropertyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyViewController.swift; sourceTree = "<group>"; };
-		35CB0CE020B576050092C5FC /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		35CB0CE120B576050092C5FC /* MyWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWalletViewController.swift; sourceTree = "<group>"; };
 		35CB0CE320B576050092C5FC /* PersonInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonInfoViewController.swift; sourceTree = "<group>"; };
 		35CB0CE420B576050092C5FC /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +397,35 @@
 		35D758A020CA6F2500A77EEB /* MyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyModel.swift; sourceTree = "<group>"; };
 		35D758A220CA8A6C00A77EEB /* BottomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInputView.swift; sourceTree = "<group>"; };
 		35D758A420CA8A8400A77EEB /* BottomInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomInputView.xib; sourceTree = "<group>"; };
+		35E5AD972110406F001FAEED /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
+		35E5AD9A2110431B001FAEED /* Web3VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web3VM.swift; sourceTree = "<group>"; };
+		35E5AD9C21104324001FAEED /* PropertyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyModel.swift; sourceTree = "<group>"; };
+		35E5AD9F21104337001FAEED /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		35E5ADA021104337001FAEED /* PropertyViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyViewCell.xib; sourceTree = "<group>"; };
+		35E5ADA121104337001FAEED /* AddPropertyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPropertyCell.xib; sourceTree = "<group>"; };
+		35E5ADA221104337001FAEED /* AddPropertyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPropertyCell.swift; sourceTree = "<group>"; };
+		35E5ADA321104337001FAEED /* AddPropertyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPropertyController.swift; sourceTree = "<group>"; };
+		35E5ADA421104337001FAEED /* PropertyViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyViewCell.swift; sourceTree = "<group>"; };
+		35E5ADA621104337001FAEED /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		35E5ADA821104337001FAEED /* WalletHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletHeadCell.swift; sourceTree = "<group>"; };
+		35E5ADA921104337001FAEED /* ModifyPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordController.swift; sourceTree = "<group>"; };
+		35E5ADAA21104337001FAEED /* WalletListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletListController.swift; sourceTree = "<group>"; };
+		35E5ADAB21104337001FAEED /* ImportWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
+		35E5ADAC21104337001FAEED /* WalletDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletDetailController.swift; sourceTree = "<group>"; };
+		35E5ADAD21104337001FAEED /* CreateWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWalletController.swift; sourceTree = "<group>"; };
+		35E5ADAE21104337001FAEED /* WalletHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletHeadCell.xib; sourceTree = "<group>"; };
+		35E5ADB021104337001FAEED /* PrivateKeyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKeyController.swift; sourceTree = "<group>"; };
+		35E5ADB121104337001FAEED /* KeyStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreController.swift; sourceTree = "<group>"; };
+		35E5ADB321104337001FAEED /* ExportPKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportPKViewController.swift; sourceTree = "<group>"; };
+		35E5ADB421104337001FAEED /* ExportKSTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportKSTextController.swift; sourceTree = "<group>"; };
+		35E5ADB521104337001FAEED /* ExportKSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportKSViewController.swift; sourceTree = "<group>"; };
+		35E5ADB621104337001FAEED /* ExportKSCodeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportKSCodeController.swift; sourceTree = "<group>"; };
+		35E5ADCB21104569001FAEED /* WalletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
+		35E5ADCD2110464E001FAEED /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		35E5ADCE2110464E001FAEED /* EthUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthUnit.swift; sourceTree = "<group>"; };
+		35E5ADD12110475C001FAEED /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		35E5ADD321105E12001FAEED /* CreateSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSuccessController.swift; sourceTree = "<group>"; };
+		35E5ADD521106354001FAEED /* BackUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackUpController.swift; sourceTree = "<group>"; };
 		764F7A13560F468FDAD2BC9C /* Pods-Star.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.release.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.release.xcconfig"; sourceTree = "<group>"; };
 		C0CEBECB4717FCC0EE3AC335 /* Pods-Star.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Star.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Star/Pods-Star.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -668,6 +724,7 @@
 		35CB0C7420B576050092C5FC /* CommonManager */ = {
 			isa = PBXGroup;
 			children = (
+				35E5ADCB21104569001FAEED /* WalletManager.swift */,
 				352281B520BE348B001A0CA8 /* CommonManager.swift */,
 				35CB0C7520B576050092C5FC /* LanguageManager.swift */,
 				35CB0C7720B576050092C5FC /* UserManager */,
@@ -836,6 +893,7 @@
 		35CB0CC920B576050092C5FC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				35E5AD9A2110431B001FAEED /* Web3VM.swift */,
 				35CB0CCC20B576050092C5FC /* LoginVM.swift */,
 				35D7589620C6603500A77EEB /* HomeVM.swift */,
 				3594D93420FB47A20009BFDF /* HomeReusableVM.swift */,
@@ -852,6 +910,7 @@
 		35CB0CCD20B576050092C5FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35E5AD9C21104324001FAEED /* PropertyModel.swift */,
 				35CB0CCE20B576050092C5FC /* CommenModel.swift */,
 				35CB0CCF20B576050092C5FC /* UserModel.swift */,
 				3594D92120F60EB40009BFDF /* HomeModel.swift */,
@@ -868,6 +927,7 @@
 		35CB0CD020B576050092C5FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				35E5AD99211041E0001FAEED /* Wallet */,
 				351EE626210AC3C7004C5DE9 /* Smart */,
 				3594D91820F5DF510009BFDF /* Home */,
 				3523686820F4CC3B0021F05C /* My */,
@@ -892,6 +952,7 @@
 		35CB0CD920B576050092C5FC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				35E5AD962110404E001FAEED /* Wallet */,
 				3594D92320F6FC4A0009BFDF /* Home */,
 				35CB0CDD20B576050092C5FC /* My */,
 				35D7588720C52F7A00A77EEB /* Task */,
@@ -910,7 +971,6 @@
 				35CB0CDE20B576050092C5FC /* PropertyViewController.swift */,
 				3523687120F5A16F0021F05C /* PropertyRecordController.swift */,
 				3523687320F5A2110021F05C /* SubRecordController.swift */,
-				35CB0CE020B576050092C5FC /* WalletViewController.swift */,
 				35CB0CE120B576050092C5FC /* MyWalletViewController.swift */,
 				35CB0CE320B576050092C5FC /* PersonInfoViewController.swift */,
 				35CB0CE420B576050092C5FC /* AccountViewController.swift */,
@@ -1005,6 +1065,86 @@
 			path = Task;
 			sourceTree = "<group>";
 		};
+		35E5AD962110404E001FAEED /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				35E5ADD12110475C001FAEED /* WalletViewController.swift */,
+				35E5ADCE2110464E001FAEED /* EthUnit.swift */,
+				35E5ADCD2110464E001FAEED /* String+Extension.swift */,
+				35E5AD972110406F001FAEED /* Wallet.storyboard */,
+				35E5ADB221104337001FAEED /* export */,
+				35E5ADAF21104337001FAEED /* import */,
+				35E5AD9E21104337001FAEED /* property */,
+				35E5ADA521104337001FAEED /* setting */,
+				35E5ADA721104337001FAEED /* wallet */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		35E5AD99211041E0001FAEED /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		35E5AD9E21104337001FAEED /* property */ = {
+			isa = PBXGroup;
+			children = (
+				35E5AD9F21104337001FAEED /* TransferViewController.swift */,
+				35E5ADA021104337001FAEED /* PropertyViewCell.xib */,
+				35E5ADA121104337001FAEED /* AddPropertyCell.xib */,
+				35E5ADA221104337001FAEED /* AddPropertyCell.swift */,
+				35E5ADA321104337001FAEED /* AddPropertyController.swift */,
+				35E5ADA421104337001FAEED /* PropertyViewCell.swift */,
+			);
+			path = property;
+			sourceTree = "<group>";
+		};
+		35E5ADA521104337001FAEED /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				35E5ADA621104337001FAEED /* SettingViewController.swift */,
+			);
+			path = setting;
+			sourceTree = "<group>";
+		};
+		35E5ADA721104337001FAEED /* wallet */ = {
+			isa = PBXGroup;
+			children = (
+				35E5ADA821104337001FAEED /* WalletHeadCell.swift */,
+				35E5ADA921104337001FAEED /* ModifyPasswordController.swift */,
+				35E5ADAA21104337001FAEED /* WalletListController.swift */,
+				35E5ADAB21104337001FAEED /* ImportWalletController.swift */,
+				35E5ADAC21104337001FAEED /* WalletDetailController.swift */,
+				35E5ADAD21104337001FAEED /* CreateWalletController.swift */,
+				35E5ADD321105E12001FAEED /* CreateSuccessController.swift */,
+				35E5ADD521106354001FAEED /* BackUpController.swift */,
+				35E5ADAE21104337001FAEED /* WalletHeadCell.xib */,
+			);
+			path = wallet;
+			sourceTree = "<group>";
+		};
+		35E5ADAF21104337001FAEED /* import */ = {
+			isa = PBXGroup;
+			children = (
+				35E5ADB021104337001FAEED /* PrivateKeyController.swift */,
+				35E5ADB121104337001FAEED /* KeyStoreController.swift */,
+			);
+			path = import;
+			sourceTree = "<group>";
+		};
+		35E5ADB221104337001FAEED /* export */ = {
+			isa = PBXGroup;
+			children = (
+				35E5ADB321104337001FAEED /* ExportPKViewController.swift */,
+				35E5ADB421104337001FAEED /* ExportKSTextController.swift */,
+				35E5ADB521104337001FAEED /* ExportKSViewController.swift */,
+				35E5ADB621104337001FAEED /* ExportKSCodeController.swift */,
+			);
+			path = export;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1080,6 +1220,7 @@
 				35CB0D2620B576060092C5FC /* guanbi@2x.png in Resources */,
 				35CB0D3120B576060092C5FC /* paizhaoanniu@3x.png in Resources */,
 				3594D93320FA04730009BFDF /* diamond.mp3 in Resources */,
+				35E5ADB821104338001FAEED /* PropertyViewCell.xib in Resources */,
 				35CB0D2B20B576060092C5FC /* tuku@2x.png in Resources */,
 				351EE62E210C6839004C5DE9 /* aip.license in Resources */,
 				35D7588B20C52FD700A77EEB /* Task.storyboard in Resources */,
@@ -1100,9 +1241,11 @@
 				35CB0D2820B576060092C5FC /* xuxian@3x.png in Resources */,
 				35CB0D2220B576050092C5FC /* queding@3x.png in Resources */,
 				351EE61F21098B4F004C5DE9 /* PaperDetailCommonCell.xib in Resources */,
+				35E5AD982110406F001FAEED /* Wallet.storyboard in Resources */,
 				35CB0C4120B575A30092C5FC /* LaunchScreen.storyboard in Resources */,
 				3523687820F5A5600021F05C /* PropertyCell.xib in Resources */,
 				35D758A520CA8A8400A77EEB /* BottomInputView.xib in Resources */,
+				35E5ADB921104338001FAEED /* AddPropertyCell.xib in Resources */,
 				35CB0D2520B576060092C5FC /* Page 1@2x.png in Resources */,
 				35CB0C3E20B575A30092C5FC /* Assets.xcassets in Resources */,
 				3521389E20EC659A00E13B14 /* TaskCell.xib in Resources */,
@@ -1110,6 +1253,7 @@
 				35CB0D2020B576050092C5FC /* guan@2x.png in Resources */,
 				35CB0D2420B576050092C5FC /* Page 1@3x.png in Resources */,
 				35CB0D2120B576050092C5FC /* queding@2x.png in Resources */,
+				35E5ADC421104338001FAEED /* WalletHeadCell.xib in Resources */,
 				3523687020F4CCDD0021F05C /* ImageTitleCell.xib in Resources */,
 				35B8411F20FCC73B00616E8A /* Info.plist in Resources */,
 				35CB0D2D20B576060092C5FC /* dengpao_dianjihou@3x.png in Resources */,
@@ -1150,26 +1294,46 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Star/Pods-Star-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/JXFMDBHelper/JXFMDBHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/JXFoundation/JXFoundation.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXFMDBHelper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXFoundation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1183,14 +1347,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35E5AD9D21104324001FAEED /* PropertyModel.swift in Sources */,
 				35CB0CEB20B576050092C5FC /* ZPCollectionViewController.swift in Sources */,
 				35CB0D8120B6A86A0092C5FC /* ImageUtils.m in Sources */,
 				35CB0CEE20B576050092C5FC /* JXTableViewController.swift in Sources */,
-				35CB0D4920B576060092C5FC /* WalletViewController.swift in Sources */,
 				35CB0C3920B575A20092C5FC /* ViewController.swift in Sources */,
 				352281B820BE4365001A0CA8 /* ArticleListController.swift in Sources */,
+				35E5ADBC21104338001FAEED /* PropertyViewCell.swift in Sources */,
+				35E5ADCF2110464E001FAEED /* String+Extension.swift in Sources */,
+				35E5ADC921104338001FAEED /* ExportKSViewController.swift in Sources */,
 				35CB0CEF20B576050092C5FC /* JXNavigationBar.swift in Sources */,
 				35CB0CE920B576050092C5FC /* JXNavigationController.swift in Sources */,
+				35E5ADC021104338001FAEED /* WalletListController.swift in Sources */,
 				35CB0CFD20B576050092C5FC /* ConstantHeader.swift in Sources */,
 				351EE61A21098B2E004C5DE9 /* PaperDetailTopCell.swift in Sources */,
 				3594D91520F5CD4D0009BFDF /* AboutUsViewController.swift in Sources */,
@@ -1198,6 +1366,7 @@
 				3594D93520FB47A20009BFDF /* HomeReusableVM.swift in Sources */,
 				35CB0C3720B575A20092C5FC /* AppDelegate.swift in Sources */,
 				35CB0D0D20B576050092C5FC /* RegisterViewController.swift in Sources */,
+				35E5ADBD21104338001FAEED /* SettingViewController.swift in Sources */,
 				35CB0D4720B576060092C5FC /* PropertyViewController.swift in Sources */,
 				35CB0D7720B6A6D40092C5FC /* CircleView.m in Sources */,
 				351EE60121070FC9004C5DE9 /* PaperVM.swift in Sources */,
@@ -1207,6 +1376,7 @@
 				35CB0D4C20B576060092C5FC /* PersonInfoViewController.swift in Sources */,
 				35CB0D7820B6A6D40092C5FC /* LivenessViewController.m in Sources */,
 				35CB0D0220B576050092C5FC /* JXRequest.swift in Sources */,
+				35E5ADB721104338001FAEED /* TransferViewController.swift in Sources */,
 				35CB0D3B20B576060092C5FC /* CommenModel.swift in Sources */,
 				35CB0CFB20B576050092C5FC /* JXPhotoBrowserController.swift in Sources */,
 				35CB0D0820B576050092C5FC /* UserManager.swift in Sources */,
@@ -1220,16 +1390,21 @@
 				35CB0CFF20B576050092C5FC /* JXNetworkError.swift in Sources */,
 				35D758A120CA6F2500A77EEB /* MyModel.swift in Sources */,
 				351EE61E21098B4F004C5DE9 /* PaperDetailCommonCell.swift in Sources */,
+				35E5ADC621104338001FAEED /* KeyStoreController.swift in Sources */,
+				35E5ADC721104338001FAEED /* ExportPKViewController.swift in Sources */,
 				3594D93120F8FA270009BFDF /* ChainInfoController.swift in Sources */,
 				35249D7820C4EE1A001C1140 /* Date+Extension.swift in Sources */,
 				35CB0D4A20B576060092C5FC /* MyWalletViewController.swift in Sources */,
 				35CB0D8A20B795B70092C5FC /* AuthResultViewController.swift in Sources */,
+				35E5ADC821104338001FAEED /* ExportKSTextController.swift in Sources */,
 				351EE605210818AC004C5DE9 /* TradeRecordController.swift in Sources */,
 				3594D92B20F754FF0009BFDF /* PowerRecordController.swift in Sources */,
 				35CB0D0120B576050092C5FC /* JXNetworkManager.swift in Sources */,
 				351EE61021096E4C004C5DE9 /* SmartViewController.swift in Sources */,
+				35E5ADBB21104338001FAEED /* AddPropertyController.swift in Sources */,
 				35CB0D0420B576050092C5FC /* Encryption.swift in Sources */,
 				35CB0CFE20B576050092C5FC /* ViewManager.swift in Sources */,
+				35E5ADD421105E12001FAEED /* CreateSuccessController.swift in Sources */,
 				352138A120EC71C400E13B14 /* TaskReusableView.swift in Sources */,
 				352281BF20BE4700001A0CA8 /* ArticleVM.swift in Sources */,
 				3523687420F5A2110021F05C /* SubRecordController.swift in Sources */,
@@ -1239,6 +1414,7 @@
 				35B8412B20FDDEB400616E8A /* InviteCardController.swift in Sources */,
 				351EE62221099B3C004C5DE9 /* TradeListCell.swift in Sources */,
 				351EE60921081A8C004C5DE9 /* TradeModel.swift in Sources */,
+				35E5ADBA21104338001FAEED /* AddPropertyCell.swift in Sources */,
 				35D7589720C6603500A77EEB /* HomeVM.swift in Sources */,
 				35CB0D0C20B576050092C5FC /* LoginViewController.swift in Sources */,
 				35CB0CEA20B576050092C5FC /* BaseViewController.swift in Sources */,
@@ -1246,30 +1422,38 @@
 				35CB0D3920B576060092C5FC /* MyVM.swift in Sources */,
 				35CB0CEC20B576050092C5FC /* JXWkWebViewController.swift in Sources */,
 				35CB0D3A20B576060092C5FC /* LoginVM.swift in Sources */,
+				35E5ADD621106354001FAEED /* BackUpController.swift in Sources */,
 				35CB0CE620B576050092C5FC /* BaseViewModel.swift in Sources */,
 				3594D91B20F5DF920009BFDF /* HomeReusableView.swift in Sources */,
 				35D7589920C6637C00A77EEB /* ArticleModel.swift in Sources */,
 				35D758A320CA8A6C00A77EEB /* BottomInputView.swift in Sources */,
 				35CB0D4420B576060092C5FC /* MainViewController.swift in Sources */,
+				35E5AD9B2110431B001FAEED /* Web3VM.swift in Sources */,
+				35E5ADBF21104338001FAEED /* ModifyPasswordController.swift in Sources */,
 				352281CA20BFB87B001A0CA8 /* JXView.swift in Sources */,
 				35CB0D0620B576050092C5FC /* LanguageManager.swift in Sources */,
 				35CB0D0920B576050092C5FC /* TabBarViewController.swift in Sources */,
+				35E5ADD22110475C001FAEED /* WalletViewController.swift in Sources */,
 				352281C220BE559B001A0CA8 /* ArticleDetailsController.swift in Sources */,
 				352281B620BE348B001A0CA8 /* CommonManager.swift in Sources */,
 				351EE629210AC3E3004C5DE9 /* SmartCell.swift in Sources */,
 				35CB0D4520B576060092C5FC /* MyViewController.swift in Sources */,
 				3594D92920F724200009BFDF /* JXSelectView.swift in Sources */,
 				35CB0D4620B576060092C5FC /* ScanViewController.swift in Sources */,
+				35E5ADD02110464E001FAEED /* EthUnit.swift in Sources */,
 				35D7589D20C7DE4000A77EEB /* TaskModel.swift in Sources */,
 				35D7589F20C7EBCD00A77EEB /* CommentModel.swift in Sources */,
+				35E5ADCA21104338001FAEED /* ExportKSCodeController.swift in Sources */,
 				35CB0D8820B6CB190092C5FC /* OcrVM.swift in Sources */,
 				35CB0D7D20B6A80E0092C5FC /* VideoCaptureDevice.m in Sources */,
 				35CB0D0A20B576050092C5FC /* AuthViewController.swift in Sources */,
 				3521389820EC640900E13B14 /* TaskViewController.swift in Sources */,
+				35E5ADBE21104338001FAEED /* WalletHeadCell.swift in Sources */,
 				3523686F20F4CCDD0021F05C /* ImageTitleCell.swift in Sources */,
 				3523687B20F5BD190021F05C /* PersonCell.swift in Sources */,
 				352281C520BE563B001A0CA8 /* CommentCell.swift in Sources */,
 				351EE5FF21070D6C004C5DE9 /* PaperModel.swift in Sources */,
+				35E5ADC121104338001FAEED /* ImportWalletController.swift in Sources */,
 				3523687720F5A5600021F05C /* PropertyCell.swift in Sources */,
 				351EE5FD21070CD4004C5DE9 /* PaperListController.swift in Sources */,
 				3594D91F20F60A8C0009BFDF /* HomeCell.swift in Sources */,
@@ -1279,14 +1463,18 @@
 				3523687220F5A16F0021F05C /* PropertyRecordController.swift in Sources */,
 				35D7589B20C6C04A00A77EEB /* CommentVM.swift in Sources */,
 				3594D92720F6FC780009BFDF /* HelpViewController.swift in Sources */,
+				35E5ADC521104338001FAEED /* PrivateKeyController.swift in Sources */,
 				35CB0D7920B6A6D40092C5FC /* FaceBaseViewController.m in Sources */,
+				35E5ADCC21104569001FAEED /* WalletManager.swift in Sources */,
 				351EE6252109FCDE004C5DE9 /* TradeDetailController.swift in Sources */,
 				35CB0D0020B576050092C5FC /* JXBaseRequest.swift in Sources */,
 				351EE61621097FFD004C5DE9 /* PaperListCell.swift in Sources */,
 				35CB0D7620B6A6D40092C5FC /* LivingConfigModel.m in Sources */,
 				3521389D20EC659A00E13B14 /* TaskCell.swift in Sources */,
+				35E5ADC321104338001FAEED /* CreateWalletController.swift in Sources */,
 				352281BC20BE43A0001A0CA8 /* ArticleCell.swift in Sources */,
 				3594D92D20F78C7D0009BFDF /* AttentionViewController.swift in Sources */,
+				35E5ADC221104338001FAEED /* WalletDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1457,7 +1645,7 @@
 					"$(PROJECT_DIR)/Star/Third/lib",
 				);
 				INFOPLIST_FILE = Star/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1487,7 +1675,7 @@
 					"$(PROJECT_DIR)/Star/Third/lib",
 				);
 				INFOPLIST_FILE = Star/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
