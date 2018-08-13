@@ -15,9 +15,10 @@ class JXTableViewController: BaseViewController{
     //refreshControl
     var refreshControl : UIRefreshControl?
     //data array
-    var dataArray = NSMutableArray()
+    var dataArray : Array<Any>!
     var page : Int = 1
     var backBlock : (()->())?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

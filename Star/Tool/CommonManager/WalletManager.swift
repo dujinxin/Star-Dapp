@@ -89,12 +89,12 @@ class WalletManager : NSObject{
             print(data)
         }
     }
-
+   
     func switchWallet(dict:Dictionary<String, Any>) -> Bool {
 
         guard let address = dict["address"] as? String else { return false }
         self.walletEntity.setValuesForKeys(dict)
-        
+        self.userDict = dict
         return WalletDB.shareInstance.setDefaultWallet(key: address)
     }
     /// 删除用户信息
@@ -172,10 +172,10 @@ class WalletDB: BaseDB {
     
     func appendWallet(data:Dictionary<String,Any>, key address:String) -> Bool {
         let cs = "address = '\(address)'"
-        if let dataArray = self.selectData(keys: [], condition: [cs]),dataArray.isEmpty == false {
-            return false
-        } else {
+        if let dataArray = self.selectData(keys: [], condition: [cs]), dataArray.isEmpty == true {
             return self.insertData(data: data)
+        } else {
+            return false
         }
     }
     func deleteWallet(key address:String) -> Bool {

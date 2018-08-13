@@ -38,7 +38,7 @@ class AddPropertyCell: UITableViewCell {
             }
             self.coinShortNameLabel.text = entity?.shortName
             self.coinWholeNameLabel.text = entity?.wholeName
-            self.coinAddressLabel.text = entity?.address
+            self.coinAddressLabel.text = entity?.tokenAddress
             self.coinImageView.backgroundColor = UIColor.green
         }
     }

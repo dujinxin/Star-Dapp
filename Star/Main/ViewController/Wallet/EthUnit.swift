@@ -12,7 +12,7 @@ import BigInt
 // Online Converter: https://etherconverter.online
 
 /*
- 以太币的最小单位为wei，1个eth相当于10的8次方wei。通常，大家也使用Gwei作为展示单位。比较常用的就是eth，Gwei和wei。
+ 以太币的最小单位为wei，1个eth相当于10的18次方wei。通常，大家也使用Gwei作为展示单位。比较常用的就是eth，Gwei和wei。
  
  单位                       wei值                    Wei
  wei                       1                        1 wei
@@ -70,5 +70,18 @@ struct EthUnit {
         }
         let etherDecimal = weiDecimal / EthUnit.etherUnit
         return etherDecimal
+    }
+    //plain, 四舍五入; down, 只舍不入; up, 只入不舍; bankers 四舍六入, 中间值时, 取最近的,保持保留最后一位为偶数
+    /// 处理小数位数
+    ///
+    /// - Parameters:
+    ///   - decimal: 要处理的decimal
+    ///   - scale: 保留几位小数
+    /// - Returns: 处理之后的decimal
+    static func decimalNumberHandler(_ decimal: Decimal, scale: Int16 = 6) -> NSDecimalNumber {
+        let num = NSDecimalNumber.init(decimal: decimal)
+        let handler = NSDecimalNumberHandler.init(roundingMode: .down, scale: scale, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+        let res = num.rounding(accordingToBehavior: handler)
+        return res
     }
 }

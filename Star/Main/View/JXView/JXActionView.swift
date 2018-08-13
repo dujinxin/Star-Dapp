@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import JXFoundation
 
-enum JXActionViewStyle : Int {
+public enum JXActionViewStyle : Int {
     case plain
     case list
     case custom
@@ -16,18 +17,21 @@ enum JXActionViewStyle : Int {
 
 private let reuseIdentifier = "reuseIdentifier"
 
-private let topBarHeight : CGFloat = 40
+private let topBarHeight : CGFloat = 44
 private let actionViewMargin : CGFloat = 0
 private let actionViewWidth : CGFloat = UIScreen.main.bounds.width - 2 * actionViewMargin
-private let listHeight : CGFloat = 40
-private let bottomViewHeight : CGFloat = (deviceModel == .iPhoneX) ? 74 : 40 //(iPhoneX 底部 多出34)
+private let listHeight : CGFloat = 44
+private let bottomViewHeight : CGFloat = kBottomMaginHeight + 44 //(iPhoneX 底部 多出34)
 private let animateDuration : TimeInterval = 0.3
 
-class JXActionView: UIView {
+
+
+public class JXActionView: UIView {
     
-    private var alertViewHeight : CGFloat = 0
-    private var alertViewTopHeight : CGFloat = 0
+    var alertViewTopHeight : CGFloat = 0
+    var alertViewHeight : CGFloat = 0
     
+
     var title : String?
     var message : String?
     var actions : Array<String> = [String](){
@@ -46,31 +50,18 @@ class JXActionView: UIView {
     }
     
     var delegate : JXActionViewDelegate?
+    var dataSource : JXActionViewDataSource?
     var style : JXActionViewStyle = .plain
 
     var selectRow : Int = -1
-    var contentHeight : CGFloat {
-        set{//可以自己指定值带来替默认值eg: （myValue）
-            var h : CGFloat = 0
-            if newValue > 0 {
-                h = newValue
-                alertViewHeight = newValue
-            }else{
-                if style == .list{
-                    let num : CGFloat = CGFloat(self.actions.count)
-                    h = (num > 5 ? 5.5 : num) * listHeight
-                    alertViewHeight = h
-                }
+    var isCustomCell: Bool = false{
+        didSet{
+            if isCustomCell {
+                
             }
-            if isUseTopBar {
-                h += topBarHeight
-            }
-            self.frame = CGRect(x: actionViewMargin, y: 0, width: actionViewWidth, height: alertViewHeight + topBarHeight + bottomViewHeight + 10)
-        }
-        get{
-            return self.frame.height
         }
     }
+    private var customCellName : String?
     
     var isScrollEnabled : Bool = false {
         didSet{
@@ -85,26 +76,11 @@ class JXActionView: UIView {
             }
         }
     }
-    
-    var isUseTopBar : Bool = false {
-        didSet{
-            if isUseTopBar {
-                alertViewTopHeight = topBarHeight
-                if (self.topBarView.superview == nil){
-                    self.addSubview(self.topBarView)
-                }
-            }else{
-                alertViewTopHeight = 0
-                if (self.topBarView.superview != nil){
-                    self.topBarView.removeFromSuperview()
-                }
-            }
-        }
-    }
+
     var isUseBottomView : Bool = false {
         didSet{
             if isUseBottomView {
-                self.addSubview(self.bottomBarView)
+                addSubview(self.bottomBarView)
             }
         }
     }
@@ -114,16 +90,19 @@ class JXActionView: UIView {
             self.contentView = customView
         }
     }
-    lazy var topBarView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.groupTableViewBackground
-        return view
-    }()
+    var topBarView: UIView? {
+        didSet{
+            if let v = topBarView {
+                alertViewTopHeight = v.bounds.height
+                addSubview(v)
+            }
+        }
+    }
     lazy var bottomBarView: BottomBarView = {
         let view = BottomBarView()
         view.backgroundColor = UIColor.white
         
-        view.cancelBlock = {(_) in
+        view.cancelBlock = {
             self.tapClick()
         }
         return view
@@ -137,7 +116,7 @@ class JXActionView: UIView {
         table.showsVerticalScrollIndicator = false
         table.showsHorizontalScrollIndicator = false
         table.separatorStyle = .none
-        table.register(ActionlistViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
         return table
     }()
     lazy private var bgWindow : UIWindow = {
@@ -161,59 +140,94 @@ class JXActionView: UIView {
     }()
     
     
-    init(frame: CGRect, style:JXActionViewStyle) {
+    public init(frame: CGRect, style:JXActionViewStyle) {
         super.init(frame: frame)
-        //self.rect = frame
-        //self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
         self.style = style
         
         if style == .list {
+            self.tableView.register(ActionlistViewCell.self, forCellReuseIdentifier: reuseIdentifier)
             self.contentView = self.tableView
-        }else if style == .custom{
+        } else if style == .custom{
             
-        }else{
+        } else{
             
         }
         alertViewHeight = frame.height
-        //self.resetFrame()
+    }
+    /// 自定义list cell
+    ///
+    /// - Parameters:
+    ///   - name: cell class name
+    ///   - isNib: 是否来至Nib
+    public init(tableViewCell name: String, isNib: Bool = false) {
+        super.init(frame: CGRect())
+        
+        self.backgroundColor = UIColor.white
+        self.style = .list
+        self.customCellName = name
+        if isNib {
+            self.tableView.register(UINib.init(nibName: name, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        } else {
+            if let listCellClass = NSClassFromString(Bundle.main.bundleName + "." + name) as? UITableViewCell.Type {
+                self.tableView.register(listCellClass.self, forCellReuseIdentifier: reuseIdentifier)
+            }
+        }
+        
+        self.contentView = self.tableView
+        
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func resetFrame(height:CGFloat = 0.0) {
+    func setContentView() {
+        
+        if isUseBottomView {
+            addSubview(self.bottomBarView)
+        }
+        if let content = self.contentView {
+            addSubview(content)
+        }
+    }
+    func resetFrame(height: CGFloat = 0.0) {
         var h : CGFloat = 0
         if height > 0 {
             h = height
             alertViewHeight = height
-        }else{
-            if style == .list{
+        } else {
+            if style == .list {
                 let num : CGFloat = CGFloat(self.actions.count)
-                h = (num > 5 ? 5.5 : num) * listHeight
-                alertViewHeight = h
+                if let ds = dataSource {
+                    h = (num > 5 ? 5.5 : num) * ds.actionView(self, heightForRowAt: 0)
+                    alertViewHeight = h
+                } else {
+                    h = (num > 5 ? 5.5 : num) * listHeight
+                    alertViewHeight = h
+                }
             }
         }
-        if isUseTopBar {
-            h += topBarHeight
-        }
+        
+        h += alertViewTopHeight
+        
         if isUseBottomView {
             h += bottomViewHeight + 10
+        } else {
+            h += kBottomMaginHeight
         }
         self.frame = CGRect.init(x: (UIScreen.main.bounds.width - actionViewWidth)/2, y: 0, width: actionViewWidth, height:h)
         
     }
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
-        if isUseTopBar {
-            topBarView.frame = CGRect(x: 0, y: 0, width: actionViewWidth, height: alertViewTopHeight)
-            //confirmButton.frame = CGRect.init(x: rect.width - 60, y: 0, width: 60, height: topBarHeight)
+        if let v = topBarView {
+            v.frame = CGRect(x: actionViewMargin, y: 0, width: actionViewWidth, height: alertViewTopHeight)
         }
         
-        self.contentView?.frame = CGRect(x: 0, y: alertViewTopHeight, width: actionViewWidth, height: alertViewHeight)
+        self.contentView?.frame = CGRect(x: actionViewMargin, y: alertViewTopHeight, width: actionViewWidth, height: alertViewHeight)
         if isUseBottomView {
-            self.bottomBarView.frame = CGRect(x: 0, y: alertViewTopHeight + alertViewHeight + 10, width: actionViewWidth, height: bottomViewHeight)
+            self.bottomBarView.frame = CGRect(x: actionViewMargin, y: alertViewTopHeight + alertViewHeight + 10, width: actionViewWidth, height: bottomViewHeight)
         }
     }
     
@@ -223,9 +237,9 @@ class JXActionView: UIView {
     
     func show(inView view:UIView? ,animate:Bool = true) {
         
-        self.addSubview(self.contentView!)
+        self.setContentView()
         self.resetFrame()
-        
+       
         let superView : UIView
         
         if let v = view {
@@ -293,28 +307,36 @@ class JXActionView: UIView {
 }
 extension JXActionView : UITableViewDelegate,UITableViewDataSource{
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (actions.isEmpty == false) {
-            return actions.count
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let ds = dataSource {
+            return ds.numberOfRow(in: self)
         }
         return 0
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let ds = self.dataSource {
+            return ds.actionView(self, heightForRowAt: indexPath.row)
+        }
         return listHeight
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ActionlistViewCell
-        
-        if actions.isEmpty == false {
-            cell.titleLabel.text = actions[indexPath.row]
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let _ = self.customCellName, let ds = self.dataSource {
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+
+            return ds.actionView(self, listCell: cell, cellForRowAt: indexPath.row)
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ActionlistViewCell
+            if actions.isEmpty == false {
+                cell.titleLabel.text = actions[indexPath.row]
+            }
+            return cell
         }
-        return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         //        if isUseTopBar {
         //            selectRow = indexPath.row
@@ -322,12 +344,21 @@ extension JXActionView : UITableViewDelegate,UITableViewDataSource{
         //            self.viewDisAppear(row: indexPath.row)
         //        }
         
-        
-        //self.delegate?.willPresentJXActionView!(self)
-        self.delegate?.jxActionView(self, clickButtonAtIndex: indexPath.row)
-        self.dismiss()
-        //self.delegate?.didPresentJXActionView!(self)
-        
+        if let dg = delegate {
+            //will present
+            if let willPresent = dg.willPresentJXActionView {
+                willPresent(self)
+            }
+            //click
+            dg.actionView(self, clickButtonAtIndex: indexPath.row)
+    
+            //did present
+            if let didPresent = dg.didPresentJXActionView {
+                didPresent(self)
+            }
+        } else {
+            dismiss()
+        }
     }
 }
 
@@ -364,12 +395,9 @@ class ActionlistViewCell: UITableViewCell {
     }
 }
 class BottomBarView: UIView {
-    var isPlaying : Bool = true
-    var isFullScreen : Bool = false
 
     lazy var cancelItem: UIButton = {
         let button = UIButton()
-        //button.setTitle("暂停", for: .selected)
         button.setTitle("取消", for: .normal)
         button.setTitleColor(JX333333Color, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -379,8 +407,8 @@ class BottomBarView: UIView {
         return button
     }()
     
-    var cancelBlock : ((_ isPlaying:Bool)->())?
-    var additionBlock : ((_ isPlaying:Bool)->())?
+    var cancelBlock : (()->())?
+    var additionBlock : (()->())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -393,9 +421,8 @@ class BottomBarView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        let height : CGFloat = (deviceModel == .iPhoneX) ? 34.0 : 0.0
         
-        self.cancelItem.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height - height)
+        self.cancelItem.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height - kBottomMaginHeight)
     }
     func initSubViews() {
         addSubview(self.cancelItem)
@@ -407,23 +434,29 @@ class BottomBarView: UIView {
         switch button.tag {
         case 10:
             if let block = cancelBlock {
-                isPlaying = !isPlaying
-                block(isPlaying)
+                block()
             }
         default:
             
             if let block = additionBlock {
-                isFullScreen = !isFullScreen
-                block(isFullScreen)
+                block()
             }
         }
     }
 }
-@objc protocol JXActionViewDelegate {
+@objc public protocol JXActionViewDelegate {
     
-    func jxActionView(_ actionView :JXActionView, clickButtonAtIndex index:Int)
-    @objc optional func jxActionViewCancel(_ :JXActionView)
+    
+    @objc func actionView(_ actionView :JXActionView, clickButtonAtIndex index:Int)
+    @objc optional func actionViewCancel(_ :JXActionView)
     @objc optional func willPresentJXActionView(_ :JXActionView)
     @objc optional func didPresentJXActionView(_ :JXActionView)
     
+}
+protocol JXActionViewDataSource {
+    
+    //func actionView(_ actionView: JXActionView, entityForRowAt index: Int) -> WalletCoinEntity
+    func actionView(_ actionView: JXActionView, heightForRowAt index: Int) -> CGFloat
+    func numberOfRow(in actionView: JXActionView) -> Int
+    func actionView(_ actionView: JXActionView, listCell: UITableViewCell, cellForRowAt index: Int) -> UITableViewCell
 }

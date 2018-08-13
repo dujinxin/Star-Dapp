@@ -208,13 +208,13 @@ class MyViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         if indexPath.row == 1 {
             performSegue(withIdentifier: "property", sender: nil)
         } else if indexPath.row == 2{
-            performSegue(withIdentifier: "myWallet_web", sender: kHtmlUrl)
-        } else if indexPath.row == 3{
-            //performSegue(withIdentifier: "personInfo", sender: nil)
+            //performSegue(withIdentifier: "myWallet_web", sender: kHtmlUrl)
             
             let storyboard = UIStoryboard(name: "Wallet", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "EthWalletVC") as! WalletViewController
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 3{
+            performSegue(withIdentifier: "personInfo", sender: nil)
         } else if indexPath.row == 4{
             let vc = TradeRecordController()
             self.navigationController?.pushViewController(vc, animated: true)

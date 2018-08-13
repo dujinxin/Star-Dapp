@@ -22,7 +22,7 @@ class AddPropertyController: UITableViewController {
         let entity = WalletPropertyEntity()
         entity.shortName = "ZC"
         entity.wholeName = "智慧币"
-        entity.address = "0x34a9a46340d0b76e423ea75e5a62b6a81ff35bf6"
+        entity.tokenAddress = "0x34a9a46340d0b76e423ea75e5a62b6a81ff35bf6"
         self.dataArray.append(entity)
     }
 

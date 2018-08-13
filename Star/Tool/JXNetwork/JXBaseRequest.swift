@@ -79,7 +79,7 @@ class JXBaseRequest: NSObject {
     
     class func download(urlStr: String, destination: @escaping Destination,progress:@escaping DownloadProgress, download: @escaping DownloadCompletion) {
         
-        let request = self.init(tag: 0, url: urlStr, param: nil, success: nil, failure: nil, progress: progress, download: download, destination: destination)
+        let request = self.init(tag: 0, url: urlStr, method: .post, param: nil, success: nil, failure: nil, progress: progress, download: download, destination: destination)
        
         request.startDownload()
     }
@@ -95,9 +95,9 @@ class JXBaseRequest: NSObject {
     ///   - param: 请求参数
     ///   - success: 成功回调
     ///   - failure: 失败回调
-    class func request(tag:Int = 0, method:JXRequestMethod = .post, url:String, param:Dictionary<String, Any>?,success:@escaping SuccessCompletion,failure:@escaping FailureCompletion) {
+    class func request(tag: Int = 0, method: JXRequestMethod = .post, url: String, param: Dictionary<String, Any>?, success: @escaping SuccessCompletion, failure: @escaping FailureCompletion) {
         
-        let request = self.init(tag: tag, url: url, param: param, success: success, failure: failure, progress: nil, download: nil, destination: nil)
+        let request = self.init(tag: tag, url: url, method: method, param: param, success: success, failure: failure, progress: nil, download: nil, destination: nil)
         
         request.startRequest()
     }
@@ -106,10 +106,11 @@ class JXBaseRequest: NSObject {
         super.init()
     }
     
-    required init(tag:Int, url:String, param:Dictionary<String, Any>?, success:  SuccessCompletion?, failure: FailureCompletion?, progress: DownloadProgress?, download: DownloadCompletion?, destination: Destination?) {
+    required init(tag: Int, url: String, method: JXRequestMethod, param: Dictionary<String, Any>?, success: SuccessCompletion?, failure: FailureCompletion?, progress: DownloadProgress?, download: DownloadCompletion?, destination: Destination?) {
         
         self.tag = tag
         self.requestUrl = url
+        self.method = method
         self.param = param
         self.success = success
         self.failure = failure

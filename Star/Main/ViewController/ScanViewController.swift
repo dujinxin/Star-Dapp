@@ -133,9 +133,9 @@ extension ScanViewController : AVCaptureMetadataOutputObjectsDelegate {
                 return
             }
             session.stopRunning()
-            ViewManager.showNotice(codeStr)
+            
             if self.validate(code: codeStr) == false {
-                
+                ViewManager.showNotice("无效地址")
             } else {
                 if let block = callBlock {
                     block(codeStr)

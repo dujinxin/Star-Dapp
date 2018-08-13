@@ -10,14 +10,14 @@ import UIKit
 import web3swift
 import JXFoundation
 
-class PrivateKeyController: UIViewController {
+class PrivateKeyController: BaseViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var textView: JXPlaceHolderTextView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var privacyButton: UIButton!
+    @IBOutlet weak var confirmTextField: UITextField!
     @IBOutlet weak var importButton: UIButton!
     
     @IBOutlet weak var contentSize_heightConstraint: NSLayoutConstraint!
@@ -25,32 +25,43 @@ class PrivateKeyController: UIViewController {
     var backBlock : (()->())?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.contentSize_heightConstraint.constant = UIScreen.main.bounds.height - 44 - 88
-        print(view.bounds.height)
-        print(UIScreen.main.bounds.height)
-        print(UIScreen.main.bounds.height - 44 - 64)
+        self.title = "导入钱包"
         self.textView.placeHolderText = "直接复制粘贴以太坊官方钱包keystore文件内容至输入框即可，或者通过生成的keystore内容的二维码扫描录入"
+        
+        
+        //颜色渐变
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.colors = [UIColor.rgbColor(from: 11, 69, 114).cgColor,UIColor.rgbColor(from:21,106,206).cgColor]
+        gradientLayer.locations = [0]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenWidth - 100, height: self.importButton.jxHeight)
+        gradientLayer.cornerRadius = 22
+        self.importButton.layer.insertSublayer(gradientLayer, at: 0)
+        self.importButton.backgroundColor = UIColor.clear
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func selectAction(_ sender: UIButton) {
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.topConstraint.constant = kNavStatusHeight
+        self.contentSize_heightConstraint.constant = UIScreen.main.bounds.height - kNavStatusHeight
     }
-    @IBAction func privacyAction(_ sender: Any) {
+    override func isCustomNavigationBarUsed() -> Bool {
+        return true
     }
     @IBAction func importAction(_ sender: Any) {
         
-        guard let name = self.nameTextField.text else { return }
-        guard let password = self.passwordTextField.text else { return }
-        guard let privateKeyStr = self.textView.text else { return }
+        guard let name = self.nameTextField.text, name.isEmpty == false else { return }
+        guard let password = self.passwordTextField.text, password.isEmpty == false else { return }
+        guard let privateKeyStr = self.textView.text, privateKeyStr.isEmpty == false else { return }
         guard let keyStore1 = try? EthereumKeystoreV3.init(privateKey: Data.init(hex: privateKeyStr), password: password),
             let keyStore = keyStore1 else {
-            print("keyStore无效")
-            return
+                print("keyStore无效")
+                return
         }
         do {
             try keyStore.regenerate(oldPassword: password, newPassword: password)
@@ -60,7 +71,7 @@ class PrivateKeyController: UIViewController {
             return
         }
         print("导入成功")
-
+        
         guard let keystoreData = try? keyStore.serialize() else { return }
         guard let keystoreData1 = keystoreData else { return }
         let keystoreBase64Str = keystoreData1.base64EncodedString()
@@ -69,12 +80,14 @@ class PrivateKeyController: UIViewController {
         //let privateKey = try! keyStore.UNSAFE_getPrivateKeyData(password: password, account: address).toHexString()
         
         let dict = ["name":name,"isDefault":false,"address":address.address,"keystore":keystoreBase64Str] as [String : Any]
+        let _ = WalletDB.shareInstance.createTable(keys: Array(dict.keys))
         let isSuc = WalletDB.shareInstance.appendWallet(data: dict, key: address.address)
         if isSuc {
             print("添加成功")
             if let block = backBlock {
                 block()
             }
+            let _ = WalletManager.manager.switchWallet(dict: dict)
             self.navigationController?.popViewController(animated: true)
         } else {
             print("钱包已存在")

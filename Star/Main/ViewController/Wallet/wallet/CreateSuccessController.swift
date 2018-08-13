@@ -59,11 +59,4 @@ class CreateSuccessController: BaseViewController {
     @IBAction func checkWallet(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @IBAction func createWallet(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "createWallet", sender: nil)
-    }
-    @IBAction func importWallet(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "importWallet", sender: nil)
-    }
 }

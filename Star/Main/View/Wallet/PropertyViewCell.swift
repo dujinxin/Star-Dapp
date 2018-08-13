@@ -12,8 +12,10 @@ class PropertyViewCell: UITableViewCell {
 
     @IBOutlet weak var coinImagView: UIImageView!
     @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var coinLongNameLabel: UILabel!
     @IBOutlet weak var coinNumberLabel: UILabel!
     @IBOutlet weak var worthLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
